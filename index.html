@@ -4,1820 +4,1761 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>axzen POS | Smart Billing & Business Management Software</title>
+<title>axzen POS - Smart Billing. Simple Business.</title>
 
-<meta name="description" content="axzen POS is an all-in-one POS software for restaurants, cafes, retail stores, grocery shops, bakeries and growing businesses. Manage billing, inventory, sales and reports from one powerful platform.">
+<meta name="description" content="axzen POS - Powerful POS solution for every business. Manage billing, stock, sales, reports and customers in one place.">
 
-<meta name="keywords" content="POS software, billing software, restaurant POS, retail POS, inventory management, axzen POS">
-
-<meta name="theme-color" content="#0758ed">
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
 /* =========================
-   GLOBAL
+   RESET
 ========================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    font-family:Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background:#ffffff;
-    color:#111827;
-    overflow-x:hidden;
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #101828;
+    background: #ffffff;
+    overflow-x: hidden;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-button,
-input,
-select,
-textarea{
-    font-family:inherit;
+button {
+    font-family: inherit;
+    cursor: pointer;
 }
 
-button{
-    cursor:pointer;
+img {
+    max-width: 100%;
+    display: block;
 }
 
-.container{
-    width:min(1180px, 92%);
-    margin:auto;
+/* =========================
+   VARIABLES
+========================= */
+
+:root {
+    --blue: #155eef;
+    --blue-dark: #0b4dcc;
+    --blue-light: #eff6ff;
+    --text: #101828;
+    --muted: #667085;
+    --border: #e4e7ec;
+    --green: #12b76a;
+    --dark: #06152f;
 }
 
-:root{
-    --blue:#0758ed;
-    --blue-dark:#0345c7;
-    --navy:#061633;
-    --text:#111827;
-    --muted:#667085;
-    --border:#e7ebf2;
-    --light:#f6f9ff;
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 1220px;
+    margin: auto;
 }
 
 /* =========================
    TOP BAR
 ========================= */
 
-.topbar{
-    height:38px;
-    background:#04122c;
-    color:#dce6f5;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 4%;
-    font-size:12px;
+.topbar {
+    background: #07152f;
+    color: #ffffff;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
 
-.top-left{
-    display:flex;
-    gap:25px;
+.topbar-inner {
+    width: 92%;
+    max-width: 1220px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 25px;
+    font-size: 13px;
 }
 
-.top-right{
-    display:flex;
-    gap:20px;
+.topbar-phone {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.demo-top {
+    background: var(--blue);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 700;
 }
 
 /* =========================
    NAVBAR
 ========================= */
 
-.navbar{
-    height:76px;
-    background:rgba(255,255,255,.96);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #edf0f5;
-    display:flex;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:1000;
+.navbar {
+    height: 78px;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #f0f2f5;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
 }
 
-.nav-inner{
-    width:min(1180px,92%);
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.nav-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.logo{
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:-1.5px;
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -1.8px;
+    color: #111827;
 }
 
-.logo span{
-    color:var(--blue);
+.logo span {
+    color: var(--blue);
 }
 
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:34px;
-    font-size:14px;
-    font-weight:500;
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    font-size: 15px;
+    font-weight: 600;
 }
 
-.nav-links a{
-    color:#344054;
-    transition:.25s;
+.nav-links a {
+    position: relative;
+    padding: 28px 0;
+    transition: 0.3s;
 }
 
-.nav-links a:hover{
-    color:var(--blue);
+.nav-links a:hover {
+    color: var(--blue);
 }
 
-.nav-actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
+.nav-links a.active {
+    color: var(--blue);
 }
 
-.nav-demo{
-    border:0;
-    background:var(--blue);
-    color:#fff;
-    padding:12px 21px;
-    border-radius:7px;
-    font-weight:600;
-    box-shadow:0 8px 20px rgba(7,88,237,.2);
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--blue);
 }
 
-.menu-btn{
-    display:none;
-    border:0;
-    background:none;
-    font-size:26px;
+.mobile-menu {
+    display: none;
+    font-size: 27px;
+    cursor: pointer;
 }
 
 /* =========================
    HERO
 ========================= */
 
-.hero{
-    position:relative;
-    overflow:hidden;
-    padding:80px 0 70px;
+.hero {
+    min-height: 550px;
+    padding: 70px 0 50px;
+    position: relative;
+    overflow: hidden;
     background:
-        radial-gradient(circle at 80% 30%, #eaf2ff 0, transparent 30%),
-        linear-gradient(180deg,#fff 0%,#fbfdff 100%);
+        radial-gradient(circle at 90% 20%, #eaf3ff 0, transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
 }
 
-.hero::before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:#edf5ff;
-    border-radius:50%;
-    right:-250px;
-    top:-150px;
-    opacity:.7;
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: #f4f8ff;
+    right: -180px;
+    top: 100px;
+    z-index: 0;
 }
 
-.hero-grid{
-    display:grid;
-    grid-template-columns:1fr 1.05fr;
-    align-items:center;
-    gap:55px;
-    position:relative;
-    z-index:2;
+.hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 40px;
+    align-items: center;
 }
 
-.hero-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 15px;
-    background:#edf5ff;
-    border:1px solid #dbeaff;
-    border-radius:30px;
-    color:var(--blue);
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:22px;
+.hero-content {
+    padding-bottom: 20px;
 }
 
-.hero-badge::before{
-    content:"";
-    width:7px;
-    height:7px;
-    background:#22c55e;
-    border-radius:50%;
+.badge {
+    display: inline-flex;
+    background: #edf5ff;
+    color: var(--blue);
+    padding: 9px 17px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 22px;
 }
 
-.hero h1{
-    font-size:58px;
-    line-height:1.04;
-    letter-spacing:-3px;
-    max-width:650px;
-    margin-bottom:24px;
+.hero h1 {
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -3px;
+    font-weight: 900;
+    color: #111111;
+    margin-bottom: 22px;
 }
 
-.hero h1 span{
-    color:var(--blue);
+.hero h1 span {
+    color: var(--blue);
 }
 
-.hero-description{
-    max-width:560px;
-    font-size:17px;
-    line-height:1.75;
-    color:#667085;
-    margin-bottom:30px;
+.hero p {
+    color: #475467;
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 28px;
 }
 
-.hero-buttons{
-    display:flex;
-    gap:13px;
-    margin-bottom:28px;
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.btn-primary{
-    border:0;
-    background:var(--blue);
-    color:#fff;
-    padding:15px 25px;
-    border-radius:8px;
-    font-size:14px;
-    font-weight:700;
-    box-shadow:0 12px 25px rgba(7,88,237,.2);
-    transition:.3s;
+.btn-primary {
+    border: none;
+    background: var(--blue);
+    color: #ffffff;
+    padding: 15px 27px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(21,94,239,0.22);
+    transition: 0.3s;
 }
 
-.btn-primary:hover{
-    background:var(--blue-dark);
-    transform:translateY(-2px);
+.btn-primary:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
 }
 
-.btn-secondary{
-    border:1px solid #dce2ec;
-    background:#fff;
-    color:#172033;
-    padding:15px 25px;
-    border-radius:8px;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
+.btn-secondary {
+    border: 1px solid #d0d5dd;
+    background: #ffffff;
+    color: #101828;
+    padding: 15px 27px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    transition: 0.3s;
 }
 
-.btn-secondary:hover{
-    border-color:var(--blue);
-    color:var(--blue);
+.btn-secondary:hover {
+    border-color: var(--blue);
+    color: var(--blue);
 }
 
-.hero-trust{
-    display:flex;
-    flex-wrap:wrap;
-    gap:22px;
-    font-size:12px;
-    color:#475467;
+.hero-checks {
+    display: flex;
+    gap: 25px;
+    margin-top: 28px;
+    flex-wrap: wrap;
 }
 
-.hero-trust span::before{
-    content:"✓";
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:17px;
-    height:17px;
-    margin-right:6px;
-    background:#22a951;
-    color:white;
-    border-radius:50%;
-    font-size:10px;
-    font-weight:bold;
+.check {
+    font-size: 14px;
+    color: #475467;
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
 
-/* =========================
-   POS MOCKUP
-========================= */
-
-.product-stage{
-    position:relative;
-    min-height:460px;
-}
-
-.pos-monitor{
-    position:absolute;
-    width:500px;
-    height:325px;
-    left:20px;
-    top:15px;
-    background:#111820;
-    border-radius:19px;
-    padding:13px;
-    transform:perspective(1000px) rotateY(-5deg) rotateX(2deg);
-    box-shadow:0 35px 50px rgba(8,20,40,.25);
-    z-index:2;
-}
-
-.pos-screen{
-    width:100%;
-    height:100%;
-    border-radius:9px;
-    overflow:hidden;
-    display:flex;
-    background:#f5f8fc;
-}
-
-.screen-sidebar{
-    width:100px;
-    background:#061633;
-    color:white;
-    padding:16px 10px;
-}
-
-.screen-brand{
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:24px;
-}
-
-.screen-nav{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    font-size:8px;
-    color:#b8c5d9;
-}
-
-.screen-nav div:first-child{
-    color:white;
-    background:#0758ed;
-    padding:8px;
-    border-radius:5px;
-}
-
-.screen-main{
-    flex:1;
-    padding:15px;
-}
-
-.screen-header{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:12px;
-}
-
-.screen-header strong{
-    font-size:12px;
-}
-
-.screen-header span{
-    font-size:8px;
-    color:#667085;
-}
-
-.dashboard-cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
-}
-
-.dashboard-card{
-    background:#fff;
-    padding:9px 7px;
-    border-radius:6px;
-    box-shadow:0 2px 8px rgba(0,0,0,.04);
-}
-
-.dashboard-card small{
-    display:block;
-    font-size:6px;
-    color:#667085;
-}
-
-.dashboard-card strong{
-    display:block;
-    font-size:11px;
-    margin-top:5px;
-}
-
-.dashboard-card.green strong{
-    color:#16a34a;
-}
-
-.dashboard-content{
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:8px;
-    margin-top:9px;
-}
-
-.dashboard-box{
-    background:#fff;
-    border-radius:7px;
-    padding:10px;
-    height:105px;
-}
-
-.dashboard-box h4{
-    font-size:7px;
-    margin-bottom:10px;
-}
-
-.fake-chart{
-    height:55px;
-    position:relative;
-    overflow:hidden;
-}
-
-.fake-chart svg{
-    width:100%;
-    height:100%;
-}
-
-.top-product{
-    display:flex;
-    justify-content:space-between;
-    font-size:7px;
-    padding:6px 0;
-    border-bottom:1px solid #edf0f5;
-}
-
-.cash-drawer{
-    position:absolute;
-    width:445px;
-    height:115px;
-    top:325px;
-    left:0;
-    background:#111820;
-    border-radius:10px 10px 16px 16px;
-    box-shadow:0 25px 35px rgba(0,0,0,.25);
-}
-
-.cash-drawer::after{
-    content:"axzen";
-    position:absolute;
-    color:white;
-    font-size:22px;
-    font-weight:700;
-    left:25px;
-    top:42px;
-}
-
-.drawer-lock{
-    position:absolute;
-    left:50%;
-    top:42px;
-    width:20px;
-    height:27px;
-    border:2px solid #9ca3af;
-    border-radius:5px;
-}
-
-.receipt-printer{
-    position:absolute;
-    right:0;
-    top:235px;
-    width:180px;
-    height:190px;
-    background:#111820;
-    border-radius:15px;
-    box-shadow:0 25px 35px rgba(0,0,0,.25);
-    z-index:4;
-}
-
-.receipt-printer::after{
-    content:"axzen";
-    position:absolute;
-    left:60px;
-    top:82px;
-    color:white;
-    font-size:17px;
-    font-weight:700;
-}
-
-.receipt{
-    position:absolute;
-    width:115px;
-    height:115px;
-    left:33px;
-    top:-78px;
-    background:#fff;
-    padding:13px;
-    color:#111;
-    font-size:7px;
-    box-shadow:0 5px 12px rgba(0,0,0,.15);
-    transform:rotate(2deg);
-}
-
-.receipt strong{
-    display:block;
-    text-align:center;
-    font-size:10px;
-    margin-bottom:9px;
+.check span {
+    width: 19px;
+    height: 19px;
+    background: #dff8e9;
+    color: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 900;
 }
 
 /* =========================
-   STATS
+   POS IMAGE MOCKUP
 ========================= */
 
-.trust-strip{
-    padding:0 0 65px;
+.hero-visual {
+    position: relative;
+    min-height: 440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.trust-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+.pos-machine {
+    width: 100%;
+    max-width: 590px;
+    position: relative;
+    padding: 25px;
 }
 
-.trust-card{
-    border:1px solid var(--border);
-    border-radius:13px;
-    padding:24px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    transition:.3s;
-    background:#fff;
+.monitor {
+    width: 78%;
+    margin-left: 8%;
+    background: #111827;
+    padding: 13px;
+    border-radius: 22px 22px 8px 8px;
+    box-shadow: 0 25px 45px rgba(16,24,40,0.25);
+    transform: perspective(900px) rotateY(-3deg);
 }
 
-.trust-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.07);
+.monitor-screen {
+    background: #f8fafc;
+    border-radius: 9px;
+    padding: 14px;
+    min-height: 280px;
 }
 
-.trust-icon{
-    width:48px;
-    height:48px;
-    flex:none;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--blue);
-    border:1px solid #cfe0ff;
-    background:#f3f7ff;
-    font-size:24px;
+.screen-top {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
-.trust-card h3{
-    font-size:14px;
-    margin-bottom:6px;
+.screen-sidebar {
+    width: 90px;
+    background: #07152f;
+    border-radius: 7px;
+    padding: 10px 6px;
+    color: white;
+    font-size: 9px;
 }
 
-.trust-card p{
-    font-size:11px;
-    line-height:1.5;
-    color:#667085;
+.side-logo {
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.side-item {
+    padding: 7px 4px;
+    opacity: .8;
+}
+
+.side-item.active {
+    background: var(--blue);
+    border-radius: 4px;
+    opacity: 1;
+}
+
+.screen-main {
+    flex: 1;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 6px;
+}
+
+.d-card {
+    background: white;
+    border: 1px solid #eaecf0;
+    border-radius: 6px;
+    padding: 7px;
+}
+
+.d-card small {
+    display: block;
+    font-size: 7px;
+    color: #667085;
+}
+
+.d-card strong {
+    font-size: 11px;
+    color: #12b76a;
+}
+
+.dashboard-body {
+    display: grid;
+    grid-template-columns: 1.4fr .8fr;
+    gap: 7px;
+    margin-top: 7px;
+}
+
+.chart-box,
+.product-box {
+    background: white;
+    border: 1px solid #eaecf0;
+    border-radius: 6px;
+    padding: 10px;
+    min-height: 110px;
+}
+
+.chart-title {
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.chart {
+    height: 65px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 8px;
+}
+
+.bar {
+    width: 12px;
+    background: var(--blue);
+    border-radius: 3px 3px 0 0;
+}
+
+.products-title {
+    font-size: 8px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 7px;
+    padding: 4px 0;
+    border-bottom: 1px solid #f2f4f7;
+}
+
+.monitor-stand {
+    width: 110px;
+    height: 35px;
+    background: #111827;
+    margin: auto;
+    border-radius: 0 0 15px 15px;
+}
+
+.cash-drawer {
+    width: 72%;
+    height: 105px;
+    background: linear-gradient(145deg,#111827,#050b16);
+    border-radius: 9px;
+    position: absolute;
+    bottom: 12px;
+    left: 3%;
+    box-shadow: 0 18px 30px rgba(16,24,40,0.25);
+}
+
+.cash-drawer::after {
+    content: "axzen";
+    color: #ffffff;
+    position: absolute;
+    left: 25px;
+    top: 40px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.printer {
+    width: 155px;
+    height: 150px;
+    background: #101820;
+    border-radius: 12px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 18px 30px rgba(16,24,40,0.25);
+}
+
+.printer::before {
+    content: "axzen POS";
+    position: absolute;
+    top: 27px;
+    left: 35px;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.receipt {
+    width: 78px;
+    height: 85px;
+    background: white;
+    position: absolute;
+    top: -55px;
+    left: 39px;
+    padding: 9px;
+    font-size: 7px;
+    color: #333;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+}
+
+.receipt strong {
+    display: block;
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+.printer-label {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 10px;
 }
 
 /* =========================
-   SECTION HEADER
+   BENEFITS
 ========================= */
 
-.section-heading{
-    text-align:center;
-    max-width:700px;
-    margin:0 auto 45px;
+.benefits {
+    padding: 25px 0 55px;
 }
 
-.section-label{
-    color:var(--blue);
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:10px;
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
 }
 
-.section-heading h2{
-    font-size:36px;
-    letter-spacing:-1.5px;
-    margin-bottom:13px;
+.benefit-card {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px 22px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    background: #ffffff;
+    transition: .3s;
 }
 
-.section-heading p{
-    color:#667085;
-    line-height:1.7;
-    font-size:14px;
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(16,24,40,.08);
+}
+
+.benefit-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    flex-shrink: 0;
+}
+
+.benefit-card h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.benefit-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 /* =========================
    FEATURES
 ========================= */
 
-.features{
-    padding:70px 0;
-    background:#f7faff;
+.features-section {
+    padding: 65px 0;
 }
 
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
+.features-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    background: #f7faff;
+    border-radius: 25px;
+    padding: 50px;
 }
 
-.feature-card{
-    background:#fff;
-    border:1px solid #e8edf5;
-    border-radius:15px;
-    padding:27px;
-    transition:.3s;
+.section-label {
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 
-.feature-card:hover{
-    transform:translateY(-5px);
-    border-color:#cddfff;
-    box-shadow:0 15px 35px rgba(7,88,237,.08);
+.section-title {
+    font-size: 34px;
+    letter-spacing: -1.5px;
+    margin-bottom: 30px;
 }
 
-.feature-icon{
-    width:50px;
-    height:50px;
-    border-radius:12px;
-    background:#edf5ff;
-    color:var(--blue);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:23px;
-    margin-bottom:20px;
+.feature-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 27px 30px;
 }
 
-.feature-card h3{
-    font-size:15px;
-    margin-bottom:10px;
+.feature-item {
+    display: flex;
+    gap: 14px;
 }
 
-.feature-card p{
-    font-size:12px;
-    line-height:1.65;
-    color:#667085;
+.feature-icon {
+    color: var(--blue);
+    font-size: 25px;
+    width: 32px;
+    flex-shrink: 0;
+}
+
+.feature-item h4 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.feature-item p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.explore {
+    display: inline-block;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 30px;
 }
 
 /* =========================
-   APP SECTION
+   MOBILE APP
 ========================= */
 
-.app-section{
-    padding:90px 0;
+.mobile-app {
+    background: #f7faff;
+    padding: 75px 0;
 }
 
-.app-wrapper{
-    background:linear-gradient(135deg,#f4f8ff,#ffffff);
-    border:1px solid #e7edf7;
-    border-radius:25px;
-    padding:60px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-    overflow:hidden;
+.mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
 }
 
-.app-content h2{
-    font-size:38px;
-    letter-spacing:-1.5px;
-    margin-bottom:18px;
+.mobile-text h2 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+    margin-bottom: 18px;
 }
 
-.app-content p{
-    max-width:500px;
-    color:#667085;
-    line-height:1.7;
-    font-size:14px;
-    margin-bottom:25px;
+.mobile-text p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 25px;
 }
 
-.app-download{
-    display:flex;
-    align-items:center;
-    gap:18px;
+.download-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.qr-code{
-    width:115px;
-    height:115px;
-    border:9px solid #fff;
-    background:
-        repeating-linear-gradient(45deg,#111 0 4px,#fff 4px 8px);
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
+.store {
+    background: #000;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
 }
 
-.app-phone{
-    display:flex;
-    justify-content:center;
+.phone-area {
+    display: flex;
+    justify-content: center;
 }
 
-.phone{
-    width:245px;
-    height:480px;
-    background:#101827;
-    padding:7px;
-    border-radius:35px;
-    box-shadow:0 30px 50px rgba(0,0,0,.2);
+.phone {
+    width: 250px;
+    height: 500px;
+    background: #101828;
+    border: 8px solid #111827;
+    border-radius: 35px;
+    padding: 8px;
+    box-shadow: 0 30px 50px rgba(16,24,40,.2);
 }
 
-.phone-screen{
-    height:100%;
-    background:#f5f8fc;
-    border-radius:28px;
-    overflow:hidden;
-    padding:15px;
+.phone-screen {
+    height: 100%;
+    background: #f8fafc;
+    border-radius: 25px;
+    padding: 18px 12px;
 }
 
-.phone-header{
-    background:var(--blue);
-    color:#fff;
-    margin:-15px -15px 15px;
-    padding:20px 15px;
-    font-weight:700;
+.phone-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 13px;
+    margin-bottom: 20px;
 }
 
-.sales-box{
-    background:white;
-    border-radius:12px;
-    padding:17px;
-    box-shadow:0 5px 15px rgba(0,0,0,.05);
+.sales-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(16,24,40,.06);
 }
 
-.sales-box small{
-    color:#667085;
+.sales-card small {
+    color: var(--muted);
 }
 
-.sales-box strong{
-    display:block;
-    color:#16a34a;
-    font-size:24px;
-    margin-top:7px;
+.sales-card strong {
+    display: block;
+    color: var(--green);
+    font-size: 25px;
+    margin-top: 5px;
 }
 
-.app-menu{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:15px;
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    margin-top: 15px;
 }
 
-.app-menu div{
-    background:#fff;
-    border-radius:10px;
-    padding:17px 5px;
-    text-align:center;
-    font-size:11px;
-    color:var(--blue);
-    box-shadow:0 3px 12px rgba(0,0,0,.04);
+.app-box {
+    background: white;
+    padding: 15px 5px;
+    border-radius: 10px;
+    text-align: center;
+    color: var(--blue);
+    font-size: 22px;
+}
+
+.app-box span {
+    display: block;
+    color: #344054;
+    font-size: 10px;
+    margin-top: 5px;
+    font-weight: 700;
 }
 
 /* =========================
    INDUSTRIES
 ========================= */
 
-.industries{
-    padding:20px 0 85px;
+.industries {
+    padding: 70px 0;
+    text-align: center;
 }
 
-.industry-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    border:1px solid var(--border);
-    border-radius:15px;
-    overflow:hidden;
+.industries h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
 }
 
-.industry{
-    padding:27px 10px;
-    text-align:center;
-    border-right:1px solid var(--border);
-    transition:.3s;
+.industries-sub {
+    color: var(--muted);
+    margin-bottom: 35px;
 }
 
-.industry:last-child{
-    border-right:0;
+.industry-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-.industry:hover{
-    background:#f7faff;
-    color:var(--blue);
+.industry {
+    padding: 28px 10px;
+    border-right: 1px solid var(--border);
+    transition: .3s;
 }
 
-.industry-icon{
-    font-size:32px;
-    margin-bottom:12px;
+.industry:last-child {
+    border-right: none;
 }
 
-.industry p{
-    font-size:12px;
-    font-weight:600;
+.industry:hover {
+    background: #f7faff;
+    color: var(--blue);
 }
 
-/* =========================
-   PRICING
-========================= */
-
-.pricing{
-    padding:80px 0;
-    background:#f7faff;
+.industry-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
-.pricing-card{
-    max-width:500px;
-    margin:auto;
-    background:#fff;
-    border:1px solid #dce6f7;
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-    box-shadow:0 20px 50px rgba(7,88,237,.08);
-}
-
-.pricing-card h3{
-    font-size:20px;
-    margin-bottom:10px;
-}
-
-.price{
-    font-size:42px;
-    color:var(--blue);
-    font-weight:800;
-    margin:20px 0;
-}
-
-.price small{
-    font-size:13px;
-    color:#667085;
-    font-weight:400;
-}
-
-.price-list{
-    list-style:none;
-    text-align:left;
-    margin:25px 0;
-}
-
-.price-list li{
-    padding:10px 0;
-    font-size:13px;
-    color:#475467;
-}
-
-.price-list li::before{
-    content:"✓";
-    color:#16a34a;
-    font-weight:bold;
-    margin-right:10px;
+.industry span {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
 }
 
 /* =========================
-   BLUE BENEFITS
+   BLUE STRIP
 ========================= */
 
-.blue-benefits{
-    background:var(--blue);
-    color:white;
-    padding:38px 0;
+.blue-strip {
+    background: linear-gradient(110deg,#0645d8,#1267f4);
+    color: white;
+    padding: 30px 0;
 }
 
-.blue-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
+.strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
 }
 
-.blue-item{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:0 28px;
-    border-right:1px solid rgba(255,255,255,.3);
+.strip-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 25px;
+    border-right: 1px solid rgba(255,255,255,.3);
 }
 
-.blue-item:first-child{
-    padding-left:0;
+.strip-item:last-child {
+    border-right: none;
 }
 
-.blue-item:last-child{
-    border:0;
+.strip-icon {
+    font-size: 35px;
 }
 
-.blue-icon{
-    font-size:35px;
+.strip-item h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
 }
 
-.blue-item h4{
-    font-size:14px;
-    margin-bottom:6px;
-}
-
-.blue-item p{
-    font-size:11px;
-    opacity:.8;
+.strip-item p {
+    font-size: 12px;
+    opacity: .85;
 }
 
 /* =========================
-   FAQ
+   CTA
 ========================= */
 
-.faq{
-    padding:85px 0;
+.cta {
+    padding: 80px 0;
+    text-align: center;
+    background: #f8fafc;
 }
 
-.faq-list{
-    max-width:800px;
-    margin:auto;
+.cta h2 {
+    font-size: 42px;
+    letter-spacing: -1.5px;
+    margin-bottom: 15px;
 }
 
-.faq-item{
-    border-bottom:1px solid var(--border);
-}
-
-.faq-question{
-    padding:20px 0;
-    display:flex;
-    justify-content:space-between;
-    font-weight:600;
-    font-size:14px;
-    cursor:pointer;
-}
-
-.faq-answer{
-    display:none;
-    color:#667085;
-    font-size:13px;
-    line-height:1.7;
-    padding:0 0 20px;
-}
-
-.faq-item.active .faq-answer{
-    display:block;
+.cta p {
+    color: var(--muted);
+    margin-bottom: 25px;
 }
 
 /* =========================
    FOOTER
 ========================= */
 
-footer{
-    background:#04132d;
-    color:#fff;
-    padding:60px 0 20px;
+footer {
+    background: #06152f;
+    color: white;
+    padding-top: 60px;
 }
 
-.footer-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr 1fr 1.3fr;
-    gap:50px;
-    padding-bottom:45px;
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 50px;
+    padding-bottom: 50px;
 }
 
-.footer-logo{
-    font-size:28px;
-    font-weight:800;
-    margin-bottom:17px;
+.footer-logo {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 15px;
 }
 
-.footer-logo span{
-    color:#1f8eff;
+.footer-logo span {
+    color: #45a3ff;
 }
 
-.footer-about{
-    max-width:250px;
-    color:#aebbd0;
-    font-size:12px;
-    line-height:1.7;
+.footer-about {
+    color: #aab5c7;
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 270px;
 }
 
-.socials{
-    display:flex;
-    gap:8px;
-    margin-top:20px;
+.footer h4 {
+    margin-bottom: 18px;
+    font-size: 15px;
 }
 
-.social{
-    width:32px;
-    height:32px;
-    border:1px solid #52627b;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
 }
 
-footer h4{
-    font-size:14px;
-    margin-bottom:20px;
+.footer-links a {
+    color: #aab5c7;
+    font-size: 13px;
+    transition: .3s;
 }
 
-.footer-links{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    color:#aebbd0;
-    font-size:12px;
+.footer-links a:hover {
+    color: white;
 }
 
-.footer-links a:hover{
-    color:#fff;
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #aab5c7;
+    font-size: 13px;
 }
 
-.contact-line{
-    color:#aebbd0;
-    font-size:12px;
-    margin-bottom:14px;
+.website-box {
+    margin-top: 20px;
+    border: 1px solid #52627a;
+    border-radius: 10px;
+    padding: 12px 18px;
+    display: inline-block;
+    color: white;
+    font-weight: 700;
 }
 
-.website-link{
-    display:inline-block;
-    margin-top:12px;
-    padding:12px 20px;
-    border:1px solid #64738b;
-    border-radius:8px;
-    font-size:12px;
-}
-
-.copyright{
-    border-top:1px solid #263550;
-    padding-top:20px;
-    text-align:center;
-    color:#8492a8;
-    font-size:11px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(2,10,25,.7);
-    backdrop-filter:blur(6px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:3000;
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:100%;
-    max-width:500px;
-    background:#fff;
-    border-radius:18px;
-    padding:35px;
-    position:relative;
-    animation:modalIn .25s ease;
-}
-
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.close-modal{
-    position:absolute;
-    top:15px;
-    right:18px;
-    border:0;
-    background:none;
-    font-size:25px;
-}
-
-.modal-box h2{
-    font-size:25px;
-    margin-bottom:8px;
-}
-
-.modal-box > p{
-    font-size:13px;
-    color:#667085;
-    margin-bottom:22px;
-}
-
-.form-group{
-    margin-bottom:13px;
-}
-
-.form-group input,
-.form-group select{
-    width:100%;
-    padding:13px;
-    border:1px solid #dce2ec;
-    border-radius:7px;
-    outline:none;
-}
-
-.form-group input:focus,
-.form-group select:focus{
-    border-color:var(--blue);
-}
-
-.full-btn{
-    width:100%;
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding: 20px 0;
+    text-align: center;
+    color: #8290a7;
+    font-size: 12px;
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media(max-width:1050px){
+@media(max-width: 1000px) {
 
-    .nav-links{
-        gap:18px;
+    .nav-links {
+        gap: 20px;
     }
 
-    .hero h1{
-        font-size:48px;
+    .hero-inner {
+        grid-template-columns: 1fr;
     }
 
-    .feature-grid{
-        grid-template-columns:repeat(2,1fr);
+    .hero-content {
+        text-align: center;
     }
 
-    .industry-grid{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .industry:nth-child(4){
-        border-right:0;
-    }
-
-    .blue-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:25px;
-    }
-
-    .blue-item{
-        border-right:0;
-    }
-}
-
-@media(max-width:800px){
-
-    .topbar{
-        display:none;
-    }
-
-    .navbar{
-        height:68px;
-    }
-
-    .nav-links{
-        display:none;
-        position:absolute;
-        top:68px;
-        left:0;
-        width:100%;
-        background:white;
-        flex-direction:column;
-        padding:25px;
-        box-shadow:0 15px 30px rgba(0,0,0,.1);
-    }
-
-    .nav-links.open{
-        display:flex;
-    }
-
-    .nav-actions{
-        display:none;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .hero{
-        padding:55px 0;
-    }
-
-    .hero-grid{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hero-description{
-        margin-left:auto;
-        margin-right:auto;
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-buttons,
-    .hero-trust{
-        justify-content:center;
+    .hero-checks {
+        justify-content: center;
     }
 
-    .product-stage{
-        transform:scale(.72);
-        margin-left:-60px;
-        margin-top:-30px;
-        min-height:390px;
+    .hero-visual {
+        min-height: 430px;
     }
 
-    .trust-grid{
-        grid-template-columns:1fr 1fr;
+    .benefits-grid {
+        grid-template-columns: repeat(2,1fr);
     }
 
-    .app-wrapper{
-        grid-template-columns:1fr;
-        gap:45px;
-        padding:40px 25px;
+    .features-wrapper,
+    .mobile-grid {
+        grid-template-columns: 1fr;
     }
 
-    .app-content{
-        text-align:center;
+    .industry-grid {
+        grid-template-columns: repeat(4,1fr);
     }
 
-    .app-content p{
-        margin-left:auto;
-        margin-right:auto;
+    .industry {
+        border-bottom: 1px solid var(--border);
     }
 
-    .app-download{
-        justify-content:center;
+    .strip-grid {
+        grid-template-columns: repeat(2,1fr);
+        gap: 25px;
     }
 
-    .industry-grid{
-        grid-template-columns:repeat(2,1fr);
+    .strip-item:nth-child(2) {
+        border-right: none;
     }
 
-    .industry{
-        border-right:1px solid var(--border);
-        border-bottom:1px solid var(--border);
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
+    .footer-grid {
+        grid-template-columns: repeat(2,1fr);
     }
 }
 
-@media(max-width:550px){
+@media(max-width: 700px) {
 
-    .hero h1{
-        font-size:38px;
-        letter-spacing:-2px;
+    .topbar {
+        display: none;
     }
 
-    .hero-buttons{
-        flex-direction:column;
+    .navbar {
+        height: 68px;
     }
 
-    .hero-trust{
-        flex-direction:column;
-        gap:10px;
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        gap: 0;
+        box-shadow: 0 10px 25px rgba(0,0,0,.08);
     }
 
-    .product-stage{
-        transform:scale(.52);
-        margin-left:-125px;
-        min-height:300px;
+    .nav-links.show {
+        display: flex;
     }
 
-    .trust-grid{
-        grid-template-columns:1fr;
+    .nav-links a {
+        width: 100%;
+        padding: 14px;
+        text-align: center;
     }
 
-    .feature-grid{
-        grid-template-columns:1fr;
+    .mobile-menu {
+        display: block;
     }
 
-    .section-heading h2{
-        font-size:30px;
+    .hero {
+        padding-top: 45px;
     }
 
-    .blue-grid{
-        grid-template-columns:1fr;
+    .hero h1 {
+        font-size: 42px;
+        letter-spacing: -2px;
     }
 
-    .blue-item{
-        padding:10px 0;
+    .hero p {
+        font-size: 16px;
     }
 
-    .footer-grid{
-        grid-template-columns:1fr;
-        gap:35px;
+    .hero-visual {
+        min-height: 340px;
+        transform: scale(.85);
+        margin: -30px 0;
     }
 
-    .modal-box{
-        padding:25px;
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features-wrapper {
+        padding: 30px 22px;
+    }
+
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-text {
+        text-align: center;
+    }
+
+    .download-buttons {
+        justify-content: center;
+    }
+
+    .industry-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .strip-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .strip-item,
+    .strip-item:nth-child(2) {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,.2);
+        padding: 15px 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .cta h2 {
+        font-size: 32px;
     }
 }
 
 </style>
 </head>
 
-
 <body>
 
-
-<!-- TOP BAR -->
+<!-- =========================
+     TOP BAR
+========================= -->
 
 <div class="topbar">
+    <div class="topbar-inner">
+        <div class="topbar-phone">
+            ☎ <span>8790568446</span>
+        </div>
 
-    <div class="top-left">
-        <span>✉ support@axzen.in</span>
-        <span>☎ 8790568446</span>
+        <a href="#contact" class="demo-top">
+            Request Demo
+        </a>
     </div>
-
-    <div class="top-right">
-        <span>Hyderabad, Telangana, India</span>
-        <span>Business Hours: Mon - Sat</span>
-    </div>
-
 </div>
 
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <header class="navbar">
 
-    <div class="nav-inner">
+    <div class="container nav-inner">
 
-        <a href="#home" class="logo">
-            äxzen <span>POS</span>
+        <a href="#" class="logo">
+            axzen <span>POS</span>
         </a>
 
         <nav class="nav-links" id="navLinks">
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#industries">Industries</a>
-            <a href="#how">How It Works</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
+
+            <a href="#home" class="active">Home</a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#pricing">
+                Pricing
+            </a>
+
+            <a href="#industries">
+                Industries
+            </a>
+
+            <a href="#how">
+                How It Works
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
         </nav>
 
-        <div class="nav-actions">
-            <button class="nav-demo" onclick="openDemo()">
-                Request Demo
-            </button>
-        </div>
-
-        <button class="menu-btn" onclick="toggleMenu()">
+        <div class="mobile-menu" onclick="toggleMenu()">
             ☰
-        </button>
+        </div>
 
     </div>
 
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero" id="home">
 
-<div class="container hero-grid">
+    <div class="container hero-inner">
 
-<div>
+        <div class="hero-content">
 
-    <div class="hero-badge">
-        Smart Billing. Simple Business.
-    </div>
+            <div class="badge">
+                Smart Billing. Simple Business.
+            </div>
 
-    <h1>
-        Powerful POS Solution
-        for <span>Every Business</span>
-    </h1>
+            <h1>
+                Powerful POS Solution
+                for <span>Every Business</span>
+            </h1>
 
-    <p class="hero-description">
-        axzen POS helps you manage billing, stock, sales, reports and customers —
-        all in one powerful platform.
-        Simple to use. Powerful in performance.
-    </p>
+            <p>
+                axzen POS helps you manage billing, stock, sales,
+                reports and customers – all in one place.
+                Simple to use. Powerful in performance.
+            </p>
 
-    <div class="hero-buttons">
+            <div class="hero-buttons">
 
-        <button class="btn-primary" onclick="openDemo()">
-            Get Started Free →
-        </button>
+                <a href="#contact" class="btn-primary">
+                    Get Started Free →
+                </a>
 
-        <button class="btn-secondary" onclick="showDemo()">
-            ▶ &nbsp; Watch Demo
-        </button>
-
-    </div>
-
-    <div class="hero-trust">
-        <span>Easy to Use</span>
-        <span>Secure & Reliable</span>
-        <span>Works Online & Offline</span>
-    </div>
-
-</div>
-
-
-<!-- POS VISUAL -->
-
-<div class="product-stage">
-
-    <div class="pos-monitor">
-
-        <div class="pos-screen">
-
-            <div class="screen-sidebar">
-
-                <div class="screen-brand">
-                    axzen POS
-                </div>
-
-                <div class="screen-nav">
-
-                    <div>◉ Dashboard</div>
-                    <div>▣ Sales</div>
-                    <div>◇ Products</div>
-                    <div>♙ Customers</div>
-                    <div>▥ Reports</div>
-                    <div>₹ Expenses</div>
-                    <div>⚙ Settings</div>
-
-                </div>
+                <a href="#how" class="btn-secondary">
+                    ◉ &nbsp; Watch Demo
+                </a>
 
             </div>
 
+            <div class="hero-checks">
 
-            <div class="screen-main">
-
-                <div class="screen-header">
-                    <strong>Business Dashboard</strong>
-                    <span>Today, 10:30 AM</span>
+                <div class="check">
+                    <span>✓</span>
+                    Easy to Use
                 </div>
 
-
-                <div class="dashboard-cards">
-
-                    <div class="dashboard-card green">
-                        <small>Today's Sales</small>
-                        <strong>₹25,430</strong>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <small>Orders</small>
-                        <strong>128</strong>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <small>Products</small>
-                        <strong>250</strong>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <small>Customers</small>
-                        <strong>86</strong>
-                    </div>
-
+                <div class="check">
+                    <span>✓</span>
+                    Secure & Reliable
                 </div>
 
-
-                <div class="dashboard-content">
-
-                    <div class="dashboard-box">
-
-                        <h4>Sales Overview</h4>
-
-                        <div class="fake-chart">
-
-                            <svg viewBox="0 0 300 100">
-
-                                <polyline
-                                    points="0,80 40,65 75,72 110,40 145,58 180,28 215,42 250,20 300,5"
-                                    fill="none"
-                                    stroke="#0758ed"
-                                    stroke-width="4"
-                                />
-
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="dashboard-box">
-
-                        <h4>Top Products</h4>
-
-                        <div class="top-product">
-                            <span>Chicken Biryani</span>
-                            <b>₹4,850</b>
-                        </div>
-
-                        <div class="top-product">
-                            <span>Veg Meals</span>
-                            <b>₹3,250</b>
-                        </div>
-
-                        <div class="top-product">
-                            <span>Fried Rice</span>
-                            <b>₹2,450</b>
-                        </div>
-
-                    </div>
-
+                <div class="check">
+                    <span>✓</span>
+                    Works Online & Offline
                 </div>
 
             </div>
 
         </div>
 
-    </div>
+
+        <!-- POS MOCKUP -->
+
+        <div class="hero-visual">
+
+            <div class="pos-machine">
+
+                <div class="monitor">
+
+                    <div class="monitor-screen">
+
+                        <div class="screen-top">
+
+                            <div class="screen-sidebar">
+
+                                <div class="side-logo">
+                                    axzen POS
+                                </div>
+
+                                <div class="side-item active">
+                                    ◉ Dashboard
+                                </div>
+
+                                <div class="side-item">
+                                    ◉ Sales
+                                </div>
+
+                                <div class="side-item">
+                                    ◉ Products
+                                </div>
+
+                                <div class="side-item">
+                                    ◉ Customers
+                                </div>
+
+                                <div class="side-item">
+                                    ◉ Reports
+                                </div>
+
+                                <div class="side-item">
+                                    ◉ Expenses
+                                </div>
+
+                            </div>
 
 
-    <div class="cash-drawer">
+                            <div class="screen-main">
 
-        <div class="drawer-lock"></div>
+                                <div class="dashboard-cards">
 
-    </div>
+                                    <div class="d-card">
+                                        <small>Today's Sales</small>
+                                        <strong>£25,430</strong>
+                                    </div>
+
+                                    <div class="d-card">
+                                        <small>Orders</small>
+                                        <strong>128</strong>
+                                    </div>
+
+                                    <div class="d-card">
+                                        <small>Products</small>
+                                        <strong>250</strong>
+                                    </div>
+
+                                    <div class="d-card">
+                                        <small>Customers</small>
+                                        <strong>86</strong>
+                                    </div>
+
+                                </div>
 
 
-    <div class="receipt-printer">
+                                <div class="dashboard-body">
 
-        <div class="receipt">
+                                    <div class="chart-box">
 
-            <strong>axzen POS</strong>
+                                        <div class="chart-title">
+                                            Sales Overview
+                                        </div>
 
-            Thank You!<br><br>
+                                        <div class="chart">
 
-            Bill No: #10045<br>
-            Chicken Biryani<br>
-            Qty: 2<br>
-            Amount: ₹280
+                                            <div class="bar" style="height:30%"></div>
+                                            <div class="bar" style="height:50%"></div>
+                                            <div class="bar" style="height:40%"></div>
+                                            <div class="bar" style="height:70%"></div>
+                                            <div class="bar" style="height:55%"></div>
+                                            <div class="bar" style="height:85%"></div>
+                                            <div class="bar" style="height:100%"></div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="product-box">
+
+                                        <div class="products-title">
+                                            Top Products
+                                        </div>
+
+                                        <div class="product-row">
+                                            Chicken Biryani
+                                            <strong>£4,850</strong>
+                                        </div>
+
+                                        <div class="product-row">
+                                            Veg Meals
+                                            <strong>£3,250</strong>
+                                        </div>
+
+                                        <div class="product-row">
+                                            Fried Rice
+                                            <strong>£2,450</strong>
+                                        </div>
+
+                                        <div class="product-row">
+                                            Paneer
+                                            <strong>£1,950</strong>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="monitor-stand"></div>
+
+                <div class="cash-drawer"></div>
+
+                <div class="printer">
+
+                    <div class="receipt">
+
+                        <strong>axzen POS</strong>
+
+                        Thank You!<br><br>
+
+                        Bill No: #10245<br>
+                        Date: Today<br>
+                        Total: £280
+
+                    </div>
+
+                    <div class="printer-label">
+                        Bluetooth
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
-
-</div>
-
-</div>
 
 </section>
 
 
-<!-- BENEFITS -->
+<!-- =========================
+     BENEFITS
+========================= -->
 
-<section class="trust-strip">
+<section class="benefits">
 
-<div class="container trust-grid">
+    <div class="container benefits-grid">
 
-    <div class="trust-card">
+        <div class="benefit-card">
 
-        <div class="trust-icon">◷</div>
+            <div class="benefit-icon">◷</div>
 
-        <div>
-            <h3>Save Time</h3>
-            <p>Fast billing and automation to save valuable time.</p>
+            <div>
+                <h3>Save Time</h3>
+
+                <p>
+                    Fast billing & automation to save valuable time.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+            <div class="benefit-icon">↗</div>
+
+            <div>
+                <h3>Increase Profit</h3>
+
+                <p>
+                    Better control, less loss, more profit.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+            <div class="benefit-icon">♢</div>
+
+            <div>
+                <h3>100% Secure</h3>
+
+                <p>
+                    Your data is safe with enterprise-grade security.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+            <div class="benefit-icon">♧</div>
+
+            <div>
+                <h3>Dedicated Support</h3>
+
+                <p>
+                    Expert support whenever you need us.
+                </p>
+            </div>
+
         </div>
 
     </div>
-
-
-    <div class="trust-card">
-
-        <div class="trust-icon">↗</div>
-
-        <div>
-            <h3>Increase Profit</h3>
-            <p>Better control, less loss and smarter business decisions.</p>
-        </div>
-
-    </div>
-
-
-    <div class="trust-card">
-
-        <div class="trust-icon">◇</div>
-
-        <div>
-            <h3>100% Secure</h3>
-            <p>Your business data is protected with secure technology.</p>
-        </div>
-
-    </div>
-
-
-    <div class="trust-card">
-
-        <div class="trust-icon">♧</div>
-
-        <div>
-            <h3>Dedicated Support</h3>
-            <p>Expert support whenever you need help.</p>
-        </div>
-
-    </div>
-
-</div>
 
 </section>
 
 
-<!-- FEATURES -->
+<!-- =========================
+     FEATURES
+========================= -->
 
-<section class="features" id="features">
+<section class="features-section" id="features">
 
-<div class="container">
+    <div class="container features-wrapper">
 
-<div class="section-heading">
+        <div>
 
-    <div class="section-label">
-        EVERYTHING YOU NEED
+            <div class="section-label">
+                Everything You Need
+            </div>
+
+            <h2 class="section-title">
+                All-in-One POS Features
+            </h2>
+
+
+            <div class="feature-list">
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">▣</div>
+
+                    <div>
+                        <h4>Fast & Easy Billing</h4>
+
+                        <p>
+                            Create bills in seconds with a user-friendly interface.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">♙</div>
+
+                    <div>
+                        <h4>Customer Management</h4>
+
+                        <p>
+                            Manage customers, history and loyalty.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">◇</div>
+
+                    <div>
+                        <h4>Product & Stock Management</h4>
+
+                        <p>
+                            Track your stock in real-time and never run out.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">＄</div>
+
+                    <div>
+                        <h4>Expense Management</h4>
+
+                        <p>
+                            Track expenses and improve business efficiency.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">↗</div>
+
+                    <div>
+                        <h4>Sales & Reports</h4>
+
+                        <p>
+                            Daily sales, profit reports and more.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">▤</div>
+
+                    <div>
+                        <h4>Bluetooth Printer Support</h4>
+
+                        <p>
+                            Works seamlessly with 58mm Bluetooth printers.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">♧</div>
+
+                    <div>
+                        <h4>Multi-user Access</h4>
+
+                        <p>
+                            Add multiple users with role-based permissions.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">☁</div>
+
+                    <div>
+                        <h4>Secure Cloud Backup</h4>
+
+                        <p>
+                            Your data is safe and accessible anytime.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a href="#features" class="explore">
+                Explore All Features →
+            </a>
+
+        </div>
+
     </div>
-
-    <h2>
-        One Powerful POS for Your Entire Business
-    </h2>
-
-    <p>
-        From billing and inventory to sales and reports,
-        axzen POS brings everything together in one simple platform.
-    </p>
-
-</div>
-
-
-<div class="feature-grid">
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">▣</div>
-
-    <h3>Fast & Easy Billing</h3>
-
-    <p>
-        Create professional bills in seconds with a simple,
-        user-friendly billing interface.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">◇</div>
-
-    <h3>Product & Stock Management</h3>
-
-    <p>
-        Track products and inventory in real-time
-        and avoid stock shortages.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">♙</div>
-
-    <h3>Customer Management</h3>
-
-    <p>
-        Manage customer details, purchase history
-        and build long-term relationships.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">₹</div>
-
-    <h3>Expense Management</h3>
-
-    <p>
-        Track business expenses and understand
-        where your money is going.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">↗</div>
-
-    <h3>Sales & Reports</h3>
-
-    <p>
-        Get clear sales reports and business insights
-        to make smarter decisions.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">▤</div>
-
-    <h3>Bluetooth Printer Support</h3>
-
-    <p>
-        Connect seamlessly with compatible
-        58mm Bluetooth thermal printers.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">♙</div>
-
-    <h3>Multi-user Access</h3>
-
-    <p>
-        Add staff and manage role-based access
-        for your business team.
-    </p>
-
-</div>
-
-
-<div class="feature-card">
-
-    <div class="feature-icon">☁</div>
-
-    <h3>Secure Cloud Backup</h3>
-
-    <p>
-        Keep your business information safe and
-        accessible whenever you need it.
-    </p>
-
-</div>
-
-
-</div>
-
-</div>
 
 </section>
 
 
-<!-- MOBILE APP -->
+<!-- =========================
+     MOBILE APP
+========================= -->
 
-<section class="app-section" id="how">
+<section class="mobile-app" id="how">
 
-<div class="container">
+    <div class="container mobile-grid">
 
-<div class="app-wrapper">
+        <div class="mobile-text">
 
+            <div class="section-label">
+                Manage Your Business Anywhere
+            </div>
 
-<div class="app-content">
+            <h2>
+                axzen POS Mobile App
+            </h2>
 
-    <div class="section-label">
-        MANAGE YOUR BUSINESS ANYWHERE
-    </div>
+            <p>
+                Powerful features in your pocket.
+                Manage billing, products, stock, sales,
+                reports and more – from anywhere.
+            </p>
 
-    <h2>
-        Your Business.
-        <br>
-        In Your Pocket.
-    </h2>
+            <div class="download-buttons">
 
-    <p>
-        Manage billing, products, inventory, sales and reports
-        from anywhere with the axzen POS mobile experience.
-    </p>
-
-
-    <div class="app-download">
-
-        <div>
-
-            <div class="qr-code"></div>
-
-            <small>
-                Scan to Download
-            </small>
-
-        </div>
-
-        <div>
-
-            <div style="display:flex;gap:8px;flex-direction:column;">
-
-                <div style="background:#050505;color:white;padding:10px 15px;border-radius:7px;font-size:11px;">
+                <a href="#" class="store">
                     ▶ Google Play
-                </div>
+                </a>
 
-                <div style="background:#050505;color:white;padding:10px 15px;border-radius:7px;font-size:11px;">
-                    ● App Store
+                <a href="#" class="store">
+                     App Store
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="phone-area">
+
+            <div class="phone">
+
+                <div class="phone-screen">
+
+                    <div class="phone-header">
+                        <span>axzen POS</span>
+                        <span>☰</span>
+                    </div>
+
+                    <div class="sales-card">
+
+                        <small>
+                            Today's Sales
+                        </small>
+
+                        <strong>
+                            £25,430
+                        </strong>
+
+                    </div>
+
+
+                    <div class="app-grid">
+
+                        <div class="app-box">
+                            ▣
+                            <span>Billing</span>
+                        </div>
+
+                        <div class="app-box">
+                            ◇
+                            <span>Products</span>
+                        </div>
+
+                        <div class="app-box">
+                            ↗
+                            <span>Sales</span>
+                        </div>
+
+                        <div class="app-box">
+                            ▣
+                            <span>Stock</span>
+                        </div>
+
+                        <div class="app-box">
+                            ♙
+                            <span>Customers</span>
+                        </div>
+
+                        <div class="app-box">
+                            ▥
+                            <span>Reports</span>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -1826,644 +1767,331 @@ footer h4{
 
     </div>
 
-</div>
-
-
-<div class="app-phone">
-
-<div class="phone">
-
-<div class="phone-screen">
-
-    <div class="phone-header">
-        axzen POS
-    </div>
-
-    <div class="sales-box">
-
-        <small>
-            Today's Sales
-        </small>
-
-        <strong>
-            ₹25,430
-        </strong>
-
-    </div>
-
-
-    <div class="app-menu">
-
-        <div>▣<br>Billing</div>
-
-        <div>◇<br>Products</div>
-
-        <div>↗<br>Sales</div>
-
-        <div>▣<br>Stock</div>
-
-        <div>♙<br>Customers</div>
-
-        <div>▥<br>Reports</div>
-
-    </div>
-
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
 </section>
 
 
-<!-- INDUSTRIES -->
+<!-- =========================
+     INDUSTRIES
+========================= -->
 
 <section class="industries" id="industries">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading">
+        <div class="section-label">
+            Perfect for Every Business
+        </div>
 
-    <div class="section-label">
-        PERFECT FOR EVERY BUSINESS
-    </div>
+        <h2>
+            Trusted by 100+ Businesses
+        </h2>
 
-    <h2>
-        Built for the Way You Do Business
-    </h2>
-
-    <p>
-        Whether you run a restaurant, cafe, retail store or growing business,
-        axzen POS helps simplify your daily operations.
-    </p>
-
-</div>
+        <p class="industries-sub">
+            One powerful POS solution for every type of business.
+        </p>
 
 
-<div class="industry-grid">
+        <div class="industry-grid">
 
-    <div class="industry">
-        <div class="industry-icon">♨</div>
-        <p>Restaurants</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">♨</div>
+                <span>Restaurants</span>
+            </div>
 
-    <div class="industry">
-        <div class="industry-icon">☕</div>
-        <p>Cafes</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">☕</div>
+                <span>Cafes</span>
+            </div>
 
-    <div class="industry">
-        <div class="industry-icon">♧</div>
-        <p>Retail Stores</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">♧</div>
+                <span>Retail Stores</span>
+            </div>
 
-    <div class="industry">
-        <div class="industry-icon">🛒</div>
-        <p>Grocery Shops</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">🛒</div>
+                <span>Grocery Shops</span>
+            </div>
 
-    <div class="industry">
-        <div class="industry-icon">▱</div>
-        <p>Food Trucks</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">▰</div>
+                <span>Food Trucks</span>
+            </div>
 
-    <div class="industry">
-        <div class="industry-icon">♨</div>
-        <p>Bakeries</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">♨</div>
+                <span>Bakeries</span>
+            </div>
 
-    <div class="industry">
-        <div class="industry-icon">•••</div>
-        <p>More</p>
-    </div>
+            <div class="industry">
+                <div class="industry-icon">•••</div>
+                <span>& More</span>
+            </div>
 
-</div>
-
-</div>
-
-</section>
-
-
-<!-- PRICING -->
-
-<section class="pricing" id="pricing">
-
-<div class="container">
-
-<div class="section-heading">
-
-    <div class="section-label">
-        SIMPLE & TRANSPARENT
-    </div>
-
-    <h2>
-        Pricing That Works for Your Business
-    </h2>
-
-    <p>
-        No confusing plans. Get the right POS solution
-        for your business and grow with confidence.
-    </p>
-
-</div>
-
-
-<div class="pricing-card">
-
-    <h3>
-        axzen POS
-    </h3>
-
-    <p style="color:#667085;font-size:13px;">
-        Complete POS solution for growing businesses
-    </p>
-
-    <div class="price">
-        Custom
-        <small>pricing</small>
-    </div>
-
-    <ul class="price-list">
-
-        <li>Fast & Easy Billing</li>
-
-        <li>Product & Inventory Management</li>
-
-        <li>Sales & Business Reports</li>
-
-        <li>Bluetooth Printer Support</li>
-
-        <li>Multi-user Access</li>
-
-        <li>Dedicated Support</li>
-
-    </ul>
-
-    <button class="btn-primary" onclick="openDemo()">
-        Request a Demo →
-    </button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- BLUE BENEFITS -->
-
-<section class="blue-benefits">
-
-<div class="container blue-grid">
-
-    <div class="blue-item">
-
-        <div class="blue-icon">◆</div>
-
-        <div>
-            <h4>No Hidden Charges</h4>
-            <p>Transparent and affordable pricing.</p>
         </div>
 
     </div>
 
+</section>
 
-    <div class="blue-item">
 
-        <div class="blue-icon">⚙</div>
+<!-- =========================
+     BLUE STRIP
+========================= -->
 
-        <div>
-            <h4>Quick Setup</h4>
-            <p>Get started with your business quickly.</p>
+<section class="blue-strip">
+
+    <div class="container strip-grid">
+
+        <div class="strip-item">
+
+            <div class="strip-icon">◆</div>
+
+            <div>
+                <h4>No Hidden Charges</h4>
+                <p>Transparent & affordable pricing.</p>
+            </div>
+
+        </div>
+
+
+        <div class="strip-item">
+
+            <div class="strip-icon">⚙</div>
+
+            <div>
+                <h4>One Time Setup</h4>
+                <p>Quick setup and get started fast.</p>
+            </div>
+
+        </div>
+
+
+        <div class="strip-item">
+
+            <div class="strip-icon">♢</div>
+
+            <div>
+                <h4>Free Training & Support</h4>
+                <p>We are here to help you succeed.</p>
+            </div>
+
+        </div>
+
+
+        <div class="strip-item">
+
+            <div class="strip-icon">↻</div>
+
+            <div>
+                <h4>Regular Updates</h4>
+                <p>Always up-to-date with new features.</p>
+            </div>
+
         </div>
 
     </div>
-
-
-    <div class="blue-item">
-
-        <div class="blue-icon">◇</div>
-
-        <div>
-            <h4>Training & Support</h4>
-            <p>We are here to help you succeed.</p>
-        </div>
-
-    </div>
-
-
-    <div class="blue-item">
-
-        <div class="blue-icon">↻</div>
-
-        <div>
-            <h4>Regular Updates</h4>
-            <p>Always improving with new features.</p>
-        </div>
-
-    </div>
-
-</div>
 
 </section>
 
 
-<!-- FAQ -->
+<!-- =========================
+     CTA
+========================= -->
 
-<section class="faq" id="faq">
+<section class="cta" id="pricing">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading">
+        <h2>
+            Ready to Simplify Your Business?
+        </h2>
 
-    <div class="section-label">
-        FREQUENTLY ASKED QUESTIONS
+        <p>
+            Start managing your business smarter with axzen POS.
+        </p>
+
+        <a href="#contact" class="btn-primary">
+            Get Started Today →
+        </a>
+
     </div>
-
-    <h2>
-        Everything You Need to Know
-    </h2>
-
-</div>
-
-
-<div class="faq-list">
-
-
-<div class="faq-item">
-
-    <div class="faq-question" onclick="toggleFAQ(this)">
-        What is axzen POS?
-        <span>+</span>
-    </div>
-
-    <div class="faq-answer">
-        axzen POS is an all-in-one point-of-sale solution that helps businesses manage billing,
-        products, inventory, customers, sales and reports from one platform.
-    </div>
-
-</div>
-
-
-<div class="faq-item">
-
-    <div class="faq-question" onclick="toggleFAQ(this)">
-        Can I use axzen POS for my restaurant?
-        <span>+</span>
-    </div>
-
-    <div class="faq-answer">
-        Yes. axzen POS is designed for restaurants, cafes, retail stores,
-        grocery shops, food trucks, bakeries and many other businesses.
-    </div>
-
-</div>
-
-
-<div class="faq-item">
-
-    <div class="faq-question" onclick="toggleFAQ(this)">
-        Does it support thermal printers?
-        <span>+</span>
-    </div>
-
-    <div class="faq-answer">
-        axzen POS is designed to work with compatible Bluetooth thermal printers,
-        including commonly used 58mm receipt printers.
-    </div>
-
-</div>
-
-
-<div class="faq-item">
-
-    <div class="faq-question" onclick="toggleFAQ(this)">
-        How can I get started?
-        <span>+</span>
-    </div>
-
-    <div class="faq-answer">
-        Click Request Demo and submit your business details.
-        Our team will contact you to understand your requirements and help you get started.
-    </div>
-
-</div>
-
-
-</div>
-
-</div>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer id="contact">
 
-<div class="container">
+    <div class="container footer-grid">
 
-<div class="footer-grid">
+        <div>
+
+            <div class="footer-logo">
+                axzen <span>POS</span>
+            </div>
+
+            <p class="footer-about">
+                Smart POS solution to simplify your
+                business operations and help you grow
+                every day.
+            </p>
+
+        </div>
 
 
-<div>
+        <div>
 
-    <div class="footer-logo">
-        äxzen <span>POS</span>
+            <h4>
+                Quick Links
+            </h4>
+
+            <div class="footer-links">
+
+                <a href="#home">Home</a>
+
+                <a href="#features">Features</a>
+
+                <a href="#pricing">Pricing</a>
+
+                <a href="#industries">Industries</a>
+
+                <a href="#contact">Contact</a>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Resources
+            </h4>
+
+            <div class="footer-links">
+
+                <a href="#how">How It Works</a>
+
+                <a href="#">FAQ</a>
+
+                <a href="#">Blog</a>
+
+                <a href="#">Privacy Policy</a>
+
+                <a href="#">Terms & Conditions</a>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Contact Us
+            </h4>
+
+            <div class="contact-info">
+
+                <div>
+                    ☎ &nbsp; 8790568446
+                </div>
+
+                <div>
+                    ✉ &nbsp; support@axzen.in
+                </div>
+
+                <div>
+                    📍 &nbsp; Hyderabad, Telangana, India
+                </div>
+
+            </div>
+
+            <a href="https://pos.axzen.in" class="website-box">
+                🌐 &nbsp; pos.axzen.in
+            </a>
+
+        </div>
+
     </div>
 
-    <p class="footer-about">
-        Smart POS solution designed to simplify your business operations,
-        improve efficiency and help you grow every day.
-    </p>
 
-    <div class="socials">
+    <div class="footer-bottom">
 
-        <div class="social">f</div>
-
-        <div class="social">◎</div>
-
-        <div class="social">◉</div>
-
-        <div class="social">▶</div>
+        © 2026 axzen POS. All rights reserved.
 
     </div>
-
-</div>
-
-
-<div>
-
-    <h4>Quick Links</h4>
-
-    <div class="footer-links">
-
-        <a href="#home">Home</a>
-
-        <a href="#features">Features</a>
-
-        <a href="#pricing">Pricing</a>
-
-        <a href="#industries">Industries</a>
-
-        <a href="#contact">Contact</a>
-
-    </div>
-
-</div>
-
-
-<div>
-
-    <h4>Resources</h4>
-
-    <div class="footer-links">
-
-        <a href="#how">How It Works</a>
-
-        <a href="#faq">FAQ</a>
-
-        <a href="#">Blog</a>
-
-        <a href="#">Privacy Policy</a>
-
-        <a href="#">Terms & Conditions</a>
-
-    </div>
-
-</div>
-
-
-<div>
-
-    <h4>Contact Us</h4>
-
-    <div class="contact-line">
-        ☎ 8790568446
-    </div>
-
-    <div class="contact-line">
-        ✉ support@axzen.in
-    </div>
-
-    <div class="contact-line">
-        ⌖ Hyderabad, Telangana, India
-    </div>
-
-    <div style="color:#8492a8;font-size:11px;margin-top:20px;">
-        Visit Our Website
-    </div>
-
-    <a href="https://pos.axzen.in" class="website-link">
-        ◉ &nbsp; pos.axzen.in
-    </a>
-
-</div>
-
-
-</div>
-
-
-<div class="copyright">
-
-    © 2026 axzen POS. All rights reserved.
-
-</div>
-
-</div>
 
 </footer>
 
 
-<!-- DEMO MODAL -->
-
-<div class="modal" id="demoModal">
-
-<div class="modal-box">
-
-<button class="close-modal" onclick="closeDemo()">
-    ×
-</button>
-
-<h2>
-    Request a Demo
-</h2>
-
-<p>
-    Tell us about your business and our team will contact you shortly.
-</p>
-
-
-<form onsubmit="submitDemo(event)">
-
-<div class="form-group">
-    <input type="text" placeholder="Your Name" required>
-</div>
-
-<div class="form-group">
-    <input type="text" placeholder="Business Name" required>
-</div>
-
-<div class="form-group">
-    <input type="tel" placeholder="Phone Number" required>
-</div>
-
-<div class="form-group">
-    <input type="email" placeholder="Email Address">
-</div>
-
-<div class="form-group">
-
-<select required>
-
-<option value="">
-    Select Business Type
-</option>
-
-<option>Restaurant</option>
-<option>Cafe</option>
-<option>Retail Store</option>
-<option>Grocery Shop</option>
-<option>Food Truck</option>
-<option>Bakery</option>
-<option>Other</option>
-
-</select>
-
-</div>
-
-
-<button class="btn-primary full-btn">
-    Submit Demo Request
-</button>
-
-</form>
-
-</div>
-
-</div>
-
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
-/* MOBILE MENU */
+function toggleMenu() {
 
-function toggleMenu(){
+    const nav = document.getElementById("navLinks");
 
-    document
-    .getElementById("navLinks")
-    .classList
-    .toggle("open");
+    nav.classList.toggle("show");
 
 }
 
 
-/* DEMO MODAL */
+// Close mobile menu when clicking a link
 
-function openDemo(){
+document.querySelectorAll(".nav-links a").forEach(link => {
 
-    document
-    .getElementById("demoModal")
-    .classList
-    .add("show");
-
-}
-
-function closeDemo(){
-
-    document
-    .getElementById("demoModal")
-    .classList
-    .remove("show");
-
-}
-
-
-/* CLOSE MODAL OUTSIDE */
-
-window.addEventListener("click",function(e){
-
-    const modal=document.getElementById("demoModal");
-
-    if(e.target===modal){
-
-        closeDemo();
-
-    }
-
-});
-
-
-/* FORM */
-
-function submitDemo(e){
-
-    e.preventDefault();
-
-    alert(
-        "Thank you! Your demo request has been received. Our team will contact you shortly."
-    );
-
-    closeDemo();
-
-}
-
-
-/* DEMO */
-
-function showDemo(){
-
-    alert(
-        "axzen POS demo video will be available soon."
-    );
-
-}
-
-
-/* FAQ */
-
-function toggleFAQ(element){
-
-    const item=element.parentElement;
-
-    item.classList.toggle("active");
-
-}
-
-
-/* CLOSE MOBILE MENU */
-
-document
-.querySelectorAll(".nav-links a")
-.forEach(function(link){
-
-    link.addEventListener("click",function(){
+    link.addEventListener("click", () => {
 
         document
-        .getElementById("navLinks")
-        .classList
-        .remove("open");
+            .getElementById("navLinks")
+            .classList.remove("show");
 
     });
 
 });
 
 
-/* ESC CLOSE */
+// Active navigation on scroll
 
-document.addEventListener("keydown",function(e){
+const sections = document.querySelectorAll("section");
 
-    if(e.key==="Escape"){
+const navItems = document.querySelectorAll(".nav-links a");
 
-        closeDemo();
+window.addEventListener("scroll", () => {
 
-    }
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 150;
+
+        if (window.scrollY >= sectionTop) {
+
+            current = section.getAttribute("id");
+
+        }
+
+    });
+
+    navItems.forEach(item => {
+
+        item.classList.remove("active");
+
+        if (item.getAttribute("href") === "#" + current) {
+
+            item.classList.add("active");
+
+        }
+
+    });
 
 });
 
