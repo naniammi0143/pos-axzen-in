@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="axzen POS - Smart Billing. Simple Business. Powerful POS solution for every business.">
+<title>axzen POS | Powerful POS Solution for Every Business</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    color:#111827;
+    background:#fff;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.topbar{
+    background:#061633;
+    color:white;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    font-size:13px;
+}
+
+.top-contact{
+    display:flex;
+    gap:25px;
+}
+
+.demo-top{
+    background:#0758ed;
+    padding:8px 22px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.navbar{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    background:white;
+    border-bottom:1px solid #edf0f5;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:29px;
+    font-weight:700;
+    letter-spacing:-1.5px;
+}
+
+.logo span{
+    color:#1261ed;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:38px;
+    font-size:14px;
+    font-weight:500;
+}
+
+.nav-links a{
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#1261ed;
+}
+
+.nav-demo{
+    background:#0758ed;
+    color:white;
+    padding:13px 26px;
+    border-radius:6px;
+    font-weight:bold;
+    box-shadow:0 8px 20px rgba(0,86,230,.2);
+}
+
+.menu-btn{
+    display:none;
+    font-size:26px;
+    background:none;
+    border:0;
+}
+
+.hero{
+    min-height:570px;
+    padding:70px 5% 50px;
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    align-items:center;
+    gap:30px;
+    position:relative;
+    overflow:hidden;
+    background:
+    radial-gradient(circle at 90% 30%,#eaf3ff 0,transparent 30%),
+    #fff;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    background:#edf5ff;
+    color:#0758ed;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:24px;
+}
+
+.hero h1{
+    font-size:54px;
+    line-height:1.08;
+    letter-spacing:-2px;
+    max-width:650px;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    color:#1261ed;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.8;
+    color:#4b5563;
+    max-width:570px;
+    margin-bottom:28px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:16px;
+    margin-bottom:30px;
+}
+
+.primary-btn{
+    background:#0758ed;
+    color:white;
+    padding:16px 28px;
+    border-radius:8px;
+    border:none;
+    font-size:15px;
+    font-weight:bold;
+    box-shadow:0 10px 25px rgba(0,88,237,.22);
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-2px);
+    background:#0049d4;
+}
+
+.secondary-btn{
+    background:white;
+    border:1px solid #d8dfeb;
+    color:#172033;
+    padding:16px 28px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    border-color:#0758ed;
+    color:#0758ed;
+}
+
+.checks{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    font-size:13px;
+    color:#374151;
+}
+
+.checks span::before{
+    content:"✓";
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    background:#38b85a;
+    color:#fff;
+    margin-right:7px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.pos-visual{
+    position:relative;
+    min-height:450px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.pos-system{
+    position:relative;
+    width:570px;
+    max-width:100%;
+    height:420px;
+}
+
+.monitor{
+    position:absolute;
+    width:430px;
+    height:280px;
+    left:35px;
+    top:20px;
+    background:#111827;
+    border-radius:18px;
+    padding:13px;
+    transform:perspective(900px) rotateY(-3deg);
+    box-shadow:0 25px 35px rgba(0,0,0,.25);
+}
+
+.screen{
+    width:100%;
+    height:100%;
+    background:#f5f8fc;
+    border-radius:8px;
+    overflow:hidden;
+    display:flex;
+}
+
+.side-menu{
+    width:85px;
+    background:#061633;
+    color:white;
+    padding:14px 8px;
+}
+
+.side-menu strong{
+    display:block;
+    font-size:11px;
+    margin-bottom:20px;
+}
+
+.side-menu div{
+    font-size:8px;
+    padding:8px 3px;
+    opacity:.85;
+}
+
+.dashboard{
+    flex:1;
+    padding:12px;
+}
+
+.dashboard-title{
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+}
+
+.stat{
+    background:#fff;
+    padding:8px 5px;
+    border-radius:5px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.stat small{
+    font-size:6px;
+    color:#667085;
+}
+
+.stat b{
+    display:block;
+    font-size:10px;
+    margin-top:5px;
+}
+
+.green{
+    color:#16a34a;
+}
+
+.chart-area{
+    margin-top:9px;
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:7px;
+}
+
+.chart,.products{
+    background:#fff;
+    border-radius:6px;
+    padding:8px;
+    height:110px;
+}
+
+.chart-title{
+    font-size:7px;
+    font-weight:bold;
+}
+
+.chart-line{
+    margin-top:25px;
+    height:35px;
+    border-bottom:2px solid #0758ed;
+    border-radius:50%;
+    transform:skewY(-8deg);
+}
+
+.products p{
+    font-size:6px;
+    padding:5px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cash-drawer{
+    position:absolute;
+    left:0;
+    top:295px;
+    width:390px;
+    height:105px;
+    background:#101820;
+    border-radius:12px 12px 17px 17px;
+    box-shadow:0 20px 30px rgba(0,0,0,.28);
+}
+
+.cash-drawer::before{
+    content:"axzen";
+    position:absolute;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    left:25px;
+    top:38px;
+}
+
+.lock{
+    position:absolute;
+    right:50%;
+    top:38px;
+    width:18px;
+    height:25px;
+    border:2px solid #aaa;
+    border-radius:5px;
+}
+
+.printer{
+    position:absolute;
+    right:5px;
+    top:210px;
+    width:165px;
+    height:180px;
+    background:#101820;
+    border-radius:14px;
+    box-shadow:0 20px 30px rgba(0,0,0,.25);
+}
+
+.printer::before{
+    content:"axzen";
+    position:absolute;
+    color:#fff;
+    font-weight:bold;
+    font-size:17px;
+    left:53px;
+    top:78px;
+}
+
+.paper{
+    position:absolute;
+    width:105px;
+    height:105px;
+    background:#fff;
+    left:30px;
+    top:-70px;
+    transform:rotate(3deg);
+    box-shadow:0 3px 8px rgba(0,0,0,.18);
+    padding:12px;
+    font-size:7px;
+    color:#222;
+}
+
+.paper strong{
+    display:block;
+    text-align:center;
+    font-size:10px;
+    margin-bottom:10px;
+}
+
+.benefits{
+    padding:10px 4.5% 60px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.benefit{
+    border:1px solid #e1e7f0;
+    border-radius:14px;
+    padding:25px;
+    display:flex;
+    gap:18px;
+    align-items:center;
+    transition:.3s;
+}
+
+.benefit:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(0,0,0,.07);
+}
+
+.icon{
+    min-width:52px;
+    height:52px;
+    border:2px solid #0758ed;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0758ed;
+    font-size:25px;
+}
+
+.benefit h3{
+    font-size:15px;
+    margin-bottom:7px;
+}
+
+.benefit p{
+    font-size:12px;
+    line-height:1.5;
+    color:#667085;
+}
+
+.features-section{
+    padding:30px 4.5% 70px;
+}
+
+.feature-wrap{
+    background:#f7faff;
+    border-radius:25px;
+    padding:55px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+}
+
+.section-label{
+    color:#0758ed;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.section-title{
+    font-size:32px;
+    margin-bottom:30px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px 35px;
+}
+
+.feature{
+    display:flex;
+    gap:15px;
+}
+
+.feature-icon{
+    color:#0758ed;
+    font-size:27px;
+    min-width:35px;
+}
+
+.feature h4{
+    font-size:14px;
+    margin-bottom:7px;
+}
+
+.feature p{
+    font-size:12px;
+    color:#667085;
+    line-height:1.5;
+}
+
+.explore{
+    display:inline-block;
+    margin-top:28px;
+    color:#0758ed;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.mobile-section{
+    margin-top:30px;
+    background:#f7faff;
+    border-radius:25px;
+    padding:55px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    overflow:hidden;
+}
+
+.mobile-content h2{
+    font-size:32px;
+    margin-bottom:18px;
+}
+
+.mobile-content p{
+    color:#667085;
+    line-height:1.7;
+    max-width:500px;
+    margin-bottom:25px;
+}
+
+.qr{
+    width:115px;
+    height:115px;
+    background:
+    repeating-linear-gradient(45deg,#111 0 4px,#fff 4px 8px);
+    border:10px solid white;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+    margin-bottom:12px;
+}
+
+.download{
+    font-size:12px;
+    color:#555;
+    margin-bottom:12px;
+}
+
+.store-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.store{
+    background:#050505;
+    color:#fff;
+    border-radius:7px;
+    padding:10px 15px;
+    font-size:11px;
+}
+
+.phone-area{
+    display:flex;
+    justify-content:center;
+    position:relative;
+}
+
+.phone{
+    width:245px;
+    height:485px;
+    background:#111827;
+    border:8px solid #111827;
+    border-radius:35px;
+    box-shadow:0 25px 40px rgba(0,0,0,.2);
+    overflow:hidden;
+    position:relative;
+}
+
+.phone-screen{
+    background:#f5f8fc;
+    width:100%;
+    height:100%;
+    padding:18px 12px;
+}
+
+.phone-top{
+    background:#0758ed;
+    color:#fff;
+    padding:15px;
+    margin:-18px -12px 15px;
+    font-weight:bold;
+}
+
+.today{
+    background:#fff;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+}
+
+.today small{
+    color:#667085;
+}
+
+.today strong{
+    display:block;
+    color:#16a34a;
+    font-size:23px;
+    margin-top:7px;
+}
+
+.app-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+.app-item{
+    background:white;
+    border-radius:10px;
+    padding:18px 5px;
+    text-align:center;
+    color:#0758ed;
+    font-size:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.04);
+}
+
+.industries{
+    padding:40px 4.5% 70px;
+    text-align:center;
+}
+
+.industries .section-title{
+    margin-bottom:35px;
+}
+
+.industry-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    border:1px solid #edf0f5;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.industry{
+    padding:25px 10px;
+    border-right:1px solid #edf0f5;
+    transition:.3s;
+}
+
+.industry:last-child{
+    border-right:0;
+}
+
+.industry:hover{
+    background:#f7faff;
+    color:#0758ed;
+}
+
+.industry-icon{
+    font-size:34px;
+    margin-bottom:13px;
+}
+
+.industry p{
+    font-size:12px;
+    font-weight:600;
+}
+
+.blue-strip{
+    background:#0758ed;
+    color:#fff;
+    padding:35px 5%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.strip-item{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding-right:25px;
+    border-right:1px solid rgba(255,255,255,.35);
+}
+
+.strip-item:last-child{
+    border-right:0;
+}
+
+.strip-icon{
+    font-size:37px;
+}
+
+.strip-item h4{
+    font-size:14px;
+    margin-bottom:7px;
+}
+
+.strip-item p{
+    font-size:11px;
+    opacity:.85;
+    line-height:1.4;
+}
+
+footer{
+    background:#04132d;
+    color:#fff;
+    padding:55px 5% 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:50px;
+    padding-bottom:40px;
+}
+
+.footer-logo{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.footer-logo span{
+    color:#1f8eff;
+}
+
+.footer-about{
+    color:#b8c3d4;
+    font-size:12px;
+    line-height:1.7;
+    max-width:230px;
+}
+
+.socials{
+    display:flex;
+    gap:8px;
+    margin-top:20px;
+}
+
+.social{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    border:1px solid #506078;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+}
+
+footer h4{
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    color:#b8c3d4;
+    font-size:12px;
+}
+
+.footer-links a:hover{
+    color:#fff;
+}
+
+.contact-item{
+    color:#b8c3d4;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.website-box{
+    margin-top:20px;
+    border:1px solid #617089;
+    border-radius:10px;
+    padding:14px 20px;
+    display:inline-block;
+    font-size:13px;
+}
+
+.copyright{
+    border-top:1px solid #263550;
+    padding-top:20px;
+    text-align:center;
+    color:#8d9ab0;
+    font-size:11px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:2000;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:500px;
+    border-radius:18px;
+    padding:35px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:15px;
+    font-size:25px;
+    border:0;
+    background:none;
+}
+
+.modal-box h2{
+    margin-bottom:10px;
+}
+
+.modal-box p{
+    color:#667085;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:13px;
+    border:1px solid #d8dfeb;
+    border-radius:7px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#0758ed;
+}
+
+.submit{
+    width:100%;
+    margin-top:5px;
+}
+
+@media(max-width:1000px){
+    .nav-links{
+        gap:20px;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons,
+    .checks{
+        justify-content:center;
+    }
+
+    .pos-visual{
+        margin-top:20px;
+    }
+
+    .benefits{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .industry-grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .industry:nth-child(4){
+        border-right:0;
+    }
+
+    .blue-strip{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .strip-item:nth-child(2){
+        border-right:0;
+    }
+}
+
+@media(max-width:750px){
+    .topbar{
+        display:none;
+    }
+
+    .navbar{
+        height:65px;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:65px;
+        left:0;
+        right:0;
+        background:white;
+        flex-direction:column;
+        padding:25px;
+        box-shadow:0 10px 20px rgba(0,0,0,.1);
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .nav-demo{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero{
+        padding:45px 5%;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .pos-system{
+        transform:scale(.65);
+        margin-left:-70px;
+        width:570px;
+    }
+
+    .benefits{
+        grid-template-columns:1fr;
+        padding:20px 5% 45px;
+    }
+
+    .feature-wrap,
+    .mobile-section{
+        grid-template-columns:1fr;
+        padding:30px 22px;
+        gap:35px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .mobile-content{
+        text-align:center;
+    }
+
+    .qr{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .store-buttons{
+        justify-content:center;
+    }
+
+    .industry-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .industry{
+        border-right:1px solid #edf0f5 !important;
+        border-bottom:1px solid #edf0f5;
+    }
+
+    .blue-strip{
+        grid-template-columns:1fr;
+    }
+
+    .strip-item{
+        border-right:0;
+        border-bottom:1px solid rgba(255,255,255,.3);
+        padding-bottom:20px;
+    }
+
+    .strip-item:last-child{
+        border-bottom:0;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+        gap:35px;
+    }
+}
+
+@media(max-width:500px){
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .checks{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .pos-system{
+        transform:scale(.48);
+        margin-left:-145px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .modal-box{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="top-contact">
+        <span>✉ support@axzen.in</span>
+        <span>☎ 8790568446</span>
+    </div>
+    <a href="#contact" class="demo-top">Request Demo</a>
+</div>
+
+<nav class="navbar">
+    <a href="#" class="logo">äxzen <span>POS</span></a>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#industries">Industries</a>
+        <a href="#how">How It Works</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <button class="nav-demo" onclick="openModal()">Request Demo</button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="badge">Smart Billing. Simple Business.</div>
+
+        <h1>
+            Powerful POS Solution<br>
+            for <span>Every Business</span>
+        </h1>
+
+        <p>
+            axzen POS helps you manage billing, stock, sales, reports and customers —
+            all in one place.<br>
+            Simple to use. Powerful in performance.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="openModal()">Get Started Free →</button>
+            <button class="secondary-btn" onclick="showDemo()">◉ &nbsp; Watch Demo</button>
+        </div>
+
+        <div class="checks">
+            <span>Easy to Use</span>
+            <span>Secure & Reliable</span>
+            <span>Works Online & Offline</span>
+        </div>
+    </div>
+
+    <div class="pos-visual">
+        <div class="pos-system">
+
+            <div class="monitor">
+                <div class="screen">
+                    <div class="side-menu">
+                        <strong>axzen POS</strong>
+                        <div>◉ Dashboard</div>
+                        <div>◉ Sales</div>
+                        <div>◉ Products</div>
+                        <div>◉ Customers</div>
+                        <div>◉ Reports</div>
+                        <div>◉ Expenses</div>
+                        <div>◉ Settings</div>
+                    </div>
+
+                    <div class="dashboard">
+                        <div class="dashboard-title">Dashboard</div>
+
+                        <div class="stats">
+                            <div class="stat">
+                                <small>Today's Sales</small>
+                                <b class="green">₹25,430</b>
+                            </div>
+                            <div class="stat">
+                                <small>Orders</small>
+                                <b>128</b>
+                            </div>
+                            <div class="stat">
+                                <small>Products</small>
+                                <b>250</b>
+                            </div>
+                            <div class="stat">
+                                <small>Customers</small>
+                                <b>86</b>
+                            </div>
+                        </div>
+
+                        <div class="chart-area">
+                            <div class="chart">
+                                <div class="chart-title">Sales Overview</div>
+                                <div class="chart-line"></div>
+                            </div>
+
+                            <div class="products">
+                                <div class="chart-title">Top Products</div>
+                                <p>Chicken Biryani ₹4,850</p>
+                                <p>Veg Meals ₹3,250</p>
+                                <p>Fried Rice ₹2,450</p>
+                                <p>Paneer Tikka ₹1,950</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cash-drawer">
+                <div class="lock"></div>
+            </div>
+
+            <div class="printer">
+                <div class="paper">
+                    <strong>axzen POS</strong>
+                    Thank You!<br><br>
+                    Bill No: #10045<br>
+                    Chicken Biryani<br>
+                    Qty: 2<br>
+                    Amount: ₹280
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="benefits">
+    <div class="benefit">
+        <div class="icon">◷</div>
+        <div>
+            <h3>Save Time</h3>
+            <p>Fast billing & automation to save valuable time.</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="icon">↗</div>
+        <div>
+            <h3>Increase Profit</h3>
+            <p>Better control, less loss, more profit.</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="icon">♢</div>
+        <div>
+            <h3>100% Secure</h3>
+            <p>Your data is safe with enterprise-grade security.</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="icon">♧</div>
+        <div>
+            <h3>Dedicated Support</h3>
+            <p>Expert support whenever you need us.</p>
+        </div>
+    </div>
+</section>
+
+<section class="features-section" id="features">
+
+    <div class="feature-wrap">
+
+        <div>
+            <div class="section-label">Everything You Need</div>
+            <h2 class="section-title">All-in-One POS Features</h2>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+                    <div class="feature-icon">▣</div>
+                    <div>
+                        <h4>Fast & Easy Billing</h4>
+                        <p>Create bills in seconds with user-friendly interface.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">♙</div>
+                    <div>
+                        <h4>Customer Management</h4>
+                        <p>Manage customers, history and loyalty.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">◇</div>
+                    <div>
+                        <h4>Product & Stock Management</h4>
+                        <p>Track your stock in real-time and never run out.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">₹</div>
+                    <div>
+                        <h4>Expense Management</h4>
+                        <p>Track expenses and improve business efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">↗</div>
+                    <div>
+                        <h4>Sales & Reports</h4>
+                        <p>Daily sales, profit reports and more — all at your fingertips.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">▤</div>
+                    <div>
+                        <h4>Bluetooth Printer Support</h4>
+                        <p>Works seamlessly with 58mm Bluetooth printers.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">♙</div>
+                    <div>
+                        <h4>Multi-user Access</h4>
+                        <p>Add multiple users with role-based permissions.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">☁</div>
+                    <div>
+                        <h4>Secure Cloud Backup</h4>
+                        <p>Your data is safe and accessible anytime, anywhere.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="#features" class="explore">Explore All Features →</a>
+        </div>
+
+        <div class="mobile-section" id="how">
+
+            <div class="mobile-content">
+                <div class="section-label">Manage Your Business Anywhere</div>
+                <h2>axzen POS Mobile App</h2>
+
+                <p>
+                    Powerful features in your pocket. Manage billing, products,
+                    stock, sales, reports and more — from anywhere.
+                </p>
+
+                <div class="qr"></div>
+                <div class="download">Scan to Download</div>
+
+                <div class="store-buttons">
+                    <div class="store">▶ Google Play</div>
+                    <div class="store">● App Store</div>
+                </div>
+            </div>
+
+            <div class="phone-area">
+                <div class="phone">
+                    <div class="phone-screen">
+                        <div class="phone-top">axzen POS</div>
+
+                        <div class="today">
+                            <small>Today's Sales</small>
+                            <strong>₹25,430</strong>
+                        </div>
+
+                        <div class="app-grid">
+                            <div class="app-item">▣<br>Billing</div>
+                            <div class="app-item">◇<br>Products</div>
+                            <div class="app-item">↗<br>Sales</div>
+                            <div class="app-item">▣<br>Stock</div>
+                            <div class="app-item">♙<br>Customers</div>
+                            <div class="app-item">▥<br>Reports</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="industries" id="industries">
+
+    <div class="section-label">Perfect for Every Business</div>
+    <h2 class="section-title">Trusted by 100+ Businesses</h2>
+
+    <div class="industry-grid">
+
+        <div class="industry">
+            <div class="industry-icon">♨</div>
+            <p>Restaurants</p>
+        </div>
+
+        <div class="industry">
+            <div class="industry-icon">☕</div>
+            <p>Cafes</p>
+        </div>
+
+        <div class="industry">
+            <div class="industry-icon">♧</div>
+            <p>Retail Stores</p>
+        </div>
+
+        <div class="industry">
+            <div class="industry-icon">🛒</div>
+            <p>Grocery Shops</p>
+        </div>
+
+        <div class="industry">
+            <div class="industry-icon">▱</div>
+            <p>Food Trucks</p>
+        </div>
+
+        <div class="industry">
+            <div class="industry-icon">♨</div>
+            <p>Bakeries</p>
+        </div>
+
+        <div class="industry">
+            <div class="industry-icon">•••</div>
+            <p>& More</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="blue-strip" id="pricing">
+
+    <div class="strip-item">
+        <div class="strip-icon">◆</div>
+        <div>
+            <h4>No Hidden Charges</h4>
+            <p>Transparent & affordable pricing.</p>
+        </div>
+    </div>
+
+    <div class="strip-item">
+        <div class="strip-icon">⚙</div>
+        <div>
+            <h4>One Time Setup</h4>
+            <p>Quick setup and get started fast.</p>
+        </div>
+    </div>
+
+    <div class="strip-item">
+        <div class="strip-icon">◇</div>
+        <div>
+            <h4>Free Training & Support</h4>
+            <p>We are here to help you succeed.</p>
+        </div>
+    </div>
+
+    <div class="strip-item">
+        <div class="strip-icon">↻</div>
+        <div>
+            <h4>Regular Updates</h4>
+            <p>Always up-to-date with new features.</p>
+        </div>
+    </div>
+
+</section>
+
+<footer id="contact">
+
+    <div class="footer-grid">
+
+        <div>
+            <div class="footer-logo">äxzen <span>POS</span></div>
+
+            <p class="footer-about">
+                Smart POS solution to simplify your business operations
+                and help you grow every day.
+            </p>
+
+            <div class="socials">
+                <div class="social">f</div>
+                <div class="social">◎</div>
+                <div class="social">◉</div>
+                <div class="social">▶</div>
+            </div>
+        </div>
+
+        <div>
+            <h4>Quick Links</h4>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#industries">Industries</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+
+        <div>
+            <h4>Resources</h4>
+            <div class="footer-links">
+                <a href="#how">How It Works</a>
+                <a href="#contact">FAQ</a>
+                <a href="#contact">Blog</a>
+                <a href="#contact">Privacy Policy</a>
+                <a href="#contact">Terms & Conditions</a>
+            </div>
+        </div>
+
+        <div>
+            <h4>Contact Us</h4>
+
+            <div class="contact-item">☎ 8790568446</div>
+            <div class="contact-item">✉ support@axzen.in</div>
+            <div class="contact-item">⌖ Hyderabad, Telangana, India</div>
+
+            <div style="margin-top:25px;font-size:12px;color:#9eabc0;">
+                Visit Our Website
+            </div>
+
+            <a href="https://pos.axzen.in" class="website-box">
+                ◉ &nbsp; pos.axzen.in
+            </a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2024 axzen POS. All rights reserved.
+    </div>
+
+</footer>
+
+<div class="modal" id="demoModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <h2>Request a Demo</h2>
+
+        <p>
+            Tell us about your business and our team will contact you shortly.
+        </p>
+
+        <form onsubmit="submitForm(event)">
+
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" placeholder="Business Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="tel" placeholder="Phone Number" required>
+            </div>
+
+            <div class="form-group">
+                <input type="email" placeholder="Email Address">
+            </div>
+
+            <div class="form-group">
+                <select required>
+                    <option value="">Select Business Type</option>
+                    <option>Restaurant</option>
+                    <option>Cafe</option>
+                    <option>Retail Store</option>
+                    <option>Grocery Shop</option>
+                    <option>Food Truck</option>
+                    <option>Bakery</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <button class="primary-btn submit" type="submit">
+                Submit Request
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+
+document.querySelectorAll(".nav-links a").forEach(function(link){
+    link.addEventListener("click",function(){
+        document.getElementById("navLinks").classList.remove("active");
+    });
+});
+
+function openModal(){
+    document.getElementById("demoModal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("demoModal").style.display="none";
+}
+
+window.addEventListener("click",function(e){
+    const modal=document.getElementById("demoModal");
+
+    if(e.target===modal){
+        closeModal();
+    }
+});
+
+function submitForm(e){
+    e.preventDefault();
+
+    alert("Thank you! Your demo request has been submitted. Our team will contact you shortly.");
+
+    closeModal();
+}
+
+function showDemo(){
+    alert("Demo video will be available soon.");
+}
+
+</script>
+
+</body>
+</html>
