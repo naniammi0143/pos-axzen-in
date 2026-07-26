@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,7 +26,7 @@
   --border:#e7ebf2;
   --white:#fff;
   --green:#16a36a;
-  --red:#e53935;
+  --red:#ef4444;
   --shadow:0 25px 70px rgba(15,31,55,.10);
 }
 
@@ -44,6 +45,7 @@ body{
   color:var(--text);
   background:#fff;
   overflow-x:hidden;
+  animation:pageFadeIn .8s ease both;
 }
 
 h1,h2,h3,h4{
@@ -55,12 +57,21 @@ a{
   color:inherit;
 }
 
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+}
+
 .container{
   width:min(1180px,calc(100% - 40px));
   margin:auto;
 }
 
-/* ================= NAVBAR ================= */
+/* =========================================================
+NAVBAR
+========================================================= */
 
 .navbar-wrap{
   position:fixed;
@@ -69,19 +80,21 @@ a{
   right:0;
   z-index:1000;
   padding:14px 0;
+  animation:navDrop .8s cubic-bezier(.2,.8,.2,1) both;
 }
 
 .navbar{
-  min-height:68px;
-  background:rgba(255,255,255,.94);
+  height:68px;
+  background:rgba(255,255,255,.90);
   backdrop-filter:blur(20px);
   border:1px solid rgba(220,227,238,.8);
   border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:10px 18px 10px 24px;
+  padding:0 18px 0 24px;
   box-shadow:0 8px 35px rgba(10,30,60,.06);
+  transition:.3s ease;
 }
 
 .logo{
@@ -122,10 +135,12 @@ a{
   font-size:12px;
   font-weight:700;
   color:#344054;
-  margin-right:3px;
+  margin-right:5px;
 }
 
 .btn{
+  position:relative;
+  overflow:hidden;
   border:none;
   border-radius:10px;
   padding:13px 20px;
@@ -137,6 +152,27 @@ a{
   align-items:center;
   gap:8px;
   transition:.25s;
+}
+
+.btn::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:70%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transform:skewX(-20deg);
+  transition:.6s;
+}
+
+.btn:hover::after{
+  left:140%;
 }
 
 .btn-blue{
@@ -167,19 +203,6 @@ a{
   transform:translateY(-2px);
 }
 
-.btn-partner{
-  background:#071a33;
-  color:#fff;
-  border:1px solid #071a33;
-  box-shadow:0 8px 20px rgba(7,26,51,.15);
-}
-
-.btn-partner:hover{
-  background:#1463ff;
-  border-color:#1463ff;
-  transform:translateY(-2px);
-}
-
 .menu{
   display:none;
   font-size:25px;
@@ -188,7 +211,9 @@ a{
   cursor:pointer;
 }
 
-/* ================= HERO ================= */
+/* =========================================================
+HERO
+========================================================= */
 
 .hero{
   min-height:900px;
@@ -207,6 +232,10 @@ a{
   gap:20px;
 }
 
+.hero-content{
+  animation:heroContent .9s cubic-bezier(.2,.8,.2,1) .15s both;
+}
+
 .badge{
   display:inline-flex;
   align-items:center;
@@ -219,6 +248,7 @@ a{
   font-size:12px;
   font-weight:700;
   margin-bottom:25px;
+  animation:badgePulse 3s ease-in-out infinite;
 }
 
 .badge-dot{
@@ -227,6 +257,7 @@ a{
   background:#20b878;
   border-radius:50%;
   box-shadow:0 0 0 4px rgba(32,184,120,.12);
+  animation:dotPulse 1.8s ease-in-out infinite;
 }
 
 .hero h1{
@@ -253,6 +284,7 @@ a{
   display:flex;
   gap:12px;
   margin-bottom:35px;
+  flex-wrap:wrap;
 }
 
 .trust{
@@ -282,11 +314,14 @@ a{
   font-size:11px;
 }
 
-/* ================= HERO DASHBOARD ================= */
+/* =========================================================
+DESKTOP POS MOCKUP
+========================================================= */
 
 .hero-dashboard{
   position:relative;
   height:570px;
+  animation:dashboardReveal 1s cubic-bezier(.2,.8,.2,1) .25s both;
 }
 
 .pos-window{
@@ -301,6 +336,7 @@ a{
   overflow:hidden;
   box-shadow:0 35px 90px rgba(10,30,65,.18);
   transform:perspective(1200px) rotateY(-5deg) rotateX(2deg);
+  animation:posFloat 5s ease-in-out infinite;
 }
 
 .window-top{
@@ -399,6 +435,12 @@ a{
   border:1px solid #e8ecf2;
   padding:12px;
   border-radius:9px;
+  transition:.25s;
+}
+
+.stat:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
 }
 
 .stat-label{
@@ -410,6 +452,7 @@ a{
 .stat-value{
   font-size:15px;
   font-weight:800;
+  transition:.25s;
 }
 
 .stat-change{
@@ -451,6 +494,8 @@ a{
   flex:1;
   border-radius:4px 4px 0 0;
   background:linear-gradient(180deg,#2b7aff,#8ab5ff);
+  transform-origin:bottom;
+  animation:chartGrow 1.2s cubic-bezier(.2,.8,.2,1) both;
 }
 
 .orders{
@@ -472,7 +517,9 @@ a{
   color:#1264e8;
 }
 
-/* ================= REALISTIC MOBILE APP ================= */
+/* =========================================================
+REALISTIC MOBILE APP HERO
+========================================================= */
 
 .mobile-app{
   position:absolute;
@@ -480,7 +527,7 @@ a{
   bottom:5px;
   width:245px;
   height:500px;
-  background:linear-gradient(145deg,#252b35,#05070a);
+  background:#101828;
   padding:7px;
   border-radius:34px;
   box-shadow:
@@ -488,19 +535,23 @@ a{
     0 5px 15px rgba(5,20,45,.12);
   z-index:10;
   transform:rotate(4deg);
+  animation:mobileFloat 4s ease-in-out infinite;
 }
 
-.mobile-app:before{
+.mobile-app::before{
   content:"";
   position:absolute;
-  top:7px;
-  left:50%;
-  transform:translateX(-50%);
-  width:75px;
-  height:17px;
-  background:#05070a;
-  border-radius:0 0 12px 12px;
-  z-index:30;
+  inset:-3px;
+  border-radius:36px;
+  background:linear-gradient(
+    135deg,
+    rgba(20,99,255,.55),
+    transparent 40%,
+    rgba(20,99,255,.2)
+  );
+  z-index:-1;
+  filter:blur(8px);
+  opacity:.6;
 }
 
 .mobile-screen{
@@ -513,7 +564,7 @@ a{
 }
 
 .mobile-status{
-  height:27px;
+  height:25px;
   background:#1463ff;
   color:#fff;
   display:flex;
@@ -613,6 +664,8 @@ a{
   flex:1;
   background:#dce9ff;
   border-radius:3px 3px 1px 1px;
+  transform-origin:bottom;
+  animation:miniChartGrow 1s ease both;
 }
 
 .mini-bar.active{
@@ -647,6 +700,11 @@ a{
   border-radius:10px;
   padding:8px 3px;
   text-align:center;
+  transition:.25s;
+}
+
+.quick-action:hover{
+  transform:translateY(-3px);
 }
 
 .quick-icon{
@@ -802,11 +860,9 @@ a{
   box-shadow:0 7px 18px rgba(20,99,255,.3);
 }
 
-.add-button span{
-  display:none;
-}
-
-/* ================= TRUST ================= */
+/* =========================================================
+TRUST
+========================================================= */
 
 .trust-strip{
   border-top:1px solid #edf0f5;
@@ -833,9 +889,17 @@ a{
   font-size:15px;
   font-weight:800;
   color:#a3acba;
+  transition:.3s;
 }
 
-/* ================= SECTIONS ================= */
+.trust-brand:hover{
+  color:var(--blue);
+  transform:translateY(-3px);
+}
+
+/* =========================================================
+SECTIONS
+========================================================= */
 
 .section{
   padding:110px 0;
@@ -845,6 +909,14 @@ a{
   max-width:680px;
   margin:0 auto 60px;
   text-align:center;
+  opacity:0;
+  transform:translateY(25px);
+  transition:.8s ease;
+}
+
+.section-head.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .eyebrow{
@@ -869,7 +941,9 @@ a{
   line-height:1.7;
 }
 
-/* ================= FEATURES ================= */
+/* =========================================================
+FEATURES
+========================================================= */
 
 .features{
   background:#f8fafc;
@@ -886,11 +960,18 @@ a{
   border:1px solid #e8ecf2;
   border-radius:18px;
   padding:30px;
-  transition:.3s;
+  transition:.7s cubic-bezier(.2,.8,.2,1);
+  opacity:0;
+  transform:translateY(30px);
+}
+
+.feature-card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .feature-card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-9px);
   box-shadow:var(--shadow);
 }
 
@@ -922,7 +1003,9 @@ a{
   line-height:1.7;
 }
 
-/* ================= PRICING ================= */
+/* =========================================================
+PRICING
+========================================================= */
 
 .pricing{
   background:#fff;
@@ -940,17 +1023,25 @@ a{
   padding:30px 25px;
   position:relative;
   background:#fff;
-  transition:.3s;
+  transition:.7s cubic-bezier(.2,.8,.2,1);
+  opacity:0;
+  transform:translateY(30px);
+}
+
+.price-card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .price-card:hover{
-  transform:translateY(-7px);
+  transform:translateY(-10px);
   box-shadow:var(--shadow);
 }
 
 .price-card.popular{
   border:2px solid var(--blue);
   box-shadow:0 20px 55px rgba(20,99,255,.13);
+  animation:popularGlow 3s ease-in-out infinite;
 }
 
 .popular-tag{
@@ -965,6 +1056,7 @@ a{
   padding:6px 15px;
   border-radius:20px;
   white-space:nowrap;
+  animation:tagFloat 2.5s ease-in-out infinite;
 }
 
 .price-card h3{
@@ -978,18 +1070,27 @@ a{
   min-height:43px;
 }
 
-/* ORIGINAL PRICE RED STRIKE */
-
+/* ORIGINAL PRICE WITH RED CROSS */
 .original{
+  position:relative;
   display:inline-block;
-  color:var(--red);
-  font-size:14px;
-  font-weight:700;
+  color:#667085;
+  font-size:13px;
+  font-weight:600;
   margin-top:22px;
-  text-decoration-line:line-through;
-  text-decoration-color:var(--red);
-  text-decoration-thickness:2px;
-  text-decoration-skip-ink:none;
+  padding:2px 3px;
+}
+
+.original::after{
+  content:"";
+  position:absolute;
+  left:-5px;
+  right:-5px;
+  top:50%;
+  height:3px;
+  background:#ef4444;
+  transform:rotate(-8deg);
+  border-radius:10px;
 }
 
 .offer{
@@ -997,7 +1098,7 @@ a{
   font-size:10px;
   font-weight:800;
   text-transform:uppercase;
-  margin-top:7px;
+  margin-top:5px;
 }
 
 .price{
@@ -1061,17 +1162,14 @@ a{
   color:#72a7ff;
 }
 
-.business .original{
-  color:#ff7777;
-  text-decoration-color:#ff7777;
-}
-
 .business .btn{
   background:#fff;
   color:var(--blue);
 }
 
-/* ================= INDUSTRIES ================= */
+/* =========================================================
+INDUSTRIES
+========================================================= */
 
 .industries{
   background:#f7f9fc;
@@ -1088,7 +1186,14 @@ a{
   border:1px solid #e7ebf1;
   border-radius:18px;
   padding:27px;
-  transition:.3s;
+  transition:.7s cubic-bezier(.2,.8,.2,1);
+  opacity:0;
+  transform:translateY(30px);
+}
+
+.industry.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .industry:hover{
@@ -1107,6 +1212,11 @@ a{
   align-items:center;
   justify-content:center;
   margin-bottom:20px;
+  transition:.3s;
+}
+
+.industry:hover .industry-icon{
+  transform:scale(1.08) rotate(-4deg);
 }
 
 .industry-icon svg{
@@ -1125,12 +1235,28 @@ a{
   line-height:1.7;
 }
 
-/* ================= APP SECTION ================= */
+/* =========================================================
+MOBILE APP SECTION
+========================================================= */
 
 .app-section{
   background:#071a33;
   color:#fff;
   overflow:hidden;
+  position:relative;
+}
+
+.app-section::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:rgba(20,99,255,.15);
+  filter:blur(100px);
+  top:10%;
+  right:-150px;
+  animation:backgroundMove 8s ease-in-out infinite;
 }
 
 .app-grid{
@@ -1138,6 +1264,8 @@ a{
   grid-template-columns:1fr 1fr;
   align-items:center;
   gap:100px;
+  position:relative;
+  z-index:2;
 }
 
 .app-text .eyebrow{
@@ -1184,83 +1312,49 @@ a{
 }
 
 .app-visual{
-  height:500px;
+  height:470px;
   position:relative;
 }
 
 .phone-large{
-  width:255px;
-  height:500px;
+  width:245px;
+  height:490px;
   position:absolute;
   left:50%;
   top:0;
-  transform:translateX(-50%) rotate(2deg);
-  background:linear-gradient(145deg,#2c3440,#05070a);
-  border-radius:38px;
-  padding:9px;
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.45),
-    0 10px 25px rgba(0,0,0,.25);
-}
-
-.phone-large:before{
-  content:"";
-  position:absolute;
-  top:9px;
-  left:50%;
   transform:translateX(-50%);
-  width:78px;
-  height:18px;
-  background:#05070a;
-  border-radius:0 0 13px 13px;
-  z-index:5;
+  background:#111827;
+  border-radius:36px;
+  padding:9px;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+  animation:phoneLargeFloat 5s ease-in-out infinite;
 }
 
 .phone-inner{
   background:#f7f9fc;
   height:100%;
-  border-radius:30px;
+  border-radius:28px;
   overflow:hidden;
   color:#111827;
 }
 
-.phone-status{
-  height:27px;
-  background:#1463ff;
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 16px;
-  font-size:7px;
-  font-weight:700;
-}
-
 .phone-blue{
   background:#1463ff;
-  padding:18px 18px 24px;
+  padding:32px 18px 22px;
   color:#fff;
 }
 
 .phone-blue small{
   opacity:.8;
-  font-size:9px;
 }
 
 .phone-blue h3{
-  font-size:29px;
+  font-size:27px;
   margin-top:7px;
-}
-
-.phone-growth{
-  color:#d8f8e9;
-  font-size:8px;
-  margin-top:5px;
 }
 
 .phone-content{
   padding:15px;
-  margin-top:-7px;
 }
 
 .phone-card{
@@ -1269,7 +1363,6 @@ a{
   border-radius:12px;
   margin-bottom:10px;
   border:1px solid #e8ecf2;
-  box-shadow:0 5px 15px rgba(16,24,40,.04);
 }
 
 .phone-card-title{
@@ -1294,7 +1387,9 @@ a{
   margin-top:14px;
 }
 
-/* ================= CTA ================= */
+/* =========================================================
+CTA
+========================================================= */
 
 .cta{
   padding:90px 0;
@@ -1311,6 +1406,7 @@ a{
   justify-content:space-between;
   align-items:center;
   gap:30px;
+  animation:ctaFloat 5s ease-in-out infinite;
 }
 
 .cta-box h2{
@@ -1324,7 +1420,9 @@ a{
   font-size:14px;
 }
 
-/* ================= CONTACT ================= */
+/* =========================================================
+CONTACT
+========================================================= */
 
 .contact{
   background:#f7f9fc;
@@ -1341,6 +1439,12 @@ a{
   border:1px solid #e5eaf1;
   border-radius:20px;
   padding:35px;
+  transition:.35s;
+}
+
+.contact-box:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow);
 }
 
 .contact-box h3{
@@ -1377,6 +1481,11 @@ a{
   display:flex;
   justify-content:center;
   align-items:center;
+  transition:.3s;
+}
+
+.contact-item:hover .contact-icon{
+  transform:scale(1.1) rotate(-5deg);
 }
 
 .form{
@@ -1407,7 +1516,9 @@ a{
   resize:vertical;
 }
 
-/* ================= FOOTER ================= */
+/* =========================================================
+FOOTER
+========================================================= */
 
 footer{
   background:#06172e;
@@ -1453,6 +1564,7 @@ footer h4{
 .footer-links a{
   color:#91a1b7;
   font-size:12px;
+  transition:.25s;
 }
 
 .footer-links a:hover{
@@ -1474,12 +1586,149 @@ footer h4{
   font-size:11px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* =========================================================
+ANIMATIONS
+========================================================= */
+
+@keyframes pageFadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes navDrop{
+  from{
+    opacity:0;
+    transform:translateY(-25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes heroContent{
+  from{
+    opacity:0;
+    transform:translateX(-40px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes dashboardReveal{
+  from{
+    opacity:0;
+    transform:translateX(45px) scale(.96);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0) scale(1);
+  }
+}
+
+@keyframes posFloat{
+  0%,100%{
+    transform:perspective(1200px) rotateY(-5deg) rotateX(2deg) translateY(0);
+  }
+  50%{
+    transform:perspective(1200px) rotateY(-5deg) rotateX(2deg) translateY(-8px);
+  }
+}
+
+@keyframes mobileFloat{
+  0%,100%{
+    transform:rotate(4deg) translateY(0);
+  }
+  50%{
+    transform:rotate(4deg) translateY(-12px);
+  }
+}
+
+@keyframes badgePulse{
+  0%,100%{
+    box-shadow:0 0 0 rgba(20,99,255,0);
+  }
+  50%{
+    box-shadow:0 0 25px rgba(20,99,255,.12);
+  }
+}
+
+@keyframes dotPulse{
+  0%,100%{
+    transform:scale(1);
+    opacity:1;
+  }
+  50%{
+    transform:scale(1.35);
+    opacity:.65;
+  }
+}
+
+@keyframes chartGrow{
+  from{transform:scaleY(0)}
+  to{transform:scaleY(1)}
+}
+
+@keyframes miniChartGrow{
+  from{transform:scaleY(0)}
+  to{transform:scaleY(1)}
+}
+
+@keyframes popularGlow{
+  0%,100%{
+    box-shadow:0 20px 55px rgba(20,99,255,.13);
+  }
+  50%{
+    box-shadow:0 25px 70px rgba(20,99,255,.23);
+  }
+}
+
+@keyframes tagFloat{
+  0%,100%{
+    transform:translateX(-50%) translateY(0);
+  }
+  50%{
+    transform:translateX(-50%) translateY(-3px);
+  }
+}
+
+@keyframes phoneLargeFloat{
+  0%,100%{
+    transform:translateX(-50%) translateY(0);
+  }
+  50%{
+    transform:translateX(-50%) translateY(-10px);
+  }
+}
+
+@keyframes backgroundMove{
+  0%,100%{
+    transform:translate(0,0);
+  }
+  50%{
+    transform:translate(-80px,50px);
+  }
+}
+
+@keyframes ctaFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-5px);
+  }
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
 
 @media(max-width:1100px){
 
   .nav-links{
-    gap:15px;
+    gap:14px;
   }
 
   .nav-phone{
@@ -1522,9 +1771,22 @@ footer h4{
     grid-template-columns:1fr;
   }
 
+  .app-text{
+    text-align:center;
+  }
+
+  .app-text p{
+    margin:auto;
+  }
+
+  .app-list{
+    max-width:400px;
+    margin:28px auto;
+  }
+
 }
 
-@media(max-width:850px){
+@media(max-width:800px){
 
   .nav-links,
   .nav-right{
@@ -1533,6 +1795,19 @@ footer h4{
 
   .menu{
     display:block;
+  }
+
+  .navbar.mobile-open .nav-links{
+    display:flex;
+    position:absolute;
+    top:78px;
+    left:0;
+    right:0;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    flex-direction:column;
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
   }
 
   .hero h1{
@@ -1557,47 +1832,6 @@ footer h4{
   }
 
 }
-
-/* MOBILE MENU */
-
-@media(max-width:850px){
-
-  .navbar.mobile-open .nav-links{
-    display:flex;
-    position:absolute;
-    top:78px;
-    left:0;
-    right:0;
-    background:#fff;
-    padding:22px;
-    border-radius:15px;
-    flex-direction:column;
-    align-items:stretch;
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
-  }
-
-  .navbar.mobile-open .nav-links a{
-    padding:10px;
-    text-align:center;
-  }
-
-  .navbar.mobile-open .nav-links:after{
-    content:"Sign in as a Partner";
-    display:block;
-    text-align:center;
-    padding:13px;
-    margin-top:5px;
-    border-radius:9px;
-    background:#071a33;
-    color:#fff;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
-  }
-
-}
-
-/* SMALL MOBILE */
 
 @media(max-width:600px){
 
@@ -1628,9 +1862,9 @@ footer h4{
 
   .hero-dashboard{
     height:440px;
-    transform:scale(.78);
+    transform:scale(.82);
     transform-origin:top center;
-    margin-bottom:-100px;
+    margin-bottom:-80px;
   }
 
   .pos-window{
@@ -1639,8 +1873,8 @@ footer h4{
   }
 
   .mobile-app{
-    right:-45px;
-    transform:scale(.82) rotate(4deg);
+    right:-35px;
+    transform:scale(.9) rotate(4deg);
     transform-origin:bottom right;
   }
 
@@ -1690,31 +1924,15 @@ footer h4{
 
 }
 
-/* PARTNER BUTTON MOBILE NAV FIX */
+@media(prefers-reduced-motion:reduce){
 
-@media(max-width:850px){
-
-  .navbar.mobile-open .nav-links:after{
-    content:"";
-    display:none;
-  }
-
-  .mobile-partner-link{
-    display:block !important;
-    background:#071a33;
-    color:#fff !important;
-    border-radius:9px;
-    padding:13px !important;
-    text-align:center !important;
-    margin-top:5px;
-  }
-
-}
-
-@media(min-width:851px){
-
-  .mobile-partner-link{
-    display:none;
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
   }
 
 }
@@ -1724,7 +1942,9 @@ footer h4{
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- =========================================================
+NAVBAR
+========================================================= -->
 
 <div class="navbar-wrap">
 
@@ -1745,13 +1965,6 @@ axzen<span>POS</span>
 <a href="#app">Mobile App</a>
 <a href="#contact">Contact</a>
 
-<a
-href="https://canteen.axzen.in/admin/"
-class="mobile-partner-link"
->
-Sign in as a Partner
-</a>
-
 </div>
 
 <div class="nav-right">
@@ -1760,10 +1973,7 @@ Sign in as a Partner
 📞 8790568446
 </div>
 
-<a
-href="https://canteen.axzen.in/admin/"
-class="btn btn-partner"
->
+<a href="https://canteen.axzen.in/admin/" class="btn btn-outline">
 Sign in as a Partner
 </a>
 
@@ -1773,7 +1983,7 @@ Book a Demo
 
 </div>
 
-<button class="menu" onclick="mobileMenu()" aria-label="Open Menu">
+<button class="menu" onclick="mobileMenu()">
 ☰
 </button>
 
@@ -1784,7 +1994,9 @@ Book a Demo
 </div>
 
 
-<!-- ================= HERO ================= -->
+<!-- =========================================================
+HERO
+========================================================= -->
 
 <section class="hero" id="home">
 
@@ -1833,26 +2045,37 @@ Explore Mobile App
 <div class="trust">
 
 <div class="trust-item">
+
 <div class="tick">✓</div>
+
 Easy to use
+
 </div>
 
 <div class="trust-item">
+
 <div class="tick">✓</div>
+
 Cloud powered
+
 </div>
 
 <div class="trust-item">
+
 <div class="tick">✓</div>
+
 Secure & reliable
-</div>
 
 </div>
 
 </div>
 
+</div>
 
-<!-- ================= DASHBOARD ================= -->
+
+<!-- =========================================================
+DESKTOP POS DASHBOARD
+========================================================= -->
 
 <div class="hero-dashboard">
 
@@ -1965,13 +2188,13 @@ Sales Overview
 
 <div class="chart">
 
-<div class="chart-bar" style="height:40%"></div>
-<div class="chart-bar" style="height:57%"></div>
-<div class="chart-bar" style="height:46%"></div>
-<div class="chart-bar" style="height:70%"></div>
-<div class="chart-bar" style="height:63%"></div>
-<div class="chart-bar" style="height:82%"></div>
-<div class="chart-bar" style="height:95%"></div>
+<div class="chart-bar" style="height:40%;animation-delay:.3s"></div>
+<div class="chart-bar" style="height:57%;animation-delay:.4s"></div>
+<div class="chart-bar" style="height:46%;animation-delay:.5s"></div>
+<div class="chart-bar" style="height:70%;animation-delay:.6s"></div>
+<div class="chart-bar" style="height:63%;animation-delay:.7s"></div>
+<div class="chart-bar" style="height:82%;animation-delay:.8s"></div>
+<div class="chart-bar" style="height:95%;animation-delay:.9s"></div>
 
 </div>
 
@@ -2019,15 +2242,20 @@ Recent Orders
 </div>
 
 
-<!-- ================= MOBILE APP ================= -->
+<!-- =========================================================
+REALISTIC MOBILE APP
+========================================================= -->
 
 <div class="mobile-app">
 
 <div class="mobile-screen">
 
 <div class="mobile-status">
+
 <span>9:41</span>
+
 <span>● ● ▪</span>
+
 </div>
 
 <div class="mobile-app-header">
@@ -2049,6 +2277,7 @@ A
 </div>
 
 </div>
+
 
 <div class="mobile-sales-card">
 
@@ -2074,17 +2303,18 @@ Today's Sales
 
 <div class="mini-chart">
 
-<div class="mini-bar" style="height:35%"></div>
-<div class="mini-bar" style="height:48%"></div>
-<div class="mini-bar" style="height:40%"></div>
-<div class="mini-bar" style="height:65%"></div>
-<div class="mini-bar" style="height:55%"></div>
-<div class="mini-bar" style="height:78%"></div>
-<div class="mini-bar active" style="height:92%"></div>
+<div class="mini-bar" style="height:35%;animation-delay:.3s"></div>
+<div class="mini-bar" style="height:48%;animation-delay:.4s"></div>
+<div class="mini-bar" style="height:40%;animation-delay:.5s"></div>
+<div class="mini-bar" style="height:65%;animation-delay:.6s"></div>
+<div class="mini-bar" style="height:55%;animation-delay:.7s"></div>
+<div class="mini-bar" style="height:78%;animation-delay:.8s"></div>
+<div class="mini-bar active" style="height:92%;animation-delay:.9s"></div>
 
 </div>
 
 </div>
+
 
 <div class="mobile-section-title">
 
@@ -2150,6 +2380,7 @@ Reports
 
 </div>
 
+
 <div class="mobile-section-title">
 
 <span>
@@ -2161,6 +2392,7 @@ See All
 </span>
 
 </div>
+
 
 <div class="mobile-orders">
 
@@ -2200,6 +2432,7 @@ Paid
 
 </div>
 
+
 <div class="mobile-order">
 
 <div class="order-left">
@@ -2235,6 +2468,7 @@ Paid
 </div>
 
 </div>
+
 
 <div class="mobile-order">
 
@@ -2273,6 +2507,7 @@ Pending
 </div>
 
 </div>
+
 
 <div class="mobile-bottom-nav">
 
@@ -2335,7 +2570,9 @@ Profile
 </section>
 
 
-<!-- ================= TRUST STRIP ================= -->
+<!-- =========================================================
+TRUST STRIP
+========================================================= -->
 
 <section class="trust-strip">
 
@@ -2370,7 +2607,9 @@ SUPERMARKETS
 </section>
 
 
-<!-- ================= FEATURES ================= -->
+<!-- =========================================================
+FEATURES
+========================================================= -->
 
 <section class="section features" id="features">
 
@@ -2399,10 +2638,12 @@ axzen POS keeps your business operations simple and organized.
 <div class="feature-card">
 
 <div class="feature-icon">
+
 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
 <path d="M4 4h16v16H4z"/>
 <path d="M8 8h8M8 12h8M8 16h4"/>
 </svg>
+
 </div>
 
 <h3>
@@ -2416,13 +2657,16 @@ simple billing interface designed for busy counters.
 
 </div>
 
+
 <div class="feature-card">
 
 <div class="feature-icon">
+
 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
 <path d="M4 5h16v14H4z"/>
 <path d="M8 9h8M8 13h5"/>
 </svg>
+
 </div>
 
 <h3>
@@ -2436,13 +2680,16 @@ what needs to be restocked before it becomes a problem.
 
 </div>
 
+
 <div class="feature-card">
 
 <div class="feature-icon">
+
 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
 <path d="M4 19V5M4 19h16"/>
 <path d="M7 15l3-4 3 2 5-7"/>
 </svg>
+
 </div>
 
 <h3>
@@ -2456,13 +2703,16 @@ with clear reports and meaningful insights.
 
 </div>
 
+
 <div class="feature-card">
 
 <div class="feature-icon">
+
 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
 <circle cx="12" cy="8" r="3"/>
 <path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>
 </svg>
+
 </div>
 
 <h3>
@@ -2476,13 +2726,16 @@ to build stronger relationships.
 
 </div>
 
+
 <div class="feature-card">
 
 <div class="feature-icon">
+
 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
 <path d="M5 4h14v16H5z"/>
 <path d="M8 8h8M8 12h8M8 16h5"/>
 </svg>
+
 </div>
 
 <h3>
@@ -2496,14 +2749,17 @@ is going with complete visibility.
 
 </div>
 
+
 <div class="feature-card">
 
 <div class="feature-icon">
+
 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
 <path d="M6 8h12v12H6z"/>
 <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
 <path d="M9 13h6"/>
 </svg>
+
 </div>
 
 <h3>
@@ -2524,7 +2780,9 @@ professional receipts to your customers.
 </section>
 
 
-<!-- ================= PRICING ================= -->
+<!-- =========================================================
+PRICING
+========================================================= -->
 
 <section class="section pricing" id="pricing">
 
@@ -2549,6 +2807,7 @@ Upgrade whenever your business grows.
 
 <div class="pricing-grid">
 
+
 <!-- STARTER -->
 
 <div class="price-card">
@@ -2566,7 +2825,7 @@ For small businesses starting with smart digital billing.
 </div>
 
 <div class="offer">
-SPECIAL OFFER
+Special Offer
 </div>
 
 <div class="price">
@@ -2614,7 +2873,7 @@ For growing businesses that need better control and insights.
 </div>
 
 <div class="offer">
-SPECIAL OFFER
+Special Offer
 </div>
 
 <div class="price">
@@ -2658,7 +2917,7 @@ For established businesses that want powerful operations.
 </div>
 
 <div class="offer">
-SPECIAL OFFER
+Special Offer
 </div>
 
 <div class="price">
@@ -2702,7 +2961,7 @@ Custom Pricing
 </div>
 
 <div class="offer">
-TAILORED SOLUTION
+Tailored Solution
 </div>
 
 <div class="price" style="font-size:30px;">
@@ -2735,7 +2994,9 @@ Contact Sales Team
 </section>
 
 
-<!-- ================= INDUSTRIES ================= -->
+<!-- =========================================================
+INDUSTRIES
+========================================================= -->
 
 <section class="section industries" id="industries">
 
@@ -2764,12 +3025,7 @@ axzen POS adapts to the way your business works.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M5 3v8M8 3v8M11 3v8"/>
-<path d="M8 11v10"/>
-<path d="M17 3v18"/>
-<path d="M17 3c3 1 4 3 4 6v2h-4"/>
-</svg>
+🍽️
 </div>
 
 <h3>
@@ -2787,14 +3043,7 @@ and complete sales visibility.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M3 21h18"/>
-<path d="M5 21V7h14v14"/>
-<path d="M8 7V4h8v3"/>
-<path d="M8 11h2M14 11h2"/>
-<path d="M8 15h2M14 15h2"/>
-<path d="M10 21v-3h4v3"/>
-</svg>
+🏨
 </div>
 
 <h3>
@@ -2812,12 +3061,7 @@ and daily business operations from one system.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8z"/>
-<path d="M16 10h2a3 3 0 0 1 0 6h-2"/>
-<path d="M4 21h15"/>
-<path d="M9 4c-1 1-1 2 0 3M13 4c-1 1-1 2 0 3"/>
-</svg>
+☕
 </div>
 
 <h3>
@@ -2835,12 +3079,7 @@ keep your daily sales organized.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M4 9h16v11H4z"/>
-<path d="M3 9l2-5h14l2 5"/>
-<path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/>
-<path d="M9 20v-6h6v6"/>
-</svg>
+🏪
 </div>
 
 <h3>
@@ -2858,12 +3097,7 @@ with complete control.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M5 6h15l-1 11H6L5 6z"/>
-<path d="M8 6a4 4 0 0 1 8 0"/>
-<circle cx="9" cy="20" r="1"/>
-<circle cx="17" cy="20" r="1"/>
-</svg>
+🛒
 </div>
 
 <h3>
@@ -2881,11 +3115,7 @@ daily billing with ease.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M3 4h2l2 11h11l2-8H6"/>
-<circle cx="9" cy="19" r="1.5"/>
-<circle cx="17" cy="19" r="1.5"/>
-</svg>
+🛍️
 </div>
 
 <h3>
@@ -2903,12 +3133,7 @@ for modern supermarkets.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M3 6h13v11H3z"/>
-<path d="M16 10h3l3 3v4h-6"/>
-<circle cx="7" cy="19" r="2"/>
-<circle cx="18" cy="19" r="2"/>
-</svg>
+🚚
 </div>
 
 <h3>
@@ -2926,13 +3151,7 @@ businesses and mobile vendors.
 <div class="industry">
 
 <div class="industry-icon">
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<circle cx="8" cy="8" r="3"/>
-<path d="M3 20c0-3 2-5 5-5s5 2 5 5"/>
-<path d="M14 5l7 7"/>
-<path d="M17 4l3 3"/>
-<path d="M14 12l-3 3"/>
-</svg>
+💇
 </div>
 
 <h3>
@@ -2953,7 +3172,9 @@ appointments with ease.
 </section>
 
 
-<!-- ================= MOBILE APP SECTION ================= -->
+<!-- =========================================================
+MOBILE APP SECTION
+========================================================= -->
 
 <section class="section app-section" id="app">
 
@@ -2978,23 +3199,43 @@ view reports and keep your operations moving.
 <div class="app-list">
 
 <div class="app-list-item">
-<div class="app-check">✓</div>
+
+<div class="app-check">
+✓
+</div>
+
 Mobile billing experience
+
 </div>
 
 <div class="app-list-item">
-<div class="app-check">✓</div>
+
+<div class="app-check">
+✓
+</div>
+
 Real-time sales visibility
+
 </div>
 
 <div class="app-list-item">
-<div class="app-check">✓</div>
+
+<div class="app-check">
+✓
+</div>
+
 Inventory and product management
+
 </div>
 
 <div class="app-list-item">
-<div class="app-check">✓</div>
+
+<div class="app-check">
+✓
+</div>
+
 Bluetooth thermal printer support
+
 </div>
 
 </div>
@@ -3008,11 +3249,6 @@ Bluetooth thermal printer support
 
 <div class="phone-inner">
 
-<div class="phone-status">
-<span>9:41</span>
-<span>● ● ▪</span>
-</div>
-
 <div class="phone-blue">
 
 <small>
@@ -3022,10 +3258,6 @@ Today's Sales
 <h3>
 ₹25,430
 </h3>
-
-<div class="phone-growth">
-↑ 18.4% compared to yesterday
-</div>
 
 </div>
 
@@ -3084,7 +3316,9 @@ Create New Bill
 </section>
 
 
-<!-- ================= CTA ================= -->
+<!-- =========================================================
+CTA
+========================================================= -->
 
 <section class="cta">
 
@@ -3116,7 +3350,9 @@ Talk to Sales →
 </section>
 
 
-<!-- ================= CONTACT ================= -->
+<!-- =========================================================
+CONTACT
+========================================================= -->
 
 <section class="section contact" id="contact">
 
@@ -3186,15 +3422,6 @@ Hyderabad, Telangana, India
 
 </div>
 
-<br>
-
-<a
-href="https://canteen.axzen.in/admin/"
-class="btn btn-partner"
->
-Sign in as a Partner →
-</a>
-
 </div>
 
 
@@ -3262,7 +3489,9 @@ Send Enquiry →
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =========================================================
+FOOTER
+========================================================= -->
 
 <footer>
 
@@ -3275,11 +3504,9 @@ axzen<span>POS</span>
 </div>
 
 <p class="footer-about">
-
 A modern, powerful and simple POS platform
 built to help businesses manage their daily operations
 and grow with confidence.
-
 </p>
 
 </div>
@@ -3346,14 +3573,10 @@ Request Demo
 <div>
 
 <h4>
-Partner Login
+Contact
 </h4>
 
 <div class="footer-contact">
-
-<a href="https://canteen.axzen.in/admin/">
-🔐 Sign in as a Partner
-</a>
 
 <div>
 📞 8790568446
@@ -3377,7 +3600,6 @@ Partner Login
 
 </div>
 
-
 <div class="footer-bottom">
 
 © 2026 axzen POS. All rights reserved.
@@ -3387,9 +3609,13 @@ Partner Login
 </footer>
 
 
-<!-- ================= JAVASCRIPT ================= -->
+<!-- =========================================================
+JAVASCRIPT
+========================================================= -->
 
 <script>
+
+/* MOBILE MENU */
 
 function mobileMenu(){
 
@@ -3399,6 +3625,8 @@ navbar.classList.toggle("mobile-open");
 
 }
 
+
+/* CLOSE MOBILE MENU AFTER CLICK */
 
 document.querySelectorAll(".nav-links a").forEach(function(link){
 
@@ -3414,6 +3642,8 @@ document
 });
 
 
+/* CONTACT FORM */
+
 function sendForm(e){
 
 e.preventDefault();
@@ -3425,6 +3655,104 @@ alert(
 e.target.reset();
 
 }
+
+
+/* =========================================================
+SCROLL REVEAL ANIMATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const animatedElements = document.querySelectorAll(
+".feature-card, .industry, .price-card, .section-head"
+);
+
+const observer = new IntersectionObserver(
+
+function(entries){
+
+entries.forEach(function(entry){
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+observer.unobserve(entry.target);
+
+}
+
+});
+
+},
+
+{
+threshold:.12,
+rootMargin:"0px 0px -50px 0px"
+}
+
+);
+
+animatedElements.forEach(function(element){
+
+observer.observe(element);
+
+});
+
+});
+
+
+/* =========================================================
+NAVBAR SCROLL EFFECT
+========================================================= */
+
+window.addEventListener("scroll",function(){
+
+const navbar = document.querySelector(".navbar");
+
+if(window.scrollY > 50){
+
+navbar.style.boxShadow =
+"0 12px 40px rgba(10,30,60,.12)";
+
+navbar.style.background =
+"rgba(255,255,255,.96)";
+
+}else{
+
+navbar.style.boxShadow =
+"0 8px 35px rgba(10,30,60,.06)";
+
+navbar.style.background =
+"rgba(255,255,255,.90)";
+
+}
+
+});
+
+
+/* =========================================================
+STAT HOVER EFFECT
+========================================================= */
+
+document.querySelectorAll(".stat-value").forEach(function(stat){
+
+stat.addEventListener("mouseenter",function(){
+
+stat.style.color="#1463ff";
+
+stat.style.transform="scale(1.05)";
+
+});
+
+stat.addEventListener("mouseleave",function(){
+
+stat.style.color="";
+
+stat.style.transform="scale(1)";
+
+});
+
+});
 
 </script>
 
