@@ -1,1949 +1,3170 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>axzen POS — Smart POS for Modern Businesses</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-<meta name="description" content="axzen POS is a powerful and simple point of sale solution for restaurants, hotels, retail stores, cafes and growing businesses.">
+<title>
+axzen POS — Smart POS for Modern Businesses
+</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta
+name="description"
+content="axzen POS is a powerful and simple point of sale solution for restaurants, hotels, retail stores, cafes and growing businesses."
+>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com"
+>
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+rel="stylesheet"
+>
 
 <style>
 
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 :root{
-  --blue:#1463ff;
-  --blue2:#0b4edb;
-  --navy:#071a33;
-  --text:#111827;
-  --muted:#667085;
-  --light:#f6f8fc;
-  --border:#e7ebf2;
-  --white:#fff;
-  --green:#16a36a;
-  --red:#ef4444;
-  --shadow:0 25px 70px rgba(15,31,55,.10);
+
+--blue:#1463ff;
+--blue-dark:#0847c7;
+--navy:#06172e;
+--text:#101828;
+--muted:#667085;
+--light:#f7f9fc;
+--border:#e5eaf1;
+--green:#12a66b;
+--red:#e5484d;
+--orange:#f79009;
+--white:#ffffff;
+
+--shadow:
+0 25px 70px rgba(15,31,55,.12);
+
 }
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-  font-family:"DM Sans",sans-serif;
-  color:var(--text);
-  background:#fff;
-  overflow-x:hidden;
-  animation:pageFadeIn .8s ease both;
+
+font-family:"DM Sans",sans-serif;
+
+color:var(--text);
+
+background:#fff;
+
+overflow-x:hidden;
+
 }
 
-h1,h2,h3,h4{
-  font-family:"Manrope",sans-serif;
+h1,
+h2,
+h3,
+h4{
+
+font-family:"Manrope",sans-serif;
+
 }
 
 a{
-  text-decoration:none;
-  color:inherit;
+
+text-decoration:none;
+
+color:inherit;
+
 }
 
 button,
 input,
 select,
 textarea{
-  font-family:inherit;
+
+font-family:inherit;
+
 }
 
 .container{
-  width:min(1180px,calc(100% - 40px));
-  margin:auto;
+
+width:min(1180px,calc(100% - 40px));
+
+margin:auto;
+
 }
 
+
 /* =========================================================
-NAVBAR
+   NAVBAR
 ========================================================= */
 
 .navbar-wrap{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  padding:14px 0;
-  animation:navDrop .8s cubic-bezier(.2,.8,.2,1) both;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+right:0;
+
+z-index:1000;
+
+padding:14px 0;
+
 }
 
 .navbar{
-  height:68px;
-  background:rgba(255,255,255,.90);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(220,227,238,.8);
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px 0 24px;
-  box-shadow:0 8px 35px rgba(10,30,60,.06);
-  transition:.3s ease;
+
+height:68px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 18px 0 24px;
+
+background:
+rgba(255,255,255,.90);
+
+backdrop-filter:
+blur(20px);
+
+border:
+1px solid rgba(220,227,238,.85);
+
+border-radius:18px;
+
+box-shadow:
+0 8px 35px rgba(10,30,60,.07);
+
 }
 
 .logo{
-  font-family:"Manrope",sans-serif;
-  font-size:25px;
-  font-weight:800;
-  letter-spacing:-1.5px;
+
+font-family:"Manrope";
+
+font-size:25px;
+
+font-weight:800;
+
+letter-spacing:-1.5px;
+
 }
 
 .logo span{
-  color:var(--blue);
+
+color:var(--blue);
+
 }
 
 .nav-links{
-  display:flex;
-  gap:27px;
-  align-items:center;
+
+display:flex;
+
+align-items:center;
+
+gap:28px;
+
 }
 
 .nav-links a{
-  font-size:13px;
-  font-weight:600;
-  color:#475467;
-  transition:.25s;
+
+font-size:13px;
+
+font-weight:600;
+
+color:#475467;
+
+transition:.25s;
+
 }
 
 .nav-links a:hover{
-  color:var(--blue);
+
+color:var(--blue);
+
 }
 
 .nav-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
 }
 
 .nav-phone{
-  font-size:12px;
-  font-weight:700;
-  color:#344054;
-  margin-right:5px;
+
+font-size:13px;
+
+font-weight:700;
+
+color:#344054;
+
 }
 
 .btn{
-  position:relative;
-  overflow:hidden;
-  border:none;
-  border-radius:10px;
-  padding:13px 20px;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  transition:.25s;
-}
 
-.btn::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-120%;
-  width:70%;
-  height:100%;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.35),
-    transparent
-  );
-  transform:skewX(-20deg);
-  transition:.6s;
-}
+border:0;
 
-.btn:hover::after{
-  left:140%;
+border-radius:10px;
+
+padding:13px 21px;
+
+font-size:13px;
+
+font-weight:700;
+
+cursor:pointer;
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+transition:.25s;
+
 }
 
 .btn-blue{
-  color:white;
-  background:var(--blue);
-  box-shadow:0 8px 20px rgba(20,99,255,.22);
+
+background:var(--blue);
+
+color:white;
+
+box-shadow:
+0 8px 20px rgba(20,99,255,.22);
+
 }
 
 .btn-blue:hover{
-  background:var(--blue2);
-  transform:translateY(-2px);
-}
 
-.btn-white{
-  background:white;
-  color:var(--blue);
+background:var(--blue-dark);
+
+transform:translateY(-2px);
+
 }
 
 .btn-outline{
-  border:1px solid #d8dee9;
-  background:#fff;
-  color:#344054;
+
+background:white;
+
+border:1px solid #d8dee9;
+
+color:#344054;
+
 }
 
 .btn-outline:hover{
-  border-color:var(--blue);
-  color:var(--blue);
-  transform:translateY(-2px);
+
+border-color:var(--blue);
+
+color:var(--blue);
+
+transform:translateY(-2px);
+
+}
+
+.btn-white{
+
+background:white;
+
+color:var(--blue);
+
 }
 
 .menu{
-  display:none;
-  font-size:25px;
-  border:0;
-  background:none;
-  cursor:pointer;
+
+display:none;
+
+border:0;
+
+background:none;
+
+font-size:25px;
+
+cursor:pointer;
+
 }
 
+
 /* =========================================================
-HERO
+   HERO
 ========================================================= */
 
 .hero{
-  min-height:900px;
-  padding:175px 0 100px;
-  background:
-    radial-gradient(circle at 80% 15%,rgba(20,99,255,.14),transparent 27%),
-    radial-gradient(circle at 10% 40%,rgba(79,135,255,.08),transparent 30%),
-    linear-gradient(180deg,#fafdff 0%,#fff 70%);
-  overflow:hidden;
+
+min-height:900px;
+
+padding:175px 0 100px;
+
+position:relative;
+
+overflow:hidden;
+
+background:
+
+radial-gradient(
+circle at 80% 10%,
+rgba(20,99,255,.15),
+transparent 28%
+),
+
+radial-gradient(
+circle at 5% 40%,
+rgba(80,140,255,.08),
+transparent 30%
+),
+
+linear-gradient(
+180deg,
+#fafdff 0%,
+#fff 70%
+);
+
 }
 
 .hero-grid{
-  display:grid;
-  grid-template-columns:48% 52%;
-  align-items:center;
-  gap:20px;
-}
 
-.hero-content{
-  animation:heroContent .9s cubic-bezier(.2,.8,.2,1) .15s both;
+display:grid;
+
+grid-template-columns:
+48% 52%;
+
+align-items:center;
+
+gap:20px;
+
 }
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 13px;
-  border:1px solid #d9e6ff;
-  background:#f1f6ff;
-  color:var(--blue);
-  border-radius:30px;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:25px;
-  animation:badgePulse 3s ease-in-out infinite;
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:8px 13px;
+
+border:
+1px solid #d9e6ff;
+
+background:#f1f6ff;
+
+color:var(--blue);
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+margin-bottom:25px;
+
+animation:
+fadeUp .7s ease both;
+
 }
 
 .badge-dot{
-  width:7px;
-  height:7px;
-  background:#20b878;
-  border-radius:50%;
-  box-shadow:0 0 0 4px rgba(32,184,120,.12);
-  animation:dotPulse 1.8s ease-in-out infinite;
+
+width:7px;
+
+height:7px;
+
+background:#20b878;
+
+border-radius:50%;
+
+box-shadow:
+0 0 0 4px rgba(32,184,120,.12);
+
 }
 
 .hero h1{
-  font-size:64px;
-  line-height:1.06;
-  letter-spacing:-3.5px;
-  max-width:650px;
-  margin-bottom:25px;
+
+font-size:62px;
+
+line-height:1.06;
+
+letter-spacing:-3.5px;
+
+max-width:650px;
+
+margin-bottom:25px;
+
+animation:
+fadeUp .8s .1s ease both;
+
 }
 
 .hero h1 span{
-  color:var(--blue);
+
+color:var(--blue);
+
 }
 
 .hero-description{
-  font-size:17px;
-  line-height:1.7;
-  color:var(--muted);
-  max-width:560px;
-  margin-bottom:32px;
+
+font-size:17px;
+
+line-height:1.7;
+
+color:var(--muted);
+
+max-width:560px;
+
+margin-bottom:32px;
+
+animation:
+fadeUp .8s .2s ease both;
+
 }
 
 .hero-actions{
-  display:flex;
-  gap:12px;
-  margin-bottom:35px;
-  flex-wrap:wrap;
+
+display:flex;
+
+gap:12px;
+
+margin-bottom:35px;
+
+animation:
+fadeUp .8s .3s ease both;
+
 }
 
 .trust{
-  display:flex;
-  gap:22px;
-  flex-wrap:wrap;
+
+display:flex;
+
+gap:22px;
+
+flex-wrap:wrap;
+
 }
 
 .trust-item{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:12px;
-  font-weight:600;
-  color:#667085;
+
+display:flex;
+
+align-items:center;
+
+gap:7px;
+
+font-size:12px;
+
+font-weight:600;
+
+color:#667085;
+
 }
 
 .tick{
-  width:19px;
-  height:19px;
-  background:#e6f8f0;
-  color:#12a66b;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
+
+width:19px;
+
+height:19px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:#e6f8f0;
+
+color:#12a66b;
+
+border-radius:50%;
+
 }
 
+
 /* =========================================================
-DESKTOP POS MOCKUP
+   HERO POS VISUAL
 ========================================================= */
 
 .hero-dashboard{
-  position:relative;
-  height:570px;
-  animation:dashboardReveal 1s cubic-bezier(.2,.8,.2,1) .25s both;
+
+height:570px;
+
+position:relative;
+
+animation:
+fadeIn 1s .2s ease both;
+
 }
 
-.pos-window{
-  position:absolute;
-  top:30px;
-  left:20px;
-  width:620px;
-  height:430px;
-  background:#fff;
-  border:1px solid #dfe5ee;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 35px 90px rgba(10,30,65,.18);
-  transform:perspective(1200px) rotateY(-5deg) rotateX(2deg);
-  animation:posFloat 5s ease-in-out infinite;
+
+/* Realistic POS System */
+
+.realistic-pos{
+
+position:absolute;
+
+left:15px;
+
+top:35px;
+
+width:540px;
+
+height:430px;
+
+filter:
+drop-shadow(0 35px 35px rgba(0,0,0,.20));
+
+animation:
+floatPOS 5s ease-in-out infinite;
+
 }
 
-.window-top{
-  height:43px;
-  border-bottom:1px solid #e9edf3;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-  gap:6px;
+.pos-monitor{
+
+position:absolute;
+
+left:80px;
+
+top:0;
+
+width:350px;
+
+height:255px;
+
+background:
+
+linear-gradient(
+145deg,
+#26303d,
+#101722
+);
+
+border-radius:18px;
+
+padding:12px;
+
+box-shadow:
+
+inset 0 1px 1px rgba(255,255,255,.15),
+
+0 15px 30px rgba(0,0,0,.25);
+
 }
 
-.window-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#d9dee8;
+.monitor-screen{
+
+height:100%;
+
+border-radius:10px;
+
+overflow:hidden;
+
+background:#f7f9fc;
+
 }
 
-.window-title{
-  margin-left:12px;
-  font-size:10px;
-  font-weight:700;
-  color:#667085;
+.monitor-top{
+
+height:38px;
+
+background:#fff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 12px;
+
+border-bottom:
+1px solid #e8ecf2;
+
 }
 
-.pos-layout{
-  display:grid;
-  grid-template-columns:145px 1fr;
-  height:387px;
+.monitor-brand{
+
+font-size:12px;
+
+font-weight:800;
+
 }
 
-.sidebar{
-  background:#081b35;
-  color:white;
-  padding:18px 12px;
+.monitor-brand span{
+
+color:var(--blue);
+
 }
 
-.side-logo{
-  font-family:"Manrope";
-  font-size:17px;
-  font-weight:800;
-  margin-bottom:30px;
+.monitor-user{
+
+font-size:8px;
+
+color:#667085;
+
 }
 
-.side-logo span{
-  color:#5b94ff;
+.monitor-body{
+
+display:grid;
+
+grid-template-columns:72px 1fr;
+
+height:calc(100% - 38px);
+
 }
 
-.side-item{
-  padding:9px 10px;
-  border-radius:7px;
-  font-size:9px;
-  color:#a9b7ca;
-  margin-bottom:5px;
+.monitor-sidebar{
+
+background:#071a33;
+
+padding:12px 7px;
+
 }
 
-.side-item.active{
-  background:#145eea;
-  color:white;
+.monitor-side-logo{
+
+color:#fff;
+
+font-size:10px;
+
+font-weight:800;
+
+margin-bottom:18px;
+
 }
 
-.pos-main{
-  background:#f7f9fc;
-  padding:18px;
+.monitor-side-logo span{
+
+color:#5b94ff;
+
 }
 
-.pos-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:17px;
+.monitor-menu{
+
+font-size:7px;
+
+color:#aab8cb;
+
+padding:7px;
+
+border-radius:5px;
+
+margin-bottom:3px;
+
 }
 
-.pos-heading{
-  font-size:15px;
-  font-weight:800;
+.monitor-menu.active{
+
+background:#1463ff;
+
+color:#fff;
+
 }
 
-.user{
-  font-size:9px;
-  background:#fff;
-  padding:7px 10px;
-  border-radius:7px;
-  border:1px solid #e5e9f0;
+.monitor-content{
+
+padding:12px;
+
 }
 
-.stat-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-bottom:14px;
+.monitor-title{
+
+font-size:12px;
+
+font-weight:800;
+
+margin-bottom:10px;
+
 }
 
-.stat{
-  background:#fff;
-  border:1px solid #e8ecf2;
-  padding:12px;
-  border-radius:9px;
-  transition:.25s;
+.monitor-stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:6px;
+
 }
 
-.stat:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 20px rgba(0,0,0,.06);
+.monitor-stat{
+
+background:#fff;
+
+border:1px solid #e8ecf2;
+
+padding:7px;
+
+border-radius:7px;
+
 }
 
-.stat-label{
-  font-size:8px;
-  color:#7b8494;
-  margin-bottom:5px;
+.monitor-stat small{
+
+display:block;
+
+font-size:6px;
+
+color:#7b8494;
+
 }
 
-.stat-value{
-  font-size:15px;
-  font-weight:800;
-  transition:.25s;
+.monitor-stat strong{
+
+display:block;
+
+font-size:11px;
+
+margin-top:3px;
+
 }
 
-.stat-change{
-  font-size:7px;
-  color:#12a66b;
-  margin-top:3px;
+.monitor-lower{
+
+display:grid;
+
+grid-template-columns:
+1.5fr 1fr;
+
+gap:7px;
+
+margin-top:8px;
+
 }
 
-.pos-content{
-  display:grid;
-  grid-template-columns:1.5fr 1fr;
-  gap:10px;
+.monitor-card{
+
+background:#fff;
+
+border:
+1px solid #e8ecf2;
+
+border-radius:7px;
+
+padding:8px;
+
+height:105px;
+
 }
 
-.sales-chart{
-  background:#fff;
-  border:1px solid #e8ecf2;
-  border-radius:9px;
-  padding:14px;
-  height:205px;
+.monitor-card-title{
+
+font-size:7px;
+
+font-weight:800;
+
+margin-bottom:8px;
+
 }
 
-.card-heading{
-  font-size:10px;
-  font-weight:800;
-  margin-bottom:16px;
+.monitor-bars{
+
+height:70px;
+
+display:flex;
+
+align-items:flex-end;
+
+gap:5px;
+
 }
 
-.chart{
-  height:140px;
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  padding:0 10px;
-  border-bottom:1px solid #edf0f4;
+.monitor-bar{
+
+flex:1;
+
+background:
+linear-gradient(
+180deg,
+#2b7aff,
+#a7c8ff
+);
+
+border-radius:3px 3px 0 0;
+
 }
 
-.chart-bar{
-  flex:1;
-  border-radius:4px 4px 0 0;
-  background:linear-gradient(180deg,#2b7aff,#8ab5ff);
-  transform-origin:bottom;
-  animation:chartGrow 1.2s cubic-bezier(.2,.8,.2,1) both;
+
+/* POS Base */
+
+.pos-base{
+
+position:absolute;
+
+left:40px;
+
+top:265px;
+
+width:430px;
+
+height:90px;
+
+background:
+
+linear-gradient(
+180deg,
+#eef1f5,
+#bfc5cc
+);
+
+border-radius:
+
+12px 12px 28px 28px;
+
+box-shadow:
+
+0 12px 20px rgba(0,0,0,.20);
+
+transform:
+perspective(500px)
+rotateX(15deg);
+
 }
 
-.orders{
-  background:#fff;
-  border:1px solid #e8ecf2;
-  border-radius:9px;
-  padding:14px;
+.pos-base-top{
+
+position:absolute;
+
+left:25px;
+
+top:10px;
+
+width:380px;
+
+height:55px;
+
+background:
+
+linear-gradient(
+145deg,
+#ffffff,
+#d9dee5
+);
+
+border-radius:9px;
+
 }
 
-.order{
-  padding:10px 0;
-  border-bottom:1px solid #f0f2f5;
-  display:flex;
-  justify-content:space-between;
-  font-size:8px;
+.pos-key{
+
+position:absolute;
+
+width:18px;
+
+height:10px;
+
+background:#9ba3ad;
+
+border-radius:2px;
+
+bottom:12px;
+
 }
 
-.order strong{
-  color:#1264e8;
+.pos-key:nth-child(1){
+left:30px;
 }
+
+.pos-key:nth-child(2){
+left:55px;
+}
+
+.pos-key:nth-child(3){
+left:80px;
+}
+
+.pos-key:nth-child(4){
+left:105px;
+}
+
+.pos-key:nth-child(5){
+left:130px;
+}
+
+.pos-key:nth-child(6){
+left:155px;
+}
+
+
+/* Barcode Scanner */
+
+.barcode-scanner{
+
+position:absolute;
+
+right:10px;
+
+top:180px;
+
+width:80px;
+
+height:115px;
+
+}
+
+.scanner-head{
+
+width:65px;
+
+height:55px;
+
+background:
+
+linear-gradient(
+145deg,
+#26313e,
+#0c121a
+);
+
+border-radius:
+12px 12px 20px 10px;
+
+transform:
+rotate(-20deg);
+
+box-shadow:
+0 10px 20px rgba(0,0,0,.22);
+
+}
+
+.scanner-light{
+
+position:absolute;
+
+top:15px;
+
+left:10px;
+
+width:35px;
+
+height:7px;
+
+background:#1463ff;
+
+border-radius:10px;
+
+box-shadow:
+0 0 15px #1463ff;
+
+}
+
+.scanner-handle{
+
+position:absolute;
+
+left:30px;
+
+top:43px;
+
+width:28px;
+
+height:75px;
+
+background:
+
+linear-gradient(
+90deg,
+#111923,
+#36404b
+);
+
+border-radius:
+6px 8px 15px 15px;
+
+transform:
+rotate(-10deg);
+
+}
+
+
+/* Printer */
+
+.pos-printer{
+
+position:absolute;
+
+left:5px;
+
+top:305px;
+
+width:100px;
+
+height:95px;
+
+background:
+
+linear-gradient(
+145deg,
+#f6f7f8,
+#bfc5cb
+);
+
+border-radius:10px;
+
+box-shadow:
+0 12px 20px rgba(0,0,0,.20);
+
+}
+
+.printer-top{
+
+height:28px;
+
+background:#d7dce1;
+
+border-radius:10px 10px 0 0;
+
+}
+
+.printer-slot{
+
+position:absolute;
+
+left:15px;
+
+top:20px;
+
+width:70px;
+
+height:5px;
+
+background:#646c75;
+
+border-radius:5px;
+
+}
+
+.printer-paper{
+
+position:absolute;
+
+left:22px;
+
+top:-22px;
+
+width:55px;
+
+height:30px;
+
+background:white;
+
+border-radius:2px;
+
+box-shadow:
+0 3px 5px rgba(0,0,0,.12);
+
+}
+
+.printer-paper::after{
+
+content:"";
+
+position:absolute;
+
+left:8px;
+
+right:8px;
+
+top:9px;
+
+height:2px;
+
+background:#d5d9df;
+
+box-shadow:
+0 6px #d5d9df,
+0 12px #d5d9df;
+
+}
+
 
 /* =========================================================
-REALISTIC MOBILE APP HERO
+   MOBILE POS MOCKUP
 ========================================================= */
 
 .mobile-app{
-  position:absolute;
-  right:-20px;
-  bottom:5px;
-  width:245px;
-  height:500px;
-  background:#101828;
-  padding:7px;
-  border-radius:34px;
-  box-shadow:
-    0 35px 80px rgba(5,20,45,.32),
-    0 5px 15px rgba(5,20,45,.12);
-  z-index:10;
-  transform:rotate(4deg);
-  animation:mobileFloat 4s ease-in-out infinite;
-}
 
-.mobile-app::before{
-  content:"";
-  position:absolute;
-  inset:-3px;
-  border-radius:36px;
-  background:linear-gradient(
-    135deg,
-    rgba(20,99,255,.55),
-    transparent 40%,
-    rgba(20,99,255,.2)
-  );
-  z-index:-1;
-  filter:blur(8px);
-  opacity:.6;
+position:absolute;
+
+right:-10px;
+
+bottom:0;
+
+width:225px;
+
+height:470px;
+
+padding:7px;
+
+background:#101828;
+
+border-radius:32px;
+
+box-shadow:
+
+0 35px 80px rgba(5,20,45,.32),
+
+0 5px 15px rgba(5,20,45,.12);
+
+z-index:10;
+
+transform:
+rotate(4deg);
+
+animation:
+floatPhone 4s ease-in-out infinite;
+
 }
 
 .mobile-screen{
-  height:100%;
-  background:#f6f8fc;
-  border-radius:28px;
-  overflow:hidden;
-  position:relative;
-  color:#101828;
+
+height:100%;
+
+background:#f6f8fc;
+
+border-radius:26px;
+
+overflow:hidden;
+
+position:relative;
+
 }
 
 .mobile-status{
-  height:25px;
-  background:#1463ff;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 15px;
-  font-size:7px;
-  font-weight:700;
+
+height:23px;
+
+background:#1463ff;
+
+color:#fff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 14px;
+
+font-size:7px;
+
+font-weight:700;
+
 }
 
 .mobile-app-header{
-  background:#1463ff;
-  color:#fff;
-  padding:8px 16px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+
+background:#1463ff;
+
+color:#fff;
+
+padding:8px 15px 18px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
 }
 
 .mobile-welcome{
-  font-size:8px;
-  opacity:.8;
-  margin-bottom:3px;
+
+font-size:7px;
+
+opacity:.8;
+
 }
 
 .mobile-user-name{
-  font-size:17px;
-  font-family:"Manrope";
-  font-weight:800;
+
+font-size:16px;
+
+font-weight:800;
+
+margin-top:3px;
+
 }
 
 .mobile-profile{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#fff;
-  color:#1463ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-  font-weight:800;
+
+width:30px;
+
+height:30px;
+
+border-radius:50%;
+
+background:white;
+
+color:#1463ff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:11px;
+
+font-weight:800;
+
 }
 
 .mobile-sales-card{
-  background:#fff;
-  margin:-5px 12px 0;
-  border-radius:13px;
-  padding:13px;
-  position:relative;
-  z-index:3;
-  box-shadow:0 8px 22px rgba(16,24,40,.08);
+
+background:#fff;
+
+margin:-5px 11px 0;
+
+border-radius:12px;
+
+padding:12px;
+
+position:relative;
+
+z-index:3;
+
+box-shadow:
+0 8px 22px rgba(16,24,40,.08);
+
 }
 
 .sales-top{
-  display:flex;
-  justify-content:space-between;
-  font-size:8px;
-  color:#667085;
-  font-weight:600;
-}
 
-.sales-menu{
-  font-size:10px;
-  color:#98a2b3;
+display:flex;
+
+justify-content:space-between;
+
+font-size:8px;
+
+color:#667085;
+
+font-weight:600;
+
 }
 
 .mobile-sales-amount{
-  font-family:"Manrope";
-  font-size:23px;
-  font-weight:800;
-  margin-top:5px;
-  letter-spacing:-1px;
+
+font-size:22px;
+
+font-weight:800;
+
+margin-top:5px;
+
 }
 
 .sales-growth{
-  color:#12a66b;
-  font-size:7px;
-  font-weight:700;
-  margin-top:3px;
+
+font-size:7px;
+
+color:#12a66b;
+
+font-weight:700;
+
+margin-top:3px;
+
 }
 
 .sales-growth span{
-  color:#98a2b3;
-  font-weight:500;
+
+color:#98a2b3;
+
+font-weight:500;
+
 }
 
 .mini-chart{
-  height:43px;
-  margin-top:9px;
-  display:flex;
-  align-items:flex-end;
-  gap:5px;
+
+height:40px;
+
+display:flex;
+
+align-items:flex-end;
+
+gap:4px;
+
+margin-top:9px;
+
 }
 
 .mini-bar{
-  flex:1;
-  background:#dce9ff;
-  border-radius:3px 3px 1px 1px;
-  transform-origin:bottom;
-  animation:miniChartGrow 1s ease both;
+
+flex:1;
+
+background:#dce9ff;
+
+border-radius:3px 3px 1px 1px;
+
 }
 
 .mini-bar.active{
-  background:#1463ff;
+
+background:#1463ff;
+
 }
 
 .mobile-section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 14px 8px;
-  font-size:9px;
-  font-weight:800;
+
+display:flex;
+
+justify-content:space-between;
+
+padding:13px 13px 7px;
+
+font-size:8px;
+
+font-weight:800;
+
 }
 
 .view-all{
-  color:#1463ff;
-  font-size:7px;
-  font-weight:700;
+
+color:#1463ff;
+
+font-size:7px;
+
 }
 
 .quick-actions{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  padding:0 12px;
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:6px;
+
+padding:0 11px;
+
 }
 
 .quick-action{
-  background:#fff;
-  border:1px solid #edf0f4;
-  border-radius:10px;
-  padding:8px 3px;
-  text-align:center;
-  transition:.25s;
-}
 
-.quick-action:hover{
-  transform:translateY(-3px);
+background:#fff;
+
+border:1px solid #edf0f4;
+
+border-radius:9px;
+
+padding:7px 2px;
+
+text-align:center;
+
 }
 
 .quick-icon{
-  width:27px;
-  height:27px;
-  border-radius:8px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  font-weight:800;
+
+width:25px;
+
+height:25px;
+
+margin:auto;
+
+border-radius:7px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:13px;
+
+font-weight:800;
+
 }
 
 .quick-icon.blue{
-  background:#eaf2ff;
-  color:#1463ff;
+background:#eaf2ff;
+color:#1463ff;
 }
 
 .quick-icon.green{
-  background:#e7f8f1;
-  color:#12a66b;
+background:#e7f8f1;
+color:#12a66b;
 }
 
 .quick-icon.orange{
-  background:#fff2e5;
-  color:#f79009;
+background:#fff2e5;
+color:#f79009;
 }
 
 .quick-icon.purple{
-  background:#f1eaff;
-  color:#7a5af8;
+background:#f1eaff;
+color:#7a5af8;
 }
 
 .quick-action span{
-  display:block;
-  font-size:6.5px;
-  color:#667085;
-  font-weight:600;
-  margin-top:5px;
+
+display:block;
+
+font-size:6px;
+
+color:#667085;
+
+margin-top:4px;
+
+font-weight:600;
+
 }
 
 .mobile-orders{
-  padding:0 12px 70px;
+
+padding:0 11px 65px;
+
 }
 
 .mobile-order{
-  background:#fff;
-  border:1px solid #edf0f4;
-  border-radius:10px;
-  padding:9px;
-  margin-bottom:7px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+
+background:#fff;
+
+border:1px solid #edf0f4;
+
+border-radius:9px;
+
+padding:8px;
+
+margin-bottom:6px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
 }
 
 .order-left{
-  display:flex;
-  align-items:center;
-  gap:8px;
+
+display:flex;
+
+align-items:center;
+
+gap:7px;
+
 }
 
 .order-icon{
-  width:28px;
-  height:28px;
-  background:#f0f5ff;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
+
+width:27px;
+
+height:27px;
+
+border-radius:7px;
+
+background:#f0f5ff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:11px;
+
 }
 
 .order-left strong{
-  display:block;
-  font-size:7px;
-  margin-bottom:3px;
+
+display:block;
+
+font-size:7px;
+
 }
 
 .order-left small{
-  display:block;
-  color:#98a2b3;
-  font-size:6px;
+
+display:block;
+
+font-size:6px;
+
+color:#98a2b3;
+
+margin-top:3px;
+
 }
 
 .order-right{
-  text-align:right;
+
+text-align:right;
+
 }
 
 .order-right strong{
-  display:block;
-  font-size:8px;
-  margin-bottom:3px;
+
+display:block;
+
+font-size:8px;
+
 }
 
 .paid,
 .pending{
-  font-size:6px;
-  font-weight:700;
+
+font-size:6px;
+
+font-weight:700;
+
 }
 
 .paid{
-  color:#12a66b;
+
+color:#12a66b;
+
 }
 
 .pending{
-  color:#f79009;
+
+color:#f79009;
+
 }
 
 .mobile-bottom-nav{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:58px;
-  background:rgba(255,255,255,.97);
-  border-top:1px solid #e8ecf2;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:20;
+
+position:absolute;
+
+left:0;
+
+right:0;
+
+bottom:0;
+
+height:54px;
+
+background:
+rgba(255,255,255,.97);
+
+border-top:
+1px solid #e8ecf2;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-around;
+
+z-index:20;
+
 }
 
 .bottom-item{
-  width:40px;
-  text-align:center;
-  color:#98a2b3;
-  font-size:13px;
+
+width:35px;
+
+text-align:center;
+
+color:#98a2b3;
+
+font-size:12px;
+
 }
 
 .bottom-item span{
-  display:block;
-  font-size:6px;
-  margin-top:3px;
-  font-weight:600;
+
+display:block;
+
+font-size:6px;
+
+margin-top:2px;
+
 }
 
 .bottom-item.active{
-  color:#1463ff;
+
+color:#1463ff;
+
 }
 
 .add-button{
-  width:38px;
-  height:38px;
-  background:#1463ff;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  box-shadow:0 7px 18px rgba(20,99,255,.3);
+
+width:36px;
+
+height:36px;
+
+background:#1463ff;
+
+color:#fff;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:20px;
+
+box-shadow:
+0 7px 18px rgba(20,99,255,.3);
+
 }
 
+
 /* =========================================================
-TRUST
+   TRUST
 ========================================================= */
 
 .trust-strip{
-  border-top:1px solid #edf0f5;
-  border-bottom:1px solid #edf0f5;
-  padding:25px 0;
-  background:#fff;
+
+border-top:
+1px solid #edf0f5;
+
+border-bottom:
+1px solid #edf0f5;
+
+padding:25px 0;
+
 }
 
 .trust-strip-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:20px;
+
 }
 
 .trust-label{
-  font-size:12px;
-  color:#98a2b3;
-  font-weight:600;
+
+font-size:12px;
+
+color:#98a2b3;
+
+font-weight:600;
+
 }
 
 .trust-brand{
-  font-family:"Manrope";
-  font-size:15px;
-  font-weight:800;
-  color:#a3acba;
-  transition:.3s;
+
+font-family:"Manrope";
+
+font-size:14px;
+
+font-weight:800;
+
+color:#a3acba;
+
 }
 
-.trust-brand:hover{
-  color:var(--blue);
-  transform:translateY(-3px);
-}
 
 /* =========================================================
-SECTIONS
+   SECTIONS
 ========================================================= */
 
 .section{
-  padding:110px 0;
+
+padding:110px 0;
+
 }
 
 .section-head{
-  max-width:680px;
-  margin:0 auto 60px;
-  text-align:center;
-  opacity:0;
-  transform:translateY(25px);
-  transition:.8s ease;
-}
 
-.section-head.show{
-  opacity:1;
-  transform:translateY(0);
+max-width:680px;
+
+margin:0 auto 60px;
+
+text-align:center;
+
 }
 
 .eyebrow{
-  font-size:11px;
-  color:var(--blue);
-  font-weight:800;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
-  margin-bottom:12px;
+
+font-size:11px;
+
+color:var(--blue);
+
+font-weight:800;
+
+letter-spacing:1.8px;
+
+text-transform:uppercase;
+
+margin-bottom:12px;
+
 }
 
 .section-head h2{
-  font-size:44px;
-  letter-spacing:-2px;
-  line-height:1.15;
-  margin-bottom:15px;
+
+font-size:44px;
+
+letter-spacing:-2px;
+
+line-height:1.15;
+
+margin-bottom:15px;
+
 }
 
 .section-head p{
-  color:var(--muted);
-  font-size:15px;
-  line-height:1.7;
+
+font-size:15px;
+
+line-height:1.7;
+
+color:var(--muted);
+
 }
 
+
 /* =========================================================
-FEATURES
+   FEATURES
 ========================================================= */
 
 .features{
-  background:#f8fafc;
+
+background:#f8fafc;
+
 }
 
 .feature-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:18px;
+
 }
 
 .feature-card{
-  background:#fff;
-  border:1px solid #e8ecf2;
-  border-radius:18px;
-  padding:30px;
-  transition:.7s cubic-bezier(.2,.8,.2,1);
-  opacity:0;
-  transform:translateY(30px);
-}
 
-.feature-card.show{
-  opacity:1;
-  transform:translateY(0);
+background:#fff;
+
+border:
+1px solid #e8ecf2;
+
+border-radius:18px;
+
+padding:30px;
+
+transition:.3s;
+
 }
 
 .feature-card:hover{
-  transform:translateY(-9px);
-  box-shadow:var(--shadow);
+
+transform:
+translateY(-6px);
+
+box-shadow:var(--shadow);
+
 }
 
 .feature-icon{
-  width:48px;
-  height:48px;
-  border-radius:13px;
-  background:#edf4ff;
-  color:var(--blue);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:22px;
-}
 
-.feature-icon svg{
-  width:24px;
-  height:24px;
+width:48px;
+
+height:48px;
+
+border-radius:13px;
+
+background:#edf4ff;
+
+color:var(--blue);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:22px;
+
+margin-bottom:22px;
+
 }
 
 .feature-card h3{
-  font-size:17px;
-  margin-bottom:8px;
+
+font-size:17px;
+
+margin-bottom:8px;
+
 }
 
 .feature-card p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
+
+font-size:13px;
+
+line-height:1.7;
+
+color:var(--muted);
+
 }
+
 
 /* =========================================================
-PRICING
+   PRICING
 ========================================================= */
 
-.pricing{
-  background:#fff;
-}
-
 .pricing-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:18px;
+
 }
 
 .price-card{
-  border:1px solid #e3e8f0;
-  border-radius:20px;
-  padding:30px 25px;
-  position:relative;
-  background:#fff;
-  transition:.7s cubic-bezier(.2,.8,.2,1);
-  opacity:0;
-  transform:translateY(30px);
-}
 
-.price-card.show{
-  opacity:1;
-  transform:translateY(0);
+background:#fff;
+
+border:
+1px solid #e3e8f0;
+
+border-radius:20px;
+
+padding:30px 25px;
+
+position:relative;
+
+transition:.3s;
+
 }
 
 .price-card:hover{
-  transform:translateY(-10px);
-  box-shadow:var(--shadow);
+
+transform:
+translateY(-7px);
+
+box-shadow:var(--shadow);
+
 }
 
 .price-card.popular{
-  border:2px solid var(--blue);
-  box-shadow:0 20px 55px rgba(20,99,255,.13);
-  animation:popularGlow 3s ease-in-out infinite;
+
+border:
+2px solid var(--blue);
+
+box-shadow:
+0 20px 55px rgba(20,99,255,.13);
+
 }
 
 .popular-tag{
-  position:absolute;
-  top:-13px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--blue);
-  color:#fff;
-  font-size:10px;
-  font-weight:800;
-  padding:6px 15px;
-  border-radius:20px;
-  white-space:nowrap;
-  animation:tagFloat 2.5s ease-in-out infinite;
+
+position:absolute;
+
+top:-13px;
+
+left:50%;
+
+transform:
+translateX(-50%);
+
+background:var(--blue);
+
+color:white;
+
+font-size:10px;
+
+font-weight:800;
+
+padding:6px 15px;
+
+border-radius:20px;
+
+white-space:nowrap;
+
 }
 
 .price-card h3{
-  font-size:20px;
-  margin-bottom:8px;
+
+font-size:20px;
+
+margin-bottom:8px;
+
 }
 
 .price-desc{
-  color:#7b8494;
-  font-size:12px;
-  min-height:43px;
+
+font-size:12px;
+
+color:#7b8494;
+
+min-height:43px;
+
 }
 
-/* ORIGINAL PRICE WITH RED CROSS */
 .original{
-  position:relative;
-  display:inline-block;
-  color:#667085;
-  font-size:13px;
-  font-weight:600;
-  margin-top:22px;
-  padding:2px 3px;
+
+display:inline-block;
+
+color:var(--red);
+
+font-size:13px;
+
+font-weight:700;
+
+margin-top:22px;
+
+position:relative;
+
 }
 
 .original::after{
-  content:"";
-  position:absolute;
-  left:-5px;
-  right:-5px;
-  top:50%;
-  height:3px;
-  background:#ef4444;
-  transform:rotate(-8deg);
-  border-radius:10px;
+
+content:"";
+
+position:absolute;
+
+left:-3px;
+
+right:-3px;
+
+top:50%;
+
+height:2px;
+
+background:#e5484d;
+
+transform:
+rotate(-5deg);
+
 }
 
 .offer{
-  color:var(--blue);
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  margin-top:5px;
+
+color:var(--blue);
+
+font-size:10px;
+
+font-weight:800;
+
+text-transform:uppercase;
+
+margin-top:6px;
+
 }
 
 .price{
-  font-family:"Manrope";
-  font-size:38px;
-  font-weight:800;
-  letter-spacing:-2px;
-  margin-top:3px;
+
+font-size:38px;
+
+font-weight:800;
+
+letter-spacing:-2px;
+
+margin-top:4px;
+
 }
 
 .price small{
-  color:#7b8494;
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0;
+
+font-size:11px;
+
+font-weight:500;
+
+color:#7b8494;
+
+letter-spacing:0;
+
 }
 
 .price-btn{
-  width:100%;
-  margin:20px 0;
+
+width:100%;
+
+margin:20px 0;
+
 }
 
 .plan-list{
-  list-style:none;
-  border-top:1px solid #edf0f4;
-  padding-top:20px;
+
+list-style:none;
+
+border-top:
+1px solid #edf0f4;
+
+padding-top:20px;
+
 }
 
 .plan-list li{
-  font-size:12px;
-  color:#596579;
-  padding:7px 0;
-  padding-left:22px;
-  position:relative;
+
+position:relative;
+
+padding:7px 0 7px 22px;
+
+font-size:12px;
+
+color:#596579;
+
 }
 
 .plan-list li::before{
-  content:"✓";
-  position:absolute;
-  left:0;
-  color:#12a66b;
-  font-weight:800;
+
+content:"✓";
+
+position:absolute;
+
+left:0;
+
+color:#12a66b;
+
+font-weight:800;
+
 }
 
 .business{
-  background:#071a33;
-  color:#fff;
-  border:none;
+
+background:#071a33;
+
+color:#fff;
+
+border:none;
+
 }
 
 .business .price-desc,
 .business .plan-list li{
-  color:#aebbd0;
+
+color:#aebbd0;
+
 }
 
 .business .plan-list{
-  border-color:rgba(255,255,255,.12);
+
+border-color:
+rgba(255,255,255,.12);
+
 }
 
 .business .offer{
-  color:#72a7ff;
+
+color:#72a7ff;
+
 }
 
 .business .btn{
-  background:#fff;
-  color:var(--blue);
+
+background:#fff;
+
+color:var(--blue);
+
 }
 
+.business .custom-price{
+
+font-size:29px;
+
+letter-spacing:-1px;
+
+margin-top:20px;
+
+}
+
+
 /* =========================================================
-INDUSTRIES
+   INDUSTRIES
 ========================================================= */
 
 .industries{
-  background:#f7f9fc;
+
+background:#f7f9fc;
+
 }
 
 .industry-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:18px;
+
 }
 
 .industry{
-  background:#fff;
-  border:1px solid #e7ebf1;
-  border-radius:18px;
-  padding:27px;
-  transition:.7s cubic-bezier(.2,.8,.2,1);
-  opacity:0;
-  transform:translateY(30px);
-}
 
-.industry.show{
-  opacity:1;
-  transform:translateY(0);
+background:#fff;
+
+border:
+1px solid #e7ebf1;
+
+border-radius:18px;
+
+padding:27px;
+
+transition:.3s;
+
 }
 
 .industry:hover{
-  transform:translateY(-6px);
-  box-shadow:var(--shadow);
-  border-color:#c8dbff;
+
+transform:
+translateY(-6px);
+
+box-shadow:var(--shadow);
+
+border-color:#c8dbff;
+
 }
 
 .industry-icon{
-  width:54px;
-  height:54px;
-  border-radius:15px;
-  background:#edf4ff;
-  color:var(--blue);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:20px;
-  transition:.3s;
-}
 
-.industry:hover .industry-icon{
-  transform:scale(1.08) rotate(-4deg);
-}
+width:54px;
 
-.industry-icon svg{
-  width:28px;
-  height:28px;
+height:54px;
+
+border-radius:15px;
+
+background:#edf4ff;
+
+color:var(--blue);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:25px;
+
+margin-bottom:20px;
+
 }
 
 .industry h3{
-  font-size:17px;
-  margin-bottom:8px;
+
+font-size:17px;
+
+margin-bottom:8px;
+
 }
 
 .industry p{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.7;
+
+font-size:12px;
+
+line-height:1.7;
+
+color:var(--muted);
+
 }
 
+
 /* =========================================================
-MOBILE APP SECTION
+   MOBILE APP
 ========================================================= */
 
 .app-section{
-  background:#071a33;
-  color:#fff;
-  overflow:hidden;
-  position:relative;
-}
 
-.app-section::before{
-  content:"";
-  position:absolute;
-  width:500px;
-  height:500px;
-  border-radius:50%;
-  background:rgba(20,99,255,.15);
-  filter:blur(100px);
-  top:10%;
-  right:-150px;
-  animation:backgroundMove 8s ease-in-out infinite;
+background:#071a33;
+
+color:#fff;
+
+overflow:hidden;
+
 }
 
 .app-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:100px;
-  position:relative;
-  z-index:2;
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+align-items:center;
+
+gap:100px;
+
 }
 
 .app-text .eyebrow{
-  color:#72a7ff;
+
+color:#72a7ff;
+
 }
 
 .app-text h2{
-  font-size:45px;
-  letter-spacing:-2px;
-  line-height:1.15;
-  margin-bottom:18px;
+
+font-size:45px;
+
+line-height:1.15;
+
+letter-spacing:-2px;
+
+margin-bottom:18px;
+
 }
 
 .app-text p{
-  color:#aebbd0;
-  font-size:15px;
-  line-height:1.8;
-  max-width:500px;
+
+font-size:15px;
+
+line-height:1.8;
+
+color:#aebbd0;
+
 }
 
 .app-list{
-  margin-top:28px;
-  display:grid;
-  gap:14px;
+
+display:grid;
+
+gap:14px;
+
+margin-top:28px;
+
 }
 
 .app-list-item{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  color:#d9e3f2;
-  font-size:13px;
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+font-size:13px;
+
+color:#d9e3f2;
+
 }
 
 .app-check{
-  width:23px;
-  height:23px;
-  background:#123e7b;
-  color:#70a8ff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+width:23px;
+
+height:23px;
+
+border-radius:50%;
+
+background:#123e7b;
+
+color:#70a8ff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
 }
 
 .app-visual{
-  height:470px;
-  position:relative;
+
+height:470px;
+
+position:relative;
+
 }
 
 .phone-large{
-  width:245px;
-  height:490px;
-  position:absolute;
-  left:50%;
-  top:0;
-  transform:translateX(-50%);
-  background:#111827;
-  border-radius:36px;
-  padding:9px;
-  box-shadow:0 30px 80px rgba(0,0,0,.35);
-  animation:phoneLargeFloat 5s ease-in-out infinite;
+
+width:245px;
+
+height:490px;
+
+position:absolute;
+
+left:50%;
+
+top:0;
+
+transform:
+translateX(-50%);
+
+background:#111827;
+
+border-radius:36px;
+
+padding:9px;
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.35);
+
+animation:
+floatPhone 4s ease-in-out infinite;
+
 }
 
 .phone-inner{
-  background:#f7f9fc;
-  height:100%;
-  border-radius:28px;
-  overflow:hidden;
-  color:#111827;
+
+height:100%;
+
+background:#f7f9fc;
+
+border-radius:28px;
+
+overflow:hidden;
+
+color:#111827;
+
 }
 
 .phone-blue{
-  background:#1463ff;
-  padding:32px 18px 22px;
-  color:#fff;
+
+background:#1463ff;
+
+padding:32px 18px 22px;
+
+color:#fff;
+
 }
 
 .phone-blue small{
-  opacity:.8;
+
+opacity:.8;
+
 }
 
 .phone-blue h3{
-  font-size:27px;
-  margin-top:7px;
+
+font-size:27px;
+
+margin-top:7px;
+
 }
 
 .phone-content{
-  padding:15px;
+
+padding:15px;
+
 }
 
 .phone-card{
-  background:#fff;
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:10px;
-  border:1px solid #e8ecf2;
+
+background:#fff;
+
+padding:14px;
+
+border-radius:12px;
+
+margin-bottom:10px;
+
+border:
+1px solid #e8ecf2;
+
 }
 
 .phone-card-title{
-  font-size:9px;
-  color:#7b8494;
+
+font-size:9px;
+
+color:#7b8494;
+
 }
 
 .phone-card-value{
-  font-size:18px;
-  font-weight:800;
-  margin-top:4px;
+
+font-size:18px;
+
+font-weight:800;
+
+margin-top:4px;
+
 }
 
 .phone-action{
-  background:#1463ff;
-  color:#fff;
-  padding:13px;
-  text-align:center;
-  border-radius:9px;
-  font-size:10px;
-  font-weight:700;
-  margin-top:14px;
+
+background:#1463ff;
+
+color:#fff;
+
+padding:13px;
+
+text-align:center;
+
+border-radius:9px;
+
+font-size:10px;
+
+font-weight:700;
+
+margin-top:14px;
+
 }
 
+
 /* =========================================================
-CTA
+   CTA
 ========================================================= */
 
 .cta{
-  padding:90px 0;
+
+padding:90px 0;
+
 }
 
 .cta-box{
-  background:
-    radial-gradient(circle at 80% 20%,rgba(70,140,255,.35),transparent 30%),
-    #0a2d60;
-  border-radius:28px;
-  padding:65px;
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:30px;
-  animation:ctaFloat 5s ease-in-out infinite;
+
+background:
+
+radial-gradient(
+circle at 80% 20%,
+rgba(70,140,255,.35),
+transparent 30%
+),
+
+#0a2d60;
+
+border-radius:28px;
+
+padding:65px;
+
+color:#fff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:30px;
+
 }
 
 .cta-box h2{
-  font-size:39px;
-  letter-spacing:-1.8px;
-  margin-bottom:12px;
+
+font-size:39px;
+
+letter-spacing:-1.8px;
+
+margin-bottom:12px;
+
 }
 
 .cta-box p{
-  color:#c1d2e9;
-  font-size:14px;
+
+font-size:14px;
+
+color:#c1d2e9;
+
 }
 
+
 /* =========================================================
-CONTACT
+   CONTACT
 ========================================================= */
 
 .contact{
-  background:#f7f9fc;
+
+background:#f7f9fc;
+
 }
 
 .contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:20px;
+
 }
 
 .contact-box{
-  background:#fff;
-  border:1px solid #e5eaf1;
-  border-radius:20px;
-  padding:35px;
-  transition:.35s;
-}
 
-.contact-box:hover{
-  transform:translateY(-5px);
-  box-shadow:var(--shadow);
+background:#fff;
+
+border:
+1px solid #e5eaf1;
+
+border-radius:20px;
+
+padding:35px;
+
 }
 
 .contact-box h3{
-  font-size:23px;
-  margin-bottom:10px;
+
+font-size:23px;
+
+margin-bottom:10px;
+
 }
 
 .contact-box p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
-  margin-bottom:25px;
+
+font-size:13px;
+
+line-height:1.7;
+
+color:var(--muted);
+
+margin-bottom:25px;
+
 }
 
 .contact-info{
-  display:grid;
-  gap:14px;
+
+display:grid;
+
+gap:14px;
+
 }
 
 .contact-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:13px;
-  font-weight:600;
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+font-size:13px;
+
+font-weight:600;
+
 }
 
 .contact-icon{
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  background:#edf4ff;
-  color:var(--blue);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  transition:.3s;
-}
 
-.contact-item:hover .contact-icon{
-  transform:scale(1.1) rotate(-5deg);
+width:40px;
+
+height:40px;
+
+border-radius:10px;
+
+background:#edf4ff;
+
+color:var(--blue);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
 }
 
 .form{
-  display:grid;
-  gap:12px;
+
+display:grid;
+
+gap:12px;
+
 }
 
 .form input,
 .form select,
 .form textarea{
-  border:1px solid #e0e5ec;
-  border-radius:9px;
-  padding:13px;
-  outline:none;
-  font-size:13px;
-  background:#fff;
+
+width:100%;
+
+border:
+1px solid #e0e5ec;
+
+border-radius:9px;
+
+padding:13px;
+
+font-size:13px;
+
+outline:none;
+
+background:#fff;
+
 }
 
 .form input:focus,
 .form select:focus,
 .form textarea:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(20,99,255,.08);
+
+border-color:var(--blue);
+
+box-shadow:
+0 0 0 3px rgba(20,99,255,.08);
+
 }
 
 .form textarea{
-  min-height:100px;
-  resize:vertical;
+
+min-height:100px;
+
+resize:vertical;
+
 }
 
+#formMessage{
+
+font-size:12px;
+
+font-weight:600;
+
+line-height:1.6;
+
+padding-top:4px;
+
+}
+
+
 /* =========================================================
-FOOTER
+   FOOTER
 ========================================================= */
 
 footer{
-  background:#06172e;
-  color:#fff;
-  padding-top:60px;
+
+background:#06172e;
+
+color:#fff;
+
+padding-top:60px;
+
 }
 
 .footer-grid{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr 1.2fr;
-  gap:45px;
-  padding-bottom:50px;
+
+display:grid;
+
+grid-template-columns:
+1.5fr 1fr 1fr 1.2fr;
+
+gap:45px;
+
+padding-bottom:50px;
+
 }
 
 .footer-logo{
-  font-family:"Manrope";
-  font-size:26px;
-  font-weight:800;
-  margin-bottom:15px;
+
+font-family:"Manrope";
+
+font-size:26px;
+
+font-weight:800;
+
+margin-bottom:15px;
+
 }
 
 .footer-logo span{
-  color:#5c9aff;
+
+color:#5c9aff;
+
 }
 
 .footer-about{
-  color:#91a1b7;
-  font-size:13px;
-  max-width:290px;
-  line-height:1.7;
+
+font-size:13px;
+
+line-height:1.7;
+
+color:#91a1b7;
+
+max-width:290px;
+
 }
 
 footer h4{
-  font-size:13px;
-  margin-bottom:17px;
+
+font-size:13px;
+
+margin-bottom:17px;
+
 }
 
 .footer-links{
-  display:grid;
-  gap:11px;
+
+display:grid;
+
+gap:11px;
+
 }
 
 .footer-links a{
-  color:#91a1b7;
-  font-size:12px;
-  transition:.25s;
-}
 
-.footer-links a:hover{
-  color:#fff;
+font-size:12px;
+
+color:#91a1b7;
+
 }
 
 .footer-contact{
-  display:grid;
-  gap:12px;
-  color:#91a1b7;
-  font-size:12px;
+
+display:grid;
+
+gap:12px;
+
+font-size:12px;
+
+color:#91a1b7;
+
 }
 
 .footer-bottom{
-  border-top:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  padding:20px;
-  color:#74849a;
-  font-size:11px;
+
+border-top:
+1px solid rgba(255,255,255,.08);
+
+padding:20px;
+
+text-align:center;
+
+font-size:11px;
+
+color:#74849a;
+
 }
+
 
 /* =========================================================
-ANIMATIONS
+   ANIMATIONS
 ========================================================= */
 
-@keyframes pageFadeIn{
-  from{opacity:0}
-  to{opacity:1}
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(25px);
+
 }
 
-@keyframes navDrop{
-  from{
-    opacity:0;
-    transform:translateY(-25px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
 }
 
-@keyframes heroContent{
-  from{
-    opacity:0;
-    transform:translateX(-40px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
 }
 
-@keyframes dashboardReveal{
-  from{
-    opacity:0;
-    transform:translateX(45px) scale(.96);
-  }
-  to{
-    opacity:1;
-    transform:translateX(0) scale(1);
-  }
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
 }
 
-@keyframes posFloat{
-  0%,100%{
-    transform:perspective(1200px) rotateY(-5deg) rotateX(2deg) translateY(0);
-  }
-  50%{
-    transform:perspective(1200px) rotateY(-5deg) rotateX(2deg) translateY(-8px);
-  }
+to{
+
+opacity:1;
+
 }
 
-@keyframes mobileFloat{
-  0%,100%{
-    transform:rotate(4deg) translateY(0);
-  }
-  50%{
-    transform:rotate(4deg) translateY(-12px);
-  }
 }
 
-@keyframes badgePulse{
-  0%,100%{
-    box-shadow:0 0 0 rgba(20,99,255,0);
-  }
-  50%{
-    box-shadow:0 0 25px rgba(20,99,255,.12);
-  }
+@keyframes floatPOS{
+
+0%,
+100%{
+
+transform:
+translateY(0);
+
 }
 
-@keyframes dotPulse{
-  0%,100%{
-    transform:scale(1);
-    opacity:1;
-  }
-  50%{
-    transform:scale(1.35);
-    opacity:.65;
-  }
+50%{
+
+transform:
+translateY(-8px);
+
 }
 
-@keyframes chartGrow{
-  from{transform:scaleY(0)}
-  to{transform:scaleY(1)}
 }
 
-@keyframes miniChartGrow{
-  from{transform:scaleY(0)}
-  to{transform:scaleY(1)}
+@keyframes floatPhone{
+
+0%,
+100%{
+
+transform:
+translateY(0)
+rotate(4deg);
+
 }
 
-@keyframes popularGlow{
-  0%,100%{
-    box-shadow:0 20px 55px rgba(20,99,255,.13);
-  }
-  50%{
-    box-shadow:0 25px 70px rgba(20,99,255,.23);
-  }
+50%{
+
+transform:
+translateY(-12px)
+rotate(4deg);
+
 }
 
-@keyframes tagFloat{
-  0%,100%{
-    transform:translateX(-50%) translateY(0);
-  }
-  50%{
-    transform:translateX(-50%) translateY(-3px);
-  }
 }
 
-@keyframes phoneLargeFloat{
-  0%,100%{
-    transform:translateX(-50%) translateY(0);
-  }
-  50%{
-    transform:translateX(-50%) translateY(-10px);
-  }
-}
-
-@keyframes backgroundMove{
-  0%,100%{
-    transform:translate(0,0);
-  }
-  50%{
-    transform:translate(-80px,50px);
-  }
-}
-
-@keyframes ctaFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-5px);
-  }
-}
 
 /* =========================================================
-RESPONSIVE
+   RESPONSIVE
 ========================================================= */
 
-@media(max-width:1100px){
+@media(max-width:1050px){
 
-  .nav-links{
-    gap:14px;
-  }
+.hero-grid{
 
-  .nav-phone{
-    display:none;
-  }
+grid-template-columns:1fr;
 
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
+}
 
-  .hero-content{
-    text-align:center;
-  }
+.hero-content{
 
-  .hero-description{
-    margin-left:auto;
-    margin-right:auto;
-  }
+text-align:center;
 
-  .hero-actions,
-  .trust{
-    justify-content:center;
-  }
+}
 
-  .hero-dashboard{
-    max-width:720px;
-    width:100%;
-    margin:auto;
-  }
+.hero-description{
 
-  .pricing-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+margin-left:auto;
 
-  .industry-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+margin-right:auto;
 
-  .app-grid{
-    grid-template-columns:1fr;
-  }
+}
 
-  .app-text{
-    text-align:center;
-  }
+.hero-actions,
+.trust{
 
-  .app-text p{
-    margin:auto;
-  }
+justify-content:center;
 
-  .app-list{
-    max-width:400px;
-    margin:28px auto;
-  }
+}
+
+.hero-dashboard{
+
+max-width:720px;
+
+width:100%;
+
+margin:auto;
+
+}
+
+.pricing-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+.industry-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+.app-grid{
+
+grid-template-columns:1fr;
+
+}
 
 }
 
 @media(max-width:800px){
 
-  .nav-links,
-  .nav-right{
-    display:none;
-  }
+.nav-links,
+.nav-right{
 
-  .menu{
-    display:block;
-  }
+display:none;
 
-  .navbar.mobile-open .nav-links{
-    display:flex;
-    position:absolute;
-    top:78px;
-    left:0;
-    right:0;
-    background:#fff;
-    padding:25px;
-    border-radius:15px;
-    flex-direction:column;
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
-  }
+}
 
-  .hero h1{
-    font-size:48px;
-  }
+.menu{
 
-  .feature-grid{
-    grid-template-columns:1fr 1fr;
-  }
+display:block;
 
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
+}
 
-  .footer-grid{
-    grid-template-columns:1fr 1fr;
-  }
+.navbar.mobile-open .nav-links{
 
-  .cta-box{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+display:flex;
+
+position:absolute;
+
+top:78px;
+
+left:0;
+
+right:0;
+
+padding:25px;
+
+background:#fff;
+
+border-radius:15px;
+
+box-shadow:
+0 20px 40px rgba(0,0,0,.12);
+
+flex-direction:column;
+
+}
+
+.hero h1{
+
+font-size:48px;
+
+}
+
+.feature-grid{
+
+grid-template-columns:
+1fr 1fr;
+
+}
+
+.contact-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-grid{
+
+grid-template-columns:
+1fr 1fr;
+
+}
+
+.cta-box{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
 
 }
 
 @media(max-width:600px){
 
-  .container{
-    width:calc(100% - 28px);
-  }
+.container{
 
-  .hero{
-    padding-top:140px;
-  }
-
-  .hero h1{
-    font-size:39px;
-    letter-spacing:-2px;
-  }
-
-  .hero-description{
-    font-size:15px;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-  }
-
-  .hero-actions .btn{
-    width:100%;
-  }
-
-  .hero-dashboard{
-    height:440px;
-    transform:scale(.82);
-    transform-origin:top center;
-    margin-bottom:-80px;
-  }
-
-  .pos-window{
-    left:0;
-    width:620px;
-  }
-
-  .mobile-app{
-    right:-35px;
-    transform:scale(.9) rotate(4deg);
-    transform-origin:bottom right;
-  }
-
-  .trust-strip-inner{
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
-  .trust-brand{
-    display:none;
-  }
-
-  .section{
-    padding:75px 0;
-  }
-
-  .section-head h2{
-    font-size:34px;
-  }
-
-  .feature-grid,
-  .pricing-grid,
-  .industry-grid{
-    grid-template-columns:1fr;
-  }
-
-  .app-text h2{
-    font-size:35px;
-  }
-
-  .app-visual{
-    transform:scale(.8);
-    margin-bottom:-80px;
-  }
-
-  .cta-box{
-    padding:40px 25px;
-  }
-
-  .cta-box h2{
-    font-size:29px;
-  }
-
-  .footer-grid{
-    grid-template-columns:1fr;
-  }
+width:
+calc(100% - 28px);
 
 }
 
-@media(prefers-reduced-motion:reduce){
+.hero{
 
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
-    transition-duration:.01ms !important;
-  }
+padding-top:140px;
+
+}
+
+.hero h1{
+
+font-size:39px;
+
+letter-spacing:-2px;
+
+}
+
+.hero-description{
+
+font-size:15px;
+
+}
+
+.hero-actions{
+
+flex-direction:column;
+
+}
+
+.hero-actions .btn{
+
+width:100%;
+
+}
+
+.hero-dashboard{
+
+height:440px;
+
+transform:
+scale(.70);
+
+transform-origin:
+top center;
+
+margin-bottom:-110px;
+
+}
+
+.realistic-pos{
+
+left:-40px;
+
+}
+
+.mobile-app{
+
+right:-30px;
+
+transform:
+rotate(4deg)
+scale(.82);
+
+transform-origin:
+bottom right;
+
+}
+
+.trust-strip-inner{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.trust-brand{
+
+display:none;
+
+}
+
+.section{
+
+padding:75px 0;
+
+}
+
+.section-head h2{
+
+font-size:34px;
+
+}
+
+.feature-grid,
+.pricing-grid,
+.industry-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.app-text h2{
+
+font-size:35px;
+
+}
+
+.app-visual{
+
+transform:
+scale(.8);
+
+margin-bottom:-80px;
+
+}
+
+.cta-box{
+
+padding:40px 25px;
+
+}
+
+.cta-box h2{
+
+font-size:29px;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+/* =========================================================
+   PARTNER BUTTON
+========================================================= */
+
+.partner-button{
+
+position:fixed;
+
+right:22px;
+
+bottom:22px;
+
+z-index:999;
+
+background:#071a33;
+
+color:#fff;
+
+padding:13px 18px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.20);
+
+transition:.3s;
+
+}
+
+.partner-button:hover{
+
+background:var(--blue);
+
+transform:
+translateY(-3px);
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- =========================================================
-NAVBAR
+     NAVBAR
 ========================================================= -->
 
 <div class="navbar-wrap">
@@ -1952,20 +3173,42 @@ NAVBAR
 
 <nav class="navbar" id="navbar">
 
-<a href="#home" class="logo">
+<a
+href="#home"
+class="logo"
+>
 axzen<span>POS</span>
 </a>
 
+
 <div class="nav-links">
 
-<a href="#home">Home</a>
-<a href="#features">Features</a>
-<a href="#pricing">Pricing</a>
-<a href="#industries">Industries</a>
-<a href="#app">Mobile App</a>
-<a href="#contact">Contact</a>
+<a href="#home">
+Home
+</a>
+
+<a href="#features">
+Features
+</a>
+
+<a href="#pricing">
+Pricing
+</a>
+
+<a href="#industries">
+Industries
+</a>
+
+<a href="#app">
+Mobile App
+</a>
+
+<a href="#contact">
+Contact
+</a>
 
 </div>
+
 
 <div class="nav-right">
 
@@ -1973,17 +3216,27 @@ axzen<span>POS</span>
 📞 8790568446
 </div>
 
-<a href="https://canteen.axzen.in/admin/" class="btn btn-outline">
+<a
+href="https://canteen.axzen.in/admin/"
+class="btn btn-outline"
+>
 Sign in as a Partner
 </a>
 
-<a href="#contact" class="btn btn-blue">
+<a
+href="#contact"
+class="btn btn-blue"
+>
 Book a Demo
 </a>
 
 </div>
 
-<button class="menu" onclick="mobileMenu()">
+
+<button
+class="menu"
+onclick="mobileMenu()"
+>
 ☰
 </button>
 
@@ -1995,12 +3248,16 @@ Book a Demo
 
 
 <!-- =========================================================
-HERO
+     HERO
 ========================================================= -->
 
-<section class="hero" id="home">
+<section
+class="hero"
+id="home"
+>
 
 <div class="container hero-grid">
+
 
 <div class="hero-content">
 
@@ -2012,6 +3269,7 @@ Smart POS for Modern Businesses
 
 </div>
 
+
 <h1>
 
 Run your business
@@ -2022,31 +3280,43 @@ Every single day.
 
 </h1>
 
+
 <p class="hero-description">
 
-axzen POS brings billing, inventory, sales, customers,
-payments and business reports together in one simple,
-powerful platform built for businesses that want to grow.
+axzen POS brings billing, inventory, sales,
+customers, payments and business reports together
+in one simple, powerful platform built for businesses
+that want to grow.
 
 </p>
 
+
 <div class="hero-actions">
 
-<a href="#pricing" class="btn btn-blue">
+<a
+href="#pricing"
+class="btn btn-blue"
+>
 Start with axzen POS →
 </a>
 
-<a href="#app" class="btn btn-outline">
+<a
+href="#app"
+class="btn btn-outline"
+>
 Explore Mobile App
 </a>
 
 </div>
 
+
 <div class="trust">
 
 <div class="trust-item">
 
-<div class="tick">✓</div>
+<div class="tick">
+✓
+</div>
 
 Easy to use
 
@@ -2054,7 +3324,9 @@ Easy to use
 
 <div class="trust-item">
 
-<div class="tick">✓</div>
+<div class="tick">
+✓
+</div>
 
 Cloud powered
 
@@ -2062,7 +3334,9 @@ Cloud powered
 
 <div class="trust-item">
 
-<div class="tick">✓</div>
+<div class="tick">
+✓
+</div>
 
 Secure & reliable
 
@@ -2074,161 +3348,203 @@ Secure & reliable
 
 
 <!-- =========================================================
-DESKTOP POS DASHBOARD
+     POS VISUAL
 ========================================================= -->
 
 <div class="hero-dashboard">
 
-<div class="pos-window">
 
-<div class="window-top">
+<div class="realistic-pos">
 
-<div class="window-dot"></div>
-<div class="window-dot"></div>
-<div class="window-dot"></div>
 
-<div class="window-title">
-axzen POS — Business Dashboard
-</div>
+<!-- MONITOR -->
 
-</div>
+<div class="pos-monitor">
 
-<div class="pos-layout">
+<div class="monitor-screen">
 
-<div class="sidebar">
+<div class="monitor-top">
 
-<div class="side-logo">
+<div class="monitor-brand">
+
 axzen<span>POS</span>
-</div>
-
-<div class="side-item active">Dashboard</div>
-<div class="side-item">Billing</div>
-<div class="side-item">Orders</div>
-<div class="side-item">Products</div>
-<div class="side-item">Inventory</div>
-<div class="side-item">Customers</div>
-<div class="side-item">Reports</div>
-<div class="side-item">Settings</div>
 
 </div>
 
-<div class="pos-main">
+<div class="monitor-user">
 
-<div class="pos-header">
+Admin Dashboard
 
-<div class="pos-heading">
-Good Morning, Admin
-</div>
-
-<div class="user">
-Admin Account
 </div>
 
 </div>
 
-<div class="stat-grid">
 
-<div class="stat">
+<div class="monitor-body">
 
-<div class="stat-label">
-Today's Sales
-</div>
 
-<div class="stat-value">
-₹25,430
-</div>
+<div class="monitor-sidebar">
 
-<div class="stat-change">
-↑ 18.4% this week
-</div>
+<div class="monitor-side-logo">
+
+axzen<span>POS</span>
 
 </div>
 
-<div class="stat">
-
-<div class="stat-label">
-Total Orders
+<div class="monitor-menu active">
+Dashboard
 </div>
 
-<div class="stat-value">
-128
+<div class="monitor-menu">
+Billing
 </div>
 
-<div class="stat-change">
-↑ 12.2% this week
+<div class="monitor-menu">
+Orders
 </div>
 
-</div>
-
-<div class="stat">
-
-<div class="stat-label">
+<div class="monitor-menu">
 Products
 </div>
 
-<div class="stat-value">
+<div class="monitor-menu">
+Inventory
+</div>
+
+<div class="monitor-menu">
+Reports
+</div>
+
+</div>
+
+
+<div class="monitor-content">
+
+<div class="monitor-title">
+
+Good Morning, Admin 👋
+
+</div>
+
+
+<div class="monitor-stats">
+
+
+<div class="monitor-stat">
+
+<small>
+Today's Sales
+</small>
+
+<strong>
+₹25,430
+</strong>
+
+</div>
+
+
+<div class="monitor-stat">
+
+<small>
+Orders
+</small>
+
+<strong>
+128
+</strong>
+
+</div>
+
+
+<div class="monitor-stat">
+
+<small>
+Products
+</small>
+
+<strong>
 1,248
-</div>
-
-<div class="stat-change">
-24 low stock
-</div>
+</strong>
 
 </div>
 
 </div>
 
-<div class="pos-content">
 
-<div class="sales-chart">
+<div class="monitor-lower">
 
-<div class="card-heading">
+
+<div class="monitor-card">
+
+<div class="monitor-card-title">
+
 Sales Overview
-</div>
-
-<div class="chart">
-
-<div class="chart-bar" style="height:40%;animation-delay:.3s"></div>
-<div class="chart-bar" style="height:57%;animation-delay:.4s"></div>
-<div class="chart-bar" style="height:46%;animation-delay:.5s"></div>
-<div class="chart-bar" style="height:70%;animation-delay:.6s"></div>
-<div class="chart-bar" style="height:63%;animation-delay:.7s"></div>
-<div class="chart-bar" style="height:82%;animation-delay:.8s"></div>
-<div class="chart-bar" style="height:95%;animation-delay:.9s"></div>
 
 </div>
 
+
+<div class="monitor-bars">
+
+<div
+class="monitor-bar"
+style="height:40%"
+></div>
+
+<div
+class="monitor-bar"
+style="height:55%"
+></div>
+
+<div
+class="monitor-bar"
+style="height:45%"
+></div>
+
+<div
+class="monitor-bar"
+style="height:70%"
+></div>
+
+<div
+class="monitor-bar"
+style="height:62%"
+></div>
+
+<div
+class="monitor-bar"
+style="height:85%"
+></div>
+
+<div
+class="monitor-bar"
+style="height:95%"
+></div>
+
 </div>
 
-<div class="orders">
+</div>
 
-<div class="card-heading">
+
+<div class="monitor-card">
+
+<div class="monitor-card-title">
+
 Recent Orders
+
 </div>
 
-<div class="order">
-<span>#10248</span>
-<strong>₹850</strong>
+<div style="font-size:7px;padding:6px 0;border-bottom:1px solid #eee;">
+#10248 &nbsp; ₹850
 </div>
 
-<div class="order">
-<span>#10247</span>
-<strong>₹1,240</strong>
+<div style="font-size:7px;padding:6px 0;border-bottom:1px solid #eee;">
+#10247 &nbsp; ₹1,240
 </div>
 
-<div class="order">
-<span>#10246</span>
-<strong>₹560</strong>
+<div style="font-size:7px;padding:6px 0;">
+#10246 &nbsp; ₹560
 </div>
 
-<div class="order">
-<span>#10245</span>
-<strong>₹2,150</strong>
-</div>
-
-<div class="order">
-<span>#10244</span>
-<strong>₹780</strong>
 </div>
 
 </div>
@@ -2242,38 +3558,114 @@ Recent Orders
 </div>
 
 
-<!-- =========================================================
-REALISTIC MOBILE APP
-========================================================= -->
+<!-- POS BASE -->
+
+<div class="pos-base">
+
+<div class="pos-base-top">
+
+<div
+class="pos-key"
+></div>
+
+<div
+class="pos-key"
+></div>
+
+<div
+class="pos-key"
+></div>
+
+<div
+class="pos-key"
+></div>
+
+<div
+class="pos-key"
+></div>
+
+<div
+class="pos-key"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- PRINTER -->
+
+<div class="pos-printer">
+
+<div class="printer-paper"></div>
+
+<div class="printer-top"></div>
+
+<div class="printer-slot"></div>
+
+</div>
+
+
+<!-- BARCODE SCANNER -->
+
+<div class="barcode-scanner">
+
+<div class="scanner-head">
+
+<div class="scanner-light"></div>
+
+</div>
+
+<div class="scanner-handle"></div>
+
+</div>
+
+
+</div>
+
+
+<!-- MOBILE APP -->
 
 <div class="mobile-app">
 
 <div class="mobile-screen">
 
+
 <div class="mobile-status">
 
-<span>9:41</span>
+<span>
+9:41
+</span>
 
-<span>● ● ▪</span>
+<span>
+● ● ▪
+</span>
 
 </div>
+
 
 <div class="mobile-app-header">
 
 <div>
 
 <div class="mobile-welcome">
+
 Good Morning 👋
+
 </div>
 
 <div class="mobile-user-name">
+
 Admin
+
 </div>
 
 </div>
 
 <div class="mobile-profile">
+
 A
+
 </div>
 
 </div>
@@ -2287,29 +3679,67 @@ A
 Today's Sales
 </span>
 
-<span class="sales-menu">
+<span>
 •••
 </span>
 
 </div>
 
+
 <div class="mobile-sales-amount">
+
 ₹25,430
+
 </div>
 
+
 <div class="sales-growth">
-↑ 18.4% <span>vs yesterday</span>
+
+↑ 18.4%
+
+<span>
+vs yesterday
+</span>
+
 </div>
+
 
 <div class="mini-chart">
 
-<div class="mini-bar" style="height:35%;animation-delay:.3s"></div>
-<div class="mini-bar" style="height:48%;animation-delay:.4s"></div>
-<div class="mini-bar" style="height:40%;animation-delay:.5s"></div>
-<div class="mini-bar" style="height:65%;animation-delay:.6s"></div>
-<div class="mini-bar" style="height:55%;animation-delay:.7s"></div>
-<div class="mini-bar" style="height:78%;animation-delay:.8s"></div>
-<div class="mini-bar active" style="height:92%;animation-delay:.9s"></div>
+<div
+class="mini-bar"
+style="height:35%"
+></div>
+
+<div
+class="mini-bar"
+style="height:48%"
+></div>
+
+<div
+class="mini-bar"
+style="height:40%"
+></div>
+
+<div
+class="mini-bar"
+style="height:65%"
+></div>
+
+<div
+class="mini-bar"
+style="height:55%"
+></div>
+
+<div
+class="mini-bar"
+style="height:78%"
+></div>
+
+<div
+class="mini-bar active"
+style="height:92%"
+></div>
 
 </div>
 
@@ -2328,7 +3758,9 @@ View All
 
 </div>
 
+
 <div class="quick-actions">
+
 
 <div class="quick-action">
 
@@ -2342,6 +3774,7 @@ New Bill
 
 </div>
 
+
 <div class="quick-action">
 
 <div class="quick-icon green">
@@ -2353,6 +3786,7 @@ Products
 </span>
 
 </div>
+
 
 <div class="quick-action">
 
@@ -2366,6 +3800,7 @@ Orders
 
 </div>
 
+
 <div class="quick-action">
 
 <div class="quick-icon purple">
@@ -2377,6 +3812,7 @@ Reports
 </span>
 
 </div>
+
 
 </div>
 
@@ -2395,6 +3831,7 @@ See All
 
 
 <div class="mobile-orders">
+
 
 <div class="mobile-order">
 
@@ -2506,6 +3943,7 @@ Pending
 
 </div>
 
+
 </div>
 
 
@@ -2513,7 +3951,9 @@ Pending
 
 <div class="bottom-item active">
 
-<div>⌂</div>
+<div>
+⌂
+</div>
 
 <span>
 Home
@@ -2523,7 +3963,9 @@ Home
 
 <div class="bottom-item">
 
-<div>▣</div>
+<div>
+▣
+</div>
 
 <span>
 Billing
@@ -2531,15 +3973,15 @@ Billing
 
 </div>
 
-<div class="bottom-item add-button">
-
-<div>+</div>
-
+<div class="add-button">
++
 </div>
 
 <div class="bottom-item">
 
-<div>◫</div>
+<div>
+◫
+</div>
 
 <span>
 Orders
@@ -2549,7 +3991,9 @@ Orders
 
 <div class="bottom-item">
 
-<div>☻</div>
+<div>
+☻
+</div>
 
 <span>
 Profile
@@ -2559,9 +4003,11 @@ Profile
 
 </div>
 
+
 </div>
 
 </div>
+
 
 </div>
 
@@ -2571,7 +4017,7 @@ Profile
 
 
 <!-- =========================================================
-TRUST STRIP
+     TRUST STRIP
 ========================================================= -->
 
 <section class="trust-strip">
@@ -2608,10 +4054,13 @@ SUPERMARKETS
 
 
 <!-- =========================================================
-FEATURES
+     FEATURES
 ========================================================= -->
 
-<section class="section features" id="features">
+<section
+class="section features"
+id="features"
+>
 
 <div class="container">
 
@@ -2633,17 +4082,14 @@ axzen POS keeps your business operations simple and organized.
 
 </div>
 
+
 <div class="feature-grid">
+
 
 <div class="feature-card">
 
 <div class="feature-icon">
-
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M4 4h16v16H4z"/>
-<path d="M8 8h8M8 12h8M8 16h4"/>
-</svg>
-
+▣
 </div>
 
 <h3>
@@ -2661,12 +4107,7 @@ simple billing interface designed for busy counters.
 <div class="feature-card">
 
 <div class="feature-icon">
-
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M4 5h16v14H4z"/>
-<path d="M8 9h8M8 13h5"/>
-</svg>
-
+▤
 </div>
 
 <h3>
@@ -2684,12 +4125,7 @@ what needs to be restocked before it becomes a problem.
 <div class="feature-card">
 
 <div class="feature-icon">
-
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M4 19V5M4 19h16"/>
-<path d="M7 15l3-4 3 2 5-7"/>
-</svg>
-
+↗
 </div>
 
 <h3>
@@ -2707,12 +4143,7 @@ with clear reports and meaningful insights.
 <div class="feature-card">
 
 <div class="feature-icon">
-
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<circle cx="12" cy="8" r="3"/>
-<path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>
-</svg>
-
+●
 </div>
 
 <h3>
@@ -2730,12 +4161,7 @@ to build stronger relationships.
 <div class="feature-card">
 
 <div class="feature-icon">
-
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M5 4h14v16H5z"/>
-<path d="M8 8h8M8 12h8M8 16h5"/>
-</svg>
-
+₹
 </div>
 
 <h3>
@@ -2753,13 +4179,7 @@ is going with complete visibility.
 <div class="feature-card">
 
 <div class="feature-icon">
-
-<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<path d="M6 8h12v12H6z"/>
-<path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-<path d="M9 13h6"/>
-</svg>
-
+▥
 </div>
 
 <h3>
@@ -2773,6 +4193,7 @@ professional receipts to your customers.
 
 </div>
 
+
 </div>
 
 </div>
@@ -2781,10 +4202,13 @@ professional receipts to your customers.
 
 
 <!-- =========================================================
-PRICING
+     PRICING
 ========================================================= -->
 
-<section class="section pricing" id="pricing">
+<section
+class="section pricing"
+id="pricing"
+>
 
 <div class="container">
 
@@ -2804,6 +4228,7 @@ Upgrade whenever your business grows.
 </p>
 
 </div>
+
 
 <div class="pricing-grid">
 
@@ -2829,23 +4254,50 @@ Special Offer
 </div>
 
 <div class="price">
-₹599 <small>/ month</small>
+₹599
+<small>/ month</small>
 </div>
 
-<a href="#contact" class="btn btn-outline price-btn">
+<a
+href="#contact"
+class="btn btn-outline price-btn"
+>
 Choose Starter
 </a>
 
 <ul class="plan-list">
 
-<li>Fast POS Billing</li>
-<li>Product Management</li>
-<li>Basic Inventory</li>
-<li>Daily Sales Reports</li>
-<li>Customer Management</li>
-<li>1 Billing User</li>
-<li>Thermal Printer Support</li>
-<li>Cloud Data Backup</li>
+<li>
+Fast POS Billing
+</li>
+
+<li>
+Product Management
+</li>
+
+<li>
+Basic Inventory
+</li>
+
+<li>
+Daily Sales Reports
+</li>
+
+<li>
+Customer Management
+</li>
+
+<li>
+1 Billing User
+</li>
+
+<li>
+Thermal Printer Support
+</li>
+
+<li>
+Cloud Data Backup
+</li>
 
 </ul>
 
@@ -2877,23 +4329,50 @@ Special Offer
 </div>
 
 <div class="price">
-₹799 <small>/ month</small>
+₹799
+<small>/ month</small>
 </div>
 
-<a href="#contact" class="btn btn-blue price-btn">
+<a
+href="#contact"
+class="btn btn-blue price-btn"
+>
 Choose Growth
 </a>
 
 <ul class="plan-list">
 
-<li>Everything in Starter</li>
-<li>Advanced Sales Reports</li>
-<li>Expense Management</li>
-<li>Multi-User Access</li>
-<li>Customer Purchase History</li>
-<li>Low Stock Alerts</li>
-<li>Cloud Backup</li>
-<li>Priority Support</li>
+<li>
+Everything in Starter
+</li>
+
+<li>
+Advanced Sales Reports
+</li>
+
+<li>
+Expense Management
+</li>
+
+<li>
+Multi-User Access
+</li>
+
+<li>
+Customer Purchase History
+</li>
+
+<li>
+Low Stock Alerts
+</li>
+
+<li>
+Cloud Backup
+</li>
+
+<li>
+Priority Support
+</li>
 
 </ul>
 
@@ -2921,23 +4400,50 @@ Special Offer
 </div>
 
 <div class="price">
-₹999 <small>/ month</small>
+₹999
+<small>/ month</small>
 </div>
 
-<a href="#contact" class="btn btn-outline price-btn">
+<a
+href="#contact"
+class="btn btn-outline price-btn"
+>
 Choose Professional
 </a>
 
 <ul class="plan-list">
 
-<li>Everything in Growth</li>
-<li>Unlimited Billing Users</li>
-<li>Advanced Analytics</li>
-<li>Profit & Loss Reports</li>
-<li>Multiple Printer Support</li>
-<li>Advanced Inventory</li>
-<li>Data Export</li>
-<li>Premium Support</li>
+<li>
+Everything in Growth
+</li>
+
+<li>
+Unlimited Billing Users
+</li>
+
+<li>
+Advanced Analytics
+</li>
+
+<li>
+Profit & Loss Reports
+</li>
+
+<li>
+Multiple Printer Support
+</li>
+
+<li>
+Advanced Inventory
+</li>
+
+<li>
+Data Export
+</li>
+
+<li>
+Premium Support
+</li>
 
 </ul>
 
@@ -2956,36 +4462,59 @@ Business
 For multi-branch businesses and growing enterprises.
 </p>
 
-<div class="original">
-Custom Pricing
-</div>
-
 <div class="offer">
 Tailored Solution
 </div>
 
-<div class="price" style="font-size:30px;">
-Let's Talk
+<div class="custom-price">
+Custom Pricing
 </div>
 
-<a href="#contact" class="btn price-btn">
+<a
+href="#contact"
+class="btn price-btn"
+>
 Contact Sales Team
 </a>
 
 <ul class="plan-list">
 
-<li>Unlimited Users</li>
-<li>Multi-Branch Management</li>
-<li>Centralized Dashboard</li>
-<li>Advanced Business Analytics</li>
-<li>Dedicated Account Manager</li>
-<li>Custom Integrations</li>
-<li>Priority Support</li>
-<li>Business Solutions</li>
+<li>
+Unlimited Users
+</li>
+
+<li>
+Multi-Branch Management
+</li>
+
+<li>
+Centralized Dashboard
+</li>
+
+<li>
+Advanced Business Analytics
+</li>
+
+<li>
+Dedicated Account Manager
+</li>
+
+<li>
+Custom Integrations
+</li>
+
+<li>
+Priority Support
+</li>
+
+<li>
+Business Solutions
+</li>
 
 </ul>
 
 </div>
+
 
 </div>
 
@@ -2995,10 +4524,13 @@ Contact Sales Team
 
 
 <!-- =========================================================
-INDUSTRIES
+     INDUSTRIES
 ========================================================= -->
 
-<section class="section industries" id="industries">
+<section
+class="section industries"
+id="industries"
+>
 
 <div class="container">
 
@@ -3018,6 +4550,7 @@ axzen POS adapts to the way your business works.
 </p>
 
 </div>
+
 
 <div class="industry-grid">
 
@@ -3079,7 +4612,7 @@ keep your daily sales organized.
 <div class="industry">
 
 <div class="industry-icon">
-🏪
+🛍️
 </div>
 
 <h3>
@@ -3115,7 +4648,7 @@ daily billing with ease.
 <div class="industry">
 
 <div class="industry-icon">
-🛍️
+🏬
 </div>
 
 <h3>
@@ -3165,6 +4698,7 @@ appointments with ease.
 
 </div>
 
+
 </div>
 
 </div>
@@ -3173,12 +4707,16 @@ appointments with ease.
 
 
 <!-- =========================================================
-MOBILE APP SECTION
+     MOBILE APP
 ========================================================= -->
 
-<section class="section app-section" id="app">
+<section
+class="section app-section"
+id="app"
+>
 
 <div class="container app-grid">
+
 
 <div class="app-text">
 
@@ -3196,7 +4734,9 @@ stay connected to your business. Check sales, manage products,
 view reports and keep your operations moving.
 </p>
 
+
 <div class="app-list">
+
 
 <div class="app-list-item">
 
@@ -3208,6 +4748,7 @@ Mobile billing experience
 
 </div>
 
+
 <div class="app-list-item">
 
 <div class="app-check">
@@ -3217,6 +4758,7 @@ Mobile billing experience
 Real-time sales visibility
 
 </div>
+
 
 <div class="app-list-item">
 
@@ -3228,6 +4770,7 @@ Inventory and product management
 
 </div>
 
+
 <div class="app-list-item">
 
 <div class="app-check">
@@ -3238,6 +4781,7 @@ Bluetooth thermal printer support
 
 </div>
 
+
 </div>
 
 </div>
@@ -3245,9 +4789,11 @@ Bluetooth thermal printer support
 
 <div class="app-visual">
 
+
 <div class="phone-large">
 
 <div class="phone-inner">
+
 
 <div class="phone-blue">
 
@@ -3261,7 +4807,9 @@ Today's Sales
 
 </div>
 
+
 <div class="phone-content">
+
 
 <div class="phone-card">
 
@@ -3275,6 +4823,7 @@ Total Orders
 
 </div>
 
+
 <div class="phone-card">
 
 <div class="phone-card-title">
@@ -3286,6 +4835,7 @@ Chicken Biryani
 </div>
 
 </div>
+
 
 <div class="phone-card">
 
@@ -3299,9 +4849,11 @@ Low Stock Items
 
 </div>
 
+
 <div class="phone-action">
 Create New Bill
 </div>
+
 
 </div>
 
@@ -3317,7 +4869,7 @@ Create New Bill
 
 
 <!-- =========================================================
-CTA
+     CTA
 ========================================================= -->
 
 <section class="cta">
@@ -3339,7 +4891,10 @@ every report and every decision simpler.
 
 </div>
 
-<a href="#contact" class="btn btn-white">
+<a
+href="#contact"
+class="btn btn-white"
+>
 Talk to Sales →
 </a>
 
@@ -3351,12 +4906,16 @@ Talk to Sales →
 
 
 <!-- =========================================================
-CONTACT
+     CONTACT / ENQUIRY
 ========================================================= -->
 
-<section class="section contact" id="contact">
+<section
+class="section contact"
+id="contact"
+>
 
 <div class="container">
+
 
 <div class="section-head">
 
@@ -3375,7 +4934,9 @@ Our team is ready to help you choose the right plan.
 
 </div>
 
+
 <div class="contact-grid">
+
 
 <div class="contact-box">
 
@@ -3388,7 +4949,9 @@ Call us or send an enquiry. We'll help you understand
 the right POS solution for your business.
 </p>
 
+
 <div class="contact-info">
+
 
 <div class="contact-item">
 
@@ -3396,9 +4959,12 @@ the right POS solution for your business.
 ☎
 </div>
 
+<a href="tel:8790568446">
 8790568446
+</a>
 
 </div>
+
 
 <div class="contact-item">
 
@@ -3406,9 +4972,12 @@ the right POS solution for your business.
 @
 </div>
 
+<a href="mailto:support@axzen.in">
 support@axzen.in
+</a>
 
 </div>
+
 
 <div class="contact-item">
 
@@ -3420,6 +4989,7 @@ Hyderabad, Telangana, India
 
 </div>
 
+
 </div>
 
 </div>
@@ -3427,60 +4997,89 @@ Hyderabad, Telangana, India
 
 <div class="contact-box">
 
-<form class="form" onsubmit="sendForm(event)">
+
+<form
+class="form"
+id="enquiryForm"
+>
+
 
 <input
+id="name"
 type="text"
 placeholder="Your Name"
 required
 >
 
+
 <input
+id="phone"
 type="tel"
 placeholder="Phone Number"
 required
 >
 
+
 <input
+id="email"
 type="email"
 placeholder="Email Address"
 >
 
-<select required>
+
+<select
+id="plan"
+required
+>
 
 <option value="">
 Select a Plan
 </option>
 
-<option>
+<option value="Starter - ₹599/month">
 Starter — ₹599/month
 </option>
 
-<option>
+<option value="Growth - ₹799/month">
 Growth — ₹799/month
 </option>
 
-<option>
+<option value="Professional - ₹999/month">
 Professional — ₹999/month
 </option>
 
-<option>
+<option value="Business - Contact Sales Team">
 Business — Contact Sales Team
 </option>
 
 </select>
 
+
 <textarea
+id="message"
 placeholder="Tell us about your business..."
 ></textarea>
 
-<button class="btn btn-blue">
+
+<button
+type="submit"
+class="btn btn-blue"
+id="submitBtn"
+>
 Send Enquiry →
 </button>
 
+
+<div
+id="formMessage"
+></div>
+
+
 </form>
 
+
 </div>
+
 
 </div>
 
@@ -3490,12 +5089,13 @@ Send Enquiry →
 
 
 <!-- =========================================================
-FOOTER
+     FOOTER
 ========================================================= -->
 
 <footer>
 
 <div class="container footer-grid">
+
 
 <div>
 
@@ -3598,7 +5198,9 @@ Contact
 
 </div>
 
+
 </div>
+
 
 <div class="footer-bottom">
 
@@ -3610,151 +5212,311 @@ Contact
 
 
 <!-- =========================================================
-JAVASCRIPT
+     PARTNER LOGIN BUTTON
+========================================================= -->
+
+<a
+href="https://canteen.axzen.in/admin/"
+target="_blank"
+class="partner-button"
+>
+
+🔐 Sign in as a Partner
+
+</a>
+
+
+<!-- =========================================================
+     JAVASCRIPT
 ========================================================= -->
 
 <script>
+
 
 /* MOBILE MENU */
 
 function mobileMenu(){
 
-const navbar = document.getElementById("navbar");
+const navbar =
+document.getElementById("navbar");
 
-navbar.classList.toggle("mobile-open");
+navbar.classList.toggle(
+"mobile-open"
+);
 
 }
 
 
-/* CLOSE MOBILE MENU AFTER CLICK */
+document
+.querySelectorAll(".nav-links a")
+.forEach(function(link){
 
-document.querySelectorAll(".nav-links a").forEach(function(link){
-
-link.addEventListener("click",function(){
+link.addEventListener(
+"click",
+function(){
 
 document
 .getElementById("navbar")
 .classList
 .remove("mobile-open");
 
-});
+}
+);
 
 });
 
 
-/* CONTACT FORM */
+/* =========================================================
+   ENQUIRY FORM
+========================================================= */
 
-function sendForm(e){
+const enquiryForm =
+document.getElementById(
+"enquiryForm"
+);
+
+
+if(enquiryForm){
+
+enquiryForm.addEventListener(
+"submit",
+async function(e){
 
 e.preventDefault();
 
-alert(
-"Thank you! Your enquiry has been received. Our axzen POS sales team will contact you shortly."
+
+const submitBtn =
+document.getElementById(
+"submitBtn"
 );
 
-e.target.reset();
+
+const formMessage =
+document.getElementById(
+"formMessage"
+);
+
+
+const name =
+document
+.getElementById("name")
+.value
+.trim();
+
+
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
+
+
+const email =
+document
+.getElementById("email")
+.value
+.trim();
+
+
+const plan =
+document
+.getElementById("plan")
+.value;
+
+
+const message =
+document
+.getElementById("message")
+.value
+.trim();
+
+
+if(
+!name ||
+!phone ||
+!plan
+){
+
+formMessage.innerHTML =
+"Please enter your name, phone number and select a plan.";
+
+formMessage.style.color =
+"#e5484d";
+
+return;
 
 }
 
 
-/* =========================================================
-SCROLL REVEAL ANIMATION
-========================================================= */
+submitBtn.disabled =
+true;
 
-document.addEventListener("DOMContentLoaded",function(){
+submitBtn.innerHTML =
+"Sending...";
 
-const animatedElements = document.querySelectorAll(
-".feature-card, .industry, .price-card, .section-head"
-);
+formMessage.innerHTML =
+"";
 
-const observer = new IntersectionObserver(
 
-function(entries){
+try{
 
-entries.forEach(function(entry){
 
-if(entry.isIntersecting){
+const response =
+await fetch(
+"/api/enquiry",
+{
 
-entry.target.classList.add("show");
+method:"POST",
 
-observer.unobserve(entry.target);
-
-}
-
-});
-
+headers:{
+"Content-Type":
+"application/json"
 },
 
-{
-threshold:.12,
-rootMargin:"0px 0px -50px 0px"
-}
+body:
+JSON.stringify({
 
+name:name,
+
+phone:phone,
+
+email:email,
+
+plan:plan,
+
+message:message
+
+})
+
+}
 );
 
-animatedElements.forEach(function(element){
 
-observer.observe(element);
-
-});
-
-});
+const data =
+await response.json();
 
 
-/* =========================================================
-NAVBAR SCROLL EFFECT
-========================================================= */
+if(
+response.ok &&
+data.success
+){
 
-window.addEventListener("scroll",function(){
+formMessage.innerHTML =
+"✓ Thank you! Your enquiry has been received. Our axzen POS team will contact you shortly.";
 
-const navbar = document.querySelector(".navbar");
+formMessage.style.color =
+"#12a66b";
 
-if(window.scrollY > 50){
 
-navbar.style.boxShadow =
-"0 12px 40px rgba(10,30,60,.12)";
+enquiryForm.reset();
 
-navbar.style.background =
-"rgba(255,255,255,.96)";
 
 }else{
 
-navbar.style.boxShadow =
-"0 8px 35px rgba(10,30,60,.06)";
 
-navbar.style.background =
-"rgba(255,255,255,.90)";
+formMessage.innerHTML =
+data.message ||
+"Unable to submit your enquiry. Please try again.";
+
+formMessage.style.color =
+"#e5484d";
+
 
 }
 
-});
+
+}catch(error){
+
+
+console.error(
+"Enquiry Error:",
+error
+);
+
+
+formMessage.innerHTML =
+"Something went wrong. Please try again or call 8790568446.";
+
+formMessage.style.color =
+"#e5484d";
+
+
+}
+
+
+submitBtn.disabled =
+false;
+
+submitBtn.innerHTML =
+"Send Enquiry →";
+
+
+}
+);
+
+}
 
 
 /* =========================================================
-STAT HOVER EFFECT
+   SCROLL ANIMATION
 ========================================================= */
 
-document.querySelectorAll(".stat-value").forEach(function(stat){
+const observer =
+new IntersectionObserver(
+(entries)=>{
 
-stat.addEventListener("mouseenter",function(){
+entries.forEach(
+(entry)=>{
 
-stat.style.color="#1463ff";
+if(
+entry.isIntersecting
+){
 
-stat.style.transform="scale(1.05)";
+entry.target.style.opacity =
+"1";
 
-});
+entry.target.style.transform =
+"translateY(0)";
 
-stat.addEventListener("mouseleave",function(){
+}
 
-stat.style.color="";
+}
+);
 
-stat.style.transform="scale(1)";
+},
+{
+threshold:.12
+}
+);
 
-});
 
-});
+document
+.querySelectorAll(
+".feature-card, .price-card, .industry"
+)
+.forEach(
+(element)=>{
+
+element.style.opacity =
+"0";
+
+element.style.transform =
+"translateY(25px)";
+
+element.style.transition =
+"opacity .6s ease, transform .6s ease";
+
+observer.observe(
+element
+);
+
+}
+);
+
 
 </script>
 
+
 </body>
+
 </html>
