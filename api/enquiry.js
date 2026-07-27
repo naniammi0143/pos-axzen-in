@@ -1,10 +1,36 @@
 import { MongoClient } from "mongodb";
 
-const client = new MongoClient(process.env.MONGODB_URI);
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error("MONGODB_URI is not configured in Vercel Environment Variables");
+}
+
+let cachedClient = globalThis._mongoClient;
+let cachedDb = globalThis._mongoDb;
+
+async function connectToDatabase() {
+  if (cachedClient && cachedDb) {
+    return { client: cachedClient, db: cachedDb };
+  }
+
+  const client = new MongoClient(uri);
+
+  await client.connect();
+
+  const db = client.db("AXZEN_CANTEEN");
+
+  globalThis._mongoClient = client;
+  globalThis._mongoDb = db;
+
+  cachedClient = client;
+  cachedDb = db;
+
+  return { client, db };
+}
 
 export default async function handler(req, res) {
-
-  // Only POST request is allowed
+  // Allow only POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
       success: false,
@@ -13,78 +39,51 @@ export default async function handler(req, res) {
   }
 
   try {
-
-    // Get customer data from website form
     const {
       name,
       phone,
       email,
       plan,
       message
-    } = req.body;
+    } = req.body || {};
 
-    // Check required fields
-    if (!name || !phone) {
+    // Validate required fields
+    if (!name || !phone || !plan) {
       return res.status(400).json({
         success: false,
-        message: "Name and phone number are required"
+        message: "Name, phone number and plan are required."
       });
     }
 
-    // Connect to MongoDB
-    await client.connect();
+    const { db } = await connectToDatabase();
 
-    // Select database
-    const db = client.db("axzen_pos");
-
-    // Select enquiries collection
-    const enquiries = db.collection("enquiries");
-
-    // Create enquiry data
     const enquiry = {
-
-      name: name.trim(),
-
-      phone: phone.trim(),
-
-      email: email ? email.trim() : "",
-
-      plan: plan || "",
-
-      message: message || "",
-
-      status: "New",
-
-      createdAt: new Date()
-
+      name: String(name).trim(),
+      phone: String(phone).trim(),
+      email: email ? String(email).trim() : "",
+      plan: String(plan).trim(),
+      message: message ? String(message).trim() : "",
+      status: "new",
+      createdAt: new Date(),
+      source: "pos.axzen.in"
     };
 
-    // Save enquiry in MongoDB
-    const result = await enquiries.insertOne(enquiry);
+    const result = await db
+      .collection("enquiries")
+      .insertOne(enquiry);
 
-    // Send success response
-    return res.status(200).json({
-
+    return res.status(201).json({
       success: true,
-
-      message: "Enquiry submitted successfully",
-
+      message: "Your enquiry has been submitted successfully.",
       enquiryId: result.insertedId
-
     });
 
   } catch (error) {
-
-    console.error("Enquiry Error:", error);
+    console.error("Enquiry API Error:", error);
 
     return res.status(500).json({
-
       success: false,
-
-      message: "Something went wrong. Please try again."
-
+      message: "Something went wrong. Please try again later."
     });
-
   }
-
 }
