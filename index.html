@@ -160,10 +160,11 @@ cursor:pointer;
 
 .hero{
 min-height:760px;
-padding:150px 0 80px;
+padding:138px 0 74px;
 position:relative;
 overflow:hidden;
-background:linear-gradient(120deg,#f8fbff 0%,#ffffff 48%,#eef5ff 100%);
+background:
+linear-gradient(120deg,#f8fbff 0%,#ffffff 46%,#edf5ff 100%);
 }
 
 .hero-grid{
@@ -177,14 +178,15 @@ gap:34px;
 display:inline-flex;
 align-items:center;
 gap:8px;
-padding:8px 13px;
+padding:9px 14px;
 border:1px solid #d9e6ff;
-background:#f1f6ff;
+background:#ffffff;
 color:var(--blue);
-border-radius:30px;
+border-radius:999px;
 font-size:12px;
 font-weight:700;
 margin-bottom:25px;
+box-shadow:0 8px 20px rgba(20,99,255,.08);
 }
 
 .badge-dot{
@@ -196,9 +198,9 @@ box-shadow:0 0 0 4px rgba(32,184,120,.12);
 }
 
 .hero h1{
-font-size:62px;
+font-size:60px;
 line-height:1.06;
-letter-spacing:-3.5px;
+letter-spacing:-2.2px;
 max-width:650px;
 margin-bottom:25px;
 }
@@ -261,11 +263,11 @@ width:100%;
 max-width:720px;
 position:relative;
 z-index:2;
-background:linear-gradient(180deg,#ffffff 0%,#f5f8ff 100%);
-border:1px solid #dfe8f7;
+background:#ffffff;
+border:1px solid #d7e2f2;
 border-radius:8px;
-padding:18px;
-box-shadow:0 34px 70px rgba(14,35,72,.16);
+padding:14px;
+box-shadow:0 34px 70px rgba(14,35,72,.18);
 }
 
 .hero-pos-image img{
@@ -274,8 +276,23 @@ height:clamp(330px,36vw,520px);
 display:block;
 object-fit:contain;
 filter:drop-shadow(0 22px 28px rgba(10,30,60,.16));
-background:#fff;
+background:#f9fbff;
 border-radius:8px;
+}
+
+.hero-pos-image::before{
+content:"Live POS workspace";
+position:absolute;
+left:22px;
+top:22px;
+z-index:3;
+padding:7px 10px;
+border-radius:999px;
+background:#0f172a;
+color:#fff;
+font-size:11px;
+font-weight:800;
+letter-spacing:0;
 }
 
 .hero-metrics{
@@ -286,11 +303,12 @@ margin-top:12px;
 }
 
 .hero-metric{
-background:#0f172a;
-color:#fff;
+background:#fff;
+color:#0f172a;
+border:1px solid #dde7f5;
 border-radius:8px;
 padding:12px;
-box-shadow:0 12px 24px rgba(15,23,42,.12);
+box-shadow:0 12px 24px rgba(15,23,42,.08);
 }
 
 .hero-metric strong{
@@ -303,7 +321,7 @@ line-height:1.1;
 display:block;
 margin-top:4px;
 font-size:11px;
-color:#b9c6dc;
+color:#64748b;
 font-weight:700;
 }
 
@@ -1264,7 +1282,7 @@ Secure & reliable
 <div class="hero-pos-image">
 
 <img
-src="assets/111.png"
+src="assets/111.png?v=3"
 alt="axzen POS System"
 >
 
@@ -1424,12 +1442,12 @@ Upgrade whenever your business grows.
 For small businesses starting with smart digital billing.
 </p>
 
-<div class="original">₹2,000 / month</div>
+<div class="original">Rs 2,000 / month</div>
 
 <div class="offer">Special Offer</div>
 
 <div class="price">
-₹599 <small>/ month</small>
+Rs 599 <small>/ month</small>
 </div>
 
 <a href="#contact" class="btn btn-outline price-btn">
@@ -1462,12 +1480,12 @@ MOST POPULAR
 For growing businesses that need better control and insights.
 </p>
 
-<div class="original">₹2,500 / month</div>
+<div class="original">Rs 2,500 / month</div>
 
 <div class="offer">Special Offer</div>
 
 <div class="price">
-₹799 <small>/ month</small>
+Rs 799 <small>/ month</small>
 </div>
 
 <a href="#contact" class="btn btn-blue price-btn">
@@ -1496,12 +1514,12 @@ Choose Growth
 For established businesses that want powerful operations.
 </p>
 
-<div class="original">₹3,000 / month</div>
+<div class="original">Rs 3,000 / month</div>
 
 <div class="offer">Special Offer</div>
 
 <div class="price">
-₹999 <small>/ month</small>
+Rs 999 <small>/ month</small>
 </div>
 
 <a href="#contact" class="btn btn-outline price-btn">
@@ -1878,16 +1896,16 @@ placeholder="Email Address"
 Select a Plan
 </option>
 
-<option value="Starter - ₹599/month">
-Starter — ₹599/month
+<option value="Starter - Rs 599/month">
+Starter - Rs 599/month
 </option>
 
-<option value="Growth - ₹799/month">
-Growth — ₹799/month
+<option value="Growth - Rs 799/month">
+Growth - Rs 799/month
 </option>
 
-<option value="Professional - ₹999/month">
-Professional — ₹999/month
+<option value="Professional - Rs 999/month">
+Professional - Rs 999/month
 </option>
 
 <option value="Business - Contact Sales Team">
@@ -2064,13 +2082,13 @@ if(!price){return "Contact Sales";}
 if(price.toLowerCase().includes("custom") || price.toLowerCase().includes("contact")){
 return escapeHtml(price);
 }
-return `â‚¹${escapeHtml(price)} ${plan.billingCycle?`<small>/ ${escapeHtml(plan.billingCycle)}</small>`:""}`;
+return `Rs ${escapeHtml(price)} ${plan.billingCycle?`<small>/ ${escapeHtml(plan.billingCycle)}</small>`:""}`;
 }
 
 function planCardHtml(plan){
 const activeClass=plan.popular?"price-card popular":"price-card";
 const businessClass=String(plan.offerPrice||"").toLowerCase().includes("custom")?" business":"";
-const original=plan.originalPrice?`<div class="original">â‚¹${escapeHtml(plan.originalPrice)} / ${escapeHtml(plan.billingCycle||"month")}</div>`:"";
+const original=plan.originalPrice?`<div class="original">Rs ${escapeHtml(plan.originalPrice)} / ${escapeHtml(plan.billingCycle||"month")}</div>`:"";
 const badge=plan.badge?`<div class="${plan.popular?"popular-tag":"offer"}">${escapeHtml(plan.badge)}</div>`:"";
 const features=(plan.features||[]).map(item=>`<li>${escapeHtml(item)}</li>`).join("");
 return `<div class="${activeClass}${businessClass}">
@@ -2089,7 +2107,7 @@ if(!planSelect || !plans.length){return;}
 planSelect.innerHTML=`<option value="">Select a Plan</option>`+
 plans.map(plan=>{
 const price=String(plan.offerPrice||"").trim();
-const suffix=price.toLowerCase().includes("custom")?price:`â‚¹${price}/${plan.billingCycle||"month"}`;
+const suffix=price.toLowerCase().includes("custom")?price:`Rs ${price}/${plan.billingCycle||"month"}`;
 const label=`${plan.name} - ${suffix}`;
 return `<option value="${escapeHtml(label)}">${escapeHtml(label)}</option>`;
 }).join("");
