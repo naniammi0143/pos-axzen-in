@@ -159,21 +159,18 @@ cursor:pointer;
 }
 
 .hero{
-min-height:900px;
-padding:175px 0 100px;
+min-height:760px;
+padding:150px 0 80px;
 position:relative;
 overflow:hidden;
-background:
-radial-gradient(circle at 80% 10%,rgba(20,99,255,.15),transparent 28%),
-radial-gradient(circle at 5% 40%,rgba(80,140,255,.08),transparent 30%),
-linear-gradient(180deg,#fafdff 0%,#fff 70%);
+background:linear-gradient(120deg,#f8fbff 0%,#ffffff 48%,#eef5ff 100%);
 }
 
 .hero-grid{
 display:grid;
-grid-template-columns:48% 52%;
+grid-template-columns:46% 54%;
 align-items:center;
-gap:20px;
+gap:34px;
 }
 
 .badge{
@@ -256,22 +253,58 @@ width:100%;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:20px;
+padding:0;
 }
 
 .hero-pos-image{
 width:100%;
-max-width:650px;
+max-width:720px;
 position:relative;
 z-index:2;
+background:linear-gradient(180deg,#ffffff 0%,#f5f8ff 100%);
+border:1px solid #dfe8f7;
+border-radius:8px;
+padding:18px;
+box-shadow:0 34px 70px rgba(14,35,72,.16);
 }
 
 .hero-pos-image img{
 width:100%;
-height:auto;
+height:clamp(330px,36vw,520px);
 display:block;
 object-fit:contain;
-filter:drop-shadow(0 30px 35px rgba(10,30,60,.20));
+filter:drop-shadow(0 22px 28px rgba(10,30,60,.16));
+background:#fff;
+border-radius:8px;
+}
+
+.hero-metrics{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:12px;
+}
+
+.hero-metric{
+background:#0f172a;
+color:#fff;
+border-radius:8px;
+padding:12px;
+box-shadow:0 12px 24px rgba(15,23,42,.12);
+}
+
+.hero-metric strong{
+display:block;
+font-size:18px;
+line-height:1.1;
+}
+
+.hero-metric span{
+display:block;
+margin-top:4px;
+font-size:11px;
+color:#b9c6dc;
+font-weight:700;
 }
 
 /* TRUST */
@@ -387,6 +420,17 @@ color:var(--muted);
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:18px;
+}
+
+.pricing-status{
+grid-column:1/-1;
+padding:24px;
+border:1px solid #e7eef9;
+border-radius:8px;
+background:#fff;
+color:var(--muted);
+font-weight:700;
+text-align:center;
 }
 
 .price-card{
@@ -1005,6 +1049,16 @@ margin-top:30px;
 
 .hero-pos-image{
 max-width:100%;
+padding:10px;
+}
+
+.hero-pos-image img{
+height:auto;
+max-height:420px;
+}
+
+.hero-metrics{
+grid-template-columns:1fr;
 }
 
 .trust-strip-inner{
@@ -1210,9 +1264,15 @@ Secure & reliable
 <div class="hero-pos-image">
 
 <img
-src="assets/POS system.png"
+src="assets/111.png"
 alt="axzen POS System"
 >
+
+<div class="hero-metrics">
+<div class="hero-metric"><strong>Fast</strong><span>Billing flow</span></div>
+<div class="hero-metric"><strong>Live</strong><span>Reports</span></div>
+<div class="hero-metric"><strong>Cloud</strong><span>Backup</span></div>
+</div>
 
 </div>
 
@@ -1354,7 +1414,7 @@ Upgrade whenever your business grows.
 
 </div>
 
-<div class="pricing-grid">
+<div class="pricing-grid" id="pricingGrid">
 
 <div class="price-card">
 
@@ -1979,6 +2039,87 @@ document
 });
 
 });
+
+
+/* LIVE PRICING */
+
+const pricingGrid=document.getElementById("pricingGrid");
+const planSelect=document.getElementById("plan");
+
+function escapeHtml(value){
+return String(value??"").replace(/[&<>"']/g,function(char){
+return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char];
+});
+}
+
+function pricingApiBase(){
+return location.hostname==="localhost" || location.hostname==="127.0.0.1"
+? ""
+: "https://canteen.axzen.in";
+}
+
+function formatPlanPrice(plan){
+const price=String(plan.offerPrice||"").trim();
+if(!price){return "Contact Sales";}
+if(price.toLowerCase().includes("custom") || price.toLowerCase().includes("contact")){
+return escapeHtml(price);
+}
+return `â‚¹${escapeHtml(price)} ${plan.billingCycle?`<small>/ ${escapeHtml(plan.billingCycle)}</small>`:""}`;
+}
+
+function planCardHtml(plan){
+const activeClass=plan.popular?"price-card popular":"price-card";
+const businessClass=String(plan.offerPrice||"").toLowerCase().includes("custom")?" business":"";
+const original=plan.originalPrice?`<div class="original">â‚¹${escapeHtml(plan.originalPrice)} / ${escapeHtml(plan.billingCycle||"month")}</div>`:"";
+const badge=plan.badge?`<div class="${plan.popular?"popular-tag":"offer"}">${escapeHtml(plan.badge)}</div>`:"";
+const features=(plan.features||[]).map(item=>`<li>${escapeHtml(item)}</li>`).join("");
+return `<div class="${activeClass}${businessClass}">
+${badge}
+<h3>${escapeHtml(plan.name)}</h3>
+<p class="price-desc">${escapeHtml(plan.description||"Smart POS plan for growing businesses.")}</p>
+${original}
+<div class="${businessClass?"custom-price":"price"}">${formatPlanPrice(plan)}</div>
+<a href="#contact" class="btn ${plan.popular?"btn-blue":"btn-outline"} price-btn" data-plan-choice="${escapeHtml(plan.name)}">${escapeHtml(plan.cta||`Choose ${plan.name}`)}</a>
+<ul class="plan-list">${features}</ul>
+</div>`;
+}
+
+function updatePlanSelect(plans){
+if(!planSelect || !plans.length){return;}
+planSelect.innerHTML=`<option value="">Select a Plan</option>`+
+plans.map(plan=>{
+const price=String(plan.offerPrice||"").trim();
+const suffix=price.toLowerCase().includes("custom")?price:`â‚¹${price}/${plan.billingCycle||"month"}`;
+const label=`${plan.name} - ${suffix}`;
+return `<option value="${escapeHtml(label)}">${escapeHtml(label)}</option>`;
+}).join("");
+}
+
+async function loadWebsitePlans(){
+if(!pricingGrid){return;}
+try{
+const response=await fetch(`${pricingApiBase()}/api/website-plans`);
+const data=await response.json();
+const plans=Array.isArray(data.plans)?data.plans.filter(plan=>plan.active!==false):[];
+if(!response.ok || !plans.length){return;}
+pricingGrid.innerHTML=plans.map(planCardHtml).join("");
+updatePlanSelect(plans);
+document.querySelectorAll("[data-plan-choice]").forEach(function(btn){
+btn.addEventListener("click",function(){
+setTimeout(function(){
+if(planSelect){
+const match=[...planSelect.options].find(option=>option.value.startsWith(btn.dataset.planChoice+" -"));
+if(match){planSelect.value=match.value;}
+}
+},80);
+});
+});
+}catch(error){
+console.warn("Pricing plans fallback active",error);
+}
+}
+
+loadWebsitePlans();
 
 
 /* ENQUIRY FORM */
