@@ -471,6 +471,130 @@ line-height:1.7;
 color:var(--muted);
 }
 
+/* RESTAURANT WORKFLOW */
+
+.restaurant-flow{
+background:#fff;
+}
+
+.flow-layout{
+display:grid;
+grid-template-columns:0.9fr 1.1fr;
+gap:28px;
+align-items:start;
+}
+
+.flow-panel{
+position:sticky;
+top:110px;
+background:#071a33;
+color:#fff;
+border-radius:22px;
+padding:34px;
+overflow:hidden;
+}
+
+.flow-panel::after{
+content:"";
+position:absolute;
+right:-80px;
+bottom:-90px;
+width:230px;
+height:230px;
+border-radius:50%;
+background:rgba(20,99,255,.35);
+}
+
+.flow-panel h2{
+position:relative;
+z-index:1;
+font-size:39px;
+line-height:1.12;
+letter-spacing:-1.8px;
+margin-bottom:16px;
+}
+
+.flow-panel p{
+position:relative;
+z-index:1;
+font-size:14px;
+line-height:1.8;
+color:#c9d5e8;
+}
+
+.flow-checks{
+position:relative;
+z-index:1;
+display:grid;
+gap:11px;
+margin-top:28px;
+}
+
+.flow-checks span{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:13px;
+font-weight:700;
+color:#eaf1fb;
+}
+
+.flow-checks b{
+width:22px;
+height:22px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#123e7b;
+color:#80b2ff;
+font-size:12px;
+}
+
+.flow-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+}
+
+.flow-card{
+min-height:205px;
+background:#fff;
+border:1px solid #e6edf7;
+border-radius:18px;
+padding:26px;
+box-shadow:0 14px 32px rgba(15,31,55,.06);
+transition:.3s;
+}
+
+.flow-card:hover{
+transform:translateY(-5px);
+box-shadow:var(--shadow);
+}
+
+.flow-number{
+display:inline-grid;
+place-items:center;
+width:36px;
+height:36px;
+border-radius:11px;
+background:#edf4ff;
+color:var(--blue);
+font-size:13px;
+font-weight:900;
+margin-bottom:20px;
+}
+
+.flow-card h3{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.flow-card p{
+font-size:13px;
+line-height:1.75;
+color:var(--muted);
+}
+
 /* PRICING */
 
 .pricing-grid{
@@ -981,6 +1105,15 @@ transform:translateY(-3px);
 grid-template-columns:1fr;
 }
 
+.flow-layout{
+grid-template-columns:1fr;
+}
+
+.flow-panel{
+position:relative;
+top:auto;
+}
+
 .hero-content{
 text-align:center;
 }
@@ -1054,6 +1187,10 @@ font-size:48px;
 }
 
 .feature-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.flow-grid{
 grid-template-columns:1fr 1fr;
 }
 
@@ -1137,8 +1274,22 @@ font-size:34px;
 
 .feature-grid,
 .pricing-grid,
-.industry-grid{
+.industry-grid,
+.flow-grid{
 grid-template-columns:1fr;
+}
+
+.flow-panel{
+padding:28px;
+}
+
+.flow-panel h2{
+font-size:31px;
+letter-spacing:-1.2px;
+}
+
+.flow-card{
+min-height:auto;
 }
 
 .industry-image{
@@ -1438,6 +1589,98 @@ is going with complete visibility.
 <p>
 Connect compatible thermal printers and deliver clean,
 professional receipts to your customers.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESTAURANT WORKFLOW -->
+
+<section class="section restaurant-flow" id="restaurant-workflow">
+
+<div class="container flow-layout">
+
+<div class="flow-panel">
+
+<div class="eyebrow">
+RESTAURANT WORKFLOW
+</div>
+
+<h2>
+From counter bill to kitchen ticket, every order stays clear.
+</h2>
+
+<p>
+Axzen POS is built for busy restaurants, canteens and food counters where
+orders, tables, printers, payments and daily reports need to move without confusion.
+</p>
+
+<div class="flow-checks">
+<span><b>1</b> Fast counter billing</span>
+<span><b>2</b> Kitchen-ready order tickets</span>
+<span><b>3</b> Daily reports for owners</span>
+</div>
+
+</div>
+
+<div class="flow-grid">
+
+<div class="flow-card">
+<span class="flow-number">01</span>
+<h3>Counter Billing</h3>
+<p>
+Create quick dine-in, takeaway or parcel bills with clear payment modes,
+discounts and thermal receipt printing.
+</p>
+</div>
+
+<div class="flow-card">
+<span class="flow-number">02</span>
+<h3>KOT & Kitchen Print</h3>
+<p>
+Send item tickets to the kitchen printer so food preparation starts fast and
+counter staff do not need to repeat orders manually.
+</p>
+</div>
+
+<div class="flow-card">
+<span class="flow-number">03</span>
+<h3>Table & Order Control</h3>
+<p>
+Keep active orders organized by table, token or customer flow, then settle the
+final bill without losing order details.
+</p>
+</div>
+
+<div class="flow-card">
+<span class="flow-number">04</span>
+<h3>Inventory Alerts</h3>
+<p>
+Track item availability, stock movement and low-stock products before rush hour
+creates shortages.
+</p>
+</div>
+
+<div class="flow-card">
+<span class="flow-number">05</span>
+<h3>Tax & Sales Reports</h3>
+<p>
+View daily sales, payment breakup, item-wise sales and export-ready business
+reports from one dashboard.
+</p>
+</div>
+
+<div class="flow-card">
+<span class="flow-number">06</span>
+<h3>Staff Login Control</h3>
+<p>
+Give cashier, admin and manager logins with role-based access so every shift
+stays accountable.
 </p>
 </div>
 
