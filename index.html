@@ -1909,6 +1909,390 @@ animation:fadeUp .8s ease both;
 animation:fadeUp 1s .15s ease both;
 }
 
+.hero h1{
+max-width:620px;
+}
+
+.hero h1 span{
+display:block;
+font-size:1.08em;
+}
+
+.micro-trust{
+display:flex;
+flex-wrap:wrap;
+gap:16px;
+margin-top:22px;
+color:#334155;
+font-size:12px;
+font-weight:800;
+}
+
+.micro-trust span{
+display:flex;
+align-items:center;
+gap:7px;
+}
+
+.micro-trust span::before{
+content:"";
+width:7px;
+height:7px;
+border-radius:50%;
+background:var(--blue);
+box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.hero-pos-image{
+overflow:visible;
+background:transparent;
+border:0;
+box-shadow:none;
+padding:0;
+}
+
+.hero-pos-image img{
+position:relative;
+z-index:2;
+filter:drop-shadow(0 26px 46px rgba(15,23,42,.16));
+}
+
+.hero-pos-image::before{
+inset:12% 2% 0;
+background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(34,197,94,.1));
+filter:blur(34px);
+}
+
+.hero-float{
+position:absolute;
+z-index:3;
+min-width:128px;
+padding:15px 16px;
+border-radius:12px;
+background:#fff;
+border:1px solid #e6edf7;
+box-shadow:0 16px 38px rgba(15,23,42,.12);
+}
+
+.hero-float strong{
+display:block;
+font-size:13px;
+color:#0f172a;
+}
+
+.hero-float span{
+display:block;
+margin-top:4px;
+font-size:12px;
+font-weight:800;
+color:#64748b;
+}
+
+.hero-float-left{
+left:-20px;
+top:25%;
+}
+
+.hero-float-right{
+right:-12px;
+bottom:21%;
+}
+
+.hero-receipt{
+position:absolute;
+z-index:4;
+left:50%;
+bottom:5%;
+width:180px;
+transform:translateX(-50%);
+background:#fff;
+border:1px solid #e2e8f0;
+box-shadow:0 18px 38px rgba(15,23,42,.16);
+padding:16px;
+font-size:11px;
+color:#0f172a;
+}
+
+.hero-receipt b,
+.hero-receipt small{
+display:block;
+text-align:center;
+}
+
+.hero-receipt small{
+margin:4px 0 10px;
+color:#64748b;
+}
+
+.hero-receipt div{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:5px 0;
+border-top:1px dashed #dbe4ef;
+}
+
+.hero-receipt-total{
+font-weight:900;
+}
+
+.trust-strip{
+background:#fff;
+padding:22px 0 28px;
+}
+
+.trust-strip-inner{
+display:grid;
+grid-template-columns:repeat(8,1fr);
+gap:14px;
+align-items:stretch;
+}
+
+.trust-label{
+grid-column:1/-1;
+text-align:center;
+font-size:15px;
+font-weight:900;
+color:#0f172a;
+}
+
+.trust-brand{
+display:none;
+}
+
+.business-card{
+min-height:78px;
+border-radius:8px;
+background:#fff;
+border:1px solid #e6edf7;
+box-shadow:0 12px 28px rgba(15,23,42,.06);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:6px;
+text-align:center;
+padding:12px 8px;
+}
+
+.business-card b{
+font-size:12px;
+color:#0f172a;
+}
+
+.business-card span{
+font-size:11px;
+font-weight:700;
+color:#64748b;
+}
+
+.language-tokens{
+background:linear-gradient(135deg,#f8fbff,#eef4ff);
+border-top:1px solid #e6edf7;
+border-bottom:1px solid #e6edf7;
+}
+
+.language-grid{
+display:grid;
+grid-template-columns:.82fr 1.55fr;
+gap:34px;
+align-items:center;
+}
+
+.language-copy h2{
+font-size:38px;
+line-height:1.12;
+letter-spacing:-1.4px;
+margin:18px 0 16px;
+}
+
+.language-copy h2 span{
+display:block;
+color:var(--blue);
+}
+
+.language-copy p{
+font-size:15px;
+line-height:1.75;
+color:#475569;
+}
+
+.language-points{
+display:grid;
+gap:10px;
+margin-top:22px;
+}
+
+.language-points span{
+font-size:13px;
+font-weight:900;
+color:#0f172a;
+display:flex;
+align-items:center;
+gap:9px;
+}
+
+.language-points span::before{
+content:"";
+width:10px;
+height:10px;
+border-radius:50%;
+background:#2563eb;
+box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.token-area h3{
+text-align:center;
+font-size:20px;
+margin-bottom:18px;
+}
+
+.token-card-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:14px;
+}
+
+.token-card,
+.mini-token-card{
+background:#fff;
+border:1px solid #e2e8f0;
+box-shadow:0 14px 28px rgba(15,23,42,.08);
+text-align:center;
+color:#0f172a;
+}
+
+.token-card{
+min-height:190px;
+padding:16px 12px 14px;
+border-radius:8px 8px 2px 2px;
+position:relative;
+}
+
+.token-card::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:-7px;
+height:8px;
+background:repeating-linear-gradient(135deg,#fff 0 8px,transparent 8px 16px);
+}
+
+.token-card strong{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:22px;
+padding:0 10px;
+border-radius:999px;
+background:#eef6ff;
+color:#1d4ed8;
+font-size:10px;
+font-weight:900;
+}
+
+.token-card small,
+.token-card em{
+display:block;
+font-style:normal;
+font-size:10px;
+font-weight:800;
+color:#64748b;
+}
+
+.token-card small{
+margin-top:12px;
+}
+
+.token-card b{
+display:block;
+font-size:31px;
+letter-spacing:0;
+margin:5px 0 10px;
+}
+
+.token-card p{
+font-size:15px;
+font-weight:900;
+margin:7px 0;
+}
+
+.token-card em{
+margin-top:12px;
+}
+
+.matched-token-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(160px,1fr));
+gap:18px;
+max-width:680px;
+margin:32px auto 0;
+}
+
+.mini-token-card{
+border-radius:8px;
+padding:18px 14px;
+}
+
+.mini-token-card span{
+display:block;
+font-size:12px;
+font-weight:900;
+color:#1d4ed8;
+}
+
+.mini-token-card b{
+display:block;
+font-size:29px;
+margin:7px 0 8px;
+}
+
+.mini-token-card p{
+margin:4px 0;
+font-size:13px;
+font-weight:900;
+}
+
+.mini-token-card.blue{
+border-color:#bfdbfe;
+box-shadow:0 18px 34px rgba(37,99,235,.12);
+}
+
+@media(max-width:1050px){
+.trust-strip-inner{
+grid-template-columns:repeat(4,1fr);
+}
+
+.language-grid{
+grid-template-columns:1fr;
+}
+
+.token-card-grid{
+grid-template-columns:repeat(3,1fr);
+}
+}
+
+@media(max-width:720px){
+.hero-float,
+.hero-receipt{
+display:none;
+}
+
+.trust-strip-inner{
+grid-template-columns:repeat(2,1fr);
+}
+
+.token-card-grid,
+.matched-token-grid{
+grid-template-columns:1fr;
+}
+
+.language-copy h2{
+font-size:30px;
+}
+}
+
 </style>
 </head>
 
@@ -1928,11 +2312,11 @@ animation:fadeUp 1s .15s ease both;
 <div class="nav-links">
 
 <a href="#home">Home</a>
-<a href="#software">Software</a>
 <a href="#features">Features</a>
-<a href="#printer">Printer</a>
-<a href="#pricing">Pricing</a>
 <a href="#industries">Industries</a>
+<a href="#languages">Languages</a>
+<a href="#pricing">Pricing</a>
+<a href="#printer">Printer</a>
 <a href="#app">Mobile App</a>
 <a href="#contact">Contact</a>
 
@@ -1978,25 +2362,24 @@ Smart POS for Modern Businesses
 </div>
 
 <h1>
-Billing, stock,
-reports and printer
-<span>in one POS.</span>
+Run Your Business
+Smarter with
+<span>AXZEN POS</span>
 </h1>
 
 <p class="hero-description">
-axzen POS gives restaurants, canteens, retail stores, cool drink shops and meat counters
-a fast billing screen, category-wise items, daily reports, inventory control and thermal
-printer receipts in one simple software.
+Billing, inventory, reports, WhatsApp updates and thermal printing in one powerful
+POS software for restaurants, canteens, retail stores, cafes and meat shops.
 </p>
 
 <div class="hero-actions">
 
-<a href="#pricing" class="btn btn-blue">
-Start with axzen POS →
+<a href="#contact" class="btn btn-blue">
+Book Free Demo
 </a>
 
-<a href="#software" class="btn btn-outline">
-See Interface
+<a href="#features" class="btn btn-outline">
+Watch How It Works
 </a>
 
 </div>
@@ -2020,6 +2403,12 @@ Secure & reliable
 
 </div>
 
+<div class="micro-trust">
+<span>No Setup Fee</span>
+<span>Works on Android</span>
+<span>58mm Bluetooth Printer Support</span>
+</div>
+
 </div>
 
 
@@ -2029,54 +2418,31 @@ Secure & reliable
 
 <div class="hero-pos-image">
 
-<div class="pos-live-board" aria-label="axzen POS billing interface preview">
-<div class="pos-window-bar">
-<div class="window-dots"><span></span><span></span><span></span></div>
-<strong>Main Canteen POS</strong>
-<span>Online</span>
+<img src="assets/POS System.png?v=5" alt="AXZEN POS billing dashboard, printer and receipt">
+
+<div class="hero-float hero-float-left">
+<strong>Printer</strong>
+<span>Connected</span>
 </div>
-<div class="pos-screen">
-<div class="pos-left">
-<div class="pos-topline">
-<div class="pos-title">New Billing</div>
-<div class="pos-status">Printer Ready</div>
+
+<div class="hero-float hero-float-right">
+<strong>Today Orders</strong>
+<span>148</span>
 </div>
-<div class="pos-tabs">
-<span class="active">All</span>
-<span>Tiffins</span>
-<span>Meals</span>
-<span>Tea</span>
-<span>Chicken Center</span>
-</div>
-<div class="pos-items">
-<div class="pos-item"><strong>Idly</strong><span>Rs 30</span></div>
-<div class="pos-item"><strong>Dosa</strong><span>Rs 40</span></div>
-<div class="pos-item"><strong>Meals</strong><span>Rs 80</span></div>
-<div class="pos-item"><strong>Tea</strong><span>Rs 15</span></div>
-<div class="pos-item weight"><strong>Chicken</strong><span>Rs 340/kg</span></div>
-<div class="pos-item"><strong>Water Bottle</strong><span>Rs 20</span></div>
-</div>
-</div>
-<div class="pos-right">
-<div class="pos-topline">
-<div class="pos-title">Cart</div>
-<div class="pos-status">Cash</div>
-</div>
-<div class="cart-lines">
-<div class="cart-line"><span>Dosa <small>Qty 2</small></span><b>Rs 80</b></div>
-<div class="cart-line"><span>Chicken <small>335g @ Rs 340/kg</small></span><b>Rs 114</b></div>
-<div class="cart-line"><span>Tea <small>Qty 3</small></span><b>Rs 45</b></div>
-</div>
-<div class="cart-total"><span>Total</span><strong>Rs 239</strong></div>
-<div class="payment-row"><span>Cash</span><span>UPI</span><span>Credit</span></div>
-</div>
-</div>
+
+<div class="hero-receipt">
+<b>AXZEN POS</b>
+<small>Bill No: 000122</small>
+<div><span>Chicken Biryani</span><strong>150</strong></div>
+<div><span>Tea x 2</span><strong>30</strong></div>
+<div><span>Water Bottle</span><strong>20</strong></div>
+<div class="hero-receipt-total"><span>Total</span><strong>200</strong></div>
 </div>
 
 <div class="hero-metrics">
-<div class="hero-metric"><strong>5 sec</strong><span>Fast bill entry</span></div>
-<div class="hero-metric"><strong>Kg</strong><span>Weight billing</span></div>
-<div class="hero-metric"><strong>58mm</strong><span>Thermal print</span></div>
+<div class="hero-metric"><strong>Printer</strong><span>Connected</span></div>
+<div class="hero-metric"><strong>Stock Alert</strong><span>12 items low</span></div>
+<div class="hero-metric"><strong>Sales Today</strong><span>Rs 12,850</span></div>
 </div>
 
 </div>
@@ -2095,8 +2461,17 @@ Secure & reliable
 <div class="container trust-strip-inner">
 
 <div class="trust-label">
-Built for businesses that mean business
+Trusted by Restaurants, Canteens, Cafes, Retail Stores and Meat Shops
 </div>
+
+<div class="business-card"><b>Restaurant</b><span>Tables and orders</span></div>
+<div class="business-card"><b>Canteen</b><span>Tokens and counters</span></div>
+<div class="business-card"><b>Cafe</b><span>Quick billing</span></div>
+<div class="business-card"><b>Retail Shop</b><span>Stock and sales</span></div>
+<div class="business-card"><b>Chicken Shop</b><span>Kg billing</span></div>
+<div class="business-card"><b>Supermarket</b><span>Fast checkout</span></div>
+<div class="business-card"><b>Food Truck</b><span>Mobile counter</span></div>
+<div class="business-card"><b>Hotels</b><span>Multi counter</span></div>
 
 <div class="trust-brand">RESTAURANTS</div>
 <div class="trust-brand">HOTELS</div>
@@ -2725,6 +3100,124 @@ businesses and mobile vendors.
 Manage services, customer records, billing and
 appointments with ease.
 </p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LANGUAGE TOKENS -->
+
+<section class="section language-tokens" id="languages">
+
+<div class="container language-grid">
+
+<div class="language-copy">
+
+<div class="badge">
+<div class="badge-dot"></div>
+Special for Street Vendors
+</div>
+
+<h2>
+Don't worry about language.
+<span>You can use any language you like.</span>
+</h2>
+
+<p>
+AXZEN POS prints bills, canteen tokens and kitchen tokens in multiple languages.
+The token number and item quantities stay the same in every language, so the counter
+and kitchen always follow one order.
+</p>
+
+<div class="language-points">
+<span>Same Token in All Languages</span>
+<span>Canteen Token</span>
+<span>Kitchen Token</span>
+<span>Customer Receipt</span>
+</div>
+
+</div>
+
+<div class="token-area">
+
+<h3>Same Token Number in All Languages</h3>
+
+<div class="token-card-grid">
+
+<div class="token-card">
+<strong>ENGLISH</strong>
+<small>Customer Token</small>
+<b>A001</b>
+<p>Tea - 2</p>
+<p>Coffee - 1</p>
+<em>03-06-2025 11:45 AM</em>
+</div>
+
+<div class="token-card">
+<strong>తెలుగు</strong>
+<small>Customer Token</small>
+<b>A001</b>
+<p>టీ - 2</p>
+<p>కాఫీ - 1</p>
+<em>03-06-2025 11:45 AM</em>
+</div>
+
+<div class="token-card">
+<strong>हिन्दी</strong>
+<small>Customer Token</small>
+<b>A001</b>
+<p>चाय - 2</p>
+<p>कॉफी - 1</p>
+<em>03-06-2025 11:45 AM</em>
+</div>
+
+<div class="token-card">
+<strong>தமிழ்</strong>
+<small>Customer Token</small>
+<b>A001</b>
+<p>டீ - 2</p>
+<p>காபி - 1</p>
+<em>03-06-2025 11:45 AM</em>
+</div>
+
+<div class="token-card">
+<strong>ಕನ್ನಡ</strong>
+<small>Customer Token</small>
+<b>A001</b>
+<p>ಚಹಾ - 2</p>
+<p>ಕಾಫಿ - 1</p>
+<em>03-06-2025 11:45 AM</em>
+</div>
+
+</div>
+
+<div class="matched-token-grid">
+
+<div class="mini-token-card">
+<span>Customer Receipt</span>
+<b>A001</b>
+<p>Tea - 2</p>
+<p>Coffee - 1</p>
+</div>
+
+<div class="mini-token-card blue">
+<span>Canteen Token (Same Number)</span>
+<b>A001</b>
+<p>Tea - 2</p>
+<p>Coffee - 1</p>
+</div>
+
+<div class="mini-token-card">
+<span>Kitchen Token (Same Number)</span>
+<b>A001</b>
+<p>Tea - 2</p>
+<p>Coffee - 1</p>
+</div>
+
 </div>
 
 </div>
