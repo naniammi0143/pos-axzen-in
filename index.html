@@ -788,6 +788,14 @@ gap:18px;
 align-items:end;
 }
 
+.printer-photo{
+width:100%;
+height:310px;
+object-fit:contain;
+display:block;
+filter:drop-shadow(0 26px 42px rgba(15,23,42,.18));
+}
+
 .thermal-printer{
 height:260px;
 border-radius:22px 22px 14px 14px;
@@ -2738,11 +2746,7 @@ rate, payment mode and total amount.
 
 <div class="printer-stage">
 
-<div class="thermal-printer">
-<div class="printer-screen">AXZEN POS READY</div>
-<div class="printer-slot"></div>
-<div class="printer-lights"><span></span><span></span></div>
-</div>
+<img src="assets/posthermal.png?v=1" alt="AXZEN POS thermal printer printing customer receipt" class="printer-photo">
 
 <div class="receipt-paper">
 <h3>MAIN CANTEEN</h3>
