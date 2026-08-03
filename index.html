@@ -2259,6 +2259,127 @@ border-color:#bfdbfe;
 box-shadow:0 18px 34px rgba(37,99,235,.12);
 }
 
+.hero-pos-image img{
+height:clamp(420px,43vw,620px);
+object-fit:contain;
+background:#fff;
+}
+
+.hero-float,
+.hero-receipt{
+display:none;
+}
+
+.token-card,
+.mini-token-card{
+font-family:"Courier New",monospace;
+background:
+linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.99)),
+repeating-linear-gradient(0deg,#fff 0 12px,#f8fafc 12px 13px);
+border:1px solid #d7dde8;
+box-shadow:0 16px 34px rgba(15,23,42,.12);
+}
+
+.token-card{
+min-height:238px;
+padding:16px 12px 18px;
+}
+
+.token-card small{
+font-size:10px;
+letter-spacing:0;
+}
+
+.token-card p{
+font-size:13px;
+line-height:1.25;
+margin:7px 0;
+white-space:nowrap;
+}
+
+.token-card b{
+font-size:30px;
+margin:6px 0 12px;
+}
+
+.matched-token-grid{
+max-width:850px;
+align-items:start;
+}
+
+.mini-token-card{
+min-height:252px;
+text-align:left;
+position:relative;
+padding:18px 18px 24px;
+border-radius:7px 7px 2px 2px;
+}
+
+.mini-token-card::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:-8px;
+height:9px;
+background:repeating-linear-gradient(135deg,#fff 0 8px,transparent 8px 16px);
+filter:drop-shadow(0 2px 1px rgba(15,23,42,.05));
+}
+
+.mini-token-card span,
+.mini-token-card b,
+.mini-token-card small{
+display:block;
+text-align:center;
+}
+
+.mini-token-card span{
+font-family:"DM Sans",sans-serif;
+font-size:11px;
+letter-spacing:0;
+}
+
+.mini-token-card b{
+font-size:32px;
+margin:8px 0 8px;
+}
+
+.mini-token-card small{
+font-size:10px;
+font-weight:800;
+color:#64748b;
+margin-bottom:12px;
+}
+
+.mini-token-card p{
+font-size:13px;
+line-height:1.35;
+margin:7px 0;
+font-weight:900;
+}
+
+.receipt-line{
+display:flex;
+justify-content:space-between;
+gap:12px;
+border-top:1px dashed #cbd5e1;
+padding-top:7px;
+margin-top:7px;
+font-size:12px;
+font-weight:900;
+}
+
+.receipt-line em{
+font-style:normal;
+}
+
+.receipt-line.total{
+font-size:14px;
+border-top:2px solid #0f172a;
+margin-top:10px;
+padding-top:9px;
+}
+
 @media(max-width:1050px){
 .trust-strip-inner{
 grid-template-columns:repeat(4,1fr);
@@ -2418,7 +2539,7 @@ Secure & reliable
 
 <div class="hero-pos-image">
 
-<img src="assets/POS System.png?v=5" alt="AXZEN POS billing dashboard, printer and receipt">
+<img src="assets/pos-hero-realistic.png?v=1" alt="Realistic AXZEN POS setup with printer, customer receipt, canteen token and kitchen token">
 
 <div class="hero-float hero-float-left">
 <strong>Printer</strong>
@@ -3152,8 +3273,10 @@ and kitchen always follow one order.
 <strong>ENGLISH</strong>
 <small>Customer Token</small>
 <b>A001</b>
+<p>Chicken Biryani - 1</p>
 <p>Tea - 2</p>
 <p>Coffee - 1</p>
+<p>Water Bottle - 1</p>
 <em>03-06-2025 11:45 AM</em>
 </div>
 
@@ -3161,8 +3284,10 @@ and kitchen always follow one order.
 <strong>తెలుగు</strong>
 <small>Customer Token</small>
 <b>A001</b>
+<p>చికెన్ బిర్యాని - 1</p>
 <p>టీ - 2</p>
 <p>కాఫీ - 1</p>
+<p>వాటర్ బాటిల్ - 1</p>
 <em>03-06-2025 11:45 AM</em>
 </div>
 
@@ -3170,8 +3295,10 @@ and kitchen always follow one order.
 <strong>हिन्दी</strong>
 <small>Customer Token</small>
 <b>A001</b>
+<p>चिकन बिरयानी - 1</p>
 <p>चाय - 2</p>
 <p>कॉफी - 1</p>
+<p>पानी बोतल - 1</p>
 <em>03-06-2025 11:45 AM</em>
 </div>
 
@@ -3179,8 +3306,10 @@ and kitchen always follow one order.
 <strong>தமிழ்</strong>
 <small>Customer Token</small>
 <b>A001</b>
+<p>சிக்கன் பிரியாணி - 1</p>
 <p>டீ - 2</p>
 <p>காபி - 1</p>
+<p>வாட்டர் பாட்டில் - 1</p>
 <em>03-06-2025 11:45 AM</em>
 </div>
 
@@ -3188,8 +3317,10 @@ and kitchen always follow one order.
 <strong>ಕನ್ನಡ</strong>
 <small>Customer Token</small>
 <b>A001</b>
+<p>ಚಿಕನ್ ಬಿರಿಯಾನಿ - 1</p>
 <p>ಚಹಾ - 2</p>
 <p>ಕಾಫಿ - 1</p>
+<p>ವಾಟರ್ ಬಾಟಲ್ - 1</p>
 <em>03-06-2025 11:45 AM</em>
 </div>
 
@@ -3200,22 +3331,32 @@ and kitchen always follow one order.
 <div class="mini-token-card">
 <span>Customer Receipt</span>
 <b>A001</b>
-<p>Tea - 2</p>
-<p>Coffee - 1</p>
+<small>Bill No: 000122 | Cash</small>
+<div class="receipt-line"><em>Chicken Biryani x 1</em><strong>150</strong></div>
+<div class="receipt-line"><em>Tea x 2</em><strong>30</strong></div>
+<div class="receipt-line"><em>Coffee x 1</em><strong>20</strong></div>
+<div class="receipt-line"><em>Water Bottle x 1</em><strong>20</strong></div>
+<div class="receipt-line total"><em>Total</em><strong>220</strong></div>
 </div>
 
 <div class="mini-token-card blue">
 <span>Canteen Token (Same Number)</span>
 <b>A001</b>
+<small>Counter Copy | Items: 4</small>
+<p>Chicken Biryani - 1</p>
 <p>Tea - 2</p>
 <p>Coffee - 1</p>
+<p>Water Bottle - 1</p>
 </div>
 
 <div class="mini-token-card">
 <span>Kitchen Token (Same Number)</span>
 <b>A001</b>
+<small>Prepare Well | Items: 4</small>
+<p>Chicken Biryani - 1</p>
 <p>Tea - 2</p>
 <p>Coffee - 1</p>
+<p>Water Bottle - 1</p>
 </div>
 
 </div>
