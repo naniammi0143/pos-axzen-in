@@ -310,23 +310,26 @@ padding:0;
 
 .hero-pos-image{
 width:100%;
-max-width:720px;
+max-width:900px;
 position:relative;
 z-index:2;
-background:#ffffff;
-border:1px solid #d7e2f2;
+background:
+linear-gradient(135deg,rgba(255,255,255,.94),rgba(238,247,255,.86)),
+radial-gradient(circle at 18% 20%,rgba(37,99,235,.18),transparent 34%),
+radial-gradient(circle at 82% 76%,rgba(34,197,94,.14),transparent 32%);
+border:1px solid rgba(215,226,242,.8);
 border-radius:8px;
-padding:14px;
-box-shadow:0 34px 70px rgba(14,35,72,.18);
+padding:18px;
+box-shadow:0 38px 84px rgba(14,35,72,.18);
 }
 
 .hero-pos-image img{
 width:100%;
-height:clamp(330px,36vw,520px);
+height:clamp(380px,42vw,650px);
 display:block;
 object-fit:contain;
-filter:drop-shadow(0 22px 28px rgba(10,30,60,.16));
-background:#f9fbff;
+filter:drop-shadow(0 28px 38px rgba(10,30,60,.18));
+background:transparent;
 border-radius:8px;
 }
 
@@ -1954,22 +1957,29 @@ box-shadow:0 0 0 4px rgba(37,99,235,.12);
 
 .hero-pos-image{
 overflow:visible;
-background:transparent;
-border:0;
-box-shadow:none;
-padding:0;
+background:
+linear-gradient(135deg,rgba(255,255,255,.9),rgba(239,247,255,.76)),
+radial-gradient(circle at 20% 18%,rgba(37,99,235,.18),transparent 32%),
+radial-gradient(circle at 78% 78%,rgba(16,185,129,.14),transparent 34%);
+border:1px solid rgba(226,232,240,.78);
+box-shadow:0 40px 90px rgba(15,23,42,.14);
+padding:18px;
 }
 
 .hero-pos-image img{
 position:relative;
 z-index:2;
-filter:drop-shadow(0 26px 46px rgba(15,23,42,.16));
+filter:drop-shadow(0 30px 48px rgba(15,23,42,.18));
 }
 
 .hero-pos-image::before{
-inset:12% 2% 0;
-background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(34,197,94,.1));
-filter:blur(34px);
+content:"";
+inset:-8% -4% 8%;
+z-index:1;
+padding:0;
+border-radius:30px;
+background:linear-gradient(135deg,rgba(37,99,235,.16),rgba(34,197,94,.12));
+filter:blur(38px);
 }
 
 .hero-float{
@@ -2269,9 +2279,9 @@ box-shadow:0 18px 34px rgba(37,99,235,.12);
 }
 
 .hero-pos-image img{
-height:clamp(420px,43vw,620px);
+height:clamp(500px,52vw,760px);
 object-fit:contain;
-background:#fff;
+background:transparent;
 }
 
 .hero-float,
@@ -2757,6 +2767,95 @@ max-width:560px;
 content:"\2713";
 }
 
+.language-receipt-stage{
+position:relative;
+z-index:1;
+padding:18px 0 8px;
+}
+
+.language-receipt-stage::before{
+content:"";
+position:absolute;
+inset:7% -4% 12%;
+z-index:-1;
+border-radius:28px;
+background:
+linear-gradient(135deg,rgba(255,255,255,.72),rgba(239,246,255,.48)),
+radial-gradient(circle at 28% 24%,rgba(37,99,235,.13),transparent 34%),
+radial-gradient(circle at 78% 70%,rgba(14,165,233,.1),transparent 32%);
+box-shadow:0 30px 90px rgba(37,99,235,.12);
+}
+
+.receipt-strip{
+display:flex;
+align-items:flex-end;
+justify-content:center;
+gap:clamp(12px,1.4vw,22px);
+min-height:430px;
+}
+
+.receipt-sample{
+margin:0;
+flex:1 1 0;
+min-width:0;
+max-width:190px;
+}
+
+.receipt-sample img,
+.token-sample img{
+width:100%;
+height:auto;
+display:block;
+filter:drop-shadow(0 24px 34px rgba(15,23,42,.16));
+transition:transform .24s ease,filter .24s ease;
+}
+
+.receipt-sample:nth-child(1){transform:rotate(-3deg) translateY(18px)}
+.receipt-sample:nth-child(2){transform:rotate(1.7deg) translateY(-8px)}
+.receipt-sample:nth-child(3){transform:rotate(-1.2deg) translateY(8px)}
+.receipt-sample:nth-child(4){transform:rotate(2.3deg) translateY(22px)}
+
+.receipt-sample:hover img,
+.token-sample:hover img{
+transform:translateY(-8px);
+filter:drop-shadow(0 34px 44px rgba(15,23,42,.2));
+}
+
+.token-strip{
+display:grid;
+grid-template-columns:minmax(210px,300px) minmax(260px,360px);
+gap:26px;
+align-items:end;
+justify-content:center;
+margin-top:36px;
+}
+
+.token-sample{
+margin:0;
+}
+
+.token-sample.customer-token{
+max-width:300px;
+}
+
+.token-sample.kitchen-token{
+max-width:360px;
+}
+
+.receipt-caption{
+display:block;
+margin-top:8px;
+font-size:11px;
+font-weight:900;
+text-align:center;
+color:#334155;
+}
+
+.token-sample .receipt-caption{
+font-size:12px;
+color:#1d4ed8;
+}
+
 @media(max-width:1050px){
 .trust-strip-inner{
 grid-template-columns:repeat(4,1fr);
@@ -2773,6 +2872,24 @@ grid-template-columns:1fr;
 
 .token-card-grid{
 grid-template-columns:repeat(3,1fr);
+}
+
+.receipt-strip{
+min-height:auto;
+align-items:flex-start;
+display:grid;
+grid-template-columns:repeat(4,minmax(120px,1fr));
+gap:18px;
+}
+
+.receipt-sample{
+max-width:none;
+transform:none !important;
+}
+
+.token-strip{
+grid-template-columns:repeat(2,minmax(220px,1fr));
+margin-top:28px;
 }
 
 .printer-product{
@@ -2802,6 +2919,12 @@ grid-template-columns:1fr;
 
 .language-redesign{
 gap:20px;
+width:min(calc(100% - 28px),1520px);
+}
+
+.language-redesign .language-copy{
+max-width:calc(100vw - 30px);
+overflow:hidden;
 }
 
 .language-points{
@@ -2809,16 +2932,66 @@ grid-template-columns:1fr;
 }
 
 .language-copy h2{
-font-size:30px;
+font-size:25px;
+line-height:1.12;
+overflow-wrap:break-word;
+}
+
+.language-copy h2 span{
+display:block;
 }
 
 .language-copy p{
 font-size:15px;
+overflow-wrap:break-word;
+max-width:340px;
 }
 
 .token-area{
 min-height:auto;
 padding-top:16px;
+}
+
+.language-receipt-stage{
+padding-top:8px;
+}
+
+.language-receipt-stage::before{
+inset:2% -8px 5%;
+}
+
+.receipt-strip{
+display:grid;
+grid-template-columns:1fr;
+justify-items:center;
+gap:18px;
+overflow:visible;
+padding:4px 0 0;
+}
+
+.receipt-sample{
+width:min(260px,84vw);
+max-width:260px;
+}
+
+.receipt-sample img{
+filter:drop-shadow(0 16px 20px rgba(15,23,42,.14));
+}
+
+.receipt-caption{
+font-size:10px;
+margin-top:4px;
+}
+
+.token-strip{
+grid-template-columns:1fr;
+gap:16px;
+margin-top:18px;
+}
+
+.token-sample{
+justify-self:center;
+width:min(100%,330px);
 }
 
 .printer-product{
@@ -3667,14 +3840,13 @@ Multi-Language Printing
 </div>
 
 <h2>
-Don't worry about language.
+Don't worry about language.<br>
 Print in your <span>customer's language.</span>
 </h2>
 
 <p>
-AXZEN POS can instantly print bills, customer receipts, canteen tokens and kitchen
-tokens in multiple languages. Every language prints the same token number, making
-it easy for customers and kitchen staff.
+AXZEN POS prints clean customer receipts, canteen tokens and kitchen tokens in multiple languages.
+The same token number stays clear for the customer, counter and kitchen.
 </p>
 
 <div class="language-points">
@@ -3682,337 +3854,46 @@ it easy for customers and kitchen staff.
 <span>Customer Receipt</span>
 <span>Kitchen Token</span>
 <span>Canteen Token</span>
-<span>15+ Indian Languages</span>
+<span>Multi-Language Bills</span>
 <span>Bluetooth Thermal Printer Support</span>
 </div>
 
 </div>
 
-<div class="token-area">
+<div class="language-receipt-stage" aria-label="AXZEN POS multi-language receipt samples">
 
-<div class="glass-halo"></div>
+<div class="receipt-strip">
+<figure class="receipt-sample">
+<img src="assets/englishbill-cutout.png?v=1" alt="English customer receipt printed from AXZEN POS" loading="lazy">
+<figcaption class="receipt-caption">English Bill</figcaption>
+</figure>
 
-<h3>Same Token Number in All Languages</h3>
+<figure class="receipt-sample">
+<img src="assets/hindibill-cutout.png?v=1" alt="Hindi customer receipt printed from AXZEN POS" loading="lazy">
+<figcaption class="receipt-caption">Hindi Bill</figcaption>
+</figure>
 
-<div class="token-card-grid">
+<figure class="receipt-sample">
+<img src="assets/tamilbill-cutout.png?v=1" alt="Tamil customer receipt printed from AXZEN POS" loading="lazy">
+<figcaption class="receipt-caption">Tamil Bill</figcaption>
+</figure>
 
-<div class="token-card thermal-paper">
-<div class="receipt-lang"><span>ENGLISH</span></div>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<small class="receipt-subtitle">Customer Receipt</small>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>Bill No</span><strong>000123</strong></div>
-<div><span>Date</span><strong>02-08-2026</strong></div>
-<div><span>Time</span><strong>11:45 AM</strong></div>
-<div><span>Cashier</span><strong>Ramesh</strong></div>
-</div>
-<div class="receipt-token">A001</div>
-<div class="receipt-table-head"><span>Item</span><span>Qty</span><span>Rate</span><span>Amount</span></div>
-<div class="receipt-items">
-<div class="receipt-row"><span>Tea</span><span>2</span><span>10</span><span>20</span></div>
-<div class="receipt-row"><span>Coffee</span><span>1</span><span>15</span><span>15</span></div>
-<div class="receipt-row"><span>Idli</span><span>2</span><span>20</span><span>40</span></div>
-<div class="receipt-row"><span>Dosa</span><span>1</span><span>30</span><span>30</span></div>
-</div>
-<div class="receipt-total-row"><span>Total</span><strong>105.00</strong></div>
-<div class="receipt-meta"><div><span>Payment Mode</span><strong>Cash</strong></div></div>
-<span class="receipt-thanks">Thank You Visit Again</span>
+<figure class="receipt-sample">
+<img src="assets/kannadabill-cutout.png?v=1" alt="Kannada customer receipt printed from AXZEN POS" loading="lazy">
+<figcaption class="receipt-caption">Kannada Bill</figcaption>
+</figure>
 </div>
 
-<div class="token-card thermal-paper">
-<div class="receipt-lang"><span>తెలుగు</span></div>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<small class="receipt-subtitle">కస్టమర్ రసీదు</small>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>బిల్ నం.</span><strong>000123</strong></div>
-<div><span>తేదీ</span><strong>02-08-2026</strong></div>
-<div><span>సమయం</span><strong>11:45 AM</strong></div>
-<div><span>క్యాషియర్</span><strong>రమేష్</strong></div>
-</div>
-<div class="receipt-token">A001</div>
-<div class="receipt-table-head"><span>వస్తువు</span><span>పరి.</span><span>ధర</span><span>మొత్తం</span></div>
-<div class="receipt-items">
-<div class="receipt-row"><span>టీ</span><span>2</span><span>10</span><span>20</span></div>
-<div class="receipt-row"><span>కాఫీ</span><span>1</span><span>15</span><span>15</span></div>
-<div class="receipt-row"><span>ఇడ్లీ</span><span>2</span><span>20</span><span>40</span></div>
-<div class="receipt-row"><span>దోసె</span><span>1</span><span>30</span><span>30</span></div>
-</div>
-<div class="receipt-total-row"><span>మొత్తం</span><strong>105.00</strong></div>
-<div class="receipt-meta"><div><span>చెల్లింపు విధానం</span><strong>నగదు</strong></div></div>
-<span class="receipt-thanks">ధన్యవాదాలు మళ్లీ రండి</span>
-</div>
+<div class="token-strip">
+<figure class="token-sample customer-token">
+<img src="assets/englishbill-cutout.png?v=1" alt="Customer receipt sample from AXZEN POS" loading="lazy">
+<figcaption class="receipt-caption">Customer Receipt</figcaption>
+</figure>
 
-<div class="token-card thermal-paper">
-<div class="receipt-lang"><span>हिन्दी</span></div>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<small class="receipt-subtitle">ग्राहक रसीद</small>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>बिल संख्या</span><strong>000123</strong></div>
-<div><span>तारीख</span><strong>02-08-2026</strong></div>
-<div><span>समय</span><strong>11:45 AM</strong></div>
-<div><span>कैशियर</span><strong>रमेश</strong></div>
-</div>
-<div class="receipt-token">A001</div>
-<div class="receipt-table-head"><span>वस्तु</span><span>मात्रा</span><span>दर</span><span>राशि</span></div>
-<div class="receipt-items">
-<div class="receipt-row"><span>चाय</span><span>2</span><span>10</span><span>20</span></div>
-<div class="receipt-row"><span>कॉफी</span><span>1</span><span>15</span><span>15</span></div>
-<div class="receipt-row"><span>इडली</span><span>2</span><span>20</span><span>40</span></div>
-<div class="receipt-row"><span>डोसा</span><span>1</span><span>30</span><span>30</span></div>
-</div>
-<div class="receipt-total-row"><span>कुल</span><strong>105.00</strong></div>
-<div class="receipt-meta"><div><span>भुगतान का तरीका</span><strong>नकद</strong></div></div>
-<span class="receipt-thanks">धन्यवाद, फिर आइए</span>
-</div>
-
-<div class="token-card thermal-paper">
-<div class="receipt-lang"><span>தமிழ்</span></div>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<small class="receipt-subtitle">வாடிக்கையாளர் ரசீது</small>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>பில் எண்</span><strong>000123</strong></div>
-<div><span>தேதி</span><strong>02-08-2026</strong></div>
-<div><span>நேரம்</span><strong>11:45 AM</strong></div>
-<div><span>காசாளர்</span><strong>ரமேஷ்</strong></div>
-</div>
-<div class="receipt-token">A001</div>
-<div class="receipt-table-head"><span>பொருள்</span><span>அளவு</span><span>விலை</span><span>தொகை</span></div>
-<div class="receipt-items">
-<div class="receipt-row"><span>டீ</span><span>2</span><span>10</span><span>20</span></div>
-<div class="receipt-row"><span>காபி</span><span>1</span><span>15</span><span>15</span></div>
-<div class="receipt-row"><span>இட்லி</span><span>2</span><span>20</span><span>40</span></div>
-<div class="receipt-row"><span>தோசை</span><span>1</span><span>30</span><span>30</span></div>
-</div>
-<div class="receipt-total-row"><span>மொத்தம்</span><strong>105.00</strong></div>
-<div class="receipt-meta"><div><span>கட்டண முறை</span><strong>ரொக்கம்</strong></div></div>
-<span class="receipt-thanks">நன்றி மீண்டும் வாருங்கள்</span>
-</div>
-
-<div class="token-card thermal-paper">
-<div class="receipt-lang"><span>ಕನ್ನಡ</span></div>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<small class="receipt-subtitle">ಗ್ರಾಹಕ ರಸೀದಿ</small>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>ಬಿಲ್ ಸಂಖ್ಯೆ</span><strong>000123</strong></div>
-<div><span>ದಿನಾಂಕ</span><strong>02-08-2026</strong></div>
-<div><span>ಸಮಯ</span><strong>11:45 AM</strong></div>
-<div><span>ಕ್ಯಾಶಿಯರ್</span><strong>ರಮೇಶ್</strong></div>
-</div>
-<div class="receipt-token">A001</div>
-<div class="receipt-table-head"><span>ವಸ್ತು</span><span>ಪ್ರಮಾಣ</span><span>ದರ</span><span>ಮೊತ್ತ</span></div>
-<div class="receipt-items">
-<div class="receipt-row"><span>ಚಹಾ</span><span>2</span><span>10</span><span>20</span></div>
-<div class="receipt-row"><span>ಕಾಫಿ</span><span>1</span><span>15</span><span>15</span></div>
-<div class="receipt-row"><span>ಇಡ್ಲಿ</span><span>2</span><span>20</span><span>40</span></div>
-<div class="receipt-row"><span>ದೋಸೆ</span><span>1</span><span>30</span><span>30</span></div>
-</div>
-<div class="receipt-total-row"><span>ಒಟ್ಟು</span><strong>105.00</strong></div>
-<div class="receipt-meta"><div><span>ಪಾವತಿ ವಿಧಾನ</span><strong>ನಗದು</strong></div></div>
-<span class="receipt-thanks">ಧನ್ಯವಾದಗಳು ಮತ್ತೆ ಬನ್ನಿ</span>
-</div>
-
-</div>
-
-<div class="printer-product">
-<img src="assets/posthermal.png?v=1" alt="AXZEN POS Bluetooth thermal printer with receipt">
-</div>
-
-<div class="matched-token-grid">
-
-<div class="mini-token-card thermal-paper">
-<span class="large-receipt-title">Customer Receipt</span>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<div class="large-token">A001</div>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>Bill No</span><strong>000123</strong></div>
-<div><span>Date</span><strong>02-08-2026</strong></div>
-<div><span>Time</span><strong>11:45 AM</strong></div>
-<div><span>Payment Mode</span><strong>Cash</strong></div>
-</div>
-<div class="receipt-table-head"><span>Item</span><span>Qty</span><span>Rate</span><span>Amount</span></div>
-<div class="receipt-row"><span>Tea</span><span>2</span><span>10</span><span>20</span></div>
-<div class="receipt-row"><span>Coffee</span><span>1</span><span>15</span><span>15</span></div>
-<div class="receipt-row"><span>Idli</span><span>2</span><span>20</span><span>40</span></div>
-<div class="receipt-row"><span>Dosa</span><span>1</span><span>30</span><span>30</span></div>
-<div class="receipt-total-row"><span>Total</span><strong>105.00</strong></div>
-<span class="receipt-thanks">Thank You Visit Again</span>
-</div>
-
-<div class="mini-token-card thermal-paper">
-<span class="large-receipt-title">Canteen Token (Same Number)</span>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<div class="large-token">A001</div>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>Counter</span><strong>Main Canteen</strong></div>
-<div><span>Date</span><strong>02-08-2026</strong></div>
-<div><span>Time</span><strong>11:45 AM</strong></div>
-<div><span>Items</span><strong>4</strong></div>
-</div>
-<div class="receipt-dash"></div>
-<div class="receipt-row"><span>Tea</span><span>2</span><span></span><span></span></div>
-<div class="receipt-row"><span>Coffee</span><span>1</span><span></span><span></span></div>
-<div class="receipt-row"><span>Idli</span><span>2</span><span></span><span></span></div>
-<div class="receipt-row"><span>Dosa</span><span>1</span><span></span><span></span></div>
-<span class="receipt-thanks">Serve Token A001</span>
-</div>
-
-<div class="mini-token-card thermal-paper">
-<span class="large-receipt-title">Kitchen Token (Same Number)</span>
-<div class="receipt-brand">axzen<span>POS</span></div>
-<div class="large-token">A001</div>
-<div class="receipt-dash"></div>
-<div class="receipt-meta">
-<div><span>Kitchen</span><strong>Hot Counter</strong></div>
-<div><span>Date</span><strong>02-08-2026</strong></div>
-<div><span>Time</span><strong>11:45 AM</strong></div>
-<div><span>Items</span><strong>4</strong></div>
-</div>
-<div class="receipt-dash"></div>
-<div class="receipt-row"><span>Tea</span><span>2</span><span></span><span></span></div>
-<div class="receipt-row"><span>Coffee</span><span>1</span><span></span><span></span></div>
-<div class="receipt-row"><span>Idli</span><span>2</span><span></span><span></span></div>
-<div class="receipt-row"><span>Dosa</span><span>1</span><span></span><span></span></div>
-<span class="receipt-thanks">Prepare Token A001</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="container language-grid">
-
-<div class="language-copy">
-
-<div class="badge">
-<div class="badge-dot"></div>
-Special for Street Vendors
-</div>
-
-<h2>
-Don't worry about language.
-<span>You can use any language you like.</span>
-</h2>
-
-<p>
-AXZEN POS prints bills, canteen tokens and kitchen tokens in multiple languages.
-The token number and item quantities stay the same in every language, so the counter
-and kitchen always follow one order.
-</p>
-
-<div class="language-points">
-<span>Same Token in All Languages</span>
-<span>Canteen Token</span>
-<span>Kitchen Token</span>
-<span>Customer Receipt</span>
-</div>
-
-</div>
-
-<div class="token-area">
-
-<h3>Same Token Number in All Languages</h3>
-
-<div class="token-card-grid">
-
-<div class="token-card">
-<strong>ENGLISH</strong>
-<small>Customer Token</small>
-<b>A001</b>
-<p>Chicken Biryani - 1</p>
-<p>Tea - 2</p>
-<p>Coffee - 1</p>
-<p>Water Bottle - 1</p>
-<em>03-06-2025 11:45 AM</em>
-</div>
-
-<div class="token-card">
-<strong>తెలుగు</strong>
-<small>Customer Token</small>
-<b>A001</b>
-<p>చికెన్ బిర్యాని - 1</p>
-<p>టీ - 2</p>
-<p>కాఫీ - 1</p>
-<p>వాటర్ బాటిల్ - 1</p>
-<em>03-06-2025 11:45 AM</em>
-</div>
-
-<div class="token-card">
-<strong>हिन्दी</strong>
-<small>Customer Token</small>
-<b>A001</b>
-<p>चिकन बिरयानी - 1</p>
-<p>चाय - 2</p>
-<p>कॉफी - 1</p>
-<p>पानी बोतल - 1</p>
-<em>03-06-2025 11:45 AM</em>
-</div>
-
-<div class="token-card">
-<strong>தமிழ்</strong>
-<small>Customer Token</small>
-<b>A001</b>
-<p>சிக்கன் பிரியாணி - 1</p>
-<p>டீ - 2</p>
-<p>காபி - 1</p>
-<p>வாட்டர் பாட்டில் - 1</p>
-<em>03-06-2025 11:45 AM</em>
-</div>
-
-<div class="token-card">
-<strong>ಕನ್ನಡ</strong>
-<small>Customer Token</small>
-<b>A001</b>
-<p>ಚಿಕನ್ ಬಿರಿಯಾನಿ - 1</p>
-<p>ಚಹಾ - 2</p>
-<p>ಕಾಫಿ - 1</p>
-<p>ವಾಟರ್ ಬಾಟಲ್ - 1</p>
-<em>03-06-2025 11:45 AM</em>
-</div>
-
-</div>
-
-<div class="matched-token-grid">
-
-<div class="mini-token-card">
-<span>Customer Receipt</span>
-<b>A001</b>
-<small>Bill No: 000122 | Cash</small>
-<div class="receipt-line"><em>Chicken Biryani x 1</em><strong>150</strong></div>
-<div class="receipt-line"><em>Tea x 2</em><strong>30</strong></div>
-<div class="receipt-line"><em>Coffee x 1</em><strong>20</strong></div>
-<div class="receipt-line"><em>Water Bottle x 1</em><strong>20</strong></div>
-<div class="receipt-line total"><em>Total</em><strong>220</strong></div>
-</div>
-
-<div class="mini-token-card blue">
-<span>Canteen Token (Same Number)</span>
-<b>A001</b>
-<small>Counter Copy | Items: 4</small>
-<p>Chicken Biryani - 1</p>
-<p>Tea - 2</p>
-<p>Coffee - 1</p>
-<p>Water Bottle - 1</p>
-</div>
-
-<div class="mini-token-card">
-<span>Kitchen Token (Same Number)</span>
-<b>A001</b>
-<small>Prepare Well | Items: 4</small>
-<p>Chicken Biryani - 1</p>
-<p>Tea - 2</p>
-<p>Coffee - 1</p>
-<p>Water Bottle - 1</p>
-</div>
-
+<figure class="token-sample kitchen-token">
+<img src="assets/kitchentoken-cutout.png?v=1" alt="Kitchen token printed from AXZEN POS" loading="lazy">
+<figcaption class="receipt-caption">Kitchen Token</figcaption>
+</figure>
 </div>
 
 </div>
