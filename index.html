@@ -3014,6 +3014,439 @@ margin-top:0;
 }
 }
 
+/* Mobile app-like layout */
+@media(max-width:600px){
+html{
+scroll-padding-top:92px;
+}
+
+body{
+background:#f6f9ff;
+font-size:16px;
+line-height:1.55;
+color:#0f172a;
+}
+
+.container{
+width:min(100% - 24px,430px);
+}
+
+.navbar-wrap{
+padding:10px 0;
+}
+
+.navbar{
+height:64px;
+border-radius:20px;
+padding:0 14px;
+box-shadow:0 14px 34px rgba(15,23,42,.09);
+}
+
+.logo img{
+height:28px;
+}
+
+.menu{
+width:42px;
+height:42px;
+border-radius:14px;
+background:#eef5ff;
+color:#0f172a;
+font-size:22px;
+line-height:1;
+}
+
+.navbar.mobile-open .nav-links{
+top:74px;
+left:12px;
+right:12px;
+gap:14px;
+padding:18px;
+border:1px solid #e5ecf7;
+border-radius:18px;
+box-shadow:0 22px 46px rgba(15,23,42,.16);
+}
+
+.navbar.mobile-open .nav-links a{
+width:100%;
+min-height:42px;
+display:flex;
+align-items:center;
+padding:0 12px;
+border-radius:12px;
+background:#f8fbff;
+font-size:15px;
+font-weight:900;
+color:#0f172a;
+}
+
+.hero{
+min-height:auto;
+padding:104px 0 34px;
+background:linear-gradient(180deg,#f6faff 0%,#ffffff 54%,#f3f8ff 100%);
+}
+
+.hero-grid{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.hero-content{
+text-align:left;
+animation:none !important;
+opacity:1 !important;
+transform:none !important;
+}
+
+.badge{
+margin-bottom:16px;
+padding:8px 12px;
+font-size:12px;
+box-shadow:0 10px 24px rgba(20,99,255,.1);
+}
+
+.hero h1{
+font-size:34px;
+line-height:1.12;
+letter-spacing:0;
+max-width:360px;
+margin:0 0 14px;
+color:#08172f;
+}
+
+.hero h1 span{
+display:block;
+font-size:1em;
+color:#1463ff;
+}
+
+.hero-description{
+max-width:360px;
+margin:0 0 20px;
+font-size:16px;
+line-height:1.65;
+color:#334155;
+}
+
+.hero-actions{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+margin:0 0 18px;
+}
+
+.btn{
+min-height:50px;
+border-radius:14px;
+font-size:15px;
+font-weight:900;
+}
+
+.trust{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+justify-content:start;
+}
+
+.trust-item{
+font-size:14px;
+font-weight:800;
+color:#334155;
+}
+
+.hero-dashboard{
+margin:0;
+animation:none !important;
+opacity:1 !important;
+transform:none !important;
+}
+
+.hero-pos-image{
+padding:10px;
+border-radius:20px;
+background:linear-gradient(145deg,#ffffff,#eef6ff);
+box-shadow:0 24px 48px rgba(15,23,42,.13);
+}
+
+.hero-pos-image::before{
+display:none;
+}
+
+.hero-pos-image img{
+height:auto;
+max-height:none;
+border-radius:16px;
+filter:drop-shadow(0 16px 20px rgba(15,23,42,.13));
+}
+
+.hero-metrics{
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.hero-metric{
+min-height:68px;
+border-radius:14px;
+padding:12px;
+}
+
+.hero-metric strong{
+font-size:15px;
+}
+
+.hero-metric span{
+font-size:12px;
+}
+
+.trust-strip{
+padding:18px 0;
+}
+
+.trust-strip-inner{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.trust-label{
+font-size:14px;
+line-height:1.35;
+}
+
+.business-card{
+min-height:70px;
+border-radius:14px;
+box-shadow:0 10px 22px rgba(15,23,42,.06);
+}
+
+.business-card b{
+font-size:13px;
+}
+
+.business-card span{
+font-size:12px;
+}
+
+.section{
+padding:52px 0;
+background:#fff;
+}
+
+.section-head{
+margin-bottom:26px;
+text-align:left;
+}
+
+.eyebrow,
+.section-head .eyebrow{
+font-size:12px;
+letter-spacing:.08em;
+}
+
+.section-head h2,
+.showcase-copy h2,
+.printer-copy h2,
+.flow-panel h2,
+.app-text h2,
+.cta h2{
+font-size:28px;
+line-height:1.16;
+letter-spacing:0;
+color:#08172f;
+}
+
+.section-head p,
+.showcase-copy p,
+.printer-copy p,
+.flow-panel p,
+.app-text p,
+.cta p{
+font-size:15px;
+line-height:1.65;
+color:#475569;
+}
+
+.feature-card,
+.price-card,
+.industry,
+.flow-card,
+.mode-card,
+.admin-tile,
+.contact-card,
+.contact-form{
+border-radius:16px;
+box-shadow:0 12px 28px rgba(15,23,42,.07);
+}
+
+.feature-card h3,
+.industry h3,
+.flow-card h3{
+font-size:18px;
+}
+
+.feature-card p,
+.industry p,
+.flow-card p{
+font-size:14px;
+line-height:1.6;
+color:#475569;
+}
+
+.product-showcase,
+.printer-showcase,
+.features,
+.restaurant-flow,
+.pricing,
+.industries,
+.language-tokens,
+.contact{
+background:#fff;
+}
+
+.showcase-grid,
+.printer-layout,
+.flow-layout,
+.app-grid,
+.contact-grid{
+gap:26px;
+min-width:0;
+}
+
+.showcase-grid > *,
+.printer-layout > *,
+.flow-layout > *,
+.app-grid > *,
+.contact-grid > *{
+min-width:0;
+}
+
+.pos-live-board,
+.printer-stage,
+.industry-image,
+.laptop-app-image{
+border-radius:18px;
+overflow:hidden;
+}
+
+.pos-live-board{
+width:100%;
+max-width:100%;
+min-width:0;
+box-shadow:0 14px 34px rgba(15,23,42,.12);
+}
+
+.pos-window-bar{
+height:38px;
+padding:0 10px;
+font-size:11px;
+}
+
+.pos-screen{
+grid-template-columns:1fr;
+gap:10px;
+min-height:auto;
+padding:10px;
+}
+
+.pos-left,
+.pos-right{
+min-width:0;
+padding:10px;
+border-radius:12px;
+}
+
+.pos-tabs{
+overflow-x:auto;
+padding-bottom:4px;
+}
+
+.pos-tabs span{
+font-size:10px;
+padding:7px 9px;
+}
+
+.pos-items{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px;
+}
+
+.pos-item{
+min-height:74px;
+padding:8px;
+}
+
+.payment-row{
+grid-template-columns:1fr;
+}
+
+.language-redesign{
+width:min(100% - 24px,430px);
+gap:24px;
+}
+
+.language-copy h2{
+font-size:28px;
+line-height:1.16;
+color:#08172f;
+}
+
+.language-copy h2 span{
+display:block;
+color:#1463ff;
+}
+
+.language-copy p{
+max-width:none;
+font-size:15px;
+line-height:1.65;
+color:#475569;
+}
+
+.language-points{
+gap:10px;
+}
+
+.language-points span{
+font-size:14px;
+font-weight:900;
+color:#0f172a;
+}
+
+.receipt-sample{
+width:min(295px,88vw);
+max-width:295px;
+}
+
+.token-sample{
+width:min(100%,350px);
+}
+
+.app-section{
+padding:54px 0;
+background:#071a35;
+}
+
+.app-text p,
+.app-list-item span{
+color:#dbeafe;
+}
+
+.cta{
+padding:50px 0;
+}
+
+.cta-box{
+border-radius:20px;
+padding:24px;
+}
+
+.footer{
+padding-top:50px;
+}
+}
+
 </style>
 </head>
 
@@ -4486,6 +4919,8 @@ entry.target.style.transform="translateY(0)";
 );
 
 
+if(window.matchMedia("(min-width: 701px)").matches){
+
 document
 .querySelectorAll(
 ".feature-card,.price-card,.industry"
@@ -4502,6 +4937,8 @@ element.style.transition=
 observer.observe(element);
 
 });
+
+}
 
 </script>
 
