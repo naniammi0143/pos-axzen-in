@@ -11,17 +11,18 @@
 <meta name="apple-mobile-web-app-title" content="Axzen POS">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://pos.axzen.in/">
-<link rel="icon" href="/assets/111.png" type="image/png">
+<link rel="icon" href="assets/pos.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/axzenPOS.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Axzen POS">
 <meta property="og:title" content="Axzen POS - Smart POS for Modern Businesses">
 <meta property="og:description" content="Axzen POS is a powerful and simple point of sale solution for restaurants, hotels, retail stores, cafes and growing businesses.">
 <meta property="og:url" content="https://pos.axzen.in/">
-<meta property="og:image" content="https://pos.axzen.in/assets/111.png">
+<meta property="og:image" content="https://pos.axzen.in/assets/axzenPOS.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Axzen POS - Smart POS for Modern Businesses">
 <meta name="twitter:description" content="Axzen POS is a powerful and simple point of sale solution for restaurants, hotels, retail stores, cafes and growing businesses.">
-<meta name="twitter:image" content="https://pos.axzen.in/assets/111.png">
+<meta name="twitter:image" content="https://pos.axzen.in/assets/axzenPOS.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,7 +39,7 @@
   "name": "Axzen POS",
   "legalName": "Axzen Infotech",
   "url": "https://pos.axzen.in/",
-  "logo": "https://pos.axzen.in/assets/111.png",
+  "logo": "https://pos.axzen.in/assets/axzenPOS.png",
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+91-8790568446",
@@ -116,9 +117,18 @@ font-family:"Manrope";
 font-size:25px;
 font-weight:800;
 letter-spacing:-1.5px;
+display:flex;
+align-items:center;
 }
 
 .logo span{color:var(--blue)}
+
+.logo img{
+height:31px;
+width:auto;
+display:block;
+object-fit:contain;
+}
 
 .nav-links{
 display:flex;
@@ -362,6 +372,510 @@ margin-top:4px;
 font-size:11px;
 color:#64748b;
 font-weight:700;
+}
+
+.pos-live-board{
+background:#0f172a;
+border-radius:8px;
+overflow:hidden;
+border:1px solid #1f2d45;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.pos-window-bar{
+height:42px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 14px;
+background:#111d33;
+color:#dbe7f6;
+font-size:12px;
+font-weight:800;
+}
+
+.window-dots{
+display:flex;
+gap:6px;
+}
+
+.window-dots span{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#f87171;
+}
+
+.window-dots span:nth-child(2){background:#fbbf24}
+.window-dots span:nth-child(3){background:#34d399}
+
+.pos-screen{
+display:grid;
+grid-template-columns:1.35fr .85fr;
+gap:12px;
+padding:14px;
+background:#f4f7fb;
+min-height:430px;
+}
+
+.pos-left,
+.pos-right{
+background:#fff;
+border:1px solid #e2e8f0;
+border-radius:8px;
+padding:12px;
+}
+
+.pos-topline{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+}
+
+.pos-title{
+font-size:14px;
+font-weight:900;
+color:#0f172a;
+}
+
+.pos-status{
+padding:6px 9px;
+border-radius:999px;
+background:#ecfdf3;
+color:#12805b;
+font-size:10px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.pos-tabs{
+display:flex;
+gap:7px;
+overflow:hidden;
+margin-bottom:12px;
+}
+
+.pos-tabs span{
+padding:8px 10px;
+border-radius:8px;
+background:#edf4ff;
+color:#0b55d8;
+font-size:10px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.pos-tabs span.active{
+background:#0f62fe;
+color:#fff;
+}
+
+.pos-items{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+}
+
+.pos-item{
+min-height:78px;
+border:1px solid #e6ecf4;
+border-radius:8px;
+padding:9px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+background:linear-gradient(180deg,#fff,#fbfdff);
+}
+
+.pos-item strong{
+font-size:12px;
+line-height:1.2;
+color:#111827;
+}
+
+.pos-item span{
+font-size:11px;
+font-weight:900;
+color:#12a66b;
+}
+
+.pos-item.weight span{
+color:#ea580c;
+}
+
+.cart-lines{
+display:grid;
+gap:8px;
+margin:12px 0;
+}
+
+.cart-line{
+display:grid;
+grid-template-columns:1fr auto;
+gap:8px;
+padding:9px 0;
+border-bottom:1px dashed #d8e0ec;
+font-size:12px;
+font-weight:800;
+color:#334155;
+}
+
+.cart-line small{
+display:block;
+font-size:10px;
+color:#64748b;
+font-weight:800;
+margin-top:3px;
+}
+
+.cart-total{
+border-radius:8px;
+background:#071a33;
+color:#fff;
+padding:14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+font-weight:900;
+margin-top:10px;
+}
+
+.payment-row{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-top:10px;
+}
+
+.payment-row span{
+min-height:36px;
+border-radius:8px;
+display:grid;
+place-items:center;
+background:#eff6ff;
+color:#0b55d8;
+font-size:10px;
+font-weight:900;
+}
+
+.payment-row span:first-child{
+background:#ecfdf3;
+color:#047857;
+}
+
+/* PRODUCT SHOWCASE */
+
+.product-showcase{
+background:#fff;
+}
+
+.showcase-grid{
+display:grid;
+grid-template-columns:1.08fr .92fr;
+gap:24px;
+align-items:start;
+}
+
+.showcase-copy{
+position:sticky;
+top:112px;
+}
+
+.showcase-copy h2{
+font-size:43px;
+line-height:1.14;
+letter-spacing:-1.8px;
+margin-bottom:16px;
+}
+
+.showcase-copy p{
+font-size:15px;
+line-height:1.75;
+color:var(--muted);
+max-width:540px;
+}
+
+.mode-list{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+margin-top:24px;
+}
+
+.mode-pill{
+border:1px solid #e5eaf1;
+border-radius:8px;
+padding:13px;
+background:#fbfcff;
+}
+
+.mode-pill strong{
+display:block;
+font-size:13px;
+margin-bottom:5px;
+}
+
+.mode-pill span{
+font-size:11px;
+line-height:1.45;
+color:#667085;
+font-weight:700;
+}
+
+.software-stack{
+display:grid;
+gap:16px;
+}
+
+.interface-panel{
+border:1px solid #dfe7f2;
+border-radius:8px;
+background:#f8fafc;
+padding:14px;
+box-shadow:0 22px 58px rgba(15,31,55,.12);
+}
+
+.interface-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:12px;
+}
+
+.interface-head strong{
+font-size:14px;
+}
+
+.interface-head span{
+font-size:11px;
+font-weight:900;
+color:#047857;
+background:#ecfdf3;
+border-radius:999px;
+padding:7px 10px;
+}
+
+.admin-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+}
+
+.admin-tile{
+border:1px solid #e5eaf1;
+border-radius:8px;
+background:#fff;
+padding:12px;
+min-height:92px;
+}
+
+.admin-tile small{
+font-size:10px;
+color:#667085;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.admin-tile strong{
+display:block;
+margin-top:9px;
+font-size:22px;
+letter-spacing:-.8px;
+}
+
+.admin-tile span{
+display:block;
+margin-top:5px;
+font-size:11px;
+font-weight:800;
+color:#12a66b;
+}
+
+.weight-demo{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.weight-box{
+background:#fff;
+border:1px solid #e6ecf4;
+border-radius:8px;
+padding:14px;
+}
+
+.weight-box label{
+display:block;
+font-size:10px;
+font-weight:900;
+color:#667085;
+text-transform:uppercase;
+margin-bottom:7px;
+}
+
+.weight-value{
+min-height:44px;
+border-radius:8px;
+background:#fff7ed;
+border:1px solid #fed7aa;
+display:flex;
+align-items:center;
+padding:0 12px;
+font-size:17px;
+font-weight:900;
+color:#9a3412;
+}
+
+.printer-showcase{
+background:#f8fafc;
+border-top:1px solid #edf0f5;
+border-bottom:1px solid #edf0f5;
+}
+
+.printer-layout{
+display:grid;
+grid-template-columns:.9fr 1.1fr;
+gap:32px;
+align-items:center;
+}
+
+.printer-copy h2{
+font-size:42px;
+line-height:1.15;
+letter-spacing:-1.7px;
+margin-bottom:15px;
+}
+
+.printer-copy p{
+font-size:15px;
+line-height:1.75;
+color:var(--muted);
+}
+
+.printer-points{
+display:grid;
+gap:10px;
+margin-top:24px;
+}
+
+.printer-points span{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:13px;
+font-weight:800;
+color:#334155;
+}
+
+.printer-points b{
+width:24px;
+height:24px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#dcfce7;
+color:#12805b;
+font-size:11px;
+}
+
+.printer-stage{
+display:grid;
+grid-template-columns:1fr .82fr;
+gap:18px;
+align-items:end;
+}
+
+.thermal-printer{
+height:260px;
+border-radius:22px 22px 14px 14px;
+background:linear-gradient(180deg,#202a38,#0f172a);
+box-shadow:0 25px 60px rgba(15,23,42,.25);
+position:relative;
+padding:28px;
+border:1px solid #334155;
+}
+
+.printer-slot{
+height:22px;
+border-radius:999px;
+background:#020617;
+box-shadow:inset 0 2px 8px rgba(0,0,0,.7);
+margin-top:24px;
+}
+
+.printer-screen{
+height:68px;
+border-radius:10px;
+background:#d9f99d;
+color:#365314;
+display:grid;
+place-items:center;
+font-size:13px;
+font-weight:900;
+border:4px solid #111827;
+}
+
+.printer-lights{
+display:flex;
+gap:8px;
+margin-top:24px;
+}
+
+.printer-lights span{
+width:14px;
+height:14px;
+border-radius:50%;
+background:#22c55e;
+box-shadow:0 0 0 5px rgba(34,197,94,.12);
+}
+
+.printer-lights span:nth-child(2){background:#f59e0b;box-shadow:0 0 0 5px rgba(245,158,11,.12)}
+
+.receipt-paper{
+background:#fff;
+border:1px solid #e2e8f0;
+border-radius:8px;
+padding:18px;
+box-shadow:0 24px 50px rgba(15,23,42,.16);
+font-family:"Courier New",monospace;
+font-size:12px;
+line-height:1.55;
+color:#111827;
+position:relative;
+}
+
+.receipt-paper::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:-10px;
+height:10px;
+background:repeating-linear-gradient(135deg,#fff 0 10px,transparent 10px 20px);
+}
+
+.receipt-paper h3{
+font-family:"Courier New",monospace;
+font-size:15px;
+text-align:center;
+margin-bottom:8px;
+}
+
+.receipt-row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+border-top:1px dashed #cbd5e1;
+padding-top:7px;
+margin-top:7px;
+}
+
+.receipt-total{
+font-weight:900;
+font-size:14px;
 }
 
 /* TRUST */
@@ -1038,6 +1552,13 @@ margin-bottom:15px;
 
 .footer-logo span{color:#5c9aff}
 
+.footer-logo img{
+height:34px;
+width:auto;
+display:block;
+object-fit:contain;
+}
+
 .footer-about{
 font-size:13px;
 line-height:1.7;
@@ -1107,6 +1628,16 @@ grid-template-columns:1fr;
 
 .flow-layout{
 grid-template-columns:1fr;
+}
+
+.showcase-grid,
+.printer-layout{
+grid-template-columns:1fr;
+}
+
+.showcase-copy{
+position:relative;
+top:auto;
 }
 
 .flow-panel{
@@ -1194,6 +1725,14 @@ grid-template-columns:1fr 1fr;
 grid-template-columns:1fr 1fr;
 }
 
+.pos-screen{
+grid-template-columns:1fr;
+}
+
+.printer-stage{
+max-width:760px;
+}
+
 .contact-grid{
 grid-template-columns:1fr;
 }
@@ -1275,8 +1814,26 @@ font-size:34px;
 .feature-grid,
 .pricing-grid,
 .industry-grid,
-.flow-grid{
+.flow-grid,
+.mode-list,
+.admin-grid,
+.weight-demo,
+.printer-stage{
 grid-template-columns:1fr;
+}
+
+.showcase-copy h2,
+.printer-copy h2{
+font-size:33px;
+letter-spacing:-1.2px;
+}
+
+.pos-items{
+grid-template-columns:repeat(2,1fr);
+}
+
+.thermal-printer{
+height:220px;
 }
 
 .flow-panel{
@@ -1365,13 +1922,15 @@ animation:fadeUp 1s .15s ease both;
 <nav class="navbar" id="navbar">
 
 <a href="#home" class="logo">
-axzen<span>POS</span>
+<img src="assets/axzenPOS.png" alt="axzenPOS">
 </a>
 
 <div class="nav-links">
 
 <a href="#home">Home</a>
+<a href="#software">Software</a>
 <a href="#features">Features</a>
+<a href="#printer">Printer</a>
 <a href="#pricing">Pricing</a>
 <a href="#industries">Industries</a>
 <a href="#app">Mobile App</a>
@@ -1419,16 +1978,15 @@ Smart POS for Modern Businesses
 </div>
 
 <h1>
-Run your business
-<span>smarter.</span>
-Every single day.
+Billing, stock,
+reports and printer
+<span>in one POS.</span>
 </h1>
 
 <p class="hero-description">
-axzen POS brings billing, inventory, sales,
-customers, payments and business reports together
-in one simple, powerful platform built for businesses
-that want to grow.
+axzen POS gives restaurants, canteens, retail stores, cool drink shops and meat counters
+a fast billing screen, category-wise items, daily reports, inventory control and thermal
+printer receipts in one simple software.
 </p>
 
 <div class="hero-actions">
@@ -1437,8 +1995,8 @@ that want to grow.
 Start with axzen POS →
 </a>
 
-<a href="#app" class="btn btn-outline">
-Explore Mobile App
+<a href="#software" class="btn btn-outline">
+See Interface
 </a>
 
 </div>
@@ -1471,15 +2029,54 @@ Secure & reliable
 
 <div class="hero-pos-image">
 
-<img
-src="assets/111.png?v=3"
-alt="axzen POS System"
->
+<div class="pos-live-board" aria-label="axzen POS billing interface preview">
+<div class="pos-window-bar">
+<div class="window-dots"><span></span><span></span><span></span></div>
+<strong>Main Canteen POS</strong>
+<span>Online</span>
+</div>
+<div class="pos-screen">
+<div class="pos-left">
+<div class="pos-topline">
+<div class="pos-title">New Billing</div>
+<div class="pos-status">Printer Ready</div>
+</div>
+<div class="pos-tabs">
+<span class="active">All</span>
+<span>Tiffins</span>
+<span>Meals</span>
+<span>Tea</span>
+<span>Chicken Center</span>
+</div>
+<div class="pos-items">
+<div class="pos-item"><strong>Idly</strong><span>Rs 30</span></div>
+<div class="pos-item"><strong>Dosa</strong><span>Rs 40</span></div>
+<div class="pos-item"><strong>Meals</strong><span>Rs 80</span></div>
+<div class="pos-item"><strong>Tea</strong><span>Rs 15</span></div>
+<div class="pos-item weight"><strong>Chicken</strong><span>Rs 340/kg</span></div>
+<div class="pos-item"><strong>Water Bottle</strong><span>Rs 20</span></div>
+</div>
+</div>
+<div class="pos-right">
+<div class="pos-topline">
+<div class="pos-title">Cart</div>
+<div class="pos-status">Cash</div>
+</div>
+<div class="cart-lines">
+<div class="cart-line"><span>Dosa <small>Qty 2</small></span><b>Rs 80</b></div>
+<div class="cart-line"><span>Chicken <small>335g @ Rs 340/kg</small></span><b>Rs 114</b></div>
+<div class="cart-line"><span>Tea <small>Qty 3</small></span><b>Rs 45</b></div>
+</div>
+<div class="cart-total"><span>Total</span><strong>Rs 239</strong></div>
+<div class="payment-row"><span>Cash</span><span>UPI</span><span>Credit</span></div>
+</div>
+</div>
+</div>
 
 <div class="hero-metrics">
-<div class="hero-metric"><strong>Fast</strong><span>Billing flow</span></div>
-<div class="hero-metric"><strong>Live</strong><span>Reports</span></div>
-<div class="hero-metric"><strong>Cloud</strong><span>Backup</span></div>
+<div class="hero-metric"><strong>5 sec</strong><span>Fast bill entry</span></div>
+<div class="hero-metric"><strong>Kg</strong><span>Weight billing</span></div>
+<div class="hero-metric"><strong>58mm</strong><span>Thermal print</span></div>
 </div>
 
 </div>
@@ -1506,6 +2103,164 @@ Built for businesses that mean business
 <div class="trust-brand">RETAIL</div>
 <div class="trust-brand">CAFÉS</div>
 <div class="trust-brand">SUPERMARKETS</div>
+
+</div>
+
+</section>
+
+
+<!-- SOFTWARE SHOWCASE -->
+
+<section class="section product-showcase" id="software">
+
+<div class="container showcase-grid">
+
+<div class="showcase-copy">
+
+<div class="eyebrow">
+INSIDE THE SOFTWARE
+</div>
+
+<h2>
+Every business can run its own category-wise billing flow.
+</h2>
+
+<p>
+Create a canteen, school counter, cool drink shop, retail store or chicken center.
+Add the categories you need, set item prices, choose quantity billing or kg billing,
+and keep the same reports, payments and printer flow across the business.
+</p>
+
+<div class="mode-list">
+<div class="mode-pill"><strong>Canteen</strong><span>Tiffins, meals, tea, snacks and daily sales.</span></div>
+<div class="mode-pill"><strong>Chicken Center</strong><span>Kg rate, grams, rupee amount and item cuts.</span></div>
+<div class="mode-pill"><strong>Cool Drink Shop</strong><span>Bottles, cartons, MRP items and quick checkout.</span></div>
+<div class="mode-pill"><strong>Retail Store</strong><span>Products, stock, customers, cash and UPI reports.</span></div>
+</div>
+
+</div>
+
+<div class="software-stack">
+
+<div class="interface-panel">
+<div class="interface-head">
+<strong>Billing Screen</strong>
+<span>Live counter</span>
+</div>
+<div class="pos-live-board">
+<div class="pos-window-bar">
+<div class="window-dots"><span></span><span></span><span></span></div>
+<strong>Axzen POS</strong>
+<span>Shift 1</span>
+</div>
+<div class="pos-screen">
+<div class="pos-left">
+<div class="pos-tabs">
+<span class="active">Chicken Center</span>
+<span>Canteen</span>
+<span>Drinks</span>
+<span>Snacks</span>
+</div>
+<div class="pos-items">
+<div class="pos-item weight"><strong>Chicken</strong><span>Rs 340/kg</span></div>
+<div class="pos-item weight"><strong>Boneless</strong><span>Rs 420/kg</span></div>
+<div class="pos-item weight"><strong>Leg Piece</strong><span>Rs 360/kg</span></div>
+<div class="pos-item"><strong>Cool Drink</strong><span>Rs 20</span></div>
+<div class="pos-item"><strong>Water</strong><span>Rs 15</span></div>
+<div class="pos-item"><strong>Parcel Cover</strong><span>Rs 5</span></div>
+</div>
+</div>
+<div class="pos-right">
+<div class="weight-demo">
+<div class="weight-box">
+<label>Price Entered</label>
+<div class="weight-value">Rs 114</div>
+</div>
+<div class="weight-box">
+<label>Auto Weight</label>
+<div class="weight-value">335 g</div>
+</div>
+</div>
+<div class="cart-total"><span>Bill Total</span><strong>Rs 139</strong></div>
+<div class="payment-row"><span>Cash</span><span>UPI</span><span>Print</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="interface-panel">
+<div class="interface-head">
+<strong>Owner Dashboard</strong>
+<span>Reports ready</span>
+</div>
+<div class="admin-grid">
+<div class="admin-tile"><small>Today Sales</small><strong>Rs 18,430</strong><span>+12% from yesterday</span></div>
+<div class="admin-tile"><small>Bills</small><strong>142</strong><span>Cash, UPI, credit</span></div>
+<div class="admin-tile"><small>Top Item</small><strong>Chicken</strong><span>Item-wise report</span></div>
+<div class="admin-tile"><small>Stock</small><strong>8 Low</strong><span>Inventory alerts</span></div>
+<div class="admin-tile"><small>Expenses</small><strong>Rs 2,150</strong><span>Daily entries</span></div>
+<div class="admin-tile"><small>Profit</small><strong>Live</strong><span>Owner view</span></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRINTER SHOWCASE -->
+
+<section class="section printer-showcase" id="printer">
+
+<div class="container printer-layout">
+
+<div class="printer-copy">
+
+<div class="eyebrow">
+THERMAL PRINTER SUPPORT
+</div>
+
+<h2>
+Clean receipts from the same billing screen.
+</h2>
+
+<p>
+Connect a compatible thermal printer and print customer receipts, counter bills
+and kitchen-style order tickets. The receipt carries item names, quantity or grams,
+rate, payment mode and total amount.
+</p>
+
+<div class="printer-points">
+<span><b>OK</b> 58mm and 80mm receipt format support</span>
+<span><b>OK</b> Cash, UPI, split and credit payment labels</span>
+<span><b>OK</b> Item-wise quantity or kg/grams details</span>
+</div>
+
+</div>
+
+<div class="printer-stage">
+
+<div class="thermal-printer">
+<div class="printer-screen">AXZEN POS READY</div>
+<div class="printer-slot"></div>
+<div class="printer-lights"><span></span><span></span></div>
+</div>
+
+<div class="receipt-paper">
+<h3>MAIN CANTEEN</h3>
+Bill No: AX-1042<br>
+Date: Today<br>
+Payment: Cash
+<div class="receipt-row"><span>Dosa x 2</span><b>80.00</b></div>
+<div class="receipt-row"><span>Chicken 335g</span><b>114.00</b></div>
+<div class="receipt-row"><span>Tea x 3</span><b>45.00</b></div>
+<div class="receipt-row receipt-total"><span>TOTAL</span><b>239.00</b></div>
+Thank you. Visit again.
+</div>
+
+</div>
 
 </div>
 
@@ -2231,7 +2986,7 @@ Send Enquiry →
 <div>
 
 <div class="footer-logo">
-axzen<span>POS</span>
+<img src="assets/axzenPOS.png" alt="axzenPOS">
 </div>
 
 <p class="footer-about">
