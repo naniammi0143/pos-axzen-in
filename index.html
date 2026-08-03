@@ -2454,8 +2454,8 @@ flex:0 0 auto;
 
 .token-area{
 position:relative;
-min-height:690px;
-padding:28px 0 26px;
+min-height:640px;
+padding:18px 0 10px;
 }
 
 .token-area h3{
@@ -2466,7 +2466,7 @@ color:#071734;
 }
 
 .token-card-grid{
-gap:14px;
+gap:18px;
 align-items:start;
 position:relative;
 z-index:2;
@@ -2474,23 +2474,23 @@ z-index:2;
 
 .glass-halo{
 position:absolute;
-inset:40px -24px 10px;
+inset:20px -34px 8px;
 border-radius:30px;
-background:rgba(255,255,255,.54);
+background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(239,246,255,.56));
 border:1px solid rgba(255,255,255,.72);
-box-shadow:0 30px 80px rgba(37,99,235,.12);
+box-shadow:0 30px 90px rgba(37,99,235,.15);
 backdrop-filter:blur(18px);
 z-index:0;
 }
 
 .printer-product{
 position:absolute;
-left:50%;
-top:220px;
-width:min(360px,42vw);
-transform:translateX(-50%);
-z-index:1;
-filter:drop-shadow(0 35px 55px rgba(15,23,42,.22));
+left:44%;
+top:292px;
+width:min(390px,33vw);
+transform:translateX(-50%) rotate(-2deg);
+z-index:3;
+filter:drop-shadow(0 38px 58px rgba(15,23,42,.24));
 pointer-events:none;
 }
 
@@ -2545,8 +2545,8 @@ filter:drop-shadow(0 5px 4px rgba(15,23,42,.1));
 }
 
 .token-card{
-min-height:255px;
-padding:18px 13px 20px;
+min-height:238px;
+padding:15px 12px 18px;
 border-radius:20px 20px 4px 4px;
 text-align:left;
 --tilt:0deg;
@@ -2561,7 +2561,7 @@ text-align:left;
 .receipt-lang{
 display:flex;
 justify-content:center;
-margin-bottom:11px;
+margin-bottom:8px;
 }
 
 .receipt-lang span{
@@ -2582,10 +2582,10 @@ letter-spacing:.04em;
 .receipt-brand{
 text-align:center;
 font-family:"Inter",sans-serif;
-font-size:14px;
+font-size:13px;
 font-weight:950;
 letter-spacing:0;
-margin-bottom:4px;
+margin-bottom:3px;
 }
 
 .receipt-brand span{
@@ -2595,23 +2595,23 @@ color:#2563eb;
 .receipt-subtitle{
 display:block;
 text-align:center;
-font-size:9px;
+font-size:8px;
 font-weight:800;
 color:#475569;
-margin-bottom:8px;
+margin-bottom:6px;
 }
 
 .receipt-dash{
 height:1px;
 background:repeating-linear-gradient(90deg,#111827 0 8px,transparent 8px 13px);
 opacity:.72;
-margin:8px 0;
+margin:7px 0;
 }
 
 .receipt-meta{
 display:grid;
-gap:5px;
-font-size:9px;
+gap:4px;
+font-size:8px;
 line-height:1.25;
 }
 
@@ -2631,11 +2631,11 @@ text-align:right;
 }
 
 .receipt-token{
-font-size:29px;
+font-size:28px;
 font-weight:950;
 letter-spacing:0;
 text-align:center;
-margin:7px 0 5px;
+margin:5px 0 4px;
 font-family:"Inter",sans-serif;
 }
 
@@ -2643,19 +2643,19 @@ font-family:"Inter",sans-serif;
 display:grid;
 grid-template-columns:1.15fr .45fr .55fr .65fr;
 gap:4px;
-font-size:8px;
+font-size:7.6px;
 font-weight:950;
-margin:8px 0 6px;
+margin:7px 0 5px;
 }
 
 .receipt-items{
 display:grid;
-gap:5px;
+gap:4px;
 }
 
 .receipt-row{
 grid-template-columns:1.15fr .45fr .55fr .65fr;
-font-size:8.5px;
+font-size:8px;
 line-height:1.2;
 }
 
@@ -2665,34 +2665,34 @@ text-align:right;
 }
 
 .receipt-total-row{
-font-size:10px;
+font-size:9.5px;
 font-weight:950;
-margin-top:7px;
-padding-top:7px;
+margin-top:6px;
+padding-top:6px;
 border-top:1px dashed rgba(15,23,42,.65);
 }
 
 .receipt-thanks{
 display:block;
 text-align:center;
-font-size:9px;
+font-size:8.5px;
 font-weight:900;
-margin-top:9px;
+margin-top:8px;
 }
 
 .matched-token-grid{
 grid-template-columns:repeat(3,minmax(170px,1fr));
 gap:22px;
-max-width:760px;
-margin:145px auto 0;
+max-width:780px;
+margin:96px 0 0 auto;
 position:relative;
-z-index:3;
+z-index:4;
 align-items:start;
 }
 
 .mini-token-card{
-min-height:330px;
-padding:22px 20px 26px;
+min-height:300px;
+padding:18px 18px 24px;
 border-radius:20px 20px 4px 4px;
 text-align:left;
 }
@@ -2717,11 +2717,11 @@ margin-bottom:8px;
 
 .large-token{
 font-family:"Inter",sans-serif;
-font-size:36px;
+font-size:34px;
 font-weight:950;
 letter-spacing:0;
 text-align:center;
-margin:8px 0 10px;
+margin:6px 0 8px;
 }
 
 .language-copy .badge{
@@ -2736,10 +2736,25 @@ display:none;
 
 .language-redesign{
 display:grid;
-grid-template-columns:minmax(320px,.82fr) minmax(620px,1.55fr);
-gap:56px;
+grid-template-columns:minmax(380px,.86fr) minmax(760px,1.62fr);
+gap:78px;
 align-items:center;
 position:relative;
+width:min(1520px,calc(100% - 56px));
+max-width:none;
+}
+
+.language-redesign .language-copy{
+align-self:center;
+padding-top:24px;
+}
+
+.language-redesign .language-copy h2{
+max-width:560px;
+}
+
+.language-redesign .language-points span::before{
+content:"\2713";
 }
 
 @media(max-width:1050px){
