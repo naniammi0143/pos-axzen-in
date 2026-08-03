@@ -2389,9 +2389,367 @@ margin-top:10px;
 padding-top:9px;
 }
 
+.language-tokens{
+background:
+radial-gradient(circle at 70% 20%,rgba(37,99,235,.15),transparent 30%),
+linear-gradient(180deg,#fff 0%,#f7fbff 48%,#fff 100%);
+border-top:1px solid rgba(226,232,240,.85);
+border-bottom:1px solid rgba(226,232,240,.85);
+overflow:hidden;
+position:relative;
+}
+
+.language-grid{
+grid-template-columns:minmax(320px,.82fr) minmax(620px,1.55fr);
+gap:56px;
+}
+
+.language-copy h2{
+font-size:clamp(38px,4vw,60px);
+line-height:1.02;
+letter-spacing:0;
+margin:18px 0 22px;
+color:#06142d;
+}
+
+.language-copy h2 span{
+display:inline;
+color:var(--blue);
+}
+
+.language-copy p{
+font-size:17px;
+line-height:1.85;
+color:#46566f;
+max-width:550px;
+}
+
+.language-points{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px 16px;
+margin-top:28px;
+max-width:520px;
+}
+
+.language-points span{
+font-size:14px;
+color:#0b1b37;
+gap:10px;
+min-height:28px;
+}
+
+.language-points span::before{
+content:"✓";
+width:22px;
+height:22px;
+background:linear-gradient(135deg,#2563eb,#0ea5e9);
+box-shadow:0 8px 18px rgba(37,99,235,.24);
+color:#fff;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+font-size:13px;
+flex:0 0 auto;
+}
+
+.token-area{
+position:relative;
+min-height:690px;
+padding:28px 0 26px;
+}
+
+.token-area h3{
+font-size:18px;
+letter-spacing:0;
+margin:0 0 24px;
+color:#071734;
+}
+
+.token-card-grid{
+gap:14px;
+align-items:start;
+position:relative;
+z-index:2;
+}
+
+.glass-halo{
+position:absolute;
+inset:40px -24px 10px;
+border-radius:30px;
+background:rgba(255,255,255,.54);
+border:1px solid rgba(255,255,255,.72);
+box-shadow:0 30px 80px rgba(37,99,235,.12);
+backdrop-filter:blur(18px);
+z-index:0;
+}
+
+.printer-product{
+position:absolute;
+left:50%;
+top:220px;
+width:min(360px,42vw);
+transform:translateX(-50%);
+z-index:1;
+filter:drop-shadow(0 35px 55px rgba(15,23,42,.22));
+pointer-events:none;
+}
+
+.printer-product img{
+width:100%;
+display:block;
+}
+
+.thermal-paper{
+font-family:"Courier New","Noto Sans Telugu","Noto Sans Devanagari","Noto Sans Tamil","Noto Sans Kannada",monospace;
+background:
+linear-gradient(90deg,rgba(15,23,42,.07),transparent 5%,transparent 95%,rgba(15,23,42,.06)),
+radial-gradient(circle at 35% 0%,rgba(255,255,255,.9),transparent 30%),
+repeating-linear-gradient(0deg,rgba(15,23,42,.028) 0 1px,transparent 1px 6px),
+linear-gradient(180deg,#fff 0%,#f8fafc 100%);
+border:1px solid rgba(203,213,225,.65);
+box-shadow:0 24px 44px rgba(15,23,42,.16),0 1px 0 rgba(255,255,255,.9) inset;
+color:#111827;
+position:relative;
+overflow:visible;
+transform-style:preserve-3d;
+transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.thermal-paper:hover{
+transform:translateY(-7px) rotate(var(--tilt,0deg));
+box-shadow:0 34px 62px rgba(15,23,42,.2),0 1px 0 rgba(255,255,255,.9) inset;
+}
+
+.thermal-paper::before{
+content:"";
+position:absolute;
+left:6%;
+right:6%;
+top:8px;
+height:10px;
+border-radius:50%;
+background:radial-gradient(ellipse at center,rgba(15,23,42,.08),transparent 72%);
+filter:blur(.3px);
+opacity:.5;
+}
+
+.thermal-paper::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:-10px;
+height:11px;
+background:repeating-linear-gradient(135deg,#fff 0 9px,transparent 9px 18px);
+filter:drop-shadow(0 5px 4px rgba(15,23,42,.1));
+}
+
+.token-card{
+min-height:255px;
+padding:18px 13px 20px;
+border-radius:20px 20px 4px 4px;
+text-align:left;
+--tilt:0deg;
+}
+
+.token-card:nth-child(1){transform:rotate(-3deg);margin-top:10px;--tilt:-3deg}
+.token-card:nth-child(2){transform:rotate(1.5deg);--tilt:1.5deg}
+.token-card:nth-child(3){transform:rotate(-.7deg);margin-top:-10px;--tilt:-.7deg}
+.token-card:nth-child(4){transform:rotate(2.4deg);margin-top:4px;--tilt:2.4deg}
+.token-card:nth-child(5){transform:rotate(-1.6deg);margin-top:14px;--tilt:-1.6deg}
+
+.receipt-lang{
+display:flex;
+justify-content:center;
+margin-bottom:11px;
+}
+
+.receipt-lang span{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:23px;
+padding:0 10px;
+border-radius:999px;
+background:rgba(37,99,235,.1);
+color:#1d4ed8;
+font-family:"Inter",sans-serif;
+font-size:9px;
+font-weight:900;
+letter-spacing:.04em;
+}
+
+.receipt-brand{
+text-align:center;
+font-family:"Inter",sans-serif;
+font-size:14px;
+font-weight:950;
+letter-spacing:0;
+margin-bottom:4px;
+}
+
+.receipt-brand span{
+color:#2563eb;
+}
+
+.receipt-subtitle{
+display:block;
+text-align:center;
+font-size:9px;
+font-weight:800;
+color:#475569;
+margin-bottom:8px;
+}
+
+.receipt-dash{
+height:1px;
+background:repeating-linear-gradient(90deg,#111827 0 8px,transparent 8px 13px);
+opacity:.72;
+margin:8px 0;
+}
+
+.receipt-meta{
+display:grid;
+gap:5px;
+font-size:9px;
+line-height:1.25;
+}
+
+.receipt-meta div,
+.receipt-row,
+.receipt-total-row{
+display:grid;
+grid-template-columns:1fr auto;
+gap:8px;
+align-items:start;
+}
+
+.receipt-meta strong,
+.receipt-row strong{
+font-weight:900;
+text-align:right;
+}
+
+.receipt-token{
+font-size:29px;
+font-weight:950;
+letter-spacing:0;
+text-align:center;
+margin:7px 0 5px;
+font-family:"Inter",sans-serif;
+}
+
+.receipt-table-head{
+display:grid;
+grid-template-columns:1.15fr .45fr .55fr .65fr;
+gap:4px;
+font-size:8px;
+font-weight:950;
+margin:8px 0 6px;
+}
+
+.receipt-items{
+display:grid;
+gap:5px;
+}
+
+.receipt-row{
+grid-template-columns:1.15fr .45fr .55fr .65fr;
+font-size:8.5px;
+line-height:1.2;
+}
+
+.receipt-row span:not(:first-child),
+.receipt-table-head span:not(:first-child){
+text-align:right;
+}
+
+.receipt-total-row{
+font-size:10px;
+font-weight:950;
+margin-top:7px;
+padding-top:7px;
+border-top:1px dashed rgba(15,23,42,.65);
+}
+
+.receipt-thanks{
+display:block;
+text-align:center;
+font-size:9px;
+font-weight:900;
+margin-top:9px;
+}
+
+.matched-token-grid{
+grid-template-columns:repeat(3,minmax(170px,1fr));
+gap:22px;
+max-width:760px;
+margin:145px auto 0;
+position:relative;
+z-index:3;
+align-items:start;
+}
+
+.mini-token-card{
+min-height:330px;
+padding:22px 20px 26px;
+border-radius:20px 20px 4px 4px;
+text-align:left;
+}
+
+.mini-token-card:nth-child(1){transform:rotate(-2deg);--tilt:-2deg}
+.mini-token-card:nth-child(2){transform:translateY(-16px) rotate(.8deg);border-color:rgba(37,99,235,.35);--tilt:.8deg}
+.mini-token-card:nth-child(3){transform:rotate(2deg);--tilt:2deg}
+
+.mini-token-card:hover:nth-child(1){transform:translateY(-7px) rotate(-2deg)}
+.mini-token-card:hover:nth-child(2){transform:translateY(-23px) rotate(.8deg)}
+.mini-token-card:hover:nth-child(3){transform:translateY(-7px) rotate(2deg)}
+
+.large-receipt-title{
+display:block;
+text-align:center;
+font-family:"Inter",sans-serif;
+font-size:11px;
+font-weight:950;
+color:#1d4ed8;
+margin-bottom:8px;
+}
+
+.large-token{
+font-family:"Inter",sans-serif;
+font-size:36px;
+font-weight:950;
+letter-spacing:0;
+text-align:center;
+margin:8px 0 10px;
+}
+
+.language-copy .badge{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(12px);
+box-shadow:0 14px 34px rgba(37,99,235,.12);
+}
+
+.language-tokens > .language-grid:not(.language-redesign){
+display:none;
+}
+
+.language-redesign{
+display:grid;
+grid-template-columns:minmax(320px,.82fr) minmax(620px,1.55fr);
+gap:56px;
+align-items:center;
+position:relative;
+}
+
 @media(max-width:1050px){
 .trust-strip-inner{
 grid-template-columns:repeat(4,1fr);
+}
+
+.language-redesign{
+grid-template-columns:1fr;
+gap:34px;
 }
 
 .language-grid{
@@ -2400,6 +2758,15 @@ grid-template-columns:1fr;
 
 .token-card-grid{
 grid-template-columns:repeat(3,1fr);
+}
+
+.printer-product{
+top:285px;
+width:min(330px,48vw);
+}
+
+.matched-token-grid{
+margin-top:150px;
 }
 }
 
@@ -2418,8 +2785,44 @@ grid-template-columns:repeat(2,1fr);
 grid-template-columns:1fr;
 }
 
+.language-redesign{
+gap:20px;
+}
+
+.language-points{
+grid-template-columns:1fr;
+}
+
 .language-copy h2{
 font-size:30px;
+}
+
+.language-copy p{
+font-size:15px;
+}
+
+.token-area{
+min-height:auto;
+padding-top:16px;
+}
+
+.printer-product{
+position:relative;
+left:auto;
+top:auto;
+width:min(320px,78vw);
+margin:18px auto 10px;
+transform:none;
+}
+
+.matched-token-grid{
+margin-top:26px;
+}
+
+.token-card:nth-child(n),
+.mini-token-card:nth-child(n){
+transform:none;
+margin-top:0;
 }
 }
 
@@ -3238,6 +3641,237 @@ appointments with ease.
 <!-- LANGUAGE TOKENS -->
 
 <section class="section language-tokens" id="languages">
+
+<div class="container language-redesign">
+
+<div class="language-copy">
+
+<div class="badge">
+<div class="badge-dot"></div>
+Multi-Language Printing
+</div>
+
+<h2>
+Don't worry about language.
+Print in your <span>customer's language.</span>
+</h2>
+
+<p>
+AXZEN POS can instantly print bills, customer receipts, canteen tokens and kitchen
+tokens in multiple languages. Every language prints the same token number, making
+it easy for customers and kitchen staff.
+</p>
+
+<div class="language-points">
+<span>Same Token Number</span>
+<span>Customer Receipt</span>
+<span>Kitchen Token</span>
+<span>Canteen Token</span>
+<span>15+ Indian Languages</span>
+<span>Bluetooth Thermal Printer Support</span>
+</div>
+
+</div>
+
+<div class="token-area">
+
+<div class="glass-halo"></div>
+
+<h3>Same Token Number in All Languages</h3>
+
+<div class="token-card-grid">
+
+<div class="token-card thermal-paper">
+<div class="receipt-lang"><span>ENGLISH</span></div>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<small class="receipt-subtitle">Customer Receipt</small>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>Bill No</span><strong>000123</strong></div>
+<div><span>Date</span><strong>02-08-2026</strong></div>
+<div><span>Time</span><strong>11:45 AM</strong></div>
+<div><span>Cashier</span><strong>Ramesh</strong></div>
+</div>
+<div class="receipt-token">A001</div>
+<div class="receipt-table-head"><span>Item</span><span>Qty</span><span>Rate</span><span>Amount</span></div>
+<div class="receipt-items">
+<div class="receipt-row"><span>Tea</span><span>2</span><span>10</span><span>20</span></div>
+<div class="receipt-row"><span>Coffee</span><span>1</span><span>15</span><span>15</span></div>
+<div class="receipt-row"><span>Idli</span><span>2</span><span>20</span><span>40</span></div>
+<div class="receipt-row"><span>Dosa</span><span>1</span><span>30</span><span>30</span></div>
+</div>
+<div class="receipt-total-row"><span>Total</span><strong>105.00</strong></div>
+<div class="receipt-meta"><div><span>Payment Mode</span><strong>Cash</strong></div></div>
+<span class="receipt-thanks">Thank You Visit Again</span>
+</div>
+
+<div class="token-card thermal-paper">
+<div class="receipt-lang"><span>తెలుగు</span></div>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<small class="receipt-subtitle">కస్టమర్ రసీదు</small>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>బిల్ నం.</span><strong>000123</strong></div>
+<div><span>తేదీ</span><strong>02-08-2026</strong></div>
+<div><span>సమయం</span><strong>11:45 AM</strong></div>
+<div><span>క్యాషియర్</span><strong>రమేష్</strong></div>
+</div>
+<div class="receipt-token">A001</div>
+<div class="receipt-table-head"><span>వస్తువు</span><span>పరి.</span><span>ధర</span><span>మొత్తం</span></div>
+<div class="receipt-items">
+<div class="receipt-row"><span>టీ</span><span>2</span><span>10</span><span>20</span></div>
+<div class="receipt-row"><span>కాఫీ</span><span>1</span><span>15</span><span>15</span></div>
+<div class="receipt-row"><span>ఇడ్లీ</span><span>2</span><span>20</span><span>40</span></div>
+<div class="receipt-row"><span>దోసె</span><span>1</span><span>30</span><span>30</span></div>
+</div>
+<div class="receipt-total-row"><span>మొత్తం</span><strong>105.00</strong></div>
+<div class="receipt-meta"><div><span>చెల్లింపు విధానం</span><strong>నగదు</strong></div></div>
+<span class="receipt-thanks">ధన్యవాదాలు మళ్లీ రండి</span>
+</div>
+
+<div class="token-card thermal-paper">
+<div class="receipt-lang"><span>हिन्दी</span></div>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<small class="receipt-subtitle">ग्राहक रसीद</small>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>बिल संख्या</span><strong>000123</strong></div>
+<div><span>तारीख</span><strong>02-08-2026</strong></div>
+<div><span>समय</span><strong>11:45 AM</strong></div>
+<div><span>कैशियर</span><strong>रमेश</strong></div>
+</div>
+<div class="receipt-token">A001</div>
+<div class="receipt-table-head"><span>वस्तु</span><span>मात्रा</span><span>दर</span><span>राशि</span></div>
+<div class="receipt-items">
+<div class="receipt-row"><span>चाय</span><span>2</span><span>10</span><span>20</span></div>
+<div class="receipt-row"><span>कॉफी</span><span>1</span><span>15</span><span>15</span></div>
+<div class="receipt-row"><span>इडली</span><span>2</span><span>20</span><span>40</span></div>
+<div class="receipt-row"><span>डोसा</span><span>1</span><span>30</span><span>30</span></div>
+</div>
+<div class="receipt-total-row"><span>कुल</span><strong>105.00</strong></div>
+<div class="receipt-meta"><div><span>भुगतान का तरीका</span><strong>नकद</strong></div></div>
+<span class="receipt-thanks">धन्यवाद, फिर आइए</span>
+</div>
+
+<div class="token-card thermal-paper">
+<div class="receipt-lang"><span>தமிழ்</span></div>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<small class="receipt-subtitle">வாடிக்கையாளர் ரசீது</small>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>பில் எண்</span><strong>000123</strong></div>
+<div><span>தேதி</span><strong>02-08-2026</strong></div>
+<div><span>நேரம்</span><strong>11:45 AM</strong></div>
+<div><span>காசாளர்</span><strong>ரமேஷ்</strong></div>
+</div>
+<div class="receipt-token">A001</div>
+<div class="receipt-table-head"><span>பொருள்</span><span>அளவு</span><span>விலை</span><span>தொகை</span></div>
+<div class="receipt-items">
+<div class="receipt-row"><span>டீ</span><span>2</span><span>10</span><span>20</span></div>
+<div class="receipt-row"><span>காபி</span><span>1</span><span>15</span><span>15</span></div>
+<div class="receipt-row"><span>இட்லி</span><span>2</span><span>20</span><span>40</span></div>
+<div class="receipt-row"><span>தோசை</span><span>1</span><span>30</span><span>30</span></div>
+</div>
+<div class="receipt-total-row"><span>மொத்தம்</span><strong>105.00</strong></div>
+<div class="receipt-meta"><div><span>கட்டண முறை</span><strong>ரொக்கம்</strong></div></div>
+<span class="receipt-thanks">நன்றி மீண்டும் வாருங்கள்</span>
+</div>
+
+<div class="token-card thermal-paper">
+<div class="receipt-lang"><span>ಕನ್ನಡ</span></div>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<small class="receipt-subtitle">ಗ್ರಾಹಕ ರಸೀದಿ</small>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>ಬಿಲ್ ಸಂಖ್ಯೆ</span><strong>000123</strong></div>
+<div><span>ದಿನಾಂಕ</span><strong>02-08-2026</strong></div>
+<div><span>ಸಮಯ</span><strong>11:45 AM</strong></div>
+<div><span>ಕ್ಯಾಶಿಯರ್</span><strong>ರಮೇಶ್</strong></div>
+</div>
+<div class="receipt-token">A001</div>
+<div class="receipt-table-head"><span>ವಸ್ತು</span><span>ಪ್ರಮಾಣ</span><span>ದರ</span><span>ಮೊತ್ತ</span></div>
+<div class="receipt-items">
+<div class="receipt-row"><span>ಚಹಾ</span><span>2</span><span>10</span><span>20</span></div>
+<div class="receipt-row"><span>ಕಾಫಿ</span><span>1</span><span>15</span><span>15</span></div>
+<div class="receipt-row"><span>ಇಡ್ಲಿ</span><span>2</span><span>20</span><span>40</span></div>
+<div class="receipt-row"><span>ದೋಸೆ</span><span>1</span><span>30</span><span>30</span></div>
+</div>
+<div class="receipt-total-row"><span>ಒಟ್ಟು</span><strong>105.00</strong></div>
+<div class="receipt-meta"><div><span>ಪಾವತಿ ವಿಧಾನ</span><strong>ನಗದು</strong></div></div>
+<span class="receipt-thanks">ಧನ್ಯವಾದಗಳು ಮತ್ತೆ ಬನ್ನಿ</span>
+</div>
+
+</div>
+
+<div class="printer-product">
+<img src="assets/posthermal.png?v=1" alt="AXZEN POS Bluetooth thermal printer with receipt">
+</div>
+
+<div class="matched-token-grid">
+
+<div class="mini-token-card thermal-paper">
+<span class="large-receipt-title">Customer Receipt</span>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<div class="large-token">A001</div>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>Bill No</span><strong>000123</strong></div>
+<div><span>Date</span><strong>02-08-2026</strong></div>
+<div><span>Time</span><strong>11:45 AM</strong></div>
+<div><span>Payment Mode</span><strong>Cash</strong></div>
+</div>
+<div class="receipt-table-head"><span>Item</span><span>Qty</span><span>Rate</span><span>Amount</span></div>
+<div class="receipt-row"><span>Tea</span><span>2</span><span>10</span><span>20</span></div>
+<div class="receipt-row"><span>Coffee</span><span>1</span><span>15</span><span>15</span></div>
+<div class="receipt-row"><span>Idli</span><span>2</span><span>20</span><span>40</span></div>
+<div class="receipt-row"><span>Dosa</span><span>1</span><span>30</span><span>30</span></div>
+<div class="receipt-total-row"><span>Total</span><strong>105.00</strong></div>
+<span class="receipt-thanks">Thank You Visit Again</span>
+</div>
+
+<div class="mini-token-card thermal-paper">
+<span class="large-receipt-title">Canteen Token (Same Number)</span>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<div class="large-token">A001</div>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>Counter</span><strong>Main Canteen</strong></div>
+<div><span>Date</span><strong>02-08-2026</strong></div>
+<div><span>Time</span><strong>11:45 AM</strong></div>
+<div><span>Items</span><strong>4</strong></div>
+</div>
+<div class="receipt-dash"></div>
+<div class="receipt-row"><span>Tea</span><span>2</span><span></span><span></span></div>
+<div class="receipt-row"><span>Coffee</span><span>1</span><span></span><span></span></div>
+<div class="receipt-row"><span>Idli</span><span>2</span><span></span><span></span></div>
+<div class="receipt-row"><span>Dosa</span><span>1</span><span></span><span></span></div>
+<span class="receipt-thanks">Serve Token A001</span>
+</div>
+
+<div class="mini-token-card thermal-paper">
+<span class="large-receipt-title">Kitchen Token (Same Number)</span>
+<div class="receipt-brand">axzen<span>POS</span></div>
+<div class="large-token">A001</div>
+<div class="receipt-dash"></div>
+<div class="receipt-meta">
+<div><span>Kitchen</span><strong>Hot Counter</strong></div>
+<div><span>Date</span><strong>02-08-2026</strong></div>
+<div><span>Time</span><strong>11:45 AM</strong></div>
+<div><span>Items</span><strong>4</strong></div>
+</div>
+<div class="receipt-dash"></div>
+<div class="receipt-row"><span>Tea</span><span>2</span><span></span><span></span></div>
+<div class="receipt-row"><span>Coffee</span><span>1</span><span></span><span></span></div>
+<div class="receipt-row"><span>Idli</span><span>2</span><span></span><span></span></div>
+<div class="receipt-row"><span>Dosa</span><span>1</span><span></span><span></span></div>
+<span class="receipt-thanks">Prepare Token A001</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <div class="container language-grid">
 
