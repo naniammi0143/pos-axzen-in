@@ -656,6 +656,24 @@
     .cart-top-actions #clearCart {
       color: var(--red);
     }
+    .cart-mini {
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 32px;
+      display: block;
+      text-align: center;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #1e40af;
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 32px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cart-mini.empty { background: #f4f6f9; color: #94a3b8; font-weight: 700; }
 
     .cart-list {
       display: grid;
@@ -5642,6 +5660,93 @@
     .item-search-empty { grid-column: 1 / -1; text-align: center; color: #64748B; font-weight: 600; }
     @keyframes itemSearchIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
+    .side-drawer .drawer-scroll { padding: 16px 12px 14px; gap: 12px; }
+    .side-drawer .drawer-brand {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      margin: -2px -2px 0;
+      padding: 12px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #0b1f4b 0%, #1d4ed8 100%);
+      color: #fff;
+      box-shadow: 0 12px 26px #1d4ed82e;
+    }
+    .side-drawer .drawer-brand-logo { width: 40px; height: 40px; border-radius: 12px; background: #fff; object-fit: contain; padding: 3px; }
+    .side-drawer .drawer-title { min-width: 0; }
+    .side-drawer .drawer-title strong { display: block; color: #fff; font-size: 16px; font-weight: 800; line-height: 1.2; }
+    .side-drawer .drawer-title small { display: block; color: #c7d7fb; font-size: 11.5px; font-weight: 600; line-height: 1.3; }
+    .side-drawer .drawer-connected {
+      grid-column: auto;
+      margin: 0;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #ffffff1f;
+      color: #bbf7d0;
+      font-size: 11px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .side-drawer .drawer-connected::before { display: block; width: 7px; height: 7px; background: #22c55e; box-shadow: 0 0 0 3px #22c55e33; }
+    .side-drawer .drawer-user {
+      grid-template-columns: 40px minmax(0, 1fr) auto;
+      min-height: 60px;
+      padding: 10px;
+      border: 1px solid #e8edf4;
+      border-radius: 14px;
+      background: #f8fafc;
+      box-shadow: none;
+    }
+    .side-drawer .drawer-user-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e3a8a;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .side-drawer .drawer-user-text { min-width: 0; }
+    .side-drawer .drawer-user-text strong { font-size: 14px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .side-drawer .drawer-user-text small { margin-top: 1px; color: #64748b; font-size: 11px; font-weight: 700; text-transform: capitalize; }
+    .side-drawer .drawer-online { padding: 5px 9px; font-size: 11px; font-weight: 800; }
+    .side-drawer .drawer-section { gap: 2px; padding-top: 10px; }
+    .side-drawer .drawer-section-title { padding: 0 8px 4px; color: #94a3b8; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; }
+    .side-drawer .drawer-item { min-height: 44px; grid-template-columns: 32px 1fr 16px; gap: 10px; padding: 0 8px; font-size: 14px; font-weight: 700; color: #1f2937; }
+    .side-drawer .drawer-item > span:first-child {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #f1f5fb;
+      color: #334155;
+    }
+    .side-drawer .drawer-item > span:first-child svg { width: 17px; height: 17px; }
+    .side-drawer .drawer-item:hover { background: #f5f8fd; }
+    .side-drawer .drawer-item.active { background: linear-gradient(90deg, #0b1f4b, #2563eb); color: #fff; }
+    .side-drawer .drawer-item.active > span:first-child { background: #ffffff24; color: #fff; }
+    .side-drawer .drawer-item .drawer-arrow { color: #cbd5e1; }
+    .side-drawer .drawer-item .drawer-arrow svg { width: 16px; height: 16px; }
+    .side-drawer .drawer-footer { padding: 10px 12px calc(14px + env(safe-area-inset-bottom)); gap: 6px; }
+    .side-drawer .drawer-logout {
+      width: 100%;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 12px;
+      background: #fef2f2;
+      color: #dc2626;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .side-drawer .drawer-logout svg { width: 18px; height: 18px; }
+    .side-drawer .drawer-version { text-align: center; color: #94a3b8; font-size: 11px; font-weight: 600; }
     /* Phone overflow guard: grid/flex children default to min-width:auto, so long
        selects, receipt previews and tables pushed pages wider than the screen. */
     .option-page > *, .work-grid > *, .work-card, .printer-setting-card, .printer-setting-head > *, .option-card, .panel { min-width: 0; }
@@ -5793,7 +5898,7 @@
       <section class="content">
         <div id="billingPanel">
           <div class="tabs" id="categoryTabs"></div>
-          <div class="section-title-row"><h2 id="billingSectionTitle">Popular Items</h2><div class="section-tools"><span id="billingSectionMeta">View All &gt;</span><button class="item-search-toggle" id="itemSearchToggle" type="button" aria-label="Search items" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></div></div>
+          <div class="section-title-row"><h2 id="billingSectionTitle">Popular Items</h2><div class="section-tools"><span id="billingSectionMeta"></span><button class="item-search-toggle" id="itemSearchToggle" type="button" aria-label="Search items" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></div></div>
           <div class="item-search-bar hidden" id="itemSearchBar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
             <input id="itemSearch" type="search" placeholder="Search item name or category" autocomplete="off" enterkeyhint="search" aria-label="Search items">
@@ -5820,6 +5925,7 @@
           </div>
           <div class="cart-top-actions">
             <button class="cart-view-btn" id="viewCartBtn" type="button" aria-label="View order"><svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <span class="cart-mini empty" id="cartMini">No items</span>
             <button id="clearCart" type="button"><svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v5"/><path d="M14 11v5"/></svg>Clear</button>
           </div>
           <div class="cart-list" id="cartList"></div>
@@ -5849,7 +5955,6 @@
         </div>
         <div class="admin-meta">
           <div class="admin-brand">
-            <strong>axzen Infotech</strong>
             <strong id="adminCanteen">Main Canteen</strong>
           </div>
           <div class="admin-filters">
@@ -6821,7 +6926,7 @@
       renderCategories();
       if ($("posView")) $("posView").classList.toggle("chicken-mode", !query && isChickenCategory(activeCategory));
       if ($("billingSectionTitle")) $("billingSectionTitle").textContent = query ? "Search Results" : activeCategory === "All" ? "Popular Items" : categoryLabel(activeCategory);
-      if ($("billingSectionMeta")) $("billingSectionMeta").textContent = query ? "All categories" : isChickenCategory(activeCategory) ? "Tap item: kg + amount" : activeCategory === "All" ? "View All >" : "Category items";
+      if ($("billingSectionMeta")) $("billingSectionMeta").textContent = query ? "All categories" : isChickenCategory(activeCategory) ? "Tap item: kg + amount" : activeCategory === "All" ? "" : "Category items";
       const baseProducts = shopBillingProducts();
       const visible = (query
         ? baseProducts
@@ -7251,6 +7356,13 @@
       const qty = cart.reduce((sum, item) => sum + item.qty, 0);
       $("cartTitle").textContent = "Current Order";
       $("cartSubtitle").textContent = qty ? `${cart.length} items • ${qty} qty` : "Cart empty";
+      const cartMini = $("cartMini");
+      if (cartMini) {
+        const miniText = !cart.length ? "No items" : cart.length <= 2 ? cart.map((item) => localizedName(item)).join(", ") : `${cart.length} items`;
+        cartMini.textContent = miniText;
+        cartMini.title = cart.length ? cart.map((item) => localizedName(item)).join(", ") : "";
+        cartMini.classList.toggle("empty", !cart.length);
+      }
       if ($("cartSubtotal")) $("cartSubtotal").textContent = money(subtotal);
       const discountNode = document.querySelector(".cart-summary .green strong");
       if (discountNode) discountNode.textContent = `- ${money(cartDiscount)}`;
@@ -10663,12 +10775,13 @@
           <aside class="side-drawer">
             <div class="drawer-scroll">
             <div class="drawer-brand">
-                <div class="drawer-title"><strong>${esc(settings.canteenName || "Main Canteen")}</strong></div>
-                <div class="drawer-connected">Connected</div>
+                <img class="drawer-brand-logo" src="assets/axzenPOS.png" alt="" onerror="this.remove()">
+                <div class="drawer-title"><strong>Axzen POS</strong><small>Billing &amp; Management</small></div>
+                <span class="drawer-connected">Connected</span>
               </div>
               <div class="drawer-user">
-                <div class="drawer-user-icon">${lucideIcon("user", 22)}</div>
-                <div><small>${esc(user?.role || "Cashier")}</small><strong>${esc(user?.name || "Venkatesh")}</strong></div>
+                <div class="drawer-user-icon">${esc(String(user?.name || "U").trim().split(/\s+/).map((part) => part[0]).join("").slice(0, 2).toUpperCase() || "U")}</div>
+                <div class="drawer-user-text"><strong>${esc(user?.name || "User")}</strong><small>${esc(user?.role || "Cashier")}</small></div>
                 <span class="drawer-online">Online</span>
               </div>
               <section class="drawer-section">
@@ -10704,7 +10817,7 @@
               </section>
             </div>
             <div class="drawer-footer">
-              <button class="drawer-logout" id="menuLogout" type="button">${lucideIcon("logOut", 18)} Logout</button>
+              <button class="drawer-logout" id="menuLogout" type="button">${lucideIcon("logOut", 18)}<span>Logout</span></button>
               <div class="drawer-version">App Version ${appBuild}</div>
             </div>
           </aside>
@@ -10738,12 +10851,7 @@
       if ($("dayCloseBtn")) $("dayCloseBtn").addEventListener("click", openDayCloseModal);
       $("menuLogout").addEventListener("click", logout);
       setTimeout(() => { menuOpening = false; }, 350);
-      loadAdminData().then(() => {
-        if ($("optionsModalMount").innerHTML) {
-          const title = document.querySelector(".drawer-title strong");
-          if (title) title.textContent = settings.canteenName || "Main Canteen";
-        }
-      }).catch(() => {});
+      loadAdminData().catch(() => {});
     }
 
     function closeOptionsModal() {
