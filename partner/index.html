@@ -5658,7 +5658,142 @@
     .item-search-bar input::-webkit-search-cancel-button { display: none; }
     .item-search-bar button { width: 32px; height: 32px; flex: 0 0 32px; padding: 0; border: 0; border-radius: 10px; background: #F1F5F9; color: #475569; font-size: 20px; line-height: 1; }
     .item-search-empty { grid-column: 1 / -1; text-align: center; color: #64748B; font-weight: 600; }
+    @keyframes navIconPop { 0% { transform: scale(.8); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
     @keyframes itemSearchIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+    .cart-peek { display: none; }
+    .cart-pay-row { display: contents; }
+    @media (orientation: portrait) {
+      html.pos-layout-compact #posView .cart-label-long { display: none !important; }
+      html.pos-layout-compact #posView .cart-pay-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+        gap: 10px;
+        align-items: stretch;
+        margin-top: 2px;
+      }
+      html.pos-layout-compact #posView .cart-pay-row .place {
+        order: -1;
+        width: 100% !important;
+        min-height: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        padding: 0 12px !important;
+        gap: 8px !important;
+        border-radius: 14px !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        background: linear-gradient(135deg, #10c766, #06a04f) !important;
+        box-shadow: 0 10px 20px #08b85a33 !important;
+        transition: transform .15s ease, box-shadow .15s ease, filter .15s ease !important;
+      }
+      html.pos-layout-compact #posView .cart-pay-row .place svg { width: 18px !important; height: 18px !important; }
+      html.pos-layout-compact #posView .cart-pay-row .place:active { transform: scale(.96) !important; box-shadow: 0 4px 10px #08b85a33 !important; filter: brightness(.95) !important; }
+      html.pos-layout-compact #posView .cart-total-row {
+        min-width: 0;
+        height: 50px;
+        margin: 0 !important;
+        padding: 0 14px !important;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #0b1f4b 0%, #16357a 100%);
+        box-shadow: 0 10px 20px #0b1f4b2e;
+        gap: 8px !important;
+      }
+      html.pos-layout-compact #posView .cart-total-label { color: #c9d6f2 !important; font-size: 13px !important; font-weight: 700 !important; }
+      html.pos-layout-compact #posView .cart-total-row #cartTotal {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #ff9f1c !important;
+        font-size: 18px !important;
+        font-weight: 900 !important;
+        line-height: 1.1 !important;
+      }
+      html.pos-layout-compact #posView .cart-total-row #cartTotal.long { font-size: 15px !important; }
+      html.pos-layout-compact #posView .cart-total-row { padding: 0 12px !important; }
+
+      html.pos-layout-compact #posView .bottom-nav button {
+        transition: background .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html.pos-layout-compact #posView .bottom-nav button:active { transform: scale(.94) !important; }
+      html.pos-layout-compact #posView .bottom-nav button.active {
+        background: linear-gradient(135deg, #0b1f4b, #1d4ed8) !important;
+        color: #fff !important;
+        box-shadow: 0 8px 18px #1d4ed840 !important;
+      }
+      html.pos-layout-compact #posView .bottom-nav button.active::after { display: none !important; }
+      html.pos-layout-compact #posView .bottom-nav button.active b { color: #fff !important; font-weight: 800 !important; }
+      html.pos-layout-compact #posView .bottom-nav button.active span { animation: navIconPop .35s ease; }
+      html.pos-layout-compact #posView .bottom-nav button.active .delivery-nav-icon { filter: brightness(0) invert(1); }
+
+      html.pos-layout-compact #posView .cart-inner { position: relative !important; }
+      html.pos-layout-compact #posView .cart-summary-chip,
+      html.pos-layout-compact #posView #cartMini { display: none !important; }
+      html.pos-layout-compact #posView .cart-head { min-height: 36px !important; margin-bottom: 6px !important; padding-right: 134px !important; }
+      html.pos-layout-compact #posView .cart-title-wrap { display: flex !important; align-items: baseline !important; gap: 8px !important; min-width: 0 !important; }
+      html.pos-layout-compact #posView .cart-head #cartTitle { font-size: 15px !important; white-space: nowrap !important; }
+      html.pos-layout-compact #posView .cart-head #cartSubtitle { display: block !important; color: #64748b !important; font-size: 12px !important; font-weight: 700 !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+      html.pos-layout-compact #posView .cart-top-actions {
+        position: absolute !important;
+        top: 11px !important;
+        right: 18px !important;
+        margin: 0 !important;
+        gap: 8px !important;
+        justify-content: flex-end !important;
+      }
+      html.pos-layout-compact #posView .cart-top-actions #clearCart,
+      html.pos-layout-compact #posView .cart-top-actions .cart-view-btn {
+        border: 0 !important;
+        transition: transform .15s ease, background .15s ease !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html.pos-layout-compact #posView .cart-top-actions #clearCart { padding: 0 12px !important; background: #fef2f2 !important; color: #dc2626 !important; }
+      html.pos-layout-compact #posView .cart-top-actions .cart-view-btn { background: #eef4ff !important; color: #1d4ed8 !important; }
+      html.pos-layout-compact #posView .cart-top-actions #clearCart:active { background: #fee2e2 !important; transform: scale(.94) !important; }
+      html.pos-layout-compact #posView .cart-top-actions .cart-view-btn:active { background: #dbe7ff !important; transform: scale(.94) !important; }
+      html.pos-layout-compact #posView #posMessage:empty { display: none !important; }
+      html.pos-layout-compact #posView .cart-peek {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 21px;
+        grid-auto-flow: row dense;
+        gap: 4px 8px;
+        height: 96px;
+        margin: 0 0 6px;
+        overflow: hidden;
+      }
+      .cart-peek .peek-row {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        padding: 0 8px;
+        border-radius: 8px;
+        background: #f4f7fc;
+        color: #1f2937;
+        font-size: 12.5px;
+        font-weight: 700;
+        line-height: 21px;
+      }
+      .cart-peek .peek-row span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .cart-peek .peek-row b { flex: 0 0 auto; color: #1d4ed8; font-weight: 800; }
+      .cart-peek .peek-row.wide { grid-column: 1 / -1; }
+      .cart-peek .peek-row.more { justify-content: center; background: #e8f0ff; color: #1d4ed8; font-weight: 800; }
+      .cart-peek .peek-empty {
+        grid-column: 1 / -1;
+        grid-row: 1 / span 4;
+        display: grid;
+        place-items: center;
+        border: 1px dashed #d5dde8;
+        border-radius: 10px;
+        color: #94a3b8;
+        font-size: 12.5px;
+        font-weight: 600;
+      }
+    }
 
     .side-drawer .drawer-scroll { padding: 16px 12px 14px; gap: 12px; }
     .side-drawer .drawer-brand {
@@ -5928,17 +6063,20 @@
             <span class="cart-mini empty" id="cartMini">No items</span>
             <button id="clearCart" type="button"><svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v5"/><path d="M14 11v5"/></svg>Clear</button>
           </div>
+          <div class="cart-peek" id="cartPeek"></div>
           <div class="cart-list" id="cartList"></div>
           <div class="cart-summary">
             <div class="row-between"><span>Subtotal</span><strong id="cartSubtotal">Rs 0</strong></div>
             <div class="row-between green"><span>Discount</span><strong>- Rs 0</strong></div>
             <div class="row-between"><span>GST (0%)</span><strong>Rs 0</strong></div>
           </div>
-          <div class="row-between">
-            <strong>Total Amount</strong>
+          <div class="cart-pay-row">
+          <div class="row-between cart-total-row">
+            <strong class="cart-total-label">Total<span class="cart-label-long"> Amount</span></strong>
             <strong id="cartTotal">Rs 0</strong>
           </div>
-          <button class="primary place" id="placeOrder">Proceed to Payment <svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></button>
+          <button class="primary place" id="placeOrder"><span class="cart-label-long">Proceed to </span><span class="place-label">Payment</span> <svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></button>
+          </div>
           <div class="status" id="posMessage"></div>
         </div>
       </section>
@@ -6129,6 +6267,11 @@
       applyNativeSafeArea();
     }
     window.addEventListener("resize", applyPosLayoutMode);
+    let cartPeekResizeTimer = 0;
+    window.addEventListener("resize", () => {
+      clearTimeout(cartPeekResizeTimer);
+      cartPeekResizeTimer = setTimeout(() => { if (cart.length) renderCart(); }, 180);
+    });
     function updateDesktopNavigation() {
       const desktop = !window.Capacitor && window.innerWidth >= 1100 && window.innerWidth > window.innerHeight && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
       document.documentElement.classList.toggle("pos-layout-desktop", desktop);
@@ -7349,6 +7492,13 @@
       }
     }
 
+    let cartPeekCanvas = null;
+    function cartPeekMeasureContext() {
+      if (!cartPeekCanvas) cartPeekCanvas = document.createElement("canvas").getContext("2d");
+      if (cartPeekCanvas) cartPeekCanvas.font = `700 12.5px ${getComputedStyle(document.body).fontFamily || "sans-serif"}`;
+      return cartPeekCanvas;
+    }
+
     function renderCart() {
       const subtotal = cart.reduce((sum, item) => sum + cartLineTotal(item), 0);
       cartDiscount = Math.min(subtotal, Math.max(0, Number(cartDiscount || 0)));
@@ -7363,10 +7513,34 @@
         cartMini.title = cart.length ? cart.map((item) => localizedName(item)).join(", ") : "";
         cartMini.classList.toggle("empty", !cart.length);
       }
+      const cartPeek = $("cartPeek");
+      if (cartPeek) {
+        const peekSlots = 8;
+        const columnWidth = Math.max(0, (cartPeek.clientWidth - 8) / 2);
+        const measure = cartPeekMeasureContext();
+        let usedSlots = 0;
+        const peekRows = [];
+        for (let index = 0; index < cart.length; index += 1) {
+          const item = cart[index];
+          const name = localizedName(item);
+          const qtyText = item.weightUnit ? formatQtyUnit(item.qty, item.weightUnit) : `×${item.qty}`;
+          const wide = columnWidth > 0 && measure && measure.measureText(`${name}  ${qtyText}`).width + 22 > columnWidth;
+          const cost = wide ? 2 : 1;
+          const reserveMore = index < cart.length - 1 ? 1 : 0;
+          if (usedSlots + cost + reserveMore > peekSlots) break;
+          usedSlots += cost;
+          peekRows.push(`<div class="peek-row${wide ? " wide" : ""}"><span>${esc(name)}</span><b>${esc(qtyText)}</b></div>`);
+        }
+        const more = cart.length - peekRows.length;
+        cartPeek.innerHTML = cart.length
+          ? `${peekRows.join("")}${more > 0 ? `<div class="peek-row more">+${more} more</div>` : ""}`
+          : `<div class="peek-empty">Tap items to add to the order</div>`;
+      }
       if ($("cartSubtotal")) $("cartSubtotal").textContent = money(subtotal);
       const discountNode = document.querySelector(".cart-summary .green strong");
       if (discountNode) discountNode.textContent = `- ${money(cartDiscount)}`;
       $("cartTotal").textContent = money(total);
+      $("cartTotal").classList.toggle("long", money(total).length > 11);
       $("cartList").innerHTML = cart.map((item, index) => `
         <div class="cart-row">
           <span class="cart-index">${index + 1}</span>
