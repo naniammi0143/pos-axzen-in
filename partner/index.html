@@ -117,6 +117,15 @@
       object-fit: contain;
     }
     .powered { margin: 0 0 5px; color: var(--muted); font-size: 11px; font-weight: 800; text-transform: uppercase; }
+    .pos-login-art { width: min(340px, 100%); margin: -10px auto -12px; line-height: 0; justify-self: center; }
+    .pos-login-art svg { width: 100%; height: auto; display: block; }
+    .pos-art-float { transform-box: fill-box; animation: posArtFloat 4s ease-in-out infinite; }
+    .pos-art-float.late { animation-delay: -2s; }
+    .pos-art-steam { animation: posArtSteam 2.4s ease-in-out infinite; }
+    @keyframes posArtFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @keyframes posArtSteam { 0%, 100% { opacity: .3; transform: translateY(1px); } 50% { opacity: 1; transform: translateY(-2px); } }
+    @media (max-height: 620px) { .pos-login-art { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .pos-art-float, .pos-art-steam { animation: none; } }
     .brand-name { margin: 0; font-size: 48px; line-height: .95; letter-spacing: 0; color: var(--ink); }
     .tagline { margin: 7px 0 0; color: var(--blue); font-size: 15px; font-weight: 900; text-transform: uppercase; }
 
@@ -277,24 +286,78 @@
     .sub-chip { flex: 0 0 auto; min-height: 28px; border-radius: 999px; padding: 6px 10px; background: #e8f6ea; color: #166534; font-size: 12px; font-weight: 800; }
     .sub-chip.warn { background: #fff6df; color: #b45309; }
     .sub-chip.expired { background: #fef2f2; color: #b91c1c; }
-    .sub-plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; }
-    .sub-plan {
+    .subscription-sheet { position: relative; }
+    .sub-close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .22); color: #fff; font-size: 22px; line-height: 1; }
+    .sub-hero {
+      position: relative;
       display: grid;
-      gap: 4px;
-      min-height: 108px;
+      grid-template-columns: minmax(0, 1fr) 128px;
+      align-items: center;
+      gap: 8px;
+      margin: -22px -22px 0;
+      padding: 22px 18px 20px 22px;
+      border-radius: 20px 20px 0 0;
+      background: radial-gradient(120% 140% at 100% 0%, #3B82F6 0%, #1D4ED8 42%, #0B1F4B 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+    .subscription-panel .sub-hero { border-radius: 20px; margin: -22px -22px 0; }
+    .sub-hero .sub-kicker { color: rgba(255, 255, 255, .72); }
+    .sub-hero h2, .subscription-panel .sub-hero h2 { margin: 4px 0 0; color: #fff; font-size: 24px; line-height: 1.15; font-weight: 750; }
+    .sub-hero p { margin: 6px 0 10px; color: rgba(255, 255, 255, .82); font-size: 13px; font-weight: 500; line-height: 1.45; }
+    .sub-hero .sub-chip { display: inline-flex; align-items: center; background: rgba(255, 255, 255, .16); color: #fff; border: 1px solid rgba(255, 255, 255, .28); }
+    .sub-hero .sub-chip.warn { background: #FEF3C7; color: #92400E; border-color: transparent; }
+    .sub-hero .sub-chip.expired { background: #FEE2E2; color: #B91C1C; border-color: transparent; }
+    .sub-hero-art { width: 128px; height: auto; display: block; animation: posArtFloat 4.5s ease-in-out infinite; }
+    .sub-section-title { margin: 2px 0 -6px; color: #0B1F4B; font-size: 14px; font-weight: 750; }
+    .sub-plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; padding-top: 8px; }
+    .sub-plan {
+      position: relative;
+      display: grid;
+      gap: 3px;
+      min-height: 112px;
       align-content: start;
-      border: 1px solid #e6e8ec;
+      border: 1.5px solid #E2E8F0;
       border-radius: 14px;
       background: #fff;
       padding: 14px;
       text-align: left;
       color: #172033;
+      transition: border-color .16s ease, box-shadow .16s ease, transform .12s ease;
     }
-    .sub-plan strong { font-size: 14px; font-weight: 750; }
-    .sub-plan b { font-size: 18px; font-weight: 750; color: #12351a; }
-    .sub-plan small { color: #667085; font-size: 12px; font-weight: 650; }
-    .sub-plan.selected { border-color: #4f9a55; background: #f3faf4; box-shadow: inset 0 0 0 1px #4f9a55; }
-    .sub-pay { min-height: 48px; border: 0; border-radius: 12px; background: #4f9a55; color: #fff; font-size: 16px; font-weight: 750; }
+    .sub-plan-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .sub-plan strong { font-size: 14px; font-weight: 700; color: #334155; }
+    .sub-plan b { margin-top: 4px; font-size: 22px; font-weight: 800; color: #0B1F4B; letter-spacing: -.01em; }
+    .sub-plan small { color: #64748B; font-size: 12px; font-weight: 600; }
+    .sub-plan-radio { width: 18px; height: 18px; flex: 0 0 18px; border: 2px solid #CBD5E1; border-radius: 50%; background: #fff; }
+    .sub-plan-save { justify-self: start; margin-top: 6px; padding: 3px 8px; border-radius: 999px; background: #DCFCE7; color: #15803D; font-size: 11px; font-weight: 800; }
+    .sub-plan-save.plain { background: #F1F5F9; color: #475569; }
+    .sub-plan.selected { border-color: #1E6BFF; background: #F5F9FF; box-shadow: 0 10px 24px rgba(30, 107, 255, .14); }
+    .sub-plan.selected .sub-plan-radio { border-color: #1E6BFF; background: radial-gradient(circle, #1E6BFF 0 45%, #fff 50%); }
+    .sub-plan.recommended { grid-column: 1 / -1; border-color: #F59E0B; background: linear-gradient(135deg, #FFFBEB, #FFFFFF 60%); padding-top: 18px; }
+    .sub-plan.recommended.selected { border-color: #1E6BFF; background: linear-gradient(135deg, #EFF6FF, #FFFFFF 60%); }
+    .sub-plan.recommended b { font-size: 26px; }
+    .sub-plan-badge { position: absolute; top: -11px; left: 14px; padding: 4px 10px; border-radius: 999px; background: linear-gradient(90deg, #F59E0B, #F97316); color: #fff; font-size: 11px; font-style: normal; font-weight: 800; letter-spacing: .02em; box-shadow: 0 6px 14px rgba(249, 115, 22, .3); }
+    .sub-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; padding: 12px 14px; border-radius: 14px; background: #F8FAFC; border: 1px solid #EEF2F7; }
+    .sub-features span { display: flex; align-items: flex-start; gap: 7px; color: #334155; font-size: 12.5px; font-weight: 600; line-height: 1.35; }
+    .sub-features i { flex: 0 0 16px; width: 16px; height: 16px; border-radius: 50%; background: #DCFCE7; color: #16A34A; font-size: 10px; font-style: normal; font-weight: 900; display: grid; place-items: center; }
+    .sub-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: -6px; }
+    .sub-trust span { padding: 4px 9px; border-radius: 999px; background: #F1F5F9; color: #475569; font-size: 11px; font-weight: 700; }
+    .sub-trust span:first-child { background: #ECFDF5; color: #047857; }
+    .sub-note { text-align: center; font-size: 12px !important; }
+    .subscription-sheet .sub-pay { position: sticky; bottom: 0; z-index: 1; }
+    @media (max-width: 420px) {
+      .subscription-gate { padding: 12px; align-items: end; }
+      .subscription-sheet { padding: 18px; max-height: calc(100dvh - 24px); }
+      .sub-hero { margin: -18px -18px 0; padding: 18px 14px 16px 18px; grid-template-columns: minmax(0, 1fr) 96px; }
+      .sub-hero-art { width: 96px; }
+      .sub-hero h2, .subscription-panel .sub-hero h2 { font-size: 21px; }
+      .sub-plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sub-plan { padding: 12px; min-height: 104px; }
+      .sub-plan b { font-size: 19px; }
+      .sub-features { grid-template-columns: 1fr; }
+    }
+    .sub-pay { min-height: 50px; border: 0; border-radius: 12px; background: linear-gradient(90deg, #1E6BFF, #1D4ED8); color: #fff; font-size: 16px; font-weight: 750; box-shadow: 0 12px 24px rgba(30, 107, 255, .28); }
     .sub-pay:disabled { opacity: .6; }
     .sub-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .sub-actions .secondary { min-height: 46px; padding: 0 16px; }
@@ -5507,6 +5570,26 @@
       #posView .report-modern-actions.report-share-actions svg { width:16px !important; height:16px !important; flex:0 0 16px !important; }
     }
     .recent-reprint {display:block;margin-top:8px;padding:6px 12px;border:1px solid #bfdbfe;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-weight:700;min-height:34px;cursor:pointer}
+
+    /* Phone overflow guard: grid/flex children default to min-width:auto, so long
+       selects, receipt previews and tables pushed pages wider than the screen. */
+    .option-page > *, .work-grid > *, .work-card, .printer-setting-card, .printer-setting-head > *, .option-card, .panel { min-width: 0; }
+    .work-card select, .work-card input, .option-card select, .option-card input, .printer-setting-card select, .printer-setting-card label {
+      max-width: 100%;
+      min-width: 0;
+    }
+    .work-card select, .option-card select, .printer-setting-card select { width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+    .receipt-preview-wrap { width: min(384px, 100%); overflow-x: auto; }
+    .receipt-preview-wrap pre { width: fit-content; margin: 0 auto; }
+    .work-card table, .option-card table { max-width: 100%; }
+    .work-card .table-scroll, .option-card .table-scroll { overflow-x: auto; }
+    @media (max-width: 760px) {
+      .printer-settings-grid { grid-template-columns: 1fr !important; }
+      .work-header { min-width: 0; flex-wrap: wrap; }
+      .work-header > * { min-width: 0; }
+      .printer-setting-head { flex-wrap: wrap; }
+      #posView .option-page { max-width: 100%; overflow-x: hidden; }
+    }
   </style>
 </head>
 <body>
@@ -5518,6 +5601,62 @@
           <p class="powered">Powered by</p>
           <img class="powered-by-logo" src="assets/poweredby.png" alt="Powered by Axzen">
         </div>
+      </div>
+      <div class="pos-login-art" aria-hidden="true">
+        <svg viewBox="0 0 340 170">
+          <defs>
+            <linearGradient id="posArtGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFDBFE"/><stop offset="1" stop-color="#EFF6FF" stop-opacity="0"/></linearGradient>
+          </defs>
+          <circle cx="170" cy="92" r="84" fill="url(#posArtGlow)"/>
+          <rect x="30" y="130" width="280" height="12" rx="5" fill="#CBD5E1"/>
+          <rect x="44" y="142" width="252" height="20" rx="3" fill="#E2E8F0"/>
+          <rect x="60" y="148" width="100" height="8" rx="3" fill="#F1F5F9"/>
+          <rect x="180" y="148" width="100" height="8" rx="3" fill="#F1F5F9"/>
+          <ellipse cx="78" cy="128" rx="30" ry="5" fill="#FFFFFF"/>
+          <path d="M54 126c2-14 12-22 24-22s22 8 24 22Z" fill="#FBBF24"/>
+          <path d="M62 120c4-6 10-9 16-9" stroke="#F59E0B" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          <path d="M100 104h16v18c0 4-3 6-8 6s-8-2-8-6Z" fill="#FFFFFF"/>
+          <path d="M116 108c5 0 6 8 0 8" stroke="#FFFFFF" stroke-width="2.4" fill="none"/>
+          <rect x="100" y="104" width="16" height="4" fill="#8B5E3C"/>
+          <g class="pos-art-steam"><path d="M104 98c-2-3 2-5 0-8" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M111 98c-2-3 2-5 0-8" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" fill="none"/></g>
+          <path d="M160 118h30l6 12h-42Z" fill="#475569"/>
+          <rect x="124" y="40" width="102" height="80" rx="9" fill="#0F172A"/>
+          <rect x="130" y="46" width="90" height="68" rx="5" fill="#FFFFFF"/>
+          <rect x="130" y="46" width="90" height="12" rx="5" fill="#007AFF"/>
+          <rect x="130" y="52" width="90" height="6" fill="#007AFF"/>
+          <circle cx="137" cy="52" r="2.2" fill="#FFFFFF"/>
+          <rect x="143" y="50.5" width="26" height="3" rx="1.5" fill="#FFFFFF" opacity=".8"/>
+          <g fill="#E2E8F0"><rect x="136" y="64" width="40" height="4" rx="2"/><rect x="136" y="73" width="32" height="4" rx="2"/><rect x="136" y="82" width="44" height="4" rx="2"/></g>
+          <g fill="#94A3B8"><rect x="200" y="64" width="14" height="4" rx="2"/><rect x="200" y="73" width="14" height="4" rx="2"/><rect x="200" y="82" width="14" height="4" rx="2"/></g>
+          <rect x="136" y="91" width="78" height="1.5" fill="#E2E8F0"/>
+          <rect x="136" y="97" width="22" height="5" rx="2" fill="#0F172A"/>
+          <rect x="180" y="95" width="34" height="13" rx="4" fill="#22C55E"/>
+          <text x="197" y="104.5" text-anchor="middle" font-size="7.5" font-weight="800" fill="#FFFFFF" font-family="Inter, Arial, sans-serif">PAY</text>
+          <path class="pos-art-paper" d="M252 62h32v42h-32Z" fill="#FFFFFF"/>
+          <path d="M252 62l4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4v4h-32Z" fill="#E2E8F0"/>
+          <g fill="#CBD5E1"><rect x="257" y="72" width="22" height="2.5" rx="1"/><rect x="257" y="78" width="16" height="2.5" rx="1"/><rect x="257" y="84" width="22" height="2.5" rx="1"/><rect x="262" y="92" width="12" height="3" rx="1" fill="#94A3B8"/></g>
+          <rect x="242" y="100" width="52" height="30" rx="7" fill="#1E293B"/>
+          <rect x="248" y="100" width="40" height="5" rx="2" fill="#0F172A"/>
+          <circle cx="284" cy="120" r="3" fill="#22C55E"/>
+          <rect x="250" y="117" width="20" height="4" rx="2" fill="#334155"/>
+          <g class="pos-art-float">
+            <rect x="8" y="30" width="98" height="38" rx="11" fill="#FFFFFF" stroke="#E2E8F0"/>
+            <circle cx="27" cy="49" r="10" fill="#DCFCE7"/>
+            <path d="M22 49l3.6 3.6 6.6-7" stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <text x="42" y="46" font-size="9" font-weight="800" fill="#101828" font-family="Inter, Arial, sans-serif">Bill Paid</text>
+            <text x="42" y="59" font-size="9" font-weight="800" fill="#007AFF" font-family="Inter, Arial, sans-serif">&#8377; 240</text>
+          </g>
+          <g class="pos-art-float late">
+            <rect x="238" y="10" width="94" height="36" rx="11" fill="#FFFFFF" stroke="#E2E8F0"/>
+            <circle cx="256" cy="28" r="10" fill="#FEF3C7"/>
+            <path d="M251 24h10M251 28h10M251 32h6" stroke="#D97706" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <text x="271" y="25" font-size="9" font-weight="800" fill="#101828" font-family="Inter, Arial, sans-serif">KOT Sent</text>
+            <text x="271" y="37" font-size="8" font-weight="700" fill="#64748B" font-family="Inter, Arial, sans-serif">Table 4</text>
+          </g>
+          <circle cx="126" cy="22" r="3" fill="#93C5FD"/>
+          <circle cx="220" cy="18" r="2" fill="#60A5FA"/>
+          <circle cx="322" cy="66" r="2.5" fill="#93C5FD"/>
+        </svg>
       </div>
       <form class="login-card" id="loginForm">
         <h1>Sign in</h1>
@@ -7294,6 +7433,10 @@
       const boldOn = "\x1B\x45\x01";
       const boldOff = "\x1B\x45\x00";
       const doubleHeight = "\x1D\x21\x10";
+      // Many Bluetooth printers ignore ESC a with font B, so the footer is centred with spaces.
+      const smallFontWidth = Math.round(width * 42 / 32);
+      const poweredFooter = () => alignLeft + "\x1B\x4D\x01" + " ".repeat(Math.floor((smallFontWidth - "Powered by".length) / 2)) + "Powered by\n"
+        + normalFont + " ".repeat(Math.floor((width - "Axzen POS System".length) / 2)) + "Axzen POS System";
       const receiptStart = "\n";
       const receiptEnd = "\n";
       const hasWeightItems = (order.items || []).some(item => item.weightUnit || Number(item.qty || 0) % 1 !== 0);
@@ -7356,7 +7499,7 @@
           line,
           boldOn + leftRight("TOTAL", `Rs ${Number(total || 0).toFixed(2)}`),
           boldOff + thick,
-          alignCenter + center("THANK YOU! VISIT AGAIN") + "\n" + boldOff + normalSize + "\x1B\x4D\x01" + alignCenter + "Powered by\n" + normalFont + "Axzen POS System" + alignLeft + receiptEnd
+          alignCenter + center("THANK YOU! VISIT AGAIN") + "\n" + boldOff + normalSize + poweredFooter() + alignLeft + receiptEnd
         ].join("\n");
       }
       return [
@@ -7375,7 +7518,7 @@
         line,
         leftRight("TOTAL", `Rs ${Number(total || 0).toFixed(2)}`),
         thick,
-        center("THANK YOU! VISIT AGAIN") + "\n" + boldOff + normalSize + "\x1B\x4D\x01" + alignCenter + "Powered by\n" + normalFont + "Axzen POS System" + alignLeft + receiptEnd
+        center("THANK YOU! VISIT AGAIN") + "\n" + boldOff + normalSize + poweredFooter() + alignLeft + receiptEnd
       ].join("\n");
     }
 
@@ -10931,19 +11074,71 @@
       return { state, durations, monthlyPrice, daysRemaining, expired, chipClass, chipText, detail };
     }
 
+    function recommendedRechargeMonths(durations) {
+      const months = durations.map(item => Number(item.months));
+      const preferred = Number(subscriptionState?.recommendedMonths || 0);
+      if (months.includes(preferred)) return preferred;
+      if (months.includes(12)) return 12;
+      if (months.includes(6)) return 6;
+      return Math.max(...months, 1);
+    }
+
     function subscriptionPlansHtml() {
       const { durations, monthlyPrice } = subscriptionSummary();
       const selected = durations.some(item => Number(item.months) === Number(selectedRechargeMonths))
         ? Number(selectedRechargeMonths)
         : Number(durations[0]?.months || 1);
       selectedRechargeMonths = selected;
-      return durations.map(item => `
-        <button class="sub-plan ${Number(item.months) === selected ? "selected" : ""}" data-recharge-months="${item.months}" type="button">
-          <strong>${esc(item.label || `${item.months} Months`)}</strong>
-          <b>${money(item.amount)}</b>
-          <small>${money(monthlyPrice)} / month</small>
-        </button>
-      `).join("");
+      const recommended = recommendedRechargeMonths(durations);
+      return durations.map(item => {
+        const months = Math.max(1, Number(item.months || 1));
+        const amount = Number(item.amount || 0);
+        const perMonth = Math.round(amount / months);
+        const fullPrice = monthlyPrice * months;
+        const save = fullPrice > amount ? Math.round((1 - amount / fullPrice) * 100) : 0;
+        const isRecommended = months === recommended && durations.length > 1;
+        return `
+        <button class="sub-plan ${months === selected ? "selected" : ""} ${isRecommended ? "recommended" : ""}" data-recharge-months="${item.months}" type="button">
+          ${isRecommended ? `<em class="sub-plan-badge">&#9733; Recommended</em>` : ""}
+          <span class="sub-plan-top"><strong>${esc(item.label || `${months} Months`)}</strong><i class="sub-plan-radio" aria-hidden="true"></i></span>
+          <b>${money(amount)}</b>
+          <small>${money(perMonth)} / month</small>
+          ${save > 0 ? `<span class="sub-plan-save">Save ${save}%</span>` : months === 1 ? `<span class="sub-plan-save plain">Flexible</span>` : ""}
+        </button>`;
+      }).join("");
+    }
+
+    function subscriptionHeroHtml({ state, chipClass, chipText, detail, titleId = "" }) {
+      return `
+        <div class="sub-hero">
+          <div class="sub-hero-copy">
+            <p class="sub-kicker">SUBSCRIPTION</p>
+            <h2 ${titleId ? `id="${titleId}"` : ""}>${esc(state.planName || "Professional")} Plan</h2>
+            <p>${esc(detail)}</p>
+            <span class="sub-chip ${chipClass}">${esc(chipText)}</span>
+          </div>
+          <svg class="sub-hero-art" viewBox="0 0 140 120" aria-hidden="true">
+            <circle cx="72" cy="62" r="50" fill="#FFFFFF" opacity=".12"/>
+            <rect x="34" y="30" width="64" height="78" rx="10" fill="#FFFFFF"/>
+            <rect x="34" y="30" width="64" height="16" rx="8" fill="#DBEAFE"/>
+            <rect x="34" y="38" width="64" height="8" fill="#DBEAFE"/>
+            <g fill="#E2E8F0"><rect x="42" y="54" width="34" height="5" rx="2.5"/><rect x="42" y="64" width="26" height="5" rx="2.5"/></g>
+            <rect x="42" y="78" width="10" height="20" rx="2" fill="#93C5FD"/><rect x="56" y="70" width="10" height="28" rx="2" fill="#3B82F6"/><rect x="70" y="62" width="10" height="36" rx="2" fill="#22C55E"/>
+            <path d="M104 18l6 12 13 2-9.5 9 2.3 13L104 48l-11.8 6 2.3-13-9.5-9 13-2Z" fill="#FBBF24"/>
+            <circle cx="104" cy="92" r="16" fill="#22C55E"/>
+            <path d="M96 92l5.5 5.5L112 86" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="24" cy="24" r="3" fill="#FFFFFF" opacity=".5"/><circle cx="126" cy="64" r="2.5" fill="#FFFFFF" opacity=".5"/>
+          </svg>
+        </div>`;
+    }
+
+    function subscriptionFeaturesHtml() {
+      const features = ["Unlimited billing & tokens", "KOT & kitchen printing", "Reports & WhatsApp summary", "Cloud sync & backup", "Stock & expense tracking", "Priority support"];
+      return `<div class="sub-features">${features.map(text => `<span><i aria-hidden="true">&#10003;</i>${esc(text)}</span>`).join("")}</div>`;
+    }
+
+    function subscriptionTrustHtml() {
+      return `<div class="sub-trust"><span>&#128274; Secure payment by Cashfree</span><span>UPI</span><span>GPay</span><span>PhonePe</span><span>Card</span></div>`;
     }
 
     function subscriptionPayLabel() {
@@ -10966,20 +11161,16 @@
     }
 
     function planRechargeHtml() {
-      const { state, chipClass, chipText, detail } = subscriptionSummary();
+      const summary = subscriptionSummary();
       return `
         <section class="subscription-panel">
-          <div class="sub-head">
-            <div>
-              <p class="sub-kicker">SUBSCRIPTION</p>
-              <h2>${esc(state.planName || "Professional")}</h2>
-              <p>${esc(detail)}</p>
-            </div>
-            <span class="sub-chip ${chipClass}">${esc(chipText)}</span>
-          </div>
+          ${subscriptionHeroHtml(summary)}
+          <p class="sub-section-title">Choose your plan duration</p>
           <div class="sub-plans">${subscriptionPlansHtml()}</div>
+          ${subscriptionFeaturesHtml()}
           <button class="sub-pay" id="planPayBtn" data-plan-pay type="button">${subscriptionPayLabel()}</button>
-          <p class="sub-note">Cashfree opens next for UPI, Google Pay, PhonePe, Paytm or card. This screen stays open until the payment is confirmed.</p>
+          ${subscriptionTrustHtml()}
+          <p class="sub-note">Cashfree opens next. This screen stays open until the payment is confirmed.</p>
           <div class="status" id="subscriptionStatus">${subscriptionState ? "Select a duration, then pay." : "Loading plan details..."}</div>
         </section>`;
     }
@@ -11027,30 +11218,28 @@
     function renderSubscriptionCheckout() {
       const gate = $("subscriptionGate");
       if (!gate) return;
-      const { state, chipClass, chipText, detail, expired } = subscriptionSummary();
+      const summary = subscriptionSummary();
+      const { expired } = summary;
       gate.innerHTML = `
         <section class="subscription-sheet" role="dialog" aria-modal="true" aria-labelledby="subscriptionSheetTitle">
-          <div class="sub-head">
-            <div>
-              <p class="sub-kicker">SUBSCRIPTION</p>
-              <h2 id="subscriptionSheetTitle">${esc(state.planName || "Professional")}</h2>
-              <p>${esc(detail)}</p>
-            </div>
-            <span class="sub-chip ${chipClass}">${esc(chipText)}</span>
-          </div>
+          ${expired ? "" : `<button class="sub-close" id="gateCloseX" type="button" aria-label="Close">&times;</button>`}
+          ${subscriptionHeroHtml({ ...summary, titleId: "subscriptionSheetTitle" })}
+          <p class="sub-section-title">Choose your plan duration</p>
           <div class="sub-plans">${subscriptionPlansHtml()}</div>
+          ${subscriptionFeaturesHtml()}
           <button class="sub-pay" id="gatePayBtn" data-plan-pay type="button">${subscriptionPayLabel()}</button>
-          <p class="sub-note">Payment stays on this screen. Cashfree opens for UPI, Google Pay, PhonePe, Paytm or card, then this plan is renewed here.</p>
+          ${subscriptionTrustHtml()}
+          <p class="sub-note">Payment stays on this screen. After Cashfree confirms, the plan renews here.</p>
           <div class="status" id="subscriptionStatus">${subscriptionState ? "Select a duration, then pay." : "Loading plan details..."}</div>
           ${expired ? "" : `<div class="sub-actions"><button class="secondary" id="gateCloseBtn" type="button">Not now</button></div>`}
         </section>`;
       gate.classList.remove("hidden");
       $("posView")?.classList.toggle("subscription-expired", expired);
       bindPlanChoices(gate);
-      $("gateCloseBtn")?.addEventListener("click", () => {
+      ["gateCloseBtn", "gateCloseX"].forEach(id => $(id)?.addEventListener("click", () => {
         subscriptionCheckoutOpen = false;
         gate.classList.add("hidden");
-      });
+      }));
     }
 
     async function openSubscriptionCheckout() {
