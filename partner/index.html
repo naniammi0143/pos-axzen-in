@@ -6450,7 +6450,7 @@
     }
 
     async function testServerFromLogin() {
-      $("loginStatus").textContent = `Testing ${API} ...`;
+      $("loginStatus").textContent = "Testing server...";
       $("loginStatus").className = "status";
       try {
         const controller = new AbortController();
@@ -6461,11 +6461,11 @@
         }).finally(() => clearTimeout(timeout));
         const data = await response.json();
         $("loginStatus").textContent = response.ok
-          ? `ONLINE ${API} | DB: ${data.database || "-"} | Mongo: ${data.mongoReady ? "YES" : "NO"}`
-          : `SERVER ERROR ${response.status} | ${API}`;
+          ? `ONLINE | DB: ${data.database || "-"} | Mongo: ${data.mongoReady ? "YES" : "NO"}`
+          : `SERVER ERROR ${response.status}`;
         $("loginStatus").className = response.ok ? "status ok" : "status error";
       } catch (error) {
-        $("loginStatus").textContent = `NO RESPONSE ${API} | ${error.name || "Error"}: ${error.message || "Failed"}`;
+        $("loginStatus").textContent = `NO RESPONSE | ${error.name || "Error"}: ${error.message || "Failed"}`;
         $("loginStatus").className = "status error";
       }
     }
@@ -11741,7 +11741,7 @@
           return;
         }
 
-        $("loginStatus").textContent = `Login failed via ${API}. Tap Test Server.`;
+        $("loginStatus").textContent = "Login failed. Tap Test Server.";
         $("loginStatus").className = "status error";
       }
     }
@@ -11969,7 +11969,7 @@
     if (user) enterApp();
     else {
       show("loginView");
-      $("loginStatus").textContent = `Enter your login details. API: ${API}`;
+      $("loginStatus").textContent = "Enter your login details.";
       loadSettings();
     }
   </script>
