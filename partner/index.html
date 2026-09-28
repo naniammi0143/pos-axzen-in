@@ -5667,7 +5667,7 @@
       html.pos-layout-compact #posView .cart-label-long { display: none !important; }
       html.pos-layout-compact #posView .cart-pay-row {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
         gap: 10px;
         align-items: stretch;
         margin-top: 2px;
@@ -5693,25 +5693,40 @@
         min-width: 0;
         height: 50px;
         margin: 0 !important;
-        padding: 0 14px !important;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #0b1f4b 0%, #16357a 100%);
-        box-shadow: 0 10px 20px #0b1f4b2e;
-        gap: 8px !important;
+        padding: 0 4px 0 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        gap: 2px !important;
+        border: 0 !important;
+        border-left: 1px dashed #cbd5e1 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        pointer-events: none;
+        user-select: none;
       }
-      html.pos-layout-compact #posView .cart-total-label { color: #c9d6f2 !important; font-size: 13px !important; font-weight: 700 !important; }
+      html.pos-layout-compact #posView .cart-total-label {
+        color: #64748b !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        line-height: 1 !important;
+      }
       html.pos-layout-compact #posView .cart-total-row #cartTotal {
+        max-width: 100%;
         min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #fff !important;
-        font-size: 18px !important;
+        color: #0b1f4b !important;
+        font-size: 22px !important;
         font-weight: 900 !important;
-        line-height: 1.1 !important;
+        line-height: 1.05 !important;
       }
-      html.pos-layout-compact #posView .cart-total-row #cartTotal.long { font-size: 15px !important; }
-      html.pos-layout-compact #posView .cart-total-row { padding: 0 12px !important; }
+      html.pos-layout-compact #posView .cart-total-row #cartTotal.long { font-size: 17px !important; }
 
       html.pos-layout-compact #posView .content { padding-top: 4px !important; }
       html.pos-layout-compact #posView .tabs {
