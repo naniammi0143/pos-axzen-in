@@ -278,7 +278,8 @@
       box-shadow: 0 24px 70px rgba(15, 23, 42, .28);
       padding: 22px;
     }
-    .subscription-panel { margin: 0 auto; box-shadow: none; }
+    .subscription-panel { margin: 0 auto; box-shadow: none; max-height: none; overflow: visible; }
+    .subscription-sheet, .subscription-panel { grid-auto-rows: max-content; align-content: start; }
     .sub-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
     .sub-kicker { margin: 0; color: #667085; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
     .sub-head h2, .subscription-panel h2 { margin: 4px 0 0; color: #172033; font-size: 26px; line-height: 1.15; font-weight: 750; }
@@ -338,6 +339,40 @@
     .sub-plan.recommended.selected { border-color: #1E6BFF; background: linear-gradient(135deg, #EFF6FF, #FFFFFF 60%); }
     .sub-plan.recommended b { font-size: 26px; }
     .sub-plan-badge { position: absolute; top: -11px; left: 14px; padding: 4px 10px; border-radius: 999px; background: linear-gradient(90deg, #F59E0B, #F97316); color: #fff; font-size: 11px; font-style: normal; font-weight: 800; letter-spacing: .02em; box-shadow: 0 6px 14px rgba(249, 115, 22, .3); }
+    .sub-hero .sub-hero-meta { margin: 4px 0 0; color: #BFDBFE; font-size: 12px; font-weight: 700; }
+    .sub-tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; padding-top: 8px; }
+    .sub-tier {
+      position: relative;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      padding: 16px 14px 14px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      background: #fff;
+      color: #172033;
+      text-align: left;
+      transition: border-color .16s ease, box-shadow .16s ease;
+    }
+    .sub-tier.selected { border-color: #1E6BFF; background: #F5F9FF; box-shadow: 0 12px 26px rgba(30, 107, 255, .14); }
+    .sub-tier.selected .sub-plan-radio { border-color: #1E6BFF; background: radial-gradient(circle, #1E6BFF 0 45%, #fff 50%); }
+    .sub-tier.recommended { border-color: #F59E0B; padding-top: 20px; }
+    .sub-tier.recommended.selected { border-color: #1E6BFF; }
+    .sub-tier-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .sub-tier-head strong { font-size: 17px; font-weight: 800; color: #0B1F4B; }
+    .sub-tier-current { padding: 3px 9px; border-radius: 999px; background: #DCFCE7; color: #15803D; font-size: 11px; font-weight: 800; }
+    .sub-tier-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 6px; }
+    .sub-tier-price b { font-size: 24px; font-weight: 800; color: #0B1F4B; letter-spacing: -.01em; }
+    .sub-tier-price b.custom-price { font-size: 18px; color: #7C3AED; }
+    .sub-tier-price small { color: #64748B; font-size: 12px; font-weight: 600; }
+    .sub-tier-price s { color: #94A3B8; font-size: 12px; font-weight: 600; }
+    .sub-tier-desc { color: #475569; font-size: 12.5px; font-weight: 500; line-height: 1.4; }
+    .sub-tier-features { display: grid; gap: 6px; padding-top: 8px; border-top: 1px dashed #E2E8F0; }
+    .sub-tier-features span { display: flex; align-items: flex-start; gap: 7px; color: #334155; font-size: 12.5px; font-weight: 600; line-height: 1.35; }
+    .sub-tier-features i { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px; border-radius: 50%; background: #DCFCE7; color: #16A34A; font-size: 10px; font-style: normal; font-weight: 900; display: grid; place-items: center; }
+    .sub-tier.custom .sub-tier-features i { background: #EDE9FE; color: #7C3AED; }
+    .sub-custom-note { display: grid; gap: 4px; padding: 14px; border-radius: 14px; background: #F5F3FF; border: 1px solid #DDD6FE; color: #4C1D95; font-size: 13px; }
+    .sub-custom-note span { color: #6D28D9; font-weight: 500; }
     .sub-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; padding: 12px 14px; border-radius: 14px; background: #F8FAFC; border: 1px solid #EEF2F7; }
     .sub-features span { display: flex; align-items: flex-start; gap: 7px; color: #334155; font-size: 12.5px; font-weight: 600; line-height: 1.35; }
     .sub-features i { flex: 0 0 16px; width: 16px; height: 16px; border-radius: 50%; background: #DCFCE7; color: #16A34A; font-size: 10px; font-style: normal; font-weight: 900; display: grid; place-items: center; }
@@ -5571,6 +5606,42 @@
     }
     .recent-reprint {display:block;margin-top:8px;padding:6px 12px;border:1px solid #bfdbfe;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-weight:700;min-height:34px;cursor:pointer}
 
+    .section-tools { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+    #billingSectionMeta { cursor: pointer; white-space: nowrap; }
+    .item-search-toggle {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 1px solid #DBE6FF;
+      border-radius: 12px;
+      background: #EFF5FF;
+      color: #1E6BFF;
+    }
+    .item-search-toggle svg { width: 18px; height: 18px; }
+    .item-search-toggle.active { background: #1E6BFF; border-color: #1E6BFF; color: #fff; }
+    .item-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: -6px 0 14px;
+      padding: 0 6px 0 12px;
+      min-height: 46px;
+      border: 1.5px solid #1E6BFF;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(30, 107, 255, .12);
+      animation: itemSearchIn .18s ease both;
+    }
+    .item-search-bar.hidden { display: none !important; }
+    .item-search-bar > svg { width: 18px; height: 18px; flex: 0 0 18px; color: #64748B; }
+    .item-search-bar input { flex: 1 1 auto; min-width: 0; min-height: 42px; border: 0 !important; outline: 0; background: transparent !important; box-shadow: none !important; padding: 0 !important; font-size: 15px; font-weight: 600; color: #0F172A; }
+    .item-search-bar input::-webkit-search-cancel-button { display: none; }
+    .item-search-bar button { width: 32px; height: 32px; flex: 0 0 32px; padding: 0; border: 0; border-radius: 10px; background: #F1F5F9; color: #475569; font-size: 20px; line-height: 1; }
+    .item-search-empty { grid-column: 1 / -1; text-align: center; color: #64748B; font-weight: 600; }
+    @keyframes itemSearchIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
     /* Phone overflow guard: grid/flex children default to min-width:auto, so long
        selects, receipt previews and tables pushed pages wider than the screen. */
     .option-page > *, .work-grid > *, .work-card, .printer-setting-card, .printer-setting-head > *, .option-card, .panel { min-width: 0; }
@@ -5722,7 +5793,12 @@
       <section class="content">
         <div id="billingPanel">
           <div class="tabs" id="categoryTabs"></div>
-          <div class="section-title-row"><h2 id="billingSectionTitle">Popular Items</h2><span id="billingSectionMeta">View All &gt;</span></div>
+          <div class="section-title-row"><h2 id="billingSectionTitle">Popular Items</h2><div class="section-tools"><span id="billingSectionMeta">View All &gt;</span><button class="item-search-toggle" id="itemSearchToggle" type="button" aria-label="Search items" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></div></div>
+          <div class="item-search-bar hidden" id="itemSearchBar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="itemSearch" type="search" placeholder="Search item name or category" autocomplete="off" enterkeyhint="search" aria-label="Search items">
+            <button id="itemSearchClear" type="button" aria-label="Close search">&times;</button>
+          </div>
           <div class="menu-grid" id="menuGrid"></div>
         </div>
         <div class="option-page hidden" id="optionPage"></div>
@@ -6348,7 +6424,7 @@
       if (activePosSection === "dinein" && window.DineIn.back()) return true;
       if ($("adminView") && !$("adminView").classList.contains("hidden")) { show("posView"); setPosSection("billing"); return true; }
       if (activePosSection !== "billing") { setPosSection("billing"); return true; }
-      if (itemSearch) { itemSearch = ""; $("itemSearch").value = ""; renderProducts(); return true; }
+      if (itemSearch || !$("itemSearchBar")?.classList.contains("hidden")) { setItemSearchOpen(false); return true; }
       if (!showingCategoryHome) { showingCategoryHome = true; renderProducts(); return true; }
       return false;
     };
@@ -6737,17 +6813,19 @@
 
     function renderProducts() {
       if (activeCategory === "Half Items") activeCategory = singleItemsCategory;
-      if (showingCategoryHome) {
+      const query = itemSearch.trim().toLowerCase();
+      if (showingCategoryHome && !query) {
         renderCategoryHome();
         return;
       }
       renderCategories();
-      if ($("posView")) $("posView").classList.toggle("chicken-mode", isChickenCategory(activeCategory));
-      if ($("billingSectionTitle")) $("billingSectionTitle").textContent = activeCategory === "All" ? "Popular Items" : categoryLabel(activeCategory);
-      if ($("billingSectionMeta")) $("billingSectionMeta").textContent = isChickenCategory(activeCategory) ? "Tap item: kg + amount" : activeCategory === "All" ? "View All >" : "Category items";
-      const query = itemSearch.trim().toLowerCase();
+      if ($("posView")) $("posView").classList.toggle("chicken-mode", !query && isChickenCategory(activeCategory));
+      if ($("billingSectionTitle")) $("billingSectionTitle").textContent = query ? "Search Results" : activeCategory === "All" ? "Popular Items" : categoryLabel(activeCategory);
+      if ($("billingSectionMeta")) $("billingSectionMeta").textContent = query ? "All categories" : isChickenCategory(activeCategory) ? "Tap item: kg + amount" : activeCategory === "All" ? "View All >" : "Category items";
       const baseProducts = shopBillingProducts();
-      const visible = (activeCategory === "All"
+      const visible = (query
+        ? baseProducts
+        : activeCategory === "All"
         ? baseProducts
         : isChickenCategory(activeCategory)
         ? [...chickenProductsForMenu(), ...baseProducts.filter(item => isChickenCategory(item.category) && !isChickenProduct(item))]
@@ -6782,7 +6860,24 @@
           </span>
         </button>
       `;
-      }).join("") || `<div class="panel">No menu items</div>`;
+      }).join("") || (query ? `<div class="panel item-search-empty">No items found for "${esc(itemSearch.trim())}"</div>` : `<div class="panel">No menu items</div>`);
+    }
+
+    function setItemSearchOpen(open) {
+      const bar = $("itemSearchBar");
+      if (!bar) return;
+      bar.classList.toggle("hidden", !open);
+      $("itemSearchToggle")?.setAttribute("aria-expanded", String(open));
+      $("itemSearchToggle")?.classList.toggle("active", open);
+      if (open) {
+        $("itemSearch").focus();
+        return;
+      }
+      if (itemSearch) {
+        itemSearch = "";
+        $("itemSearch").value = "";
+        renderProducts();
+      }
     }
 
     function productSubItems(item) {
@@ -11047,15 +11142,53 @@
         </form></div>`;
     }
 
+    const fallbackSubscriptionPlans = [
+      { name: "Starter", description: "For small businesses starting with smart digital billing.", monthlyPrice: 599, originalPrice: 2000, features: ["Fast POS Billing", "Product Management", "Basic Inventory", "Daily Sales Reports", "Customer Management", "1 Billing User", "Thermal Printer Support", "Cloud Data Backup"] },
+      { name: "Growth", description: "For growing businesses that need better control and insights.", monthlyPrice: 799, originalPrice: 2500, popular: true, features: ["Everything in Starter", "Advanced Sales Reports", "Expense Management", "Multi-User Access", "Customer Purchase History", "Low Stock Alerts", "Cloud Backup", "Priority Support"] },
+      { name: "Professional", description: "For established businesses that want powerful operations.", monthlyPrice: 999, originalPrice: 3000, features: ["Everything in Growth", "Unlimited Billing Users", "Advanced Analytics", "Profit & Loss Reports", "Multiple Printer Support", "Advanced Inventory", "Data Export", "Premium Support"] },
+      { name: "Business", description: "For multi-branch businesses and growing enterprises.", monthlyPrice: 0, priceLabel: "Custom Pricing", features: ["Unlimited Users", "Multi-Branch Management", "Centralized Dashboard", "Advanced Business Analytics", "Dedicated Account Manager", "Custom Integrations", "Priority Support", "Business Solutions"] }
+    ];
+    let selectedRechargePlan = "";
+
+    function subscriptionPlanOptions() {
+      const rows = Array.isArray(subscriptionState?.plans) && subscriptionState.plans.length ? subscriptionState.plans : fallbackSubscriptionPlans;
+      return rows.filter(plan => plan && plan.name);
+    }
+
+    function currentSubscriptionPlanName() {
+      return subscriptionState?.currentPlanName || subscriptionState?.planName || "Professional";
+    }
+
+    function sameName(a, b) {
+      return String(a || "").trim().toLowerCase() === String(b || "").trim().toLowerCase();
+    }
+
+    function activeSubscriptionPlan() {
+      const plans = subscriptionPlanOptions();
+      return plans.find(plan => sameName(plan.name, selectedRechargePlan))
+        || plans.find(plan => sameName(plan.name, currentSubscriptionPlanName()))
+        || plans.find(plan => Number(plan.monthlyPrice) > 0)
+        || plans[0];
+    }
+
+    function recommendedSubscriptionPlanName() {
+      const plans = subscriptionPlanOptions();
+      return (plans.find(plan => plan.popular) || plans.find(plan => sameName(plan.name, "Professional")) || {}).name || "";
+    }
+
     function subscriptionDurations() {
       const state = subscriptionState || {};
-      return state.durations || [1, 3, 6, 9, 12].map(months => ({ months, label: `${months} Month${months > 1 ? "s" : ""}`, amount: 999 * months }));
+      const plan = activeSubscriptionPlan();
+      const price = Number(plan?.monthlyPrice || 0);
+      if (!price) return [];
+      if (Array.isArray(state.durations) && sameName(plan.name, state.planName)) return state.durations;
+      return [1, 3, 6, 9, 12].map(months => ({ months, label: `${months} Month${months > 1 ? "s" : ""}`, amount: price * months }));
     }
 
     function subscriptionSummary() {
       const state = subscriptionState || {};
       const durations = subscriptionDurations();
-      const monthlyPrice = Number(state.monthlyPrice || durations[0]?.amount || 999);
+      const monthlyPrice = Number(activeSubscriptionPlan()?.monthlyPrice || state.monthlyPrice || 999);
       const daysRemaining = subscriptionDaysRemaining();
       const expired = Boolean(state.expired || daysRemaining < 0);
       const chipClass = expired ? "expired" : daysRemaining !== null && daysRemaining <= 2 ? "warn" : "";
@@ -11069,8 +11202,8 @@
       const detail = expired
         ? `Expired${state.expiryDate ? ` on ${state.expiryDate}` : ""}. Renew on this screen. Billing stays paused until payment is confirmed.`
         : state.expiryDate
-          ? `Active until ${state.expiryDate}. Choose a duration and pay here.`
-          : "Choose a duration and pay here. The plan renews after payment is confirmed.";
+          ? `Active until ${state.expiryDate}. Renew or upgrade your plan here.`
+          : "Pick a plan and duration. The plan activates after payment is confirmed.";
       return { state, durations, monthlyPrice, daysRemaining, expired, chipClass, chipText, detail };
     }
 
@@ -11099,7 +11232,7 @@
         const isRecommended = months === recommended && durations.length > 1;
         return `
         <button class="sub-plan ${months === selected ? "selected" : ""} ${isRecommended ? "recommended" : ""}" data-recharge-months="${item.months}" type="button">
-          ${isRecommended ? `<em class="sub-plan-badge">&#9733; Recommended</em>` : ""}
+          ${isRecommended ? `<em class="sub-plan-badge">&#9733; Best Value</em>` : ""}
           <span class="sub-plan-top"><strong>${esc(item.label || `${months} Months`)}</strong><i class="sub-plan-radio" aria-hidden="true"></i></span>
           <b>${money(amount)}</b>
           <small>${money(perMonth)} / month</small>
@@ -11112,8 +11245,9 @@
       return `
         <div class="sub-hero">
           <div class="sub-hero-copy">
-            <p class="sub-kicker">SUBSCRIPTION</p>
-            <h2 ${titleId ? `id="${titleId}"` : ""}>${esc(state.planName || "Professional")} Plan</h2>
+            <p class="sub-kicker">MY SUBSCRIPTION</p>
+            <h2 ${titleId ? `id="${titleId}"` : ""}>${esc(currentSubscriptionPlanName())} Plan</h2>
+            ${state.expiryDate ? `<p class="sub-hero-meta">Valid till ${esc(state.expiryDate)}</p>` : ""}
             <p>${esc(detail)}</p>
             <span class="sub-chip ${chipClass}">${esc(chipText)}</span>
           </div>
@@ -11132,9 +11266,42 @@
         </div>`;
     }
 
-    function subscriptionFeaturesHtml() {
-      const features = ["Unlimited billing & tokens", "KOT & kitchen printing", "Reports & WhatsApp summary", "Cloud sync & backup", "Stock & expense tracking", "Priority support"];
-      return `<div class="sub-features">${features.map(text => `<span><i aria-hidden="true">&#10003;</i>${esc(text)}</span>`).join("")}</div>`;
+    function subscriptionTiersHtml() {
+      const active = activeSubscriptionPlan();
+      const current = currentSubscriptionPlanName();
+      const recommended = recommendedSubscriptionPlanName();
+      return `<div class="sub-tiers">${subscriptionPlanOptions().map(plan => {
+        const price = Number(plan.monthlyPrice || 0);
+        const original = Number(plan.originalPrice || 0);
+        const isCurrent = sameName(plan.name, current);
+        const isRecommended = sameName(plan.name, recommended);
+        const features = (plan.features || []).slice(0, 8);
+        return `
+        <button class="sub-tier ${sameName(plan.name, active?.name) ? "selected" : ""} ${isRecommended ? "recommended" : ""} ${price ? "" : "custom"}" data-plan-name="${esc(plan.name)}" type="button">
+          ${isRecommended ? `<em class="sub-plan-badge">&#9733; Recommended</em>` : ""}
+          <span class="sub-tier-head">
+            <strong>${esc(plan.name)}</strong>
+            ${isCurrent ? `<span class="sub-tier-current">Current</span>` : `<i class="sub-plan-radio" aria-hidden="true"></i>`}
+          </span>
+          <span class="sub-tier-price">${price ? `<b>${money(price)}</b><small>/ month</small>${original > price ? `<s>${money(original)}</s>` : ""}` : `<b class="custom-price">${esc(plan.priceLabel || "Custom Pricing")}</b>`}</span>
+          ${plan.description ? `<span class="sub-tier-desc">${esc(plan.description)}</span>` : ""}
+          <span class="sub-tier-features">${features.map(text => `<span><i aria-hidden="true">&#10003;</i>${esc(text)}</span>`).join("")}</span>
+        </button>`;
+      }).join("")}</div>`;
+    }
+
+    function subscriptionCheckoutBodyHtml() {
+      const active = activeSubscriptionPlan();
+      const durations = subscriptionDurations();
+      return `
+        <p class="sub-section-title">Choose your plan</p>
+        ${subscriptionTiersHtml()}
+        ${durations.length ? `
+          <p class="sub-section-title">Duration for ${esc(active?.name || "plan")}</p>
+          <div class="sub-plans">${subscriptionPlansHtml()}</div>
+          <button class="sub-pay" data-plan-pay type="button">${subscriptionPayLabel()}</button>
+          ${subscriptionTrustHtml()}` : `
+          <div class="sub-custom-note"><strong>${esc(active?.name || "Business")} plan is set up by our sales team.</strong><span>Share your branches and users, and we will send a custom quote.</span></div>`}`;
     }
 
     function subscriptionTrustHtml() {
@@ -11143,7 +11310,9 @@
 
     function subscriptionPayLabel() {
       const selected = subscriptionDurations().find(item => Number(item.months) === Number(selectedRechargeMonths));
-      return selected ? `Pay ${money(selected.amount)}` : "Pay now";
+      const plan = activeSubscriptionPlan()?.name || "";
+      const action = sameName(plan, currentSubscriptionPlanName()) ? "Renew" : "Upgrade to";
+      return selected ? `${action} ${plan} · Pay ${money(selected.amount)}` : "Pay now";
     }
 
     function subscriptionStatusNode() {
@@ -11152,6 +11321,17 @@
 
     function bindPlanChoices(root) {
       if (!root) return;
+      root.querySelectorAll("[data-plan-name]").forEach(btn => btn.addEventListener("click", () => {
+        selectedRechargePlan = btn.dataset.planName;
+        if (root.id === "subscriptionGate") {
+          renderSubscriptionCheckout();
+          return;
+        }
+        const panel = root.querySelector(".subscription-panel");
+        if (!panel) return;
+        panel.outerHTML = planRechargeHtml();
+        bindPlanChoices(root);
+      }));
       root.querySelectorAll("[data-recharge-months]").forEach(btn => btn.addEventListener("click", () => {
         selectedRechargeMonths = Number(btn.dataset.rechargeMonths);
         root.querySelectorAll("[data-recharge-months]").forEach(item => item.classList.toggle("selected", Number(item.dataset.rechargeMonths) === Number(selectedRechargeMonths)));
@@ -11165,13 +11345,9 @@
       return `
         <section class="subscription-panel">
           ${subscriptionHeroHtml(summary)}
-          <p class="sub-section-title">Choose your plan duration</p>
-          <div class="sub-plans">${subscriptionPlansHtml()}</div>
-          ${subscriptionFeaturesHtml()}
-          <button class="sub-pay" id="planPayBtn" data-plan-pay type="button">${subscriptionPayLabel()}</button>
-          ${subscriptionTrustHtml()}
+          ${subscriptionCheckoutBodyHtml()}
           <p class="sub-note">Cashfree opens next. This screen stays open until the payment is confirmed.</p>
-          <div class="status" id="subscriptionStatus">${subscriptionState ? "Select a duration, then pay." : "Loading plan details..."}</div>
+          <div class="status" id="subscriptionStatus">${subscriptionState ? "Select a plan and duration, then pay." : "Loading plan details..."}</div>
         </section>`;
     }
 
@@ -11224,13 +11400,9 @@
         <section class="subscription-sheet" role="dialog" aria-modal="true" aria-labelledby="subscriptionSheetTitle">
           ${expired ? "" : `<button class="sub-close" id="gateCloseX" type="button" aria-label="Close">&times;</button>`}
           ${subscriptionHeroHtml({ ...summary, titleId: "subscriptionSheetTitle" })}
-          <p class="sub-section-title">Choose your plan duration</p>
-          <div class="sub-plans">${subscriptionPlansHtml()}</div>
-          ${subscriptionFeaturesHtml()}
-          <button class="sub-pay" id="gatePayBtn" data-plan-pay type="button">${subscriptionPayLabel()}</button>
-          ${subscriptionTrustHtml()}
-          <p class="sub-note">Payment stays on this screen. After Cashfree confirms, the plan renews here.</p>
-          <div class="status" id="subscriptionStatus">${subscriptionState ? "Select a duration, then pay." : "Loading plan details..."}</div>
+          ${subscriptionCheckoutBodyHtml()}
+          <p class="sub-note">Payment stays on this screen. After Cashfree confirms, the plan activates here.</p>
+          <div class="status" id="subscriptionStatus">${subscriptionState ? "Select a plan and duration, then pay." : "Loading plan details..."}</div>
           ${expired ? "" : `<div class="sub-actions"><button class="secondary" id="gateCloseBtn" type="button">Not now</button></div>`}
         </section>`;
       gate.classList.remove("hidden");
@@ -11327,8 +11499,9 @@
 
     async function startPlanRecharge(months) {
       const statusNode = subscriptionStatusNode();
-      const buttons = document.querySelectorAll("[data-recharge-months], [data-plan-pay]");
-      const selected = (subscriptionState?.durations || []).find(item => Number(item.months) === Number(months));
+      const buttons = document.querySelectorAll("[data-recharge-months], [data-plan-pay], [data-plan-name]");
+      const selected = subscriptionDurations().find(item => Number(item.months) === Number(months));
+      const planName = activeSubscriptionPlan()?.name || "";
       buttons.forEach(btn => {
         btn.disabled = true;
         btn.classList.toggle("selected", Number(btn.dataset.rechargeMonths) === Number(months));
@@ -11341,7 +11514,7 @@
         const order = await api("/subscription/recharge/create-order", {
           method: "POST",
           timeoutMs: 15000,
-          body: JSON.stringify({ months: Number(months) })
+          body: JSON.stringify({ months: Number(months), planName })
         });
         if (!order.paymentSessionId) throw new Error("Payment session missing from Cashfree");
         if (typeof Cashfree !== "function") throw new Error("Cashfree SDK not loaded. Check internet connection.");
@@ -12055,6 +12228,14 @@
     if ($("logoutAdmin")) $("logoutAdmin").addEventListener("click", logout);
     if ($("itemSearch")) $("itemSearch").addEventListener("input", event => {
       itemSearch = event.target.value;
+      renderProducts();
+    });
+    $("itemSearchToggle")?.addEventListener("click", () => setItemSearchOpen($("itemSearchBar").classList.contains("hidden")));
+    $("itemSearchClear")?.addEventListener("click", () => setItemSearchOpen(false));
+    $("billingSectionMeta")?.addEventListener("click", () => {
+      if (itemSearch || activeCategory === "All") return;
+      activeCategory = "All";
+      showingCategoryHome = false;
       renderProducts();
     });
     $("userNav").addEventListener("click", event => {

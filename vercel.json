@@ -1,5 +1,8 @@
 {
   "redirects": [
-    { "source": "/partner", "destination": "/partner/", "permanent": false }
+    { "source": "/partner", "destination": "/partner/", "permanent": false },
+    { "source": "/sales", "destination": "/sales/", "permanent": false },
+    { "source": "/marketing", "destination": "/sales/", "permanent": true },
+    { "source": "/marketing/:path*", "destination": "/sales/", "permanent": true }
   ]
 }
