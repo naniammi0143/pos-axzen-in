@@ -5667,13 +5667,12 @@
       html.pos-layout-compact #posView .cart-label-long { display: none !important; }
       html.pos-layout-compact #posView .cart-pay-row {
         display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
         gap: 10px;
         align-items: stretch;
         margin-top: 2px;
       }
       html.pos-layout-compact #posView .cart-pay-row .place {
-        order: -1;
         width: 100% !important;
         min-height: 50px !important;
         height: 50px !important;
@@ -5693,14 +5692,14 @@
         min-width: 0;
         height: 50px;
         margin: 0 !important;
-        padding: 0 4px 0 12px !important;
+        padding: 0 12px 0 4px !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-end !important;
+        align-items: flex-start !important;
         justify-content: center !important;
         gap: 2px !important;
         border: 0 !important;
-        border-left: 1px dashed #cbd5e1 !important;
+        border-right: 1px dashed #cbd5e1 !important;
         border-radius: 0 !important;
         background: transparent !important;
         box-shadow: none !important;
