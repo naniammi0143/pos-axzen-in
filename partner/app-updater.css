@@ -1,0 +1,16 @@
+﻿[data-app-notifications] { position: relative; }
+.app-update-badge { position:absolute; top:0; right:0; min-width:17px; height:17px; padding:0 4px; display:grid; place-items:center; background:#c62c39; color:white; border:2px solid white; border-radius:20px; font:700 10px/1 system-ui; }
+.app-update-dialog { width:min(440px,calc(100% - 32px)); max-height:85dvh; overflow:auto; border:1px solid #dfe5eb; border-radius:20px; padding:24px; background:white; color:#172033; font-family:system-ui,sans-serif; box-shadow:0 20px 70px #10203030; }
+.app-update-dialog::backdrop { background:#14253680; }
+.app-update-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.app-update-heading h2 { margin:0; font-size:21px; }
+.app-update-dialog button { min-height:44px; border:1px solid #dfe5eb; border-radius:10px; padding:10px 14px; background:#f3f6f8; color:#243c49; font:600 14px system-ui; cursor:pointer; }
+.app-update-card { margin:20px 0; border:1px solid #dae6e3; padding:18px; border-radius:14px; background:#f5faf8; }
+.app-update-label { color:#146c60; letter-spacing:.1em; font-size:11px; font-weight:700; }
+.app-update-card h3 { margin:10px 0; font-size:19px; }
+.app-update-card p { white-space:pre-wrap; overflow-wrap:anywhere; font-size:14px; line-height:1.6; }
+.app-update-card small { display:block; color:#617080; line-height:1.5; }
+.app-update-card [data-update-install] { width:100%; margin-top:18px; background:#146c60; color:white; border-color:#146c60; }
+.app-update-dialog button:disabled { opacity:.55; cursor:wait; }
+.app-update-status, .app-update-empty { color:#617080; font-size:14px; line-height:1.5; }
+.app-update-dialog button:focus-visible { outline:3px solid #378fba; outline-offset:2px; }

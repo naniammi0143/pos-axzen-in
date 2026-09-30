@@ -1,4 +1,7 @@
 {
+  "headers": [
+    { "source": "/partner/:path*", "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }] }
+  ],
   "redirects": [
     { "source": "/partner", "destination": "/partner/", "permanent": false },
     { "source": "/sales", "destination": "/sales/", "permanent": false },
