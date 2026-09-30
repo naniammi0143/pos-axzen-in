@@ -6,6 +6,7 @@
   <title>axzen Infotech POS</title>
   <link rel="stylesheet" href="dine-in.css">
   <script src="bill-taxes.js"></script>
+  <script src="business-rules.js"></script>
   <script src="dine-in-offline.js"></script>
   <script src="restaurant-settings.js"></script>
   <link rel="stylesheet" href="restaurant-settings.css">
@@ -6263,7 +6264,7 @@
       ["waiter", "Waiter"],
       ["admin", "Admin"]
     ];
-    let settings = {
+    const defaultClientSettings = {
       canteenName: "Main Canteen",
       brandName: "axzen",
       tagline: "Infotech",
@@ -6273,6 +6274,8 @@
       menuLanguage: "english",
       receiptLanguage: "english"
     };
+    let settings = { ...defaultClientSettings };
+    let sessionGeneration = 0;
     let user = null;
     let products = [];
     let orders = [];
@@ -6489,7 +6492,7 @@
       const overrides = productUnitOverrides();
       return rows.map(item => {
         const key = productUnitKey(item);
-        return key && overrides[key] && !item.weightUnit ? { ...item, unit: overrides[key] } : item;
+        return key && overrides[key] && !item.unit && !item.weightUnit ? { ...item, unit: overrides[key] } : item;
       });
     }
     function saveProductUnitOverride(item, unit) {
@@ -6663,17 +6666,7 @@
     }
 
     function isChickenProduct(item) {
-      const name = String(item?.name || "").toLowerCase();
-      const unit = String(item?.unit || item?.saleUnit || item?.weightUnit || "").trim().toLowerCase();
-      if (["kg", "kgs", "kilogram", "kilograms", "g", "gram", "grams"].includes(unit)) return true;
-      if (item?.billingType === "quantity") return false;
-      if (!isChickenShopCanteen()) return false;
-      if (name.includes("egg")) return false;
-      if (["piece", "pieces", "pcs", "pc", "plate", "plates", "item", "items", "nos", "no", "dozen", "packet", "packets", "box", "boxes"].includes(unit)) {
-        return false;
-      }
-      if (item?.billingType === "weight") return true;
-      return isChickenCategory(item?.category) || ["chicken", "meat", "meet", "mutton", "fish", "seafood"].some(keyword => name.includes(keyword));
+      return BusinessRules.weight(item, settings?.businessCategory || user?.canteen?.businessCategory, settings?.posMode || user?.canteen?.posMode);
     }
 
     function isEggProduct(item) {
@@ -6681,28 +6674,13 @@
       return /^(?:(?:farm|country|brown|white)\s+)?eggs?(?:\s+tray)?$/.test(name);
     }
 
-    function isChickenShopCanteen() {
-      const text = [
-        settings?.businessCategory,
-        settings?.posMode,
-        user?.canteen?.businessCategory,
-        user?.canteen?.posMode
-      ].join(" ").toLowerCase();
-      return ["chicken", "meat", "meet", "mutton", "fish", "seafood"].some(keyword => text.includes(keyword));
-    }
+    function isChickenShopCanteen() { return shopKind() === 'chicken'; }
 
     function shopKind() {
-      const text = [
-        settings?.businessCategory,
-        settings?.posMode,
-        user?.canteen?.businessCategory,
-        user?.canteen?.posMode
-      ].join(" ").toLowerCase();
-      if (["chicken", "meat", "meet", "mutton", "fish", "seafood"].some(keyword => text.includes(keyword))) return "chicken";
-      if (["cool", "drink", "juice"].some(keyword => text.includes(keyword))) return "drinks";
-      if (["retail", "super", "grocery"].some(keyword => text.includes(keyword))) return "retail";
-      return "canteen";
+      return BusinessRules.kind(settings?.businessCategory || user?.canteen?.businessCategory, settings?.posMode || user?.canteen?.posMode);
     }
+
+    function canUseDineIn() { return Boolean(user) && shopKind() === 'canteen'; }
 
     function isCanteenMealItem(item) {
       const category = String(item?.category || "").toLowerCase();
@@ -6712,29 +6690,13 @@
     }
 
     function shopBillingProducts(rows = products) {
-      const visible = (rows || []).filter(item => !isItemHidden(item));
-      const kind = shopKind();
-      if (kind === "chicken") {
-        return visible.filter(item => {
-          if (isChickenProduct(item) || isEggProduct(item) || isChickenCategory(item.category)) return true;
-          const category = String(item.category || "").toLowerCase();
-          return ["snacks", "drinks", "juice"].some(keyword => category.includes(keyword)) && !isCanteenMealItem(item);
-        });
-      }
-      if (kind === "drinks") {
-        return visible.filter(item => {
-          const category = String(item.category || "").toLowerCase();
-          const name = String(item.name || "").toLowerCase();
-          return ["juice", "drinks"].some(keyword => category.includes(keyword)) || /water|juice|soda|cool|drink/.test(name);
-        });
-      }
-      if (kind === "retail") {
-        return visible.filter(item => {
-          const category = String(item.category || "").toLowerCase();
-          return ["drinks", "snacks", "juice"].some(keyword => category.includes(keyword)) && !isCanteenMealItem(item);
-        });
-      }
-      return visible;
+      return tenantProducts(rows).filter(item => !isItemHidden(item));
+    }
+
+    function tenantProducts(rows = [], allowUnscoped = true) {
+      const tenant = String(user?.canteenId || '').trim().toUpperCase();
+      if (!tenant) return [];
+      return rows.filter(item => (allowUnscoped && !item.canteenId) || String(item.canteenId||'').trim().toUpperCase() === tenant).map(item=>({...item,canteenId:tenant}));
     }
 
     function shouldShowChickenCategory() {
@@ -6762,7 +6724,7 @@
       const saved = readJson(chickenPricesKey, []);
       const today = todayKey();
       const map = new Map();
-      products.filter(isChickenProduct).forEach(item => {
+      shopBillingProducts().filter(isChickenProduct).forEach(item => {
         const name = String(item.name || "").trim();
         if (!name) return;
         const key = name.toLowerCase();
@@ -6776,10 +6738,11 @@
           updatedDate: existing.updatedDate || ""
         });
       });
-      saved.filter(item => Number(item.id || 0) > 0).forEach(item => {
+      saved.filter(item => products.some(p => !isItemHidden(p) && isChickenProduct(p) && Number(p.id) === Number(item.id))).forEach(item => {
         const name = String(item.name || "").trim();
         if (!name) return;
         const key = name.toLowerCase();
+        if (!map.has(key)) return;
         map.set(key, {
           ...(map.get(key) || {}),
           id: Number(item.id || -(Date.now() + map.size)),
@@ -6804,21 +6767,7 @@
     }
 
     function chickenProductsForMenu() {
-      const existing = products.filter(isChickenProduct);
-      const existingNames = new Set(existing.map(item => String(item.name || "").trim().toLowerCase()));
-      const virtualRows = chickenPriceRows()
-        .filter(item => !existingNames.has(String(item.name || "").trim().toLowerCase()))
-        .map((item, index) => ({
-          id: item.id,
-          name: item.name,
-          nameTe: suggestTeluguName(item.name),
-          price: Number(item.price || 0),
-          category: chickenCategory,
-          image: "",
-          sortOrder: 9000 + index,
-          chickenVirtual: true
-        }));
-      return [...existing.map(item => ({ ...item, price: chickenPriceFor(item) })), ...virtualRows];
+      return shopBillingProducts().filter(isChickenProduct).map(item => ({ ...item, price: chickenPriceFor(item) }));
     }
 
     function chickenPriceFor(product) {
@@ -6838,6 +6787,7 @@
     }
 
     async function api(path, options = {}) {
+      const generation = sessionGeneration;
       const { timeoutMs, authToken, ...fetchOptions } = options;
       const token = authToken || localStorage.getItem(tokenKey);
       const appVersion = installedAppVersion();
@@ -6863,7 +6813,9 @@
         error.status = response.status;
         throw error;
       }
-      return response.json();
+      const data = await response.json();
+      if (generation !== sessionGeneration) throw Object.assign(new Error('Login changed; previous response ignored'), {code:'STALE_SESSION'});
+      return data;
     }
 
     function installedAppVersion() {
@@ -6881,7 +6833,11 @@
     }
 
     function applySettings(next = {}) {
+      if (next.canteenId && user?.canteenId && String(next.canteenId).toUpperCase() !== String(user.canteenId).toUpperCase()) return;
       settings = { ...settings, ...next };
+      if(user?.canteenId) scopedLocalSet('AXEN_BUSINESS_SETTINGS',JSON.stringify(settings));
+      ensureUserNavKeys();
+      if(activePosSection==='dinein' && !canUseDineIn())setPosSection('billing');
       if(user?.canteenId) scopedLocalSet("AXZEN_TAX_SETTINGS",JSON.stringify(settings.taxSettings||{}));
       [menuLanguageKey, receiptLanguageKey, receiptLogoPositionKey, receiptLogoSizeKey, receiptLogoDataUrlKey].forEach(migrateScopedLocal);
       settings.menuLanguage = scopedLocalGet(menuLanguageKey) || settings.menuLanguage;
@@ -6911,7 +6867,17 @@
     }
 
     function setSession(nextUser, token) {
+      sessionGeneration++;
+      window.DineIn?.close(); dineOffline?.stop(); dineOffline=null; dineOfflineScope='';
       user = nextUser;
+      products=[];orders=[];expenses=[];users=[];creditors=[];addresses=[];cart=[];selectedSubItems={};cartDiscount=0;
+      activeCategory='All';itemSearch='';showingCategoryHome=false;adminAccessToken='';adminUnlocked=false;subscriptionState=null;
+      settings={...defaultClientSettings,canteenId:user?.canteenId,businessCategory:user?.canteen?.businessCategory,posMode:user?.canteen?.posMode};
+      try { const saved=JSON.parse(scopedLocalGet('AXEN_BUSINESS_SETTINGS')||'{}');if(saved.canteenId===user?.canteenId)settings={...settings,...saved}; } catch {}
+      if(user?.canteen?.businessCategory)settings.businessCategory=user.canteen.businessCategory;
+      if(user?.canteen?.posMode)settings.posMode=user.canteen.posMode;
+      closeOptionsModal();$('paymentModalMount').innerHTML='';
+      renderProducts();renderCart();ensureUserNavKeys();
       try { settings.taxSettings=JSON.parse(scopedLocalGet("AXZEN_TAX_SETTINGS")||"{}"); } catch { settings.taxSettings={}; }
       writeJson(sessionKey, user);
       if (token) localStorage.setItem(tokenKey, token);
@@ -6948,6 +6914,7 @@
     }
 
     function logout() {
+      sessionGeneration++;
       window.AxzenAppUpdater?.stop();
       window.DineIn?.close(); dineOffline?.stop(); dineOffline=null; dineOfflineScope="";
       closeOptionsModal();
@@ -6955,6 +6922,7 @@
       localStorage.removeItem(sessionKey);
       localStorage.removeItem(tokenKey);
       user = null;
+      products=[];orders=[];expenses=[];users=[];creditors=[];addresses=[];settings={...defaultClientSettings};subscriptionState=null;cartDiscount=0;
       adminAccessToken = "";
       cart = [];
       selectedSubItems = {};
@@ -7019,26 +6987,32 @@
     }
 
     async function loadSettings() {
+      if(!user)return;
+      const generation=sessionGeneration;
       try {
         const data = await api("/settings");
         applySettings(data);
       } catch {
-        applySettings(settings);
+        if(generation===sessionGeneration)applySettings(settings);
       }
     }
 
     async function loadProducts() {
-      const cached = readJson(productCacheKey, []);
+      if(!user)return;
+      const generation=sessionGeneration;
+      const cached = tenantProducts(readJson(productCacheKey, []), false);
+      products = [];
       if (cached.length) {
         products = applyProductUnitOverrides(cached);
         renderProducts();
         preloadProductImages(products);
       }
       try {
-        products = applyProductUnitOverrides(await api("/products", { timeoutMs: cached.length ? 6500 : 9000 }));
+        products = applyProductUnitOverrides(tenantProducts(await api("/products", { timeoutMs: cached.length ? 6500 : 9000 })));
         writeJson(productCacheKey, products);
         preloadProductImages(products);
       } catch {}
+      if(generation!==sessionGeneration)return;
       if (isChickenShopCanteen() && (activeCategory === "All" || isCanteenMealItem({ category: activeCategory, name: activeCategory }))) {
         activeCategory = chickenCategory;
       }
@@ -7055,6 +7029,8 @@
     }
 
     async function loadAdminData() {
+      if(!user)return;
+      const generation=sessionGeneration;
       try {
         updateSyncStatus("Loading data...", "syncing");
         const dashboard = await api("/dashboard", { timeoutMs: 9000 });
@@ -7069,7 +7045,7 @@
         expenses = dashboard.expenses || [];
         creditors = dashboard.creditors || [];
         addresses = dashboard.addresses || [];
-        const currentUser = (dashboard.users || []).find(row => String(row.mobile || "") === String(user?.mobile || ""));
+        const currentUser = (dashboard.users || []).find(row => String(row.mobile || "") === String(user?.mobile || "") && String(row.canteenId || '').toUpperCase() === String(user?.canteenId || '').toUpperCase());
         if (currentUser) {
           user = { ...user, ...currentUser };
           writeJson(sessionKey, user);
@@ -7079,6 +7055,7 @@
       } catch {
         updateSyncStatus("Data load failed", navigator.onLine ? "offline" : "offline");
       }
+      if(generation!==sessionGeneration)return;
       try {
         users = await api("/users", { timeoutMs: 9000 });
       } catch {}
@@ -7523,7 +7500,7 @@
     function addToCart(id, option = null) {
       const product = findBillingProduct(id);
       if (!product) return;
-      if (!option && isChickenProduct(product)) {
+      if (isChickenProduct(product)) {
         openChickenSaleModal(product);
         return;
       }
@@ -10086,11 +10063,13 @@
 
     let dineOffline = null, dineOfflineScope = "";
     function tableOfflineStore() {
-      if(!user) return null;
+      if(!user || !canUseDineIn()) return null;
       const scope = String(user.canteenId || "") + ":" + String(user.mobile || user.id || "");
       if(!dineOffline || dineOfflineScope!==scope) {
+        const generation=sessionGeneration;
+        const sessionApi=(path,options)=>{if(generation!==sessionGeneration)return Promise.reject(new Error("Login changed"));return api(path,options);};
         dineOffline?.stop(); dineOfflineScope=scope;
-        dineOffline=DineOffline.create({scope,api,getMenu:()=>products.length?products:api('/products'),getSettings:()=>settings,user,
+        dineOffline=DineOffline.create({scope,api:sessionApi,getMenu:()=>{if(generation!==sessionGeneration)throw new Error('Login changed');return products.length?products:sessionApi('/products');},getSettings:()=>settings,user,
           onChange:state=>{const node=document.querySelector('.di-sync-banner');if(node)node.textContent=state.error||(state.pending?state.pending+' changes waiting to sync':state.offline?'Offline · saved on this device':'All table changes synced');}});
       }
       return dineOffline;
@@ -10099,6 +10078,7 @@
       const page = $("optionPage");
       if (!page) return;
       if (activePosSection === "dinein") {
+        if(!canUseDineIn()){setPosSection("billing");return;}
         const offline = tableOfflineStore();
         window.DineIn.mount(page, {
           api:offline.api, adminApi, admin: hasAdminAccess(),
@@ -10142,7 +10122,7 @@
         : activePosSection === "subscription" ? planRechargeHtml()
         : simpleAdminPageHtml(activePosSection);
       page.innerHTML = html;
-      if (activePosSection === "report") {
+      if (activePosSection === "report" && canUseDineIn()) {
         const tablesButton = document.createElement("button");
         tablesButton.className = "page-action";
         tablesButton.textContent = "Dine In — Table-wise Bills";
@@ -10167,6 +10147,7 @@
       if (section === "add") section = "edit";
       if (section === "delivery" && subscriptionState?.takeawayEnabled === false) section = "billing";
       if (section === "bulk") section = "dinein";
+      if(section === "dinein" && !canUseDineIn()) section="billing";
       window.DineIn.close();
       activePosSection = section === "dashboard" || section === "billing" || section === "menu" ? "billing" : section;
       if (["report", "finance"].includes(activePosSection)) resetReportRangeToToday();
@@ -10446,7 +10427,7 @@
       const keys = ["billing", "dinein", "report", "delivery"];
       document.querySelectorAll("#userNav button").forEach((btn, index) => {
         btn.dataset.nav = keys[index] || "billing";
-        if (index === 1) btn.querySelector("b").textContent = "Dine In";
+        if (index === 1) {btn.querySelector("b").textContent = "Dine In";btn.hidden=!canUseDineIn();btn.style.display=canUseDineIn()?"":"none";}
       });
     }
 
@@ -11199,11 +11180,14 @@
     }
 
     async function syncPendingOrders() {
+      if(!user)return;
+      const generation=sessionGeneration;
       if(user) tableOfflineStore()?.sync().catch(()=>{});
       const pending = pendingOrders();
       if (!pending.length) return updateSyncStatus();
       if (!navigator.onLine) return updateSyncStatus("Connect internet", "offline");
       const connected = await checkServerConnection();
+      if(generation!==sessionGeneration)return;
       if (!connected) return updateSyncStatus("Connect internet", "offline");
       try {
         updateSyncStatus("Syncing...", "syncing");
@@ -12686,7 +12670,7 @@
       if (!btn) return;
       if (btn.dataset.singleItem) return;
       const product = findBillingProduct(btn.dataset.item);
-      if (!productSubItems(product).length) return;
+      if (isChickenProduct(product) || !productSubItems(product).length) return;
       clearTimeout(longPressTimer);
       longPressTimer = setTimeout(() => {
         longPressHandled = true;
@@ -12731,12 +12715,11 @@
     window.setInterval(checkServerConnection, 30000);
 
     window.AxzenAppUpdater?.markHealthy();
-    user = readJson(sessionKey, null);
-    if (user) enterApp();
+    const restoredUser = readJson(sessionKey, null);
+    if (restoredUser) {setSession(restoredUser,localStorage.getItem(tokenKey));enterApp();}
     else {
       show("loginView");
       $("loginStatus").textContent = "Enter your login details.";
-      loadSettings();
     }
   </script>
 </body>
