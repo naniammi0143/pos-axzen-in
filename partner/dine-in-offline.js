@@ -113,8 +113,12 @@ window.DineOffline = (() => {
     async function menu() {const data=read();try{const items=await getMenu();if(items?.length){await lock(':data',()=>{const latest=read();latest.menu=clone(items);write(latest);});return items;}}catch(e){if(!data.menu.length)throw e;}return data.menu;}
     const draft = tableId => {const raw=storage.getItem(key+':draft:'+tableId);if(!raw)return null;try{return JSON.parse(raw);}catch{throw Error('Saved table draft could not be read');}};
     function saveDraft(tableId,value) {try{storage.setItem(key+':draft:'+tableId,JSON.stringify(value));}catch{throw Error('Device storage is full. Current table draft could not be saved.');}}
+    async function updateTaxSettings(value) {
+      const normalized = BillTaxes.normalize(value);
+      await lock(':data',()=>{const data=read();if(data.access)data.access.taxSettings=normalized;write(data);});
+    }
     function stop(){stopped=true;}
-    return { api,menu,sync,status,draft,saveDraft,stop,exportData:()=>JSON.stringify(read(),null,2) };
+    return { api,menu,sync,status,draft,saveDraft,stop,updateTaxSettings,exportData:()=>JSON.stringify(read(),null,2) };
   }
   return {create};
 })();

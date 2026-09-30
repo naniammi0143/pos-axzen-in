@@ -309,6 +309,16 @@ dialog.di-dialog[open] {
 .di-bill-summary { border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-top:14px; }
 .di-bill-summary .di-total { border-top:1px solid var(--line); border-radius:0; background:white; padding:14px 0 3px; }
 .di [hidden] { display:none!important; }
+.di .di-food { align-self:start; }
+.di .di-food-select { display:block; width:100%; padding:7px; border:0; background:transparent; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
+.di .di-food-photo { display:block; border-radius:8px; }
+.di .di-food-info { display:block; min-height:68px; }
+.di .di-food.selected { border-color:#2f7d26; background:#f1fbef; box-shadow:0 6px 16px #2f7d2620; }
+.di .di-food.selected .di-food-photo { outline:3px solid #2f7d26; outline-offset:-3px; }
+.di .di-food.selected .di-food-info>strong { color:#2f7d26; }
+.di .di-food-count { position:absolute; right:12px; top:10px; min-width:30px; height:30px; border:2px solid white; border-radius:50%; display:grid; place-items:center; background:#ef4444; color:white; font-size:14px; font-weight:800; pointer-events:none; }
+.di .di-food-remove { left:12px; right:auto; top:10px; background:#111827; color:white; border:2px solid white; z-index:2; }
+.di .di-food-select:focus-visible,.di .di-food-remove:focus-visible { outline:3px solid #2563eb; outline-offset:-3px; }
 .di-food { position:relative; }
 .di-food-remove { position:absolute; right:6px; top:6px; width:30px; height:30px; border:1px solid #f3cece; border-radius:50%; background:white; color:#c73737; font-size:23px; cursor:pointer; box-shadow:0 2px 8px #0001; }
 .di-cart-heading { width:100%; display:flex; align-items:center; justify-content:space-between; padding:12px; background:#e9f7f1; color:#102b24; border:0; border-radius:10px; text-align:left; font:inherit; cursor:pointer; }
@@ -474,4 +484,28 @@ dialog.app-update-dialog,dialog.app-update-dialog p,dialog.app-update-dialog h2 
  .di-new-order .di-send-hint { padding:0; background:none; font-size:10px; text-align:center; margin:5px 0 0!important; }
  .di-dialog [data-panel="bill"] .di-new-order { display:none; }
  .di-dialog [data-panel="bill"] .di-current-bill { padding-bottom:14px; }
+}
+/* Match the Home order rows: number, thumbnail, name, quantity and remove. */
+.di .di-draft-line { display:grid; grid-template-columns:18px 44px minmax(0,1fr); grid-template-areas:'index thumb name' 'index thumb actions'; gap:4px 8px; padding:10px 0; }
+.di .di-order-index { grid-area:index; color:#667085; font-size:12px; }
+.di .di-order-thumb { grid-area:thumb; width:44px; height:44px; border-radius:9px; overflow:hidden; display:grid; place-items:center; background:#eef2f7; font-size:13px; }
+.di .di-order-thumb img { width:100%; height:100%; object-fit:cover; }
+.di .di-order-name { grid-area:name; min-width:0; overflow-wrap:anywhere; }
+.di .di-order-name small { margin-top:3px; font-size:11px; }
+.di .di-order-actions { grid-area:actions; display:flex; justify-content:space-between; align-items:center; gap:6px; }
+.di .di-stepper { border:1px solid #dce2e9; border-radius:8px; overflow:hidden; gap:0; }
+.di .di-stepper .di-btn { border-radius:0; min-height:28px!important; padding:3px 8px; background:#f4f6f8; color:#172033; }
+.di .di-stepper>b { min-width:24px; text-align:center; }
+.di .di-cart-heading { background:white; border-bottom:1px solid #e6e8ec; border-radius:0; padding:12px 0; }
+.di .di-cart-heading b { color:#111827; font-size:20px; }
+.di .di-food-grid { align-items:start; scrollbar-gutter:stable; }
+.di .di-order-summary { flex-shrink:0; border-top:1px dashed #cbd5e1; padding:6px 0; }
+.di .di-order-summary .di-bill-line { padding:2px 0; font-size:12px; }
+@media(max-width:760px) {
+ .di .di-food { display:block; padding:0; min-height:0; }
+ .di .di-food-select { display:flex; gap:12px; align-items:center; }
+ .di .di-food-info { min-height:0; padding:7px 0; }
+ .di .di-food-info h3 { margin:0 0 9px; padding-right:24px; }
+ .di .di-food-count { right:6px; top:6px; width:24px; min-width:24px; height:24px; font-size:12px; }
+ .di .di-food-remove { left:10px; top:10px; width:24px; height:24px; font-size:18px; }
 }

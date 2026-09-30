@@ -9,18 +9,27 @@ window.RestaurantSettings = (() => {
         try {
           const next = BillTaxes.normalize({ gstin:root.querySelector('#rs-gstin').value, rows:config.rows.map(r=>({...r,enabled:root.querySelector(`[data-tax="${r.id}"]`).checked,rate:Number(root.querySelector(`[data-rate="${r.id}"]`).value)})), print:Object.fromEntries([...root.querySelectorAll('[data-print]')].map(e=>[e.dataset.print,e.checked])) });
           const response = await api('/settings',{method:'POST',body:JSON.stringify({taxSettings:next})});
-          config=next; onSaved(response.settings); message='Tax and print settings saved.'; draw();
+          config=BillTaxes.normalize(response.settings?.taxSettings || next); await onSaved(response.settings || {taxSettings:config}); message='Tax and print settings saved.'; draw();
         } catch(e) { root.querySelector('.rs-message').textContent=e.message; if(button) button.disabled=false; }
       };
       root.querySelector('#rs-table-form').onsubmit = async event => {
         event.preventDefault(); const button=event.submitter; if(button)button.disabled=true;
-        try { await api('/dine-in/tables',{method:'POST',body:JSON.stringify({tableId:root.querySelector('#rs-id').value||undefined,name:root.querySelector('#rs-name').value,zone:root.querySelector('#rs-zone').value,seats:Number(root.querySelector('#rs-seats').value),active:root.querySelector('#rs-active').checked})}); await load(); }
-        catch(e) {root.querySelector('#rs-table-status').textContent=e.message;if(button)button.disabled=false;}
+        try { await api('/dine-in/tables',{method:'POST',body:JSON.stringify({tableId:root.querySelector('#rs-id').value||undefined,name:root.querySelector('#rs-name').value,zone:root.querySelector('#rs-zone').value,seats:Number(root.querySelector('#rs-seats').value),active:root.querySelector('#rs-active').checked})}); await load(); root.querySelector('#rs-table-status').textContent='Table saved.'; }
+        catch(e) {root.querySelector('#rs-table-status').textContent=e.message;} finally {if(button)button.disabled=false;}
       };
       root.querySelector('#rs-clear').onclick=()=>root.querySelector('#rs-table-form').reset();
       root.querySelectorAll('[data-edit-table]').forEach(button=>button.onclick=()=>{const t=tables.find(t=>t.tableId===button.dataset.editTable);for(const [key,val] of Object.entries({id:t.tableId,name:t.name,zone:t.zone,seats:t.seats}))root.querySelector('#rs-'+key).value=val;root.querySelector('#rs-active').checked=t.active;root.querySelector('#rs-name').focus();});
     }
-    async function load(){try{const access=await api('/dine-in');tables=access.tables||[];draw();}catch(e){draw();root.querySelector('#rs-table-status').textContent=e.message;}}
+    async function load(){
+      try {
+        const access=await api('/dine-in'); tables=access.tables||[];
+        // Loading tables must not reset edits in the independent tax form.
+        const section=document.createElement('div');
+        section.innerHTML=tables.map(t=>`<button type="button" data-edit-table="${esc(t.tableId)}"><b>Table ${esc(t.name)}</b><span>${esc(t.zone)} &middot; ${t.seats} seats &middot; ${esc(t.status)}</span></button>`).join('');
+        root.querySelector('.rs-tables').replaceChildren(...section.childNodes);
+        root.querySelectorAll('[data-edit-table]').forEach(button=>button.onclick=()=>{const t=tables.find(t=>t.tableId===button.dataset.editTable);for(const [key,val] of Object.entries({id:t.tableId,name:t.name,zone:t.zone,seats:t.seats}))root.querySelector('#rs-'+key).value=val;root.querySelector('#rs-active').checked=t.active;root.querySelector('#rs-name').focus();});
+      } catch(e) {root.querySelector('#rs-table-status').textContent=e.message;}
+    }
     draw();load();
   }
   return { mount };

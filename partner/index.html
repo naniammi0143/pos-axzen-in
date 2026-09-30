@@ -5109,7 +5109,7 @@
         font-size: 15px !important;
       }
       #posView .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)) !important;
         gap: 12px !important;
       }
       #posView .item-card {
@@ -5257,7 +5257,7 @@
       font-size: 15px !important;
     }
     html.pos-layout-tablet #posView .menu-grid {
-      grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)) !important;
+      grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)) !important;
       gap: 12px !important;
     }
     html.pos-layout-tablet #posView .item-card {
@@ -5515,7 +5515,7 @@
       }
       html.pos-layout-compact #posView .tabs { padding: 6px 0 !important; }
       html.pos-layout-compact #posView .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
         gap: 8px !important;
       }
       html.pos-layout-compact #posView .item-card {
@@ -7692,7 +7692,6 @@
             <div class="order-review-summary">
               <div><span>Subtotal</span><strong>${money(subtotal)}</strong></div>
               <div class="discount"><span>Discount</span><strong>- ${money(cartDiscount)}</strong></div>${[...calculatedBill.charges,...calculatedBill.taxes].map(t=>`<div class="cart-tax-line"><span>${esc(t.name)} (${t.rate}%)</span><strong>${money(t.amount)}</strong></div>`).join("")}
-              <div><span>GST (0%)</span><strong>${money(0)}</strong></div>
               <div class="final"><span>Total Amount</span><strong>${money(total)}</strong></div>
             </div>
             <div class="order-review-actions">
@@ -12188,7 +12187,7 @@
       } else {
         page.innerHTML = settingsAdminHtml();
         const restaurant=document.createElement('div');page.appendChild(restaurant);
-        RestaurantSettings.mount(restaurant,{api:adminApi,settings,onSaved:applySettings});
+        RestaurantSettings.mount(restaurant,{api:adminApi,settings,onSaved:async next=>{applySettings(next);renderCart();await tableOfflineStore()?.updateTaxSettings(next.taxSettings);}});
       }
       bindAdminPageActions();
     }
@@ -12567,7 +12566,7 @@
       renderCart();
       updateSyncStatus();
       setPosSection("billing");
-      loadSettings().then(() => renderProducts()).catch(() => applySettings(settings));
+      loadSettings().then(() => {renderProducts();renderCart();}).catch(() => applySettings(settings));
       window.AxzenAppUpdater?.start({ apiBase: API, token: localStorage.getItem(tokenKey) });
       if (isChickenShopCanteen()) activeCategory = chickenCategory;
       loadProducts().then(()=>tableOfflineStore()?.menu()).catch(() => renderProducts());

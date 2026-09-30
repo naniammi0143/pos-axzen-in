@@ -1,6 +1,6 @@
-const CACHE='axzen-pos-shell-3.79';
+const CACHE='axzen-pos-shell-3.80';
 const SHELL=['./','index.html','dine-in.js','dine-in.css','bill-taxes.js','dine-in-offline.js','restaurant-settings.js','restaurant-settings.css','offline-shell.js','app-updater.js','app-updater.css','help-center.js','help-center.css','catalog-import.js','catalog-import.css','assets/topbarlogo.png','assets/axzenPOS.png'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL))));
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('axzen-pos-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
  const request=event.request,url=new URL(request.url),scope=new URL(self.registration.scope);
