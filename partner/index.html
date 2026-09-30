@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="dine-in.css">
   <script src="bill-taxes.js"></script>
   <script src="business-rules.js"></script>
+  <script src="app-version.js"></script>
   <script src="dine-in-offline.js"></script>
   <script src="restaurant-settings.js"></script>
   <link rel="stylesheet" href="restaurant-settings.css">
@@ -6225,7 +6226,7 @@
         return defaults;
       }
     })();
-    const appBuild = "3.68";
+    const appBuild = window.AxzenVersion.current();
     const appBuildKey = "AXEN_APP_BUILD";
     const productCacheKey = "AXEN_PRODUCTS";
     const productUnitOverridesKey = "AXEN_PRODUCT_UNIT_OVERRIDES";
@@ -6800,6 +6801,7 @@
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
           ...(appVersion ? { "X-Axzen-App-Version": appVersion } : {}),
+          "X-Axzen-Client": window.AxzenVersion?.client() || (window.AxzenUpdater ? "android" : "web"),
           ...(fetchOptions.headers || {})
         }
       }).finally(() => clearTimeout(timeout));
@@ -6819,6 +6821,7 @@
     }
 
     function installedAppVersion() {
+      if(window.AxzenVersion)return window.AxzenVersion.current();
       try {
         if (window.AxzenUpdater && typeof window.AxzenUpdater.current === "function") {
           const current = JSON.parse(window.AxzenUpdater.current() || "{}");
@@ -11080,7 +11083,7 @@
             </div>
             <div class="drawer-footer">
               <button class="drawer-logout" id="menuLogout" type="button">${lucideIcon("logOut", 18)}<span>Logout</span></button>
-              <div class="drawer-version">App Version ${appBuild}</div>
+              <div class="drawer-version">App Version ${esc(installedAppVersion() || appBuild)}</div>
             </div>
           </aside>
           <button class="drawer-close-zone" id="closeOptionsModal" type="button" aria-label="Close menu"></button>
@@ -11972,6 +11975,7 @@
       const menuLanguage = languageMode(settings.menuLanguage);
       const receiptLanguage = languageMode(settings.receiptLanguage);
       return `
+        <div class="panel"><h2>App version</h2><strong>${esc(installedAppVersion() || appBuild)}</strong><p class="muted">Currently running on this device</p></div>
         <div class="panel">
           <h2>Top Bar Preview</h2>
           <div class="settings-preview-row">

@@ -1054,7 +1054,7 @@
           <div class="fact"><span>Payment</span><strong>${money(item.paidAmount)} / Pending ${money(item.pendingAmount)}</strong></div>
           <div class="fact"><span>Plan</span><strong>${esc(item.selectedPlan)} - ${esc(item.planType)}${item.planExpiryDate ? `<br>Expiry: ${esc(item.planExpiryDate)}` : ""}</strong></div>
           <div class="fact"><span>Printers</span><strong>${Number(item.printersAssigned || 0)} / ${Number(item.printersRequired || 0)}</strong></div>
-          <div class="fact"><span>Using version</span><strong>${esc(usingVersion(item))}</strong></div>
+          <div class="fact"><span>Installed app version</span><strong>${esc(usingVersion(item))}</strong><small>${item.appVersionReportedAt ? "Reported " + esc(formatDateTime(item.appVersionReportedAt)) : "Awaiting app connection"}</small></div><div class="fact"><span>Web POS version</span><strong>${esc(item.webInstalledVersion || "Not reported")}</strong></div>
           <div class="fact"><span>Assigned version</span><strong>${esc(assignedVersion(item))}</strong></div>
         </div>
         <div class="credential-box">
@@ -1073,7 +1073,7 @@
         <td>${esc(item.selectedPlan)}<br><span class="muted">${esc(item.planType)}${item.planExpiryDate ? ` | Expiry: ${esc(item.planExpiryDate)}` : ""}</span></td>
         <td>${money(item.paidAmount)}<br><span class="muted">Pending ${money(item.pendingAmount)}</span></td>
         <td>${Number(item.printersAssigned || 0)} / ${Number(item.printersRequired || 0)}</td>
-        <td>Using ${esc(usingVersion(item))}<br><span class="muted">Assigned ${esc(assignedVersion(item))}</span></td>
+        <td>App ${esc(usingVersion(item))}<br><span class="muted">Web ${esc(item.webInstalledVersion || "Not reported")}</span><br><span class="muted">Assigned ${esc(assignedVersion(item))}</span></td>
         <td><span class="pill ${statusClass(item.status)}">${esc(item.status)}</span></td>
         <td>${item.canteenLoginId ? `<strong>ID: ${esc(item.activatedCanteenId || "-")}</strong><br><span class="muted">Login: ${esc(item.canteenLoginId)} | Temp Pass: ${esc(item.defaultPassword || "-")}</span><br><span class="muted">First login: create permanent owner login</span><br>${posOpenAction(item)} ${copyCredentialsAction(item)}` : `<span class="muted">After approval</span>`}</td>
         <td>${esc(item.submittedByName || item.submittedBy)}</td>
