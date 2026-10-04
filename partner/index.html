@@ -10124,7 +10124,7 @@
         if(!canUseDineIn()){setPosSection("billing");return;}
         const offline = tableOfflineStore();
         window.DineIn.mount(page, {
-          api:offline.api, adminApi, admin: hasAdminAccess(),
+          api:offline.api, adminApi, admin: hasAdminAccess(), manageTables: hasAdminAccess(),
           getMenu:offline.menu, getSettings:()=>settings, getDraft:offline.draft, saveDraft:offline.saveDraft, syncStatus:offline.status,
           isActive: () => activePosSection === "dinein" && Boolean(user),
           printKot: (table, ticket, copy) => {
@@ -12209,7 +12209,7 @@
       } else {
         page.innerHTML = settingsAdminHtml();
         const restaurant=document.createElement('div');page.appendChild(restaurant);
-        RestaurantSettings.mount(restaurant,{api:adminApi,settings,onSaved:async next=>{applySettings(next);renderCart();await tableOfflineStore()?.updateTaxSettings(next.taxSettings);}});
+        RestaurantSettings.mount(restaurant,{api:adminApi,settings,onSaved:async next=>{applySettings(next);renderCart();await tableOfflineStore()?.updateTaxSettings(next.taxSettings).catch(()=>{});}});
       }
       bindAdminPageActions();
     }
