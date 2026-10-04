@@ -1,5 +1,5 @@
-const CACHE='axzen-pos-shell-3.82';
-const SHELL=['./','index.html','dine-in.js','dine-in.css','bill-taxes.js','business-rules.js','app-version.js','dine-in-offline.js','restaurant-settings.js','restaurant-settings.css','offline-shell.js','app-updater.js','app-updater.css','help-center.js','help-center.css','catalog-import.js','catalog-import.css','assets/topbarlogo.png','assets/axzenPOS.png'];
+const CACHE='axzen-pos-shell-3.83';
+const SHELL=['./','index.html','dine-in.js','dine-in.css','bill-taxes.js','business-rules.js','app-version.js','dine-in-offline.js','restaurant-settings-v2.js','restaurant-settings.css','offline-shell.js','app-updater.js','app-updater.css','help-center.js','help-center.css','catalog-import.js','catalog-import.css','assets/topbarlogo.png','assets/axzenPOS.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('axzen-pos-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
@@ -13,6 +13,12 @@ self.addEventListener('fetch',event=>{
    if(request.mode==='navigate'){
      try{const response=await fetch(request);if(response.ok)await cache.put('index.html',response.clone());return response;}catch{const saved=await cache.match('index.html');return saved||Response.error();}
    }
-   return await cache.match(request,{ignoreSearch:true}) || fetch(request);
+   try {
+     const response=await fetch(request,{cache:'no-store'});
+     if(response.ok)await cache.put(request,response.clone());
+     return response;
+   } catch {
+     return await cache.match(request,{ignoreSearch:true}) || Response.error();
+   }
  })());
 });
