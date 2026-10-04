@@ -38,9 +38,28 @@ window.DineIn = (() => {
     function floorTables() {
       return (access?.tables || []).filter(t => t.active || options.admin);
     }
+    const tableState = status => ({
+      available: { label: "Vacant", hint: "Start order" },
+      occupied: { label: "Running", hint: "View order" },
+      reserved: { label: "Reserved", hint: "Open table" },
+      cleaning: { label: "To clean", hint: "Mark ready" },
+      closing: { label: "Bill printed", hint: "Recover bill" },
+      disabled: { label: "Disabled", hint: "Unavailable" }
+    }[status] || { label: status || "Unknown", hint: "View table" });
+    function elapsedTime(value) {
+      const started = new Date(value).getTime();
+      if (!Number.isFinite(started)) return "";
+      const minutes = Math.max(0, Math.floor((Date.now() - started) / 60000));
+      if (minutes < 60) return `${minutes}m`;
+      return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+    }
     function tableButton(t) {
       const open = summary(t);
-      return `<button class="di-table ${esc(t.status)}${t.tableId === selected ? " is-selected" : ""}" data-di="select" data-value="${esc(t.tableId)}" aria-pressed="${t.tableId === selected}"><span class="di-table-art" aria-hidden="true"><i></i><i></i><i></i><i></i><em></em></span><span class="di-table-info"><h2>T${esc(t.name)}</h2><small>${t.seats} seats</small><b class="di-table-status">${esc(t.status)}</b>${open.total ? `<strong>${money(open.total)}</strong>` : ""}${t.reservation ? `<small>${esc(t.reservation)}</small>` : ""}</span></button>`;
+      const state = tableState(t.status);
+      const qty = open.items.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+      const kot = (t.session?.tickets || []).filter(ticket => !["served", "cancelled"].includes(ticket.status)).length;
+      const age = elapsedTime(t.session?.openedAt);
+      return `<button class="di-table ${esc(t.status)}${t.tableId === selected ? " is-selected" : ""}" data-di="select" data-value="${esc(t.tableId)}" aria-pressed="${t.tableId === selected}" aria-label="Table ${esc(t.name)}, ${esc(state.label)}"><span class="di-table-top"><span class="di-table-number">${esc(t.name)}</span><b class="di-table-status"><i aria-hidden="true"></i>${esc(state.label)}</b></span><span class="di-table-info"><span class="di-table-capacity">${t.seats} seats${t.session?.guests ? ` · ${t.session.guests} guests` : ""}</span>${open.total ? `<strong>${money(open.total)}</strong>` : `<strong class="di-table-hint">${esc(state.hint)}</strong>`}<span class="di-table-foot">${qty ? `${qty} items` : t.reservation ? esc(t.reservation) : esc(t.zone || "Floor")}${kot || age ? `<em>${kot ? `${kot} KOT` : ""}${kot && age ? " · " : ""}${esc(age)}</em>` : ""}</span></span></button>`;
     }
     function foodHtml() {
       return menu.filter(p => (category === "All" || (p.category || "Other") === category) && p.name.toLowerCase().includes(search.toLowerCase())).map(p => {
@@ -80,10 +99,11 @@ window.DineIn = (() => {
         dineBills.forEach(b => { const g = groups.get(b.tableId) || { name: b.tableName, count: 0, total: 0 }; g.count++; g.total += Number(b.total); groups.set(b.tableId, g); });
         html = `<div class="di-board-head"><h2>Table-wise bills</h2><p>Saved bills · ${dineBills.length} bills · ${money(dineBills.reduce((s, b) => s + Number(b.total), 0))}</p></div><div class="di-grid">${[...groups.values()].map(g => `<div class="di-card"><h3>Table ${esc(g.name)}</h3><p>${g.count} bills · ${money(g.total)}</p></div>`).join("")}</div><div class="di-scroll"><table><thead><tr><th>Date</th><th>Table</th><th>Bill</th><th>Payment</th><th>Total</th><th>Receipt</th></tr></thead><tbody>${dineBills.slice().reverse().map(b => `<tr><td>${esc(b.time)}</td><td>${esc(b.tableName)}</td><td>${esc(b.id)}</td><td>${esc(b.payment)}</td><td>${money(b.total)}</td><td>${button("print-bill", "Print", b.clientOrderId)}</td></tr>`).join("") || '<tr><td colspan="6">No settled Dine In bills</td></tr>'}</tbody></table></div>`;
       } else {
-        const tables = floorTables().filter(t => (floorFilter === "all" || t.status === floorFilter) && (zoneFilter === "all" || t.zone === zoneFilter));
+        const tables = floorTables().filter(t => (floorFilter === "all" || t.status === floorFilter) && (zoneFilter === "all" || (t.zone || "Floor") === zoneFilter));
+        const zones = [...new Set(floorTables().map(t => t.zone || "Floor"))];
         const groups = new Map();
         tables.forEach(t => { const zone = t.zone || "Floor"; if (!groups.has(zone)) groups.set(zone, []); groups.get(zone).push(t); });
-        html = `<div class="di-board-head"><h2>Dine In</h2><p>${floorTables().length} tables · ${floorTables().filter(t => t.status === "occupied").length} occupied · ${floorTables().filter(t => t.status === "available").length} available</p></div><label class="di-floor-select">Floor<select id="di-floor"><option value="all">All floors</option>${[...new Set(floorTables().map(t => t.zone || "Floor"))].map(z => `<option value="${esc(z)}" ${zoneFilter === z ? "selected" : ""}>${esc(z)}</option>`).join("")}</select></label><div class="di-floor-filters" aria-label="Filter tables">${["all", "available", "occupied", "reserved", "cleaning"].map(status => `<button type="button" data-di="filter" data-value="${status}" aria-pressed="${floorFilter === status}">${status === "all" ? "All tables" : status}<b>${floorTables().filter(t => status === "all" || t.status === status).length}</b></button>`).join("")}</div><div class="di-legend"><span class="available">Available</span><span class="reserved">Reserved</span><span class="occupied">Occupied</span><span class="cleaning">Cleaning</span><span class="disabled">Disabled</span></div>${[...groups.entries()].map(([zone, rows]) => `<section class="di-zone"><h2>${esc(zone)}</h2><div class="di-grid">${rows.map(tableButton).join("")}</div></section>`).join("") || "<p>No tables in this view. Choose another status or add a table.</p>"}${options.manageTables ? `<p class="di-add">${button("new-table", "+ Add table")}</p>` : ""}`;
+        html = `<div class="di-board-head"><div><span class="di-floor-kicker">RESTAURANT FLOOR</span><h2>Table View</h2><p>${floorTables().length} tables · ${floorTables().filter(t => t.status === "occupied").length} running · ${floorTables().filter(t => t.status === "available").length} vacant</p></div>${options.manageTables ? button("new-table", "+ Add table") : ""}</div><div class="di-floor-toolbar"><div class="di-zone-tabs" aria-label="Select floor"><button type="button" data-di="zone" data-value="all" aria-pressed="${zoneFilter === "all"}">All Areas</button>${zones.map(z => `<button type="button" data-di="zone" data-value="${esc(z)}" aria-pressed="${zoneFilter === z}">${esc(z)}</button>`).join("")}</div><label class="di-floor-select">Floor<select id="di-floor"><option value="all">All areas</option>${zones.map(z => `<option value="${esc(z)}" ${zoneFilter === z ? "selected" : ""}>${esc(z)}</option>`).join("")}</select></label><div class="di-floor-filters" aria-label="Filter tables">${["all", "available", "occupied", "reserved", "cleaning"].map(status => { const state = tableState(status); return `<button type="button" data-di="filter" data-value="${status}" aria-pressed="${floorFilter === status}"><i class="${status}" aria-hidden="true"></i>${status === "all" ? "All" : esc(state.label)}<b>${floorTables().filter(t => status === "all" || t.status === status).length}</b></button>`; }).join("")}</div></div><div class="di-legend"><span class="available">Vacant</span><span class="occupied">Running</span><span class="reserved">Reserved</span><span class="cleaning">To clean</span><span class="closing">Bill printed</span></div>${[...groups.entries()].map(([zone, rows]) => `<section class="di-zone"><h2><span>${esc(zone)}</span><b>${rows.length} tables</b></h2><div class="di-grid">${rows.map(tableButton).join("")}</div></section>`).join("") || `<div class="di-no-tables"><strong>No tables found</strong><span>Choose another area or status.</span></div>`}`;
         if (row || addingTable) {
           let panelHtml = "";
           if (addingTable) panelHtml = `${tableForm()}${button("save-table", "Create table")}`;
@@ -147,6 +167,7 @@ window.DineIn = (() => {
       if (action === "close-popup") { back(); return; }
       if (action === "category") { category = value; render(); return; }
       if (action === "filter") { floorFilter = value; render(); return; }
+      if (action === "zone") { zoneFilter = value; render(); return; }
       if (action === "panel") { panel = value; render(); return; }
       if (action === "new-table") { addingTable = true; render(); return; }
       busy = true; error = false; message = "";
