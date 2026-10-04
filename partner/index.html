@@ -21,11 +21,14 @@
   <link rel="stylesheet" href="app-updater.css">
   <link rel="icon" href="assets/axzenPOS.png?v=2" type="image/png">
   <link rel="apple-touch-icon" href="assets/axzenPOS.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Noto+Sans+Telugu:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
   <script async src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
   <style>
     /* System fonts keep first paint independent of the network. */
     :root {
-      --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Noto Sans Telugu", "Nirmala UI", "Segoe UI", system-ui, sans-serif;
+      --font-ui: Inter, "Noto Sans Telugu", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Nirmala UI", "Segoe UI", system-ui, sans-serif;
       --ink: #111827;
       --muted: #6b7280;
       --line: #e5e7eb;
@@ -5568,6 +5571,39 @@
       justify-content: start !important;
       align-items: start;
     }
+
+    /* Calm, Apple-like type hierarchy. Older rules used synthetic 850–950
+       weights throughout, which made Inter and Windows fallbacks look bulky. */
+    body,
+    button,
+    input,
+    select,
+    textarea,
+    .di,
+    .app-update-dialog {
+      font-family: var(--font-ui) !important;
+      font-synthesis: none;
+    }
+    body { letter-spacing: -.006em; }
+    body :is(button, label, strong, b) { font-weight: 600 !important; }
+    body :is(h1, h2, h3, .item-price, #cartTotal, .payment-total, .cart-page-total) {
+      font-weight: 700 !important;
+      letter-spacing: -.018em;
+    }
+    body :is(.muted, small, .drawer-section-title, .variant-hint) {
+      font-weight: 500 !important;
+      letter-spacing: 0;
+    }
+    .side-drawer .drawer-item,
+    #posView .tab,
+    #posView .bottom-nav button,
+    .page-action,
+    .secondary,
+    .primary {
+      font-weight: 600 !important;
+      letter-spacing: -.008em;
+    }
+    label { text-transform: none; letter-spacing: 0; }
 
     .weekly-sales-card { min-width: 0; }
     .weekly-sales-heading { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
