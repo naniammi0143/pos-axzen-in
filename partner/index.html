@@ -25,6 +25,7 @@
   <style>
     /* System fonts keep first paint independent of the network. */
     :root {
+      --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Noto Sans Telugu", "Nirmala UI", "Segoe UI", system-ui, sans-serif;
       --ink: #111827;
       --muted: #6b7280;
       --line: #e5e7eb;
@@ -53,14 +54,14 @@
       min-height: 100vh;
       background: #ffffff;
       color: var(--ink);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-family: var(--font-ui);
       font-size: 14px;
       font-weight: 400;
       line-height: 1.5;
     }
     h1, h2, h3 { font-weight: 700; line-height: 1.25; letter-spacing: 0; }
 
-    button, input, select { font: inherit; }
+    button, input, select, textarea { font: inherit; }
     button { cursor: pointer; transition: transform .12s ease, box-shadow .16s ease, background-color .16s ease, border-color .16s ease, opacity .12s ease; }
     button:active { transform: scale(.97); }
 
@@ -5111,7 +5112,8 @@
         font-size: 15px !important;
       }
       #posView .menu-grid {
-        grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill, 168px) !important;
+        justify-content: start !important;
         gap: 12px !important;
       }
       #posView .item-card {
@@ -5259,7 +5261,8 @@
       font-size: 15px !important;
     }
     html.pos-layout-tablet #posView .menu-grid {
-      grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)) !important;
+      grid-template-columns: repeat(auto-fill, 168px) !important;
+      justify-content: start !important;
       gap: 12px !important;
     }
     html.pos-layout-tablet #posView .item-card {
@@ -6454,7 +6457,7 @@
     }
 
     function printItemName(item) {
-      return localizedName(item, settings.receiptLanguage);
+      return localizedName(item, settings.menuLanguage);
     }
 
     function printableKitchenItemName(item) {
@@ -6843,13 +6846,14 @@
       if(activePosSection==='dinein' && !canUseDineIn())setPosSection('billing');
       if(user?.canteenId) scopedLocalSet("AXZEN_TAX_SETTINGS",JSON.stringify(settings.taxSettings||{}));
       [menuLanguageKey, receiptLanguageKey, receiptLogoPositionKey, receiptLogoSizeKey, receiptLogoDataUrlKey].forEach(migrateScopedLocal);
-      settings.menuLanguage = scopedLocalGet(menuLanguageKey) || settings.menuLanguage;
-      settings.receiptLanguage = scopedLocalGet(receiptLanguageKey) || settings.receiptLanguage;
+      const selectedLanguage = languageMode(scopedLocalGet(menuLanguageKey) || scopedLocalGet(receiptLanguageKey) || settings.menuLanguage || settings.receiptLanguage);
+      settings.menuLanguage = selectedLanguage;
+      settings.receiptLanguage = selectedLanguage;
       settings.receiptLogoPosition = scopedLocalGet(receiptLogoPositionKey) || settings.receiptLogoPosition;
       settings.receiptLogoSize = receiptLogoSizeValue(scopedLocalGet(receiptLogoSizeKey) || settings.receiptLogoSize);
       receiptLogoDataUrl = scopedLocalGet(receiptLogoDataUrlKey) || "";
-      settings.menuLanguage = languageMode(settings.menuLanguage);
-      settings.receiptLanguage = languageMode(settings.receiptLanguage);
+      scopedLocalSet(menuLanguageKey, selectedLanguage);
+      scopedLocalSet(receiptLanguageKey, selectedLanguage);
       settings.receiptLogoPosition = ["above", "left", "right"].includes(settings.receiptLogoPosition) ? settings.receiptLogoPosition : "above";
       $("loginCanteen").textContent = settings.canteenName;
       $("posCanteen").textContent = settings.canteenName || user?.canteen?.name || "Your Company";
@@ -7842,7 +7846,7 @@
       const width = Math.max(32, Math.min(42, Number(columns || 32)));
       const line = "-".repeat(width);
       const thick = "=".repeat(width);
-      const cleanText = value => String(value || "").replace(/[^\x20-\x7E]/g, "").replace(/\s+/g, " ").trim();
+      const cleanText = value => String(value || "").replace(/[\u0000-\u001F\u007F]/g, "").replace(/\s+/g, " ").trim();
       const center = value => {
         const text = cleanText(value).slice(0, width);
         const left = Math.max(0, Math.floor((width - text.length) / 2));
@@ -8100,7 +8104,11 @@
     }
 
     function canPrintReceiptBitmap(options = {}) {
-      return false;
+      const mode = languageMode(options.receiptLanguage || settings.receiptLanguage || settings.menuLanguage);
+      return mode !== "english" && Boolean(window.AxenPrinter) && (
+        typeof window.AxenPrinter.printReceiptBitmapToPrinter === "function" ||
+        typeof window.AxenPrinter.printReceiptBitmapToPrinterAsync === "function"
+      );
     }
 
     function receiptBitmapPayload(order = {}, logoDataUrl = "", paperWidth = receiptPaperWidthPx()) {
@@ -11972,8 +11980,7 @@
       const logoPosition = settings.receiptLogoPosition || "above";
       const logoSize = receiptLogoSizeValue(settings.receiptLogoSize);
       const localLogoText = receiptLogoDataUrl ? "Receipt logo saved on this device" : "No receipt logo selected";
-      const menuLanguage = languageMode(settings.menuLanguage);
-      const receiptLanguage = languageMode(settings.receiptLanguage);
+      const selectedLanguage = languageMode(settings.menuLanguage);
       return `
         <div class="panel"><h2>App version</h2><strong>${esc(installedAppVersion() || appBuild)}</strong><p class="muted">Currently running on this device</p></div>
         <div class="panel">
@@ -11991,15 +11998,10 @@
           <form class="form-grid" id="settingsForm">
             <label>Display name / Canteen name <input id="canteenNameInput" value="${esc(settings.canteenName)}"></label>
             <label>Logo URL <input id="logoUrlInput" value="${esc(settings.logoUrl || "")}" placeholder="https://..."></label>
-            <label>Menu language <select id="menuLanguageInput">
-              <option value="english" ${menuLanguage === "english" ? "selected" : ""}>English</option>
-              <option value="telugu" ${menuLanguage === "telugu" ? "selected" : ""}>Telugu</option>
-              <option value="both" ${menuLanguage === "both" ? "selected" : ""}>English + Telugu</option>
-            </select></label>
-            <label>Receipt print language <select id="receiptLanguageInput">
-              <option value="english" ${receiptLanguage === "english" ? "selected" : ""}>English</option>
-              <option value="telugu" ${receiptLanguage === "telugu" ? "selected" : ""}>Telugu</option>
-              <option value="both" ${receiptLanguage === "both" ? "selected" : ""}>English + Telugu</option>
+            <label>Display &amp; print language <select id="menuLanguageInput">
+              <option value="english" ${selectedLanguage === "english" ? "selected" : ""}>English</option>
+              <option value="telugu" ${selectedLanguage === "telugu" ? "selected" : ""}>Telugu</option>
+              <option value="both" ${selectedLanguage === "both" ? "selected" : ""}>English + Telugu</option>
             </select></label>
             <label>Receipt logo <input id="receiptLogoFileInput" type="file" accept="image/*"><span class="muted">${localLogoText}</span></label>
             <label>Receipt logo position <select id="receiptLogoPositionInput">
@@ -12244,13 +12246,13 @@
         settings.canteenName = $("canteenNameInput")?.value.trim() || settings.canteenName || "Main Canteen";
         settings.logoUrl = $("logoUrlInput")?.value.trim() || settings.logoUrl || "";
         settings.menuLanguage = $("menuLanguageInput")?.value || settings.menuLanguage;
-        settings.receiptLanguage = $("receiptLanguageInput")?.value || settings.receiptLanguage;
+        settings.receiptLanguage = settings.menuLanguage;
         settings.receiptLogoPosition = $("receiptLogoPositionInput")?.value || settings.receiptLogoPosition;
         settings.receiptLogoSize = receiptLogoSizeValue($("receiptLogoSizeInput")?.value || settings.receiptLogoSize);
         if ($("receiptLogoSizeValue")) $("receiptLogoSizeValue").textContent = `${settings.receiptLogoSize}%`;
         $("receiptPreviewBox").innerHTML = receiptPreviewHtml();
       };
-      ["receiptAreaInput", "canteenNameInput", "logoUrlInput", "menuLanguageInput", "receiptLanguageInput", "receiptLogoPositionInput", "receiptLogoSizeInput", "receiptLogoFileInput"].forEach(id => {
+      ["receiptAreaInput", "canteenNameInput", "logoUrlInput", "menuLanguageInput", "receiptLogoPositionInput", "receiptLogoSizeInput", "receiptLogoFileInput"].forEach(id => {
         const input = $(id);
         if (!input) return;
         input.addEventListener("input", update);
@@ -12414,7 +12416,7 @@
         canteenName: $("canteenNameInput") ? $("canteenNameInput").value.trim() || "Main Canteen" : settings.canteenName,
         logoUrl: $("logoUrlInput")?.value.trim() || settings.logoUrl || "",
         menuLanguage: $("menuLanguageInput") ? $("menuLanguageInput").value : settings.menuLanguage,
-        receiptLanguage: $("receiptLanguageInput") ? $("receiptLanguageInput").value : settings.receiptLanguage,
+        receiptLanguage: $("menuLanguageInput") ? $("menuLanguageInput").value : settings.menuLanguage,
         receiptLogoPosition: $("receiptLogoPositionInput") ? $("receiptLogoPositionInput").value : settings.receiptLogoPosition,
         receiptLogoSize: receiptLogoSizeValue($("receiptLogoSizeInput") ? $("receiptLogoSizeInput").value : settings.receiptLogoSize),
         reportTime: $("reportTimeInput") ? $("reportTimeInput").value.trim() : settings.reportTime,
